@@ -32,7 +32,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="alink nav-link border-link" href="productos.html">Productos</a>
+                        <a class="alink nav-link border-link" href="productos.html">Productos e é</a>
                     </li>
                     <li class="nav-item">
                         <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
