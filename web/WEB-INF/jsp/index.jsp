@@ -7,26 +7,59 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <title>Welcome to Spring Web MVC project</title>
     </head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <body>
-        <div class="container ">
-            <div class="row">
-                <div class="col-lg-4">
-                    <p>Hola</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>Hola</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>Hola</p> 
-                </div>
+        <!-- Navbar-->
+    <nav class="navbar navbar-expand-sm colorbg sticky-top">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand img-fluid" href="index.htm">
+                <img id="logo" src="img/letra 5mm.png" alt="InterVid">
+            </a>
+            <!--             Toggle icon 
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <img src="img/Menu_32.png">
+                        </button>-->
+
+            <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="alink nav-link border-link" href="index.html">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="alink nav-link border-link" href="productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
+                    </li>
+                </ul>
             </div>
-            
         </div>
-    <c:forEach var="dato" items="${lista}">
-        <table class="table" border="1">
+    </nav>
+    <div class="container ">
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Hola</p>
+            </div>
+            <div class="col-lg-4">
+                <p>Hola</p>
+            </div>
+            <div class="col-lg-4">
+                <p>Hola</p> 
+            </div>
+        </div>
+
+    </div>
+    <table class="table" border="1">
+        <c:forEach var="dato" items="${lista}">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -43,8 +76,7 @@
                     <td></td>
                 </tr>
             </tbody>
-        </table>
-
-    </c:forEach>
+        </c:forEach>
+    </table>
 </body>
 </html>
