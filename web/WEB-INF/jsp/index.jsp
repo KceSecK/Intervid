@@ -9,11 +9,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome to Spring Web MVC project</title>
     </head>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <body>
-   
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-4">
+                    <p>Hola</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Hola</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Hola</p> 
+                </div>
+            </div>
+            
+        </div>
     <c:forEach var="dato" items="${lista}">
-        <table border="1">
+        <table class="table" border="1">
             <thead>
                 <tr>
                     <th>ID</th>
