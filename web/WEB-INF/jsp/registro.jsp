@@ -127,16 +127,22 @@
                     </p>
 
                     <form method="POST"> 
+                        <div class="form-row">
+                         <div class="form-group col-md-6">
+      <label class="text-intervid">Nombres</label>
+      <input type="text" class="form-control" name="nomUsPos">
+    </div>
+    <div class="form-group col-md-6">
+      <label class="text-intervid">Apellidos</label>
+      <input type="text" class="form-control" name="apeUsPos">
+    </div>
+                            </div>
                         <div class="form-group">
                             <label class="text-intervid">Correo Electronico:</label><input type="mail"  name="correo" class="form-control">
                         </div>
                         <div class="form-group">
                             <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label class="text-intervid">  Repita Contraseña:</label><input type="password" name="pass2" class="form-control">
-                        </div>
-
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
                             <p>He leído y acepto los <a href="">Los términos y condiciones de Servicio</a> y la <a href="">
                                     Política de privacidad</a> de INTERVID</p>

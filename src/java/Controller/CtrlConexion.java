@@ -2,6 +2,7 @@ package Controller;
 
 import Config.Conexion;
 import entidades.Usuario;
+import entidades.UsuarioPostulante;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -31,14 +32,15 @@ public class CtrlConexion {
       @RequestMapping(value = "registro.htm",method = RequestMethod.GET)
       public ModelAndView Agregar(){
         mav.addObject(new Usuario());
+        mav.addObject(new UsuarioPostulante());
         mav.setViewName("registro");         
           return mav;   
       }
          @RequestMapping(value = "registro.htm",method = RequestMethod.POST)
-      public ModelAndView Agregar(Usuario u){
-        String sql ="insert into usuario (CorreoUsuario,Contraseña,"
-                + "TipoCuenta,CuentaActiva) values (?,?,?,?)";
-        this.jdbcTemplate.update(sql,u.getCorreo(),u.getClave(),u.getTipoCuenta());
+      public ModelAndView Agregar(Usuario u,UsuarioPostulante uP){
+        String sql ="insert into usuario (correoUsuario,Contraseña)values(?,?)";
+        this.jdbcTemplate.update(sql,u.getCorreo(),u.getClave());
+        
           return new ModelAndView("redirect:/index.htm");   
       }
   
