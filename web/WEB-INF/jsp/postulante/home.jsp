@@ -3,11 +3,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
+<mvc:view-controller path="jsp/postulante" view-name="jsp/postulante"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <title>Welcome to Spring Web MVC project</title>
@@ -32,7 +32,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="alink nav-link border-link" href="productos.html">Productos</a>
+                        <a class="alink nav-link border-link" href="productos.html">Productos e é</a>
                     </li>
                     <li class="nav-item">
                         <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>

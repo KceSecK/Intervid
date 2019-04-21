@@ -1,4 +1,18 @@
 
+.hr-custom-black{
+    border : 0;
+    height: 1px; 
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.p-22{
+    font-size: 22px;
+}
+
+.inner {
+    display: block;
+    margin: 0 auto;
+}
 
 .colorbg{
     background: #fff;
@@ -15,7 +29,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background: #31559C;
+    background: #37589F;
     transition: width .3s;
 }
 
@@ -24,5 +38,11 @@
 }
 
 .alink{
-    color: #31559C;
+    color: #37589F;
+}
+
+.home{
+    background: #37589F;
+    width: auto;
+    height: 500px;
 }
