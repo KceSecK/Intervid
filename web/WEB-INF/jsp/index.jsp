@@ -28,7 +28,7 @@
             <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="alink nav-link border-link" href="index.html">Inicio</a>
+                        <a class="alink nav-link border-link" href="registro.htm">Inicio</a>
                     </li>
 
                     <li class="nav-item">

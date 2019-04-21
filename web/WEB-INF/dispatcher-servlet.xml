@@ -20,6 +20,7 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">conexionController</prop>
+                <prop key="registro.htm">conexionController</prop>
             </props>
         </property>
     </bean>
