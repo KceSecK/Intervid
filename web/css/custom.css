@@ -1,4 +1,57 @@
 
+#footer{
+    position: relative;
+    top: 100%;
+    bottom: 0;
+    width: 100%;
+    z-index: 5000;
+
+}
+.box-img{
+    height: 500px;
+    width: 100%;
+    background: #10707f;
+}
+
+.hr-custom-black{
+    border : 0;
+    height: 1px; 
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.bg-black{
+    background: #000;
+}
+
+.p-22{
+    font-size: 22px;
+}
+.p-28{
+    font-size: 28px;
+}
+.p-12{
+    font-size: 12px;
+
+}
+
+.inner {
+    display: block;
+    margin: 0 auto;
+}
+
+.inner2 {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    right: 30%;
+    bottom: 30%;
+    width: auto;
+    height: auto;
+    margin-top: auto; /* Half the height */
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: auto;/* Half the width */
+}
 
 .colorbg{
     background: #fff;
@@ -15,7 +68,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background: #37589F;
+    background: #FA6900;
     transition: width .3s;
 }
 
@@ -24,24 +77,20 @@
 }
 
 .alink{
-    color: #37589F;
+    color: #FFF;
 }
 
-.left{
+.alink:hover{
+    color: #FFF;
+}
 
-    width: 30%;
-    height: 100%;
-    position: absolute;
-    float: left;
-    background-color: #37589F;
-    padding-top: 50px;
-   
+.home{
+    background: #37589F;
+    width: auto;
+    height: 500px;
 }
-.right{
-    width: 70%;
-    padding: 10%;
-    float: right;
-}
+
+
 .letraGrande
 {
     font-size: 35px;
@@ -57,4 +106,22 @@
 .inner {
     display: block;
     margin: 0 auto;
+}
+.bg-intervid{
+    background:  #37589F;
+}
+
+.loginEM{
+    background: #37589F;
+    width: auto;
+    height: 200px;
+}
+.loginBody
+{
+    width: auto;
+    height: 530px;
+}
+.verdeEmpresaLogo
+{
+    color:#54B692;
 }

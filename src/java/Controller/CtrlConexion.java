@@ -40,8 +40,25 @@ public class CtrlConexion {
       public ModelAndView Agregar(Usuario u,UsuarioPostulante uP){
         String sql ="insert into usuario (correoUsuario,Contraseña)values(?,?)";
         this.jdbcTemplate.update(sql,u.getCorreo(),u.getClave());
-        
-          return new ModelAndView("redirect:/index.htm");   
+//        String sql2="SELECT MAX(usuarioid) FROM usuario)";
+//        
+//        String sql3="insert into usuarioPostulante (PostulanteUsuarioFK"
+//                + ",NombreUsuario,ApellidoUsuario) values (?,?,?)";
+//        this.jdbcTemplate.update(sql3, ,uP.getNomUsPos(),uP.getApeUsPos())
+        return new ModelAndView("redirect:/index.htm");   
       }
-  
+  @RequestMapping(value="registroEmpresa.htm",method=RequestMethod.GET)
+   public ModelAndView AgregarEmpresa(){
+        mav.addObject(new Usuario());
+        mav.addObject(new UsuarioPostulante());
+        mav.setViewName("registroEmpresa");         
+          return mav;   
+      }
+   
+   @RequestMapping(value="login.htm",method=RequestMethod.GET)
+   public ModelAndView login(){
+        mav.addObject(new Usuario());
+        mav.setViewName("login");         
+          return mav;   
+      }
 }

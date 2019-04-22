@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registro
-    Created on : abr 20, 2019, 6:54:08 p.m.
+    Document   : registroEmpresa
+    Created on : abr 21, 2019, 4:14:52 p.m.
     Author     : Saitam
 --%>
 
@@ -10,11 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-    <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 
     <body>
         <!-- Navbar-->
@@ -49,17 +48,17 @@
             </div>
         </nav>
 
+        
         <div class='container-fluid'>
             <div class="row">
                 <div class="col-lg-3 bg-intervid">
                     <div class="container">
-
                         <div class="row">
                             <div class="col">
 
                             </div>
                             <div class="col-5">
-                                <p class="text-white letraMedia">Encuentra tu trabajo ideal desde tu hogar</p>
+                                <p class="text-white letraMedia">Encuentra el candidato ideal para tu empresa</p>
                             </div>
                             <div class="col">
 
@@ -71,7 +70,7 @@
 
                             </div>
                             <div class="col-5">
-                                <img src="img/icons8-working-with-a-laptop-64.png" class="inner">
+                                <img src="img/icons8-permanent-job-48.png" class="inner">
                             </div>
                             <div class="col">
 
@@ -83,7 +82,7 @@
 
                             </div>
                             <div class="col-5">
-                                <p class="text-white letraMedia"> Realiza TODAS tus entrevistas de forma ONLINE</p>
+                                <p class="text-white letraMedia">Ahorra al realizar las entrevistas de forma ONLINE</p>
 
                             </div>
                             <div class="col">
@@ -96,7 +95,7 @@
 
                             </div>
                             <div class="col-5">
-                                <p class="text-white letraMedia"> Más de 100.000 ofertas laborales te están esperando</p>
+                                <img src="img/icons8-money-box-64.png" class="inner">
                             </div>
                             <div class="col">
 
@@ -107,61 +106,94 @@
                             <div class="col">
 
                             </div>
-                            <div class="col-5">
-                                <img src="img/icons8-laptop-webcam-64.png" class="inner">
+                            <div class="col-5">   
+                                <p class="text-white letraMedia"> Más de 1.000.000 de CV's en nuestras bases de datos</p>
                             </div>
                             <div class="col">
 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+
+                            </div>
+                            <div class="col-5">
+                                <img src="img/icons8-profile-64.png" class="inner">
+                            </div>
+                            <div class="col">
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            
-       
 
+                <!--              Registro Usuario Empresa  -->
 
-
-        <!--              Registro Usuario postulante-->
-           
-                <div class="col-lg-9 ">
+                <div class="col-lg-9">
                     <div class="container">
-                        
-                    <p class="letraGrande text-intervid">
-                        Crea tu cuenta y súmate al mundo de las video 
-                        entrevistas  
-                    </p>
 
-                    <form method="POST"> 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="text-intervid">Nombres</label>
-                                <input type="text" class="form-control" name="nomUsPos">
+                        <p class="letraGrande text-intervid">
+                            Registro de Empresas 
+                        </p>
+
+                        <form method="POST"> 
+                            <div class="form-group">
+                                <label class="text-intervid">Correo Electronico:</label>
+                                <input type="mail"  name="correo" class="form-control">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="text-intervid">Apellidos</label>
-                                <input type="text" class="form-control" name="apeUsPos">
+                            <div class="form-group">
+                                <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-intervid">Correo Electronico:</label><input type="mail"  name="correo" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control">
-                        </div>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                            <p>He leído y acepto los <a href="">Los términos y condiciones de Servicio</a> y la <a href="">
-                                    Política de privacidad</a> de INTERVID</p>
-                        </div>
-                        <input type="submit" value="Crear Cuenta" class="btn btn-success">
-                    </form>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="text-intervid">RUT de la empresa</label>
+                                    <input type="text" class="form-control" name="nomUsPos">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="text-intervid">Razón Social</label>
+                                    <input type="text" class="form-control" name="apeUsPos">
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="text-intervid">Nombre de la empresa</label>
+                                    <input type="text" class="form-control" name="nomUsPos">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="text-intervid">Teléfono</label>
+                                    <input type="text" class="form-control" name="apeUsPos">
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="text-intervid">Nombre de contacto empresa</label>
+                                    <input type="text" class="form-control" name="nomUsPos">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="text-intervid">Apellido contacto empresa</label>
+                                    <input type="text" class="form-control" name="apeUsPos">
+                                </div>
+                            </div>
+
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                <p>He leído y acepto los <a href="">Los términos y condiciones de Servicio</a> y la <a href="">
+                                        Política de privacidad</a> de INTERVID</p>
+                            </div>
+                            <input type="submit" value="Crear Cuenta" class="btn btn-success">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>      
-   
-         
-          <!--                 FOOTER                  --> 
-         <div id="footer" class="container-fluid bg-black">
+        
+        <!--                 FOOTER                  --> 
+        <div id="footer" class="container-fluid bg-black">
             <div class="container-fluid">
                 <div class="row pt-4 ">
                     <div class="container">
@@ -204,5 +236,8 @@
         </div>
 
 
-</body>
+
+
+    </body>
+
 </html>
