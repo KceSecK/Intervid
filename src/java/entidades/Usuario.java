@@ -5,13 +5,28 @@ import java.sql.PreparedStatement;
 import java.util.Date;
 
 public class Usuario {
+    int UsuarioID;
     String correo;
     String clave;
     String tipoCuenta;
+    int CuentaActiva;
     Date fechaRegistro;
 
- 
-  
+    public int getUsuarioID() {
+        return UsuarioID;
+    }
+
+    public void setUsuarioID(int UsuarioID) {
+        this.UsuarioID = UsuarioID;
+    }
+
+    public int getCuentaActiva() {
+        return CuentaActiva;
+    }
+
+    public void setCuentaActiva(int CuentaActiva) {
+        this.CuentaActiva = CuentaActiva;
+    }
 
     public String getCorreo() {
         return correo;

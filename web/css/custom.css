@@ -90,6 +90,11 @@
     height: 500px;
 }
 
+.perfil{
+    background: #37589F;
+    width: 10%;
+    height: 1000px;
+}
 
 .letraGrande
 {
@@ -99,6 +104,12 @@
 {
     font-size: 25px;
     text-align: center;
+}
+.letraMediaPerfil
+{
+    font-size: 20px;
+    text-align: center;
+    color:#37589F;
 }
 .text-intervid{
     color:#37589F;
@@ -124,4 +135,7 @@
 .verdeEmpresaLogo
 {
     color:#54B692;
+}
+.height100{
+    height: auto;
 }

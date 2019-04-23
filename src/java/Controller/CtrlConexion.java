@@ -55,10 +55,22 @@ public class CtrlConexion {
           return mav;   
       }
    
-   @RequestMapping(value="login.htm",method=RequestMethod.GET)
+   @RequestMapping(value="loginEmpresa.htm",method=RequestMethod.GET)
    public ModelAndView login(){
         mav.addObject(new Usuario());
-        mav.setViewName("login");         
+        mav.setViewName("loginEmpresa");         
+          return mav;   
+      }
+   @RequestMapping(value="loginPostulante.htm",method=RequestMethod.GET)
+   public ModelAndView loginPostulante(){
+        mav.addObject(new Usuario());
+        mav.setViewName("loginPostulante");         
+          return mav;   
+      }
+      @RequestMapping(value="cvPostulante.htm",method=RequestMethod.GET)
+   public ModelAndView cvPostulante(){
+        mav.addObject(new UsuarioPostulante());
+        mav.setViewName("cvPostulante");         
           return mav;   
       }
 }
