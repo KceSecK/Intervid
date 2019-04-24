@@ -67,14 +67,39 @@
 
                         <!--Primer cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Mi CV</p></div>
-                        <div class="row">
-                            <div class="card col-12">
+                        
+                            <div class="card col-lg-12 ">
                                 <div class="card-body ">
-                                    Estado CV/ Foto Perfil / Video Pitch
+                                   
+                                        
+               <div class="container">
+               <div class="row">
+               <div class="col-sm-3 col-md-2">
+			<div class="progress" data-percentage="20">
+				<span class="progress-left">
+					<span class="progress-bar"></span>
+				</span>
+				<span class="progress-right">
+					<span class="progress-bar"></span>
+				</span>
+				<div class="progress-value">
+					<div>
+						20%<br>
+						<span>completed</span>
+					</div>
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
+		
+                                        
+              
                                 </div>
                             </div>
-                        </div>
+                      
 
+                        
                         <!--Segundo cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Datos Personales</p></div>
 
@@ -268,10 +293,10 @@
 
                         <!--Tercer cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Datos de Contacto</p></div>
-                        <form method="POST"> 
-                            <div class="card col-md-9 ">
-                                <div class="card-body ">
 
+                        <div class="card col-md-9 ">
+                            <div class="card-body ">
+                                <form method="POST"> 
                                     <div class="form-row">
 
                                         <label class="text-intervid">País de residencia</label>
@@ -329,112 +354,266 @@
                                     <div class="col-md-6"></div>
                                     <input type="submit" value="Crear Cuenta" class="btn btn-success">  
                                     <button type="button" class="btn btn-primary">Cancelar</button>
-                                    </form>
+                                </form>
+                            </div>
+
+                        </div> 
+
+
+                        <!--Cuerto cuadro-->
+                        <div class="row mt-2"><p class="letraMediaPerfil">Educación</p></div>
+
+                        <div class="card col-md-9 ">
+                            <div class="card-body ">
+                                <div class="form-group ">
+                                    <label class="col-form-label text-intervid">Institución:</label>
+                                    <input type="text"  name="correo" class="form-control">
                                 </div>
 
-                            </div> 
+                                <div class="form-row">
 
+                                    <label class="text-intervid">Nivel de estudios:</label>
+                                    <select name="" class="form-control">
+                                        <option selected>Medio</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
 
-                            <!--Cuerto cuadro-->
-                            <div class="row mt-2"><p class="letraMediaPerfil">Educación</p></div>
+                                    <label class="text-intervid">Estado:</label>
+                                    <select name="" class="form-control">
+                                        <option selected>Cosa</option>
+                                    </select>
+                                </div>
 
-                            <div class="card col-md-9 ">
-                                <div class="card-body ">
-                                    <div class="form-group ">
-                                        <label class="col-form-label text-intervid">Institución:</label>
-                                        <input type="text"  name="correo" class="form-control">
-                                    </div>
-
-                                    <div class="form-row">
-
-                                        <label class="text-intervid">Nivel de estudios:</label>
+                                <div class="form-row">
+                                    <label class="text-intervid">Período: </label>
+                                    <div class="col-md-11"></div>
+                                    <div class="form-group col-md-2">
                                         <select name="" class="form-control">
-                                            <option selected>Medio</option>
+                                            <option selected>Mes</option>
                                         </select>
                                     </div>
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Año</option>
+                                        </select>
+                                    </div>
+                                    -
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Mes</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Año</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-check col-md-3">
+
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                            A la actualidad
+                                        </div>
+                                    </div>
+
+
+                                </div><input type="submit" value="Añadir" class="btn btn-success">  
+                                <button type="button" class="btn btn-primary">Cancelar</button>
+                            </div>
+
+                        </div> 
+
+                        <!--Quinto cuadro-->
+                        <div class="row mt-2"><p class="letraMediaPerfil">Expectativas Laborales</p></div>
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+
+                                  <div class="form-group ">
+                                    <label class="col-form-label text-intervid">Expectativas de renta:</label>
+                                    <input type="text"  name="correo" class="form-control">
+                                </div>
                                     <div class="form-row">
 
-                                        <label class="text-intervid">Estado:</label>
+                                        <label class="text-intervid">Moneda:</label>
                                         <select name="" class="form-control">
                                             <option selected>Cosa</option>
                                         </select>
                                     </div>
 
                                     <div class="form-row">
-                                        <label class="text-intervid">Período: </label>
-                                        <div class="col-md-11"></div>
-                                        <div class="form-group col-md-2">
-                                            <select name="" class="form-control">
-                                                <option selected>Mes</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <select name="" class="form-control">
-                                                <option selected>Año</option>
-                                            </select>
-                                        </div>
-                                        -
-                                        <div class="form-group col-md-2">
-                                            <select name="" class="form-control">
-                                                <option selected>Mes</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <select name="" class="form-control">
-                                                <option selected>Año</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-check col-md-3">
 
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                               A la actualidad
+                                        <label class="text-intervid">Region/Estado preferente para trabajar:</label>
+                                        <select name="" class="form-control">
+                                            <option selected>Cosa</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-row">
+
+                                        <label class="text-intervid">Jornada:</label>
+                                        <select name="" class="form-control">
+                                            <option selected>Cosa</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="text-intervid">Disponibilidad para viajar:</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
-
                                     </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="text-intervid">Disponibilidad para cambiar de residencia:</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                <label class="form-check-label" for="inlineRadio2">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" value="Añadir" class="btn btn-success">  
+                                    <button type="button" class="btn btn-primary">Cancelar</button>
                                 </div>
 
-                            </div> 
+                            </div>
+                        </div> 
 
-                            <!--Quinto cuadro-->
-                            <div class="row mt-2"><p class="letraMediaPerfil">Expectativas Laborales</p></div>
-                            <div class="row">
-                                <div class="card col-md-9 ">
-                                    <div class="card-body ">
-                                        wa
-                                    </div>
+                        <!--Sexto cuadro-->
+                        <div class="row mt-2"><p class="letraMediaPerfil">Experiencia Profesional</p></div>
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                   
+                                     <div class="form-group ">
+                                    <label class="col-form-label text-intervid">Empresa:</label>
+                                    <input type="text"  name="correo" class="form-control">
                                 </div>
-                            </div> 
+                                    <div class="form-group">
 
-                            <!--Sexto cuadro-->
-                            <div class="row mt-2"><p class="letraMediaPerfil">Experiencia Profesional</p></div>
-                            <div class="row">
-                                <div class="card col-md-9 ">
-                                    <div class="card-body ">
-                                        wa
+                                        <label class="text-intervid">Área:</label>
+                                        <select name="" class="form-control">
+                                            <option selected>Categorias</option>
+                                        </select>
                                     </div>
+                                    
+                                     <div class="form-group ">
+                                    <label class="col-form-label text-intervid">Cargo:</label>
+                                    <input type="text"  name="correo" class="form-control">
                                 </div>
-                            </div> 
+                                    
+                                     <div class="form-row">
+                                    <label class="text-intervid">Período: </label>
+                                    <div class="col-md-11"></div>
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Mes</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Año</option>
+                                        </select>
+                                    </div>
+                                    -
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Mes</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <select name="" class="form-control">
+                                            <option selected>Año</option>
+                                        </select>
+                                    </div>
+                                    
+                                     <div class="form-group col-lg-12">
+                                    <label class="col-form-label text-intervid">Funciones y logros del cargo:</label>
+                                    <textarea  name="funcionLogros" class="form-control txtarea"></textarea>
+                                </div>
 
-                            <!--Septimo cuadro-->
-                            <div class="row mt-2"><p class="letraMediaPerfil">Idiomas</p></div>
-                            <div class="row">
-                                <div class="card col-md-9 ">
-                                    <div class="card-body ">
-                                        wa
-                                    </div>
-                                </div>
-                            </div> 
 
-                            <!--Segundo cuadro-->
-                            <div class="row mt-2"><p class="letraMediaPerfil">Otros Conocimientos</p></div>
-                            <div class="row">
-                                <div class="card col-md-9 ">
-                                    <div class="card-body ">
-                                        wa
-                                    </div>
                                 </div>
-                            </div> 
+                                    
+                                    <input type="submit" value="Añadir" class="btn btn-success">  
+                                <button type="button" class="btn btn-primary">Cancelar</button>
+                                </div>  
+                              
+                            </div>
+                        </div> 
+
+                        <!--Septimo cuadro-->
+                        <div class="row mt-2"><p class="letraMediaPerfil">Idiomas</p></div>
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                                             <div class="form-row ">
+                                                <label class="col-form-label text-intervid">Idioma:</label>
+                                                <div class="col-md-6"></div>
+                                                <div class="form-group col-md-8">
+                                                    <select name="idioma" class="form-control ">
+                                                        <option selected>Español</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-check col-md-4">
+
+                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                        Nativo
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                                        <div class="form-group">
+
+                                        <label class="text-intervid">Escrito:</label>
+                                        <select name="escrito" class="form-control">
+                                            <option selected>Categorias</option>
+                                        </select>
+                                    </div>
+                                    
+                                                        <div class="form-group">
+
+                                        <label class="text-intervid">Hablado:</label>
+                                        <select name="hablado" class="form-control">
+                                            <option selected>Categorias</option>
+                                        </select>
+                                    </div>
+                            
+                                      <input type="submit" value="Añadir" class="btn btn-success">  
+                                <button type="button" class="btn btn-primary">Cancelar</button>
+                                
+                                </div>
+                            </div>
+                        </div> 
+
+                        <!--Segundo cuadro-->
+                        <div class="row mt-2"><p class="letraMediaPerfil">Otros Conocimientos</p></div>
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                    <div class="form-group ">
+                                        
+                                    <label class="col-form-label text-intervid">Conocimientos o habilidades:</label>
+                                    <input type="text"  name="correo" class="form-control">
+                                </div>
+                                      <input type="submit" value="Añadir" class="btn btn-success">  
+                                <button type="button" class="btn btn-primary">Cancelar</button>
+                                </div>
+                            </div>
+                        </div> 
 
                     </div>    
                 </div>
@@ -442,30 +621,33 @@
         </div>
 
 
-
-        <!--                 FOOTER                  --> 
+<!--                 FOOTER                  --> 
         <div id="footer" class="container-fluid bg-black">
             <div class="container-fluid">
                 <div class="row pt-4 ">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Postulantes</h5>
-                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <hr class="hr-custom-white" />
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Reclutadores</h5>
-                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <hr class="hr-custom-white" />
+
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Empresas</h5>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
+                                <hr class="hr-custom-white" />
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
                             <div class="col-lg-3 mt-3 text-right">
                                 <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
@@ -474,7 +656,10 @@
                                 <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
                             </div>
                         </div>
-                        <div class="row mt-5">
+                        <div class="row mt-1">
+                            <div class="col-lg-12">
+                                <hr class="hr-custom-white"/>
+                            </div>
                             <div class="col-lg-12">
                                 <p class="text-white p-12">
                                     &copy; 2019 InterVid . Todos los derechos reservados.
@@ -485,7 +670,6 @@
                 </div>
             </div>
         </div>
-
 
     </body>
 </html>
