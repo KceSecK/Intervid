@@ -25,6 +25,7 @@
                  <prop key="loginEmpresa.htm">conexionController</prop>
                  <prop key="loginPostulante.htm">conexionController</prop>
                  <prop key="cvPostulante.htm">conexionController</prop>
+                 <prop key="ofertasLaboralesPostulante.htm">conexionController</prop>
                  
             </props>
         </property>

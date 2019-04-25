@@ -73,4 +73,10 @@ public class CtrlConexion {
         mav.setViewName("cvPostulante");         
           return mav;   
       }
+      @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)
+   public ModelAndView vistaOfertasLaborales(){
+        mav.addObject(new UsuarioPostulante());
+        mav.setViewName("ofertasLaboralesPostulante");         
+          return mav;   
+      }
 }
