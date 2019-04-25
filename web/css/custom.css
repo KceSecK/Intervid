@@ -1,21 +1,42 @@
 
 #footer{
-    position: relative;
-    top: 100%;
-    bottom: 0;
-    width: 100%;
-    z-index: 5000;
+
 }
+
 .box-img{
-    height: 500px;
+    height: auto;
     width: 100%;
     background: #10707f;
+}
+.box{
+    background: white ;
+    overflow: hidden;
+}
+
+.scale{
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.scale:hover{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transition: all 0.3s;
+    transform: scale(1.1);
+    opacity: 90%;
 }
 
 .hr-custom-black{
     border : 0;
     height: 1px; 
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.hr-custom-white{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
 }
 
 .bg-black{
