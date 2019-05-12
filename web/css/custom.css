@@ -1,13 +1,13 @@
 
 
-/*#footer{
+#footer{
     position: relative;
     top: 100%;
     bottom: 0;
     width: 100%;
-    z-index: 5000;
+    z-index: 2;
 
-}*/
+}
 
 .scale{
     max-width: 100%;
@@ -198,4 +198,18 @@
 
 .greyTxt{
     color: grey;
+}
+
+.static{
+    position: fixed;
+}
+
+#div-principal{
+    position: relative;
+    top: 60px;
+}
+
+#nav-fixed{
+    z-index: 1;
+    background-color: #FFF;
 }

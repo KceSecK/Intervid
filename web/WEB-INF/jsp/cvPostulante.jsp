@@ -26,7 +26,7 @@
     <body>
 
         <!-- Navbar-->
-        <div class="container-fluid nav-intervid">
+        <div id="nav-fixed" class="container-fluid nav-intervid static">
             <div class="navbar navbar-expand-sm black">
                 <div class="container-fluid">
                     <!-- Logo -->
@@ -41,9 +41,6 @@
                     <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="alink nav-link border-link text-intervid" href="loginEmpresa.htm">Empresas</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="btn btn-primary nav-link" href="loginPostulante.htm" role="button">Ingresar</a>                            
                             </li>
                         </ul>
@@ -51,12 +48,14 @@
                 </div>
             </div>
         </div>
+        
         <!--Container principal-->
-        <div class="container-fluid">
+        <div id="div-principal" class="container-fluid">
             <div class="row">
+                <!--Nav lateral-->
                 <div class="col-lg-2 bg-intervid">
                     <div class="container">
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled static ">
                             <li>
                                 <a class="alink nav-link border-link" href="#datosPersonales">Datos Personales</a>
                             </li>
@@ -81,31 +80,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-9">
-                    <div class="container bg-black">
-                        asdf
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="container-fluid">
-            <div class="row">
-                <!--Lado Derecho-->
-                <div class="col-lg-3 perfil">
+                <div class="col-lg-9 mb-5">
                     <div class="container">
-
-                    </div>
-                </div>
-
-
-                <!--Lado Izquierdo-->
-
-                <div class="col-lg-9 py-md-3 pl-md-5 ">
-
-                    <div class="container ">
-
                         <!--Primer cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Mi CV</p></div>
                         <div class="row">
@@ -598,7 +574,7 @@
 
                         <!--Segundo cuadro-->
                         <div class="row mt-2" id="otrosConocimientos"><p class="letraMediaPerfil">Otros Conocimientos</p></div>
-                        <div class="row">
+                        <div class="row mb-5">
                             <div class="card col-md-9 ">
                                 <div class="card-body ">
                                     <div class="form-group ">
@@ -612,10 +588,12 @@
                             </div>
                         </div> 
 
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
+
+
 
 
         <!--                 FOOTER                  --> 

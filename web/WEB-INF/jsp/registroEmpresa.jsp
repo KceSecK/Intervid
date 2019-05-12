@@ -33,7 +33,7 @@
                     <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="btn btn-primary" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                                <a class="btn btn-primary" href="loginEmpresa.htm" role="button">Ingresar</a>                            
                             </li>
                         </ul>
                     </div>
