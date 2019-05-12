@@ -21,11 +21,11 @@
             <props>
                 <prop key="index.htm">conexionController</prop>
                 <prop key="registro.htm">conexionController</prop>
-                 <prop key="registroEmpresa.htm">conexionController</prop>
-                 <prop key="loginEmpresa.htm">conexionController</prop>
-                 <prop key="loginPostulante.htm">conexionController</prop>
-                 <prop key="cvPostulante.htm">conexionController</prop>
-                 <prop key="ofertasLaboralesPostulante.htm">conexionController</prop>
+                <prop key="registroEmpresa.htm">conexionController</prop>
+                <prop key="loginEmpresa.htm">conexionController</prop>
+                <prop key="loginPostulante.htm">conexionController</prop>
+                <prop key="cvPostulante.htm">conexionController</prop>
+                <prop key="ofertasLaboralesPostulante.htm">conexionController</prop>
                  
             </props>
         </property>
@@ -35,8 +35,6 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
-
-   
     
     <bean name="conexionController"
           class="Controller.CtrlConexion"/>

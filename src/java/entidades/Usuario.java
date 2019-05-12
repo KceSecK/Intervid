@@ -1,31 +1,32 @@
 package entidades;
+
 import Config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Date;
 
 public class Usuario {
-    int UsuarioID;
+
+    String nomUsPos;
+    String apeUsPos;
     String correo;
     String clave;
     String tipoCuenta;
-    int CuentaActiva;
-    Date fechaRegistro;
 
-    public int getUsuarioID() {
-        return UsuarioID;
+    public String getNomUsPos() {
+        return nomUsPos;
     }
 
-    public void setUsuarioID(int UsuarioID) {
-        this.UsuarioID = UsuarioID;
+    public void setNomUsPos(String nomUsPos) {
+        this.nomUsPos = nomUsPos;
     }
 
-    public int getCuentaActiva() {
-        return CuentaActiva;
+    public String getApeUsPos() {
+        return apeUsPos;
     }
 
-    public void setCuentaActiva(int CuentaActiva) {
-        this.CuentaActiva = CuentaActiva;
+    public void setApeUsPos(String apeUsPos) {
+        this.apeUsPos = apeUsPos;
     }
 
     public String getCorreo() {
@@ -51,14 +52,5 @@ public class Usuario {
     public void setTipoCuenta(String tipoCuenta) {
         this.tipoCuenta = tipoCuenta;
     }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-    
 
 }

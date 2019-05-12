@@ -3,7 +3,7 @@
     Created on : abr 22, 2019, 6:19:48 p.m.
     Author     : Saitam
 --%>
-
+<c:redirect url="/cvPostulante.htm"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,82 +26,106 @@
     <body>
 
         <!-- Navbar-->
-        <nav class="navbar navbar-expand-sm colorbg sticky-top">
-            <div class="container">
-                <!-- Logo -->
-                <a class="navbar-brand img-fluid" href="index.htm">
-                    <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                </a>
-                <!--             Toggle icon 
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                <img src="img/Menu_32.png">
-                            </button>-->
-                <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="index.html">Inicio</a>
-                        </li>
+        <div class="container-fluid nav-intervid">
+            <div class="navbar navbar-expand-sm black">
+                <div class="container-fluid">
+                    <!-- Logo -->
+                    <a class="navbar-brand img-fluid" href="index.htm">
+                        <img id="logo" src="img/letra 5mm.png" alt="InterVid">
+                    </a>
+                    <!--                    Toggle icon 
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                            <img src="img/Menu_32.png">
+                                        </button>-->
 
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="productos.html">Productos e é</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                        </li>
-                    </ul>
+                    <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="alink nav-link border-link text-intervid" href="loginEmpresa.htm">Empresas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary nav-link" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </nav>
-
+        </div>
+        <!--Container principal-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 bg-intervid">
+                    <div class="container">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="alink nav-link border-link" href="#datosPersonales">Datos Personales</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#datosContacto">Datos de Contacto</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#educacion">Educación</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#expectativasLaborales">Expectativas Laborales</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#experienciaProfesional">Experiencia Profesional</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#idiomas">Idiomas</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#otrosConocimientos">Otros Conocimientos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="container bg-black">
+                        asdf
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div class="container-fluid">
-            <div class="row flex-xl-nowrap">
+            <div class="row">
                 <!--Lado Derecho-->
-                <div class="col-12 col-md-3 col-xl-2 height100 perfil">
-                    <div class="container ">
-                        
-                        <a class="alink nav-link border-link pb-0" href="#datosPersonales">Datos Personales</a>
-                        <a class="alink nav-link border-link pb-0" href="#datosContacto">Datos de Contacto</a>
-                        <a class="alink nav-link border-link pb-0" href="#educacion">Educación</a>
-                        <a class="alink nav-link border-link pb-0" href="#expectativasLaborales">Expectativas Laborales</a>
-                        <a class="alink nav-link border-link pb-0" href="#experienciaProfesional">Experiencia Profesional</a>
-                        <a class="alink nav-link border-link pb-0" href="#idiomas">Idiomas</a>
-                        <a class="alink nav-link border-link pb-0" href="#otrosConocimientos">Otros Conocimientos</a>
-                        
+                <div class="col-lg-3 perfil">
+                    <div class="container">
+
                     </div>
                 </div>
-                
-                
+
+
                 <!--Lado Izquierdo-->
 
-                <div class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 ">
+                <div class="col-lg-9 py-md-3 pl-md-5 ">
 
                     <div class="container ">
 
                         <!--Primer cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Mi CV</p></div>
                         <div class="row">
-                        <div class="card col-md-12">
-                            <div class="card-body ">
-                                 <div class="container ">
-                                    <div class="row">
-                                <div class="col-md-4">
-                                Estado cv <img src="img/100.png" class="rounded-circle" height="70px" width="70px"> 
+                            <div class="card col-md-12">
+                                <div class="card-body ">
+                                    <div class="container ">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                Estado cv <img src="img/100.png" class="rounded-circle" height="70px" width="70px"> 
+                                            </div>
+                                            <div class="col-md-4">
+                                                Foto perfil  <img src="img/icons8-person-64.png" class="rounded-circle" height="70px" width="70px"> 
+                                            </div>
+                                            <div class="col-md-4">
+                                                Video pitch  <img src="img/icons8-circled-play-64.png" class="rounded-circle" height="70px" width="70px"> 
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                  Foto perfil  <img src="img/icons8-person-64.png" class="rounded-circle" height="70px" width="70px"> 
-                                </div>
-                                <div class="col-md-4">
-                                  Video pitch  <img src="img/icons8-circled-play-64.png" class="rounded-circle" height="70px" width="70px"> 
-                                </div>
-                                
-                            </div>
-                            </div>
-                            </div>
                             </div>
                         </div>
 
@@ -109,308 +133,308 @@
 
                         <!--Segundo cuadro-->
                         <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos Personales</p></div>
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="card col-md-9">
-                            <div class="card-body ">
+                            <div class="card col-md-9">
+                                <div class="card-body ">
 
-                                <div class="col-lg-9">
-                                    <div class="container">
+                                    <div class="col-lg-9">
+                                        <div class="container">
 
 
-                                        <form method="POST"> 
-                                            <div class="form-group ">
-                                                <label class="col-form-label text-intervid">Nombre(s):</label>
+                                            <form method="POST"> 
+                                                <div class="form-group ">
+                                                    <label class="col-form-label text-intervid">Nombre(s):</label>
 
-                                                <input type="text"  name="nombre" class="form-control">
+                                                    <input type="text"  name="nombre" class="form-control">
 
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-intervid">Apellido(s):</label><input type="text" name="apellido" class="form-control">
-                                            </div>
-
-                                            <div class="form-row">
+                                                </div>
                                                 <div class="form-group">
-                                                    <label class="text-intervid">Género:</label>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                        <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                                                    <label class="text-intervid">Apellido(s):</label><input type="text" name="apellido" class="form-control">
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Género:</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                            <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                            <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-row">
+                                                <div class="form-row">
 
-                                                <label class="text-intervid">Nacionalidad</label>
-                                                <select name="" class="form-control">
-                                                    <option selected>Cosa</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-row">
-
-                                                <label class="text-intervid">Tipo de Identificación</label>
-                                                <div class="col-md-3"></div>
-                                                <div class="form-group col-md-6">
-
+                                                    <label class="text-intervid">Nacionalidad</label>
                                                     <select name="" class="form-control">
-                                                        <option selected value="CI">Cédula de identidad</option>
-                                                        <option selected value="CE">Cédula de extranjeria</option>
-                                                        <option selected value="PA">Pasaporte</option>
-                                                        <option selected value="IFE">Credencial para votar</option>
+                                                        <option selected>Cosa</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <input type="text" name="identificacion" class="form-control">
+
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Tipo de Identificación</label>
+                                                    <div class="col-md-3"></div>
+                                                    <div class="form-group col-md-6">
+
+                                                        <select name="" class="form-control">
+                                                            <option selected value="CI">Cédula de identidad</option>
+                                                            <option selected value="CE">Cédula de extranjeria</option>
+                                                            <option selected value="PA">Pasaporte</option>
+                                                            <option selected value="IFE">Credencial para votar</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" name="identificacion" class="form-control">
+                                                    </div>
+
                                                 </div>
 
-                                            </div>
+                                                <div class="form-row">
 
-                                            <div class="form-row">
+                                                    <label class="text-intervid">Fecha de nacimiento</label>
+                                                    <div class="col-md-6"></div>
 
-                                                <label class="text-intervid">Fecha de nacimiento</label>
-                                                <div class="col-md-6"></div>
-
-                                                <input id="datepicker"  type="date" class="form-control" name="fechaNac" >
-                                            </div>
-
-                                            <div class="form-row ">
-                                                <label class="col-form-label text-intervid">Estado Civil:</label>
-                                                <div class="col-md-6"></div>
-                                                <div class="form-group col-md-8">
-                                                    <select name="" class="form-control ">
-                                                        <option value="soltero/a">Soltero/a</option>
-                                                        <option value="casado/a">Casado/a</option>
-                                                        <option value="viudo/a">Viudo/a</option>
-                                                        <option value="divorciado/a">Divorciado/a</option>
-                                                        <option value="conviviente">Conviviente civil</option>
-                                                    </select>
+                                                    <input id="datepicker"  type="date" class="form-control" name="fechaNac" >
                                                 </div>
-                                                <div class="form-check col-md-4">
 
-                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                                        Mostrar en CV
+                                                <div class="form-row ">
+                                                    <label class="col-form-label text-intervid">Estado Civil:</label>
+                                                    <div class="col-md-6"></div>
+                                                    <div class="form-group col-md-8">
+                                                        <select name="" class="form-control ">
+                                                            <option value="soltero/a">Soltero/a</option>
+                                                            <option value="casado/a">Casado/a</option>
+                                                            <option value="viudo/a">Viudo/a</option>
+                                                            <option value="divorciado/a">Divorciado/a</option>
+                                                            <option value="conviviente">Conviviente civil</option>
+                                                        </select>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <div class="form-check col-md-4">
 
-
-                                            <div class="form-row">
-                                                <!--licencias a--> 
-                                                <label class="col-form-label text-intervid">Licencia de Conducir:</label>
-                                                <div class="col-md-6"></div>
-                                                <div class="form-group col-lg-12">
-
-
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                                        <label class="form-check-label" for="inlineCheckbox1">A1</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">A2</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">A3</label>
-                                                    </div>
-
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">A4</label>
-                                                    </div>
-
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">A5</label>
-                                                    </div>
-                                                </div>
-                                                <!--licencias b-->
-                                                <div class="form-group col-lg-12">
-
-
-
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                                        <label class="form-check-label" for="inlineCheckbox1">B</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">C</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">D</label>
-                                                    </div>
-
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">E</label>
-                                                    </div>
-
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">F</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                        <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
+                                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                            Mostrar en CV
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                            </div>
 
-                                            <div class="form-row">
-                                                <div class="form-group">
-                                                    <label class="text-intervid">Vehículo propio:</label>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                <div class="form-row">
+                                                    <!--licencias a--> 
+                                                    <label class="col-form-label text-intervid">Licencia de Conducir:</label>
+                                                    <div class="col-md-6"></div>
+                                                    <div class="form-group col-lg-12">
+
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                            <label class="form-check-label" for="inlineCheckbox1">A1</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">A2</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">A3</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">A4</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">A5</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                                    <!--licencias b-->
+                                                    <div class="form-group col-lg-12">
+
+
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                            <label class="form-check-label" for="inlineCheckbox1">B</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">C</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">D</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">E</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">F</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                            <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Vehículo propio:</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                            <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                            <label class="form-check-label" for="inlineRadio2">No</label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
 
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                                <label class="form-check-label" for="inlineRadio1">Poseeo algún tipo de discapacidad</label>
-                                            </div>
-                                            <input type="submit" value="Crear Cuenta" class="btn btn-success">  <button type="button" class="btn btn-primary">Cancelar</button>
-                                        </form>
+                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                    <label class="form-check-label" for="inlineRadio1">Poseeo algún tipo de discapacidad</label>
+                                                </div>
+                                                <input type="submit" value="Crear Cuenta" class="btn btn-success">  <button type="button" class="btn btn-primary">Cancelar</button>
+                                            </form>
+                                        </div>
                                     </div>
+
+
                                 </div>
-
-
-                            </div>
                             </div>
                         </div> 
 
                         <!--Tercer cuadro-->
                         <div class="row mt-2" id="datosContacto"><p class="letraMediaPerfil">Datos de Contacto</p></div>
-    <div class="row">
-                        <div class="card col-md-9 ">
-                            <div class="card-body ">
-                                <form method="POST"> 
-                                    <div class="form-row">
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                    <form method="POST"> 
+                                        <div class="form-row">
 
-                                        <label class="text-intervid">País de residencia</label>
-                                        <select name="" class="form-control">
-                                            <option selected>Cosa</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-row">
-
-                                        <label class="text-intervid">Región/Estado</label>
-                                        <select name="" class="form-control">
-                                            <option selected>Cosa</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-row">
-
-                                        <label class="text-intervid">Comuna/Municipio</label>
-                                        <select name="" class="form-control">
-                                            <option selected>Cosa</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-row ">
-                                        <label class="col-form-label text-intervid">Dirección:</label>
-
-                                        <input type="text"  name="correo" class="form-control">
-                                    </div>
-
-                                    <div class="form-row ">
-                                        <label class="col-form-label text-intervid">Correo electrónico:</label>
-
-                                        <input type="email"  name="correo" class="form-control">
-                                    </div>
-
-
-                                    <div class="form-row">
-                                        <label class="text-intervid">Télefono</label>
-                                        <div class="col-md-6"></div>
-                                        <div class="form-row col-md-6">
-
-                                            <select name="tipoTel" class="form-control">
-                                                <option value="fijo">Fijo</option>
-                                                <option value="movil">Movil</option>
+                                            <label class="text-intervid">País de residencia</label>
+                                            <select name="" class="form-control">
+                                                <option selected>Cosa</option>
                                             </select>
                                         </div>
-                                        <div class="form-row col-md-6">
-                                            <input type="text" name="telefono" class="form-control">
+
+                                        <div class="form-row">
+
+                                            <label class="text-intervid">Región/Estado</label>
+                                            <select name="" class="form-control">
+                                                <option selected>Cosa</option>
+                                            </select>
                                         </div>
 
-                                    </div>
-                                    <a href="">+Añadir otro télefono</a>
-                                    <div class="col-md-6"></div>
-                                    <input type="submit" value="Ingresar" class="btn btn-success">  
-                                    <button type="button" class="btn btn-primary">Cancelar</button>
-                                </form>
-                            </div>
+                                        <div class="form-row">
 
-                        </div> 
+                                            <label class="text-intervid">Comuna/Municipio</label>
+                                            <select name="" class="form-control">
+                                                <option selected>Cosa</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-row ">
+                                            <label class="col-form-label text-intervid">Dirección:</label>
+
+                                            <input type="text"  name="correo" class="form-control">
+                                        </div>
+
+                                        <div class="form-row ">
+                                            <label class="col-form-label text-intervid">Correo electrónico:</label>
+
+                                            <input type="email"  name="correo" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-row">
+                                            <label class="text-intervid">Télefono</label>
+                                            <div class="col-md-6"></div>
+                                            <div class="form-row col-md-6">
+
+                                                <select name="tipoTel" class="form-control">
+                                                    <option value="fijo">Fijo</option>
+                                                    <option value="movil">Movil</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-row col-md-6">
+                                                <input type="text" name="telefono" class="form-control">
+                                            </div>
+
+                                        </div>
+                                        <a href="">+Añadir otro télefono</a>
+                                        <div class="col-md-6"></div>
+                                        <input type="submit" value="Ingresar" class="btn btn-success">  
+                                        <button type="button" class="btn btn-primary">Cancelar</button>
+                                    </form>
+                                </div>
+
+                            </div> 
                         </div> 
 
 
                         <!--Cuerto cuadro-->
                         <div class="row mt-2" id="educacion"><p class="letraMediaPerfil">Educación</p></div>
-    <div class="row">
-                        <div class="card col-md-9 ">
-                            <div class="card-body ">
-                                <div class="form-group ">
-                                    <label class="col-form-label text-intervid">Institución:</label>
-                                    <input type="text"  name="correo" class="form-control">
-                                </div>
-
-                                <div class="form-row">
-
-                                    <label class="text-intervid">Nivel de estudios:</label>
-                                    <select name="estudios" class="form-control">
-                                        <option value="basico">Básico</option>
-                                        <option value="medio">Medio</option>
-                                        <option value="superior">Superior</option>
-                                    </select>
-                                </div>
-                                <div class="form-row">
-
-                                    <label class="text-intervid">Estado:</label>
-                                    <select name="" class="form-control">
-                                        <option value="en curso">En Curso</option>
-                                        <option value="graduado">Graduado</option>
-                                        <option value="abandonado">Abandonado</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-row">
-                                    <label class="text-intervid">Período:</label>
-                                    <div class="col-md-11"></div>
-                                    <div class="form-group col-md-8">
-
-                                        <input  class="form-control" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                    <div class="form-group ">
+                                        <label class="col-form-label text-intervid">Institución:</label>
+                                        <input type="text"  name="correo" class="form-control">
                                     </div>
 
-                                    <div class="form-check col-md-4">
+                                    <div class="form-row">
 
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                            A la actualidad
+                                        <label class="text-intervid">Nivel de estudios:</label>
+                                        <select name="estudios" class="form-control">
+                                            <option value="basico">Básico</option>
+                                            <option value="medio">Medio</option>
+                                            <option value="superior">Superior</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+
+                                        <label class="text-intervid">Estado:</label>
+                                        <select name="" class="form-control">
+                                            <option value="en curso">En Curso</option>
+                                            <option value="graduado">Graduado</option>
+                                            <option value="abandonado">Abandonado</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <label class="text-intervid">Período:</label>
+                                        <div class="col-md-11"></div>
+                                        <div class="form-group col-md-8">
+
+                                            <input  class="form-control" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
                                         </div>
-                                    </div>
+
+                                        <div class="form-check col-md-4">
+
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                A la actualidad
+                                            </div>
+                                        </div>
 
 
-                                </div><input type="submit" value="Añadir" class="btn btn-success">  
-                                <button type="button" class="btn btn-primary">Cancelar</button>
-                            </div>
+                                    </div><input type="submit" value="Añadir" class="btn btn-success">  
+                                    <button type="button" class="btn btn-primary">Cancelar</button>
+                                </div>
 
-                        </div> 
+                            </div> 
                         </div> 
 
                         <!--Quinto cuadro-->
@@ -547,7 +571,7 @@
 
                                         <label class="text-intervid">Escrito:</label>
                                         <select name="escrito" class="form-control">
-                                              <option value="bajoIdiomaEs">Bajo</option>
+                                            <option value="bajoIdiomaEs">Bajo</option>
                                             <option value="medioIdiomaEs">Medio</option>
                                             <option value="altoIdiomaEs">Alto</option>
                                             <option value="bilingueIdiomaEs">Bilingüe</option>
@@ -657,19 +681,19 @@
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
     });
-     $(function () {
+    $(function () {
         $('input[name="daterange2"]').daterangepicker({
             opens: 'left'
         }, function (start, end, label) {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
-    });  
+    });
     $.datepicker.setDefaults($.datepicker.regional["es"]);
-$("#datepicker").datepicker({
-firstDay: 1
-});
+    $("#datepicker").datepicker({
+        firstDay: 1
+    });
 
-$("#datepicker").click(function () {
-$("#datepicker").datepicker("setDate", "-117y");
-});
+    $("#datepicker").click(function () {
+        $("#datepicker").datepicker("setDate", "-117y");
+    });
 </script>
