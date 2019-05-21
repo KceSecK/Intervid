@@ -5,17 +5,15 @@ import java.util.Date;
 
 public class UsuarioPostulante {
     
-    int id_usuarioPostulante;
-    String nomUsPos;
-    String apeUsPos;
-    String genero;
-    String nacionalidad;
-    String documento;
-    String numDocumento;
-    Date fechaNacimiento;
-    String estadoCivil;
-    int vehiculoUsuario;
-    int discapacidadUsuario;
+   private int id_usuarioPostulante;
+   private String genero;
+   private String nacionalidad;
+   private String documento;
+   private String numDocumento;
+   private Date fechaNacimiento;
+   private String estadoCivil;
+   private int vehiculoUsuario;
+   private int discapacidadUsuario;
 
     public int getId_usuarioPostulante() {
         return id_usuarioPostulante;
@@ -23,22 +21,6 @@ public class UsuarioPostulante {
 
     public void setId_usuarioPostulante(int id_usuarioPostulante) {
         this.id_usuarioPostulante = id_usuarioPostulante;
-    }
-
-    public String getNomUsPos() {
-        return nomUsPos;
-    }
-
-    public void setNomUsPos(String nomUsPos) {
-        this.nomUsPos = nomUsPos;
-    }
-
-    public String getApeUsPos() {
-        return apeUsPos;
-    }
-
-    public void setApeUsPos(String apeUsPos) {
-        this.apeUsPos = apeUsPos;
     }
 
     public String getGenero() {

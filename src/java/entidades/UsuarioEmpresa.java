@@ -1,16 +1,16 @@
 package entidades;
 public class UsuarioEmpresa {
-    int UsuarioEmpresaID;
-    int EmpresaUsuarioFK;
-    int SectorEmpresarialFK;
-    String NombreEmpresa;
-    String RazonSocial;
-    String RutEmpresa;
-    int EmpresaComuna;
-    String EmpresaDireccion;
-    String LogoEmpresa;
-    String PaginaEmpresa;
-    String DescripcionEmpresa;
+   private int UsuarioEmpresaID;
+   private int EmpresaUsuarioFK;
+   private int SectorEmpresarialFK;
+   private String NombreEmpresa;
+   private String RazonSocial;
+   private String RutEmpresa;
+   private int EmpresaComuna;
+   private String EmpresaDireccion;
+   private String LogoEmpresa;
+   private String PaginaEmpresa;
+   private String DescripcionEmpresa;
 
     public int getUsuarioEmpresaID() {
         return UsuarioEmpresaID;

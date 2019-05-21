@@ -149,11 +149,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">RUT de la empresa</label>
-                                    <input type="text" class="form-control" name="nomUsPos">
+                                    <input type="text" class="form-control" name="RutEmpresa">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Razón Social</label>
-                                    <input type="text" class="form-control" name="apeUsPos">
+                                    <input type="text" class="form-control" name="RazonSocial">
                                 </div>
                             </div>
 
@@ -161,11 +161,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombre de la empresa</label>
-                                    <input type="text" class="form-control" name="nomUsPos">
+                                    <input type="text" class="form-control" name="NombreEmpresa">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Teléfono</label>
-                                    <input type="text" class="form-control" name="apeUsPos">
+                                    <input type="text" class="form-control" name="NumeroTelefonico">
                                 </div>
                             </div>
 

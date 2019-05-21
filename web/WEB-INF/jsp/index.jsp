@@ -18,23 +18,28 @@
         <div class="container-fluid home">
             <!-- Navbar-->
             <div class="navbar navbar-expand-sm black">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link alink border-link" href="#">Precios</a>
+                            </li>
+                        </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="alink nav-link border-link" href="productos.html">Empresas</a>
+                                <a class="alink nav-link border-link" href="loginEmpresa.htm">Empresas</a>
                             </li>
                             <li class="nav-item">
                                 <p class="nav-link text-white font-weight-bold">|</p>
                             </li>
                             <li class="nav-item">
-                                <button type="button" class="btn btn-primary">Ingresar</button>
-                            
+                                <a class="btn btn-primary" href="loginPostulante.htm" role="button">Ingresar</a>                            
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+
             <div class="container">
                 <div class="row mt-3"></div>
                 <div class="row">
@@ -69,7 +74,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 m-2 text-right">
-                        <button type="button" class="btn btn-success font-weight-bold">Buscar Empleos</button>
+                        <a class="btn btn-success font-weight-bold" href="ofertasLaboralesPostulante.htm" role="button">Buscar Empleos</a>
                     </div>
                 </div>
             </div>
@@ -83,19 +88,19 @@
             </div>
             <div class="row justify-content-md-center pb-5">
                 <div class="col-lg-4 text-justify">
-                    <img class="inner mb-4" src="img/letra 10mm.png" alt=""/>
+                    <img class="inner mb-4 scale" src="img/letra 10mm.png" alt=""/>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </div>
                 <div class="col-lg-4 text-justify">
-                    <img class="inner mb-4" src="img/letra 10mm.png" alt=""/>
+                    <img class="inner mb-4 scale" src="img/letra 10mm.png" alt=""/>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </div>
                 <div class="col-lg-4 text-justify">
-                    <img class="inner mb-4" src="img/letra 10mm.png" alt=""/>
+                    <img class="inner mb-4 scale" src="img/letra 10mm.png" alt=""/>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
@@ -131,23 +136,27 @@
                 <div class="row pt-4 ">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Postulantes</h5>
-                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <hr class="hr-custom-white" />
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Reclutadores</h5>
-                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <hr class="hr-custom-white" />
+
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Empresas</h5>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
+                                <hr class="hr-custom-white" />
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
                             <div class="col-lg-3 mt-3 text-right">
                                 <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
@@ -156,7 +165,10 @@
                                 <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
                             </div>
                         </div>
-                        <div class="row mt-5">
+                        <div class="row mt-1">
+                            <div class="col-lg-12">
+                                <hr class="hr-custom-white"/>
+                            </div>
                             <div class="col-lg-12">
                                 <p class="text-white p-12">
                                     &copy; 2019 InterVid . Todos los derechos reservados.
@@ -167,5 +179,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>
