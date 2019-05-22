@@ -2,11 +2,11 @@ package entidades;
 public class UsuarioEmpresa {
    private int UsuarioEmpresaID;
    private int EmpresaUsuarioFK;
-   private int SectorEmpresarialFK;
+     private int EmpresaComuna;
+   private String SectorEmpresarial;
    private String NombreEmpresa;
    private String RazonSocial;
    private String RutEmpresa;
-   private int EmpresaComuna;
    private String EmpresaDireccion;
    private String LogoEmpresa;
    private String PaginaEmpresa;
@@ -24,17 +24,19 @@ public class UsuarioEmpresa {
         return EmpresaUsuarioFK;
     }
 
-    public void setEmpresaUsuarioFK(int EmpresaUsuarioFK) {
+    public void setEmpresaUsuarioFK(int EmpresaUsuario) {
         this.EmpresaUsuarioFK = EmpresaUsuarioFK;
     }
 
-    public int getSectorEmpresarialFK() {
-        return SectorEmpresarialFK;
+    public String getSectorEmpresarial() {
+        return SectorEmpresarial;
     }
 
-    public void setSectorEmpresarialFK(int SectorEmpresarialFK) {
-        this.SectorEmpresarialFK = SectorEmpresarialFK;
+    public void setSectorEmpresarial(String SectorEmpresarial) {
+        this.SectorEmpresarial = SectorEmpresarial;
     }
+
+ 
 
     public String getNombreEmpresa() {
         return NombreEmpresa;
