@@ -19,13 +19,21 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
+            <!--Comunes-->
                 <prop key="index.htm">conexionController</prop>
-                <prop key="registro.htm">conexionController</prop>
-                 <prop key="registroEmpresa.htm">conexionController</prop>
-                 <prop key="loginEmpresa.htm">conexionController</prop>
-                 <prop key="loginPostulante.htm">conexionController</prop>
-                 <prop key="cvPostulante.htm">conexionController</prop>
-                 <prop key="ofertasLaboralesPostulante.htm">conexionController</prop>
+                
+            <!--Usuario Postulante--> 
+                <prop key="registro.htm">conexionController2</prop> 
+                <prop key="loginPostulante.htm">conexionController2</prop>
+                <prop key="cvPostulante.htm">conexionController2</prop>
+                <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
+                
+            <!--Usuario Empresa-->
+                 <prop key="registroEmpresa.htm">conexionController3</prop>
+                 <prop key="loginEmpresa.htm">conexionController3</prop>
+                
+                 
+                 
                  
             </props>
         </property>
@@ -40,5 +48,8 @@
     
     <bean name="conexionController"
           class="Controller.CtrlConexion"/>
-
+<bean name="conexionController2"
+          class="Controller.CtrlPostulante"/>
+<bean name="conexionController3"
+          class="Controller.CtrlEmpresa"/>
 </beans>
