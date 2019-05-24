@@ -63,7 +63,7 @@
                             </p>
                           
                                 <div class="card-body ">
-                                <form method="POST"> 
+                                    <form method="POST"> 
 
                                     <div class="form-group">
                                          <div class="col-12">
@@ -74,7 +74,7 @@
                                     <div class="form-group">
                                          <div class="col-12">
                                         <label class="text-intervid">Contraseña</label>
-                                        <input type="text" class="form-control" name="contraseña">
+                                        <input type="text" class="form-control" name="clave">
                                     </div>
                                     </div>
                                     

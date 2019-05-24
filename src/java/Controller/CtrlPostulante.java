@@ -5,19 +5,25 @@
  */
 package Controller;
 import Config.Conexion;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import entidades.Usuario;
 import entidades.UsuarioPostulante;
 import java.sql.ResultSet;
 import java.util.List;
 import static javafx.scene.input.KeyCode.T;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Controller;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,5 +85,32 @@ public class CtrlPostulante {
         mav.setViewName("ofertasLaboralesPostulante");         
           return mav;   
       }
-    
+   
+ 
+@RequestMapping(value="loginPostulante.htm",method=RequestMethod.POST)   
+ public ModelAndView loginUsarioPostulante(HttpServletRequest request) {        
+            String cor=request.getParameter("correo");
+            String cla=request.getParameter("clave");
+  String sql = "select * from usuario where correoUsuario='"+cor+"' and Contraseña=AES_ENCRYPT('"+cla+"','userpass')";
+  
+  List list = jdbcTemplate.queryForList(sql);
+ 
+  if(list.size() > 0){
+      mav.addObject("lista",list);
+      HttpSession sesion= request.getSession(true);
+        sesion.setAttribute("tipoCuenta", list.get(0));
+        System.out.println("Controller.CtrlPostulante.loginUsarioPostulante()"+sesion.getAttribute("tipoCuenta"));
+      return new ModelAndView("redirect:/index.htm?idExt=1");
+  }
+  
+else
+  {
+       return new ModelAndView("redirect:/index.htm?idErr=1");
+  }
 }
+}
+
+
+
+    
+
