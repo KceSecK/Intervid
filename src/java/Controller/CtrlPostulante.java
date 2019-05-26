@@ -9,7 +9,10 @@ import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import entidades.Usuario;
 import entidades.UsuarioPostulante;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
+import java.util.Map;
 import static javafx.scene.input.KeyCode.T;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,9 +26,12 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -33,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Saitam
  */
 @Controller
+@SessionAttributes({"tipoCuenta","CorreoUsuario","NombreUsuario","CuentaActiva","ID"})
 public class CtrlPostulante {
     
         Conexion con = new Conexion();
@@ -47,13 +54,13 @@ public class CtrlPostulante {
           return mav;   
       }
          @RequestMapping(value = "registro.htm",method = RequestMethod.POST)
-      public ModelAndView Agregar(Usuario u){
+      public String Agregar(Usuario u){
        try{
         this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)",u.getCorreo(),u.getClave(),u.getNomUsPos(),u.getApeUsPos());
-         return new ModelAndView("redirect:/index.htm?idExt=1");
+         return "/index";
        }
        catch(DataIntegrityViolationException e){
-                   return new ModelAndView("redirect:/index.htm?idErr=1");
+                   return "/index.htm?idErr=1";
 
        }          
       }
@@ -68,15 +75,15 @@ public class CtrlPostulante {
    
    
       @RequestMapping(value="cvPostulante.htm",method=RequestMethod.GET)
-   public ModelAndView cvPostulante(HttpServletRequest request){
+   public String cvPostulante(HttpServletRequest request, ModelMap model){
         mav.addObject(new UsuarioPostulante());
         mav.setViewName("cvPostulante");
         int idPostulante= Integer.parseInt(request.getParameter("id"));
         String sql="select * from usuariopostulante up INNER JOIN usuario u \n" +
 "WHERE up.PostulanteUsuarioFK=u.UsuarioID and u.UsuarioID = "+idPostulante+"";
         List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista",datos);
-          return mav;   
+        model.addAttribute("lista", datos);
+          return "/cvPostulante";   
       }
    
       @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)
@@ -87,28 +94,36 @@ public class CtrlPostulante {
       }
    
  
-@RequestMapping(value="loginPostulante.htm",method=RequestMethod.POST)   
- public ModelAndView loginUsarioPostulante(HttpServletRequest request) {        
+@RequestMapping(value="loginPostulante.htm",method=RequestMethod.POST)    
+public String loginUsuarioPostulante(HttpServletRequest request, ModelMap model) {        
             String cor=request.getParameter("correo");
             String cla=request.getParameter("clave");
-  String sql = "select * from usuario where correoUsuario='"+cor+"' and Contraseña=AES_ENCRYPT('"+cla+"','userpass')";
-  
-  List list = jdbcTemplate.queryForList(sql);
- 
-  if(list.size() > 0){
-      mav.addObject("lista",list);
-      HttpSession sesion= request.getSession(true);
-        sesion.setAttribute("tipoCuenta", list.get(0));
-        System.out.println("Controller.CtrlPostulante.loginUsarioPostulante()"+sesion.getAttribute("tipoCuenta"));
-      return new ModelAndView("redirect:/index.htm?idExt=1");
+  String sql = "select usuarioID,CorreoUsuario,TipoCuenta,"
+          + "nombreUsuario,ApellidoUsuario from usuario where correoUsuario='"+cor+"' and Contraseña=AES_ENCRYPT('"+cla+"','userpass')";
+  List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+	
+  if(rows.size() > 0){
+      
+	for (Map row : rows) {
+                model.put("tipoCuenta", (String) row.get("TipoCuenta").toString());
+                model.put("CorreoUsuario", (String) row.get("CorreoUsuario").toString());
+                model.put("NombreUsuario", (String) row.get("NombreUsuario").toString());
+                model.put("CuentaActiva", (Integer) row.get("CuentaActiva"));
+                model.put("ID", (Integer) row.get("usuarioID"));
+	}
+        
+   
+      return "/index";
+
   }
   
 else
   {
-       return new ModelAndView("redirect:/index.htm?idErr=1");
+       return "/loginPostulante";
   }
 }
 }
+
 
 
 

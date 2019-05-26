@@ -101,7 +101,7 @@
                                             <div class="row align-items-end">
                                                 <div class="col "></div>
                                                 <div class="col ">
-                                            <a href="">¿No tienes cuenta? Registrate ahora</a>
+                                            <a href="registro.htm">¿No tienes cuenta? Registrate ahora</a>
                                             </div>
                                                 </div>
                                             </div>

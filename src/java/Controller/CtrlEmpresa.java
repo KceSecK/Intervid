@@ -3,9 +3,12 @@ package Controller;
 
 import entidades.NumeroContacto;
 import Config.Conexion;
+import entidades.OfertaLaboral;
 import entidades.Usuario;
 import entidades.UsuarioEmpresa;
+import entidades.UsuarioReclutador;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import static javafx.scene.input.KeyCode.T;
 import javax.servlet.http.HttpServletRequest;
@@ -37,20 +40,58 @@ public class CtrlEmpresa {
       }
         @RequestMapping(value = "registroEmpresa.htm",method = RequestMethod.POST)
      
-        public ModelAndView Agregar(Usuario u, UsuarioEmpresa ue, NumeroContacto nc){
+        public String Agregar(Usuario u, UsuarioEmpresa ue, NumeroContacto nc){
   
         this.jdbcTemplate.update("call creacion_UsuarioEmpresa(?,?,?,?,?,?,?,?)",u.getCorreo(),
                 u.getClave(),u.getNomUsPos(),u.getApeUsPos(),ue.getRazonSocial()
         ,ue.getRutEmpresa(),ue.getNombreEmpresa(),nc.getNumeroTelefonico());
         
-         return new ModelAndView("redirect:/index.htm");
+         return "/index";
 
       }
+        
    
    @RequestMapping(value="loginEmpresa.htm",method=RequestMethod.GET)
    public ModelAndView login(){
         mav.addObject(new Usuario());
         mav.setViewName("loginEmpresa");         
           return mav;   
+      }
+   
+           @RequestMapping(value = "crearOfertaLaboral.htm",method = RequestMethod.POST)
+     
+        public ModelAndView AgregarOferta(Usuario u, UsuarioEmpresa ue, NumeroContacto nc,OfertaLaboral of){
+               try {
+                   this.jdbcTemplate.update("insert into OfertaLaboral (NombreOferta,"
+                + "CreadorOferta,EmpresaOferta,LugarTrabajo,TipoEntrevista,"
+                + "PlanOferta,DescripcionCargo,FechaPublicacionOferta,"
+                + "FechaFinalizacionOferta,RequisitosOferta,BeneficiosOferta,"
+                + "HorarioEntrevista,TipoCargo,TipoContrato,JornadaTrabajo,SueldoOfrecido) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                ,of.getNombreOferta(),u.getUsuarioID(),ue.getUsuarioEmpresaID(),of.getLugarTrabajo(),
+                of.getTipoEntrevista(),of.getPlanOferta(),of.getDescripcionCargo(),
+                of.getFechaPublicacionOferta(),of.getFechaFinalizacionOferta(),
+                of.getRequisitosOferta(),of.getBeneficiosOferta(),of.getHorarioEntrevista(),
+                of.getTipoCargo(),of.getTipoContrato(),of.getJornadaTrabajo(),
+                of.getSueldoOfrecido());
+        
+         return new ModelAndView("redirect:/ofertasLaboralesEmpresa.htm");
+
+               } catch (DataIntegrityViolationException e) {
+                   return new ModelAndView("redirect:/crearOfertaLaboral.htm?err=1");
+               }
+        
+      }
+        
+          @RequestMapping(value = "registroReclutador.htm",method = RequestMethod.POST)
+     
+        public String AgregarReclutador(Usuario u, UsuarioEmpresa ue,UsuarioReclutador ur){
+  
+        this.jdbcTemplate.update("call creacion_UsuarioReclutador(?,?,?,?,?,?,?)",u.getCorreo(),
+                u.getClave(),u.getNomUsPos(),u.getApeUsPos(),ue.getUsuarioEmpresaID()
+        ,ur.getReclutadorCargo(),ur.getReclutadorGenero());
+        
+         return "/index?idExt=1";
+
       }
 }
