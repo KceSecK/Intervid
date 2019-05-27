@@ -166,14 +166,14 @@
                                                 <div class="form-group col-md-6">
 
                                                     <select name="" class="form-control">
-                                                        <option selected value="CI">Cédula de identidad</option>
-                                                        <option selected value="CE">Cédula de extranjeria</option>
-                                                        <option selected value="PA">Pasaporte</option>
-                                                        <option selected value="IFE">Credencial para votar</option>
+                                                        <option  ${d.Documento == 'CI' ? 'selected' : '' } value="CI">Cédula de identidad</option>
+                                                        <option  ${d.Documento == 'CE' ? 'selected' : '' } value="CE">Cédula de extranjeria</option>
+                                                        <option  ${d.Documento == 'PA' ? 'selected' : '' } value="PA">Pasaporte</option>
+                                                        <option  ${d.Documento == 'IFE' ? 'selected' : '' } value="IFE">Credencial para votar</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <input type="text" name="identificacion" class="form-control">
+                                                    <input type="text" name="identificacion" value="${d.NumDocumento}" class="form-control">
                                                 </div>
 
                                             </div>
@@ -183,7 +183,7 @@
                                                 <label class="text-intervid">Fecha de nacimiento</label>
                                                 <div class="col-md-6"></div>
 
-                                                <input id="datepicker"  type="date" class="form-control" name="fechaNac" >
+                                                <input id="datepicker"  type="date" value="${d.FechaNacimiento}" class="form-control" name="fechaNac" >
                                             </div>
 
                                             <div class="form-row ">
@@ -191,11 +191,11 @@
                                                 <div class="col-md-6"></div>
                                                 <div class="form-group col-md-8">
                                                     <select name="" class="form-control ">
-                                                        <option value="soltero/a">Soltero/a</option>
-                                                        <option value="casado/a">Casado/a</option>
-                                                        <option value="viudo/a">Viudo/a</option>
-                                                        <option value="divorciado/a">Divorciado/a</option>
-                                                        <option value="conviviente">Conviviente civil</option>
+                                                        <option ${d.EstadoCivil == 'so' ? 'selected' : '' } value="so">Soltero/a</option>
+                                                        <option ${d.EstadoCivil == 'ca' ? 'selected' : '' } value="ca">Casado/a</option>
+                                                        <option ${d.EstadoCivil == 'vi' ? 'selected' : '' } value="vi">Viudo/a</option>
+                                                        <option ${d.EstadoCivil == 'di' ? 'selected' : '' } value="di">Divorciado/a</option>
+                                                        <option ${d.EstadoCivil == 'co' ? 'selected' : '' } value="co">Conviviente civil</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-check col-md-4">
@@ -276,11 +276,13 @@
                                                 <div class="form-group">
                                                     <label class="text-intervid">Vehículo propio:</label>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                        <input class="form-check-input" type="radio" name="vehiculoPropioSi" id="vehiculo" value="true" 
+                                                               ${d.VehiculoUsuario == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineRadio1">Si</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <input class="form-check-input" type="radio" name="vehiculoPropioNo" id="vehiculo" value="false"
+                                                               ${d.VehiculoUsuario == 'false' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineRadio2">No</label>
                                                     </div>
                                                 </div>
