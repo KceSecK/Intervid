@@ -215,25 +215,30 @@
 
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="a1"
+                                                                ${d.LicenciaTipo == 'a1' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox1">A1</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a2"
+                                                                ${d.LicenciaTipo == 'a2' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A2</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a3"
+                                                                ${d.LicenciaTipo == 'a3' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A3</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a4"
+                                                                ${d.LicenciaTipo == 'a4' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A4</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a5"
+                                                                ${d.LicenciaTipo == 'a5' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A5</label>
                                                     </div>
                                                 </div>
@@ -243,29 +248,35 @@
 
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="b"
+                                                               ${d.LicenciaTipo == 'b' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox1">B</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="c"
+                                                                ${d.LicenciaTipo == 'c' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">C</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="d"
+                                                                ${d.LicenciaTipo == 'd' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">D</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="e"
+                                                                ${d.LicenciaTipo == 'e' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">E</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="f"
+                                                                ${d.LicenciaTipo == 'f' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">F</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="x"
+                                                                ${d.LicenciaTipo == 'x' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
                                                     </div>
                                                 </div>
@@ -289,7 +300,8 @@
                                             </div>
 
 
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck"
+                                                                            ${d.DiscapacidadUsuario == 'true' ? 'checked' : '' }>
                                                 <label class="form-check-label" for="inlineRadio1">Poseeo algún tipo de discapacidad</label>
                                             </div>
                                             <input type="submit" value="Crear Cuenta" class="btn btn-success">  <button type="button" class="btn btn-primary">Cancelar</button>
@@ -312,7 +324,7 @@
 
                                         <label class="text-intervid">País de residencia</label>
                                         <select name="" class="form-control">
-                                            <option selected>Cosa</option>
+                                            <option >Cosa</option>
                                         </select>
                                     </div>
 
@@ -335,13 +347,15 @@
                                     <div class="form-row ">
                                         <label class="col-form-label text-intervid">Dirección:</label>
 
-                                        <input type="text"  name="correo" class="form-control">
+                                        <input type="text"  name="correo" class="form-control"
+                                                value="${d.DireccionResidencia}">
                                     </div>
 
                                     <div class="form-row ">
                                         <label class="col-form-label text-intervid">Correo electrónico:</label>
 
-                                        <input type="email"  name="correo" class="form-control">
+                                        <input type="email"  name="correo" class="form-control"
+                                               value="${d.CorreoUsuario}">
                                     </div>
 
 
@@ -356,7 +370,8 @@
                                             </select>
                                         </div>
                                         <div class="form-row col-md-6">
-                                            <input type="text" name="telefono" class="form-control">
+                                            <input type="text" name="telefono" class="form-control"
+                                                   value="${d.NumeroTelefonico}">
                                         </div>
 
                                     </div>
@@ -378,25 +393,26 @@
                             <div class="card-body ">
                                 <div class="form-group ">
                                     <label class="col-form-label text-intervid">Institución:</label>
-                                    <input type="text"  name="correo" class="form-control">
+                                    <input type="text"  name="text" class="form-control"
+                                           value="${d.Institucion}">
                                 </div>
 
                                 <div class="form-row">
 
                                     <label class="text-intervid">Nivel de estudios:</label>
                                     <select name="estudios" class="form-control">
-                                        <option value="basico">Básico</option>
-                                        <option value="medio">Medio</option>
-                                        <option value="superior">Superior</option>
+                                        <option ${d.NivelEstudio == 'basico' ? 'selected' : '' } value="basico">Básico</option>
+                                        <option ${d.NivelEstudio == 'medio' ? 'selected' : '' } value="medio">Medio</option>
+                                        <option ${d.NivelEstudio == 'superior' ? 'selected' : '' } value="superior">Superior</option>
                                     </select>
                                 </div>
                                 <div class="form-row">
 
                                     <label class="text-intervid">Estado:</label>
                                     <select name="" class="form-control">
-                                        <option value="en curso">En Curso</option>
-                                        <option value="graduado">Graduado</option>
-                                        <option value="abandonado">Abandonado</option>
+                                        <option ${d.EstadoEstudio == 'en curso' ? 'selected' : '' } value="en curso">En Curso</option>
+                                        <option ${d.EstadoEstudio == 'graduado' ? 'selected' : '' } value="graduado">Graduado</option>
+                                        <option ${d.EstadoEstudio == 'abandonado' ? 'selected' : '' } value="abandonado">Abandonado</option>
                                     </select>
                                 </div>
 
@@ -405,12 +421,13 @@
                                     <div class="col-md-11"></div>
                                     <div class="form-group col-md-8">
 
-                                        <input  class="form-control" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+                                        <input  class="form-control" type="text" name="daterange" value="${d.PeriodoInicio} ${d.PeriodoFin}" />
                                     </div>
 
                                     <div class="form-check col-md-4">
 
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck"
+                                                                ${d.PeriodoActual == 'true' ? 'checked' : '' }>
                                             A la actualidad
                                         </div>
                                     </div>
@@ -431,15 +448,16 @@
 
                                     <div class="form-group ">
                                         <label class="col-form-label text-intervid">Expectativas de renta:</label>
-                                        <input type="text"  name="correo" class="form-control">
+                                        <input type="text"  name="text" class="form-control"
+                                               value="${d.ExpectativaRenta}">
                                     </div>
                                     <div class="form-row">
 
                                         <label class="text-intervid">Moneda:</label>
                                         <select name="moneda" class="form-control">
-                                            <option value="clp">Chilena</option>
-                                            <option value="mxp">Mexicana</option>
-                                            <option value="usd">Dolar</option>
+                                            <option ${d.TipoMoneda == 'clp' ? 'selected' : '' } value="clp">Chilena</option>
+                                            <option ${d.TipoMoneda == 'mxp' ? 'selected' : '' } value="mxp">Mexicana</option>
+                                            <option ${d.TipoMoneda == 'usd' ? 'selected' : '' } value="usd">Dolar</option>
                                         </select>
                                     </div>
 
@@ -455,8 +473,8 @@
 
                                         <label class="text-intervid">Jornada:</label>
                                         <select name="" class="form-control">
-                                            <option value="fullTime">Full-Time</option>
-                                            <option value="partTime">Part-Time</option>
+                                            <option ${d.JornadaPreferente == 'ft' ? 'selected' : '' } value="ft">Full-Time</option>
+                                            <option ${d.JornadaPreferente == 'pt' ? 'selected' : '' } value="pt">Part-Time</option>
                                         </select>
                                     </div>
 
@@ -464,11 +482,13 @@
                                         <div class="form-group">
                                             <label class="text-intervid">Disponibilidad para viajar:</label>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true"
+                                                       ${d.DisponibilidadViaje == 'true' ? 'checked' : '' }>
                                                 <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false"
+                                                       ${d.DisponibilidadViaje == 'false' ? 'checked' : '' }>
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
@@ -478,11 +498,13 @@
                                         <div class="form-group">
                                             <label class="text-intervid">Disponibilidad para cambiar de residencia:</label>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true">
+                                                <label class="form-check-label" for="inlineRadio1"
+                                                       ${d.CambioResidencia == 'true' ? 'checked' : '' }>Si</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false"
+                                                       ${d.CambioResidencia == 'false' ? 'checked' : '' }>
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
                                         </div>
@@ -503,7 +525,8 @@
 
                                     <div class="form-group ">
                                         <label class="col-form-label text-intervid">Empresa:</label>
-                                        <input type="text"  name="correo" class="form-control">
+                                        <input type="text"  name="empresa" class="form-control"
+                                               ${d.EmpresaExperiencia}>
                                     </div>
                                     <div class="form-group">
 
@@ -515,14 +538,16 @@
 
                                     <div class="form-group ">
                                         <label class="col-form-label text-intervid">Cargo:</label>
-                                        <input type="text"  name="correo" class="form-control">
+                                        <input type="text"  name="cargo" class="form-control"
+                                               ${d.CargoDesempeñado}>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="text-intervid">Período: </label>
                                         <div class="col-md-11"></div>
 
-                                        <input  class="form-control" type="text" name="daterange2" value="01/01/2018 - 01/15/2018" />
+                                        <input  class="form-control" type="text" name="daterange2" 
+                                                value="${d.InicioPeriodo} ${d.FinPeriodo}" />
                                     </div>
 
                                     <input type="submit" value="Añadir" class="btn btn-success">  
@@ -557,10 +582,10 @@
 
                                         <label class="text-intervid">Escrito:</label>
                                         <select name="escrito" class="form-control">
-                                              <option value="bajoIdiomaEs">Bajo</option>
-                                            <option value="medioIdiomaEs">Medio</option>
-                                            <option value="altoIdiomaEs">Alto</option>
-                                            <option value="bilingueIdiomaEs">Bilingüe</option>
+                                            <option ${d.NivelEscrito == 'bajo' ? 'selected' : '' } value="bajo">Bajo</option>
+                                            <option ${d.NivelEscrito == 'medio' ? 'selected' : '' } value="medio">Medio</option>
+                                            <option ${d.NivelEscrito == 'alto' ? 'selected' : '' }  value="alto">Alto</option>
+                                            <option ${d.NivelEscrito == 'nativo' ? 'selected' : '' } value="nativo">Nativo</option>
                                         </select>
                                     </div>
 
@@ -568,10 +593,10 @@
 
                                         <label class="text-intervid">Hablado:</label>
                                         <select name="hablado" class="form-control">
-                                            <option value="bajoIdiomaHa">Bajo</option>
-                                            <option value="medioIdiomaHa">Medio</option>
-                                            <option value="altoIdiomaHa">Alto</option>
-                                            <option value="bilingueIdiomaHa">Bilingüe</option>
+                                            <option ${d.NivelHablado == 'bajo' ? 'selected' : '' } value="bajo">Bajo</option>
+                                            <option ${d.NivelHablado == 'medio' ? 'selected' : '' } value="medio">Medio</option>
+                                            <option ${d.NivelHablado == 'alto' ? 'selected' : '' } value="alto">Alto</option>
+                                            <option ${d.NivelHablado == 'nativo' ? 'selected' : '' } value="nativo">Nativo</option>
                                         </select>
                                     </div>
 
@@ -590,7 +615,8 @@
                                     <div class="form-group ">
 
                                         <label class="col-form-label text-intervid">Conocimientos o habilidades:</label>
-                                        <input type="text"  name="correo" class="form-control">
+                                        <input type="text"  name="correo" class="form-control"
+                                               value="${d.Conocimiento}">
                                     </div>
                                     <input type="submit" value="Añadir" class="btn btn-success">  
                                     <button type="button" class="btn btn-primary">Cancelar</button>

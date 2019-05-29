@@ -78,9 +78,27 @@ public class CtrlPostulante {
    public String cvPostulante(HttpServletRequest request, ModelMap model){
         mav.addObject(new UsuarioPostulante());
         mav.setViewName("cvPostulante");
-        int idPostulante= Integer.parseInt(request.getParameter("id"));
-        String sql="select * from usuariopostulante up INNER JOIN usuario u \n" +
-"WHERE up.PostulanteUsuarioFK=u.UsuarioID and u.UsuarioID = "+idPostulante+"";
+        int idUsuarioPostulante= Integer.parseInt(request.getParameter("id"));
+        String sql="SELECT * FROM usuario \n" +
+"LEFT JOIN usuariopostulante \n" +
+"	ON usuariopostulante.PostulanteUsuarioFK = usuario.UsuarioID \n" +
+"LEFT JOIN contactopostulante \n" +
+"	ON contactopostulante.ContactoPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN idiomapostulante\n" +
+"	ON idiomapostulante.PostulanteIdiomaFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN licencia\n" +
+"	ON licencia.LicenciaPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN educacionpostulante\n" +
+"	ON educacionpostulante.EducacionPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN expectativalaboral\n" +
+"	ON expectativalaboral.ExpectativaPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN experienciaprofesional\n" +
+"	ON experienciaprofesional.ExperienciaPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN numerocontacto\n" +
+"	ON numerocontacto.NumeroUsuarioFK = usuariopostulante.UsuarioPostulanteID\n" +
+"LEFT JOIN otrosconocimientos\n" +
+"	ON otrosconocimientos.ConocimientoPostulante = usuariopostulante.UsuarioPostulanteID \n" +
+"WHERE usuariopostulante.UsuarioPostulanteID= "+idUsuarioPostulante+"";
         List datos = this.jdbcTemplate.queryForList(sql);
         model.addAttribute("lista", datos);
           return "/cvPostulante";   
