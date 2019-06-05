@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : cvPostulante
     Created on : abr 22, 2019, 6:19:48 p.m.
     Author     : Saitam
@@ -323,16 +323,20 @@
                                     <div class="form-row">
 
                                         <label class="text-intervid">País de residencia</label>
-                                        <select name="" class="form-control">
-                                            <option >Cosa</option>
+                                        <select name="" class="form-control" id="selPais">
+                                             <c:forEach var="p" items="${pais}">
+                                            <option value="${p.PaisID}">${p.PaisNombre}</option>
+                                           </c:forEach> 
                                         </select>
                                     </div>
 
                                     <div class="form-row">
 
                                         <label class="text-intervid">Región/Estado</label>
-                                        <select name="" class="form-control">
-                                            <option selected>Cosa</option>
+                                        <select name="" class="form-control" id="selRegion" onchange="cargarRegiones()">
+                                            <c:forEach var="r" items="${region}" >
+                                            <option value="${r.RegionID}">${r.RegionNombre}</option>                                            <
+                                        </c:forEach>
                                         </select>
                                     </div>
 
@@ -687,7 +691,6 @@
 <script>
 
 
-
     $(function () {
         $('input[name="daterange"]').daterangepicker({
             opens: 'left'
@@ -710,4 +713,22 @@ firstDay: 1
 $("#datepicker").click(function () {
 $("#datepicker").datepicker("setDate", "-117y");
 });
+
+
+function cargarRegiones(){
+var id_Pais= document.getElementById('selPais').value;   
+var id_Reg= document.getElementById('selRegion').value;   
+      
+        console.log(id_Reg);
+    if(id_Reg==5)
+    {
+      throw new Error("waaaaaaaaaaa");
+      
+    }
+    
+
+ 
+}
+
+
 </script>

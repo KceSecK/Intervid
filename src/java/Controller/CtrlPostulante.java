@@ -99,7 +99,13 @@ public class CtrlPostulante {
 "LEFT JOIN otrosconocimientos\n" +
 "	ON otrosconocimientos.ConocimientoPostulante = usuariopostulante.UsuarioPostulanteID \n" +
 "WHERE usuariopostulante.UsuarioPostulanteID= "+idUsuarioPostulante+"";
+        String sql2 = "select * from Pais";
+        String sql3 = "select * from Region";
         List datos = this.jdbcTemplate.queryForList(sql);
+        List pais = this.jdbcTemplate.queryForList(sql2);
+        List region = this.jdbcTemplate.queryForList(sql3);
+        model.addAttribute("pais",pais);
+        model.addAttribute("region",region);
         model.addAttribute("lista", datos);
           return "/cvPostulante";   
       }
