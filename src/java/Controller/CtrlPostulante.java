@@ -95,12 +95,24 @@ public class CtrlPostulante {
 "LEFT JOIN experienciaprofesional\n" +
 "	ON experienciaprofesional.ExperienciaPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
 "LEFT JOIN numerocontacto\n" +
-"	ON numerocontacto.NumeroUsuarioFK = usuariopostulante.UsuarioPostulanteID\n" +
+"	ON numerocontacto.NumeroUsuarioFK = usuario.UsuarioID\n" +
 "LEFT JOIN otrosconocimientos\n" +
 "	ON otrosconocimientos.ConocimientoPostulante = usuariopostulante.UsuarioPostulanteID \n" +
 "WHERE usuariopostulante.UsuarioPostulanteID= "+idUsuarioPostulante+"";
+        
+        String sql2="select * from pais";
+        String sql3="select * from region";
+        String sql4="select * from comuna";
+      
+                
         List datos = this.jdbcTemplate.queryForList(sql);
+        List pais = this.jdbcTemplate.queryForList(sql2);
+        List region = this.jdbcTemplate.queryForList(sql3);
+        List comuna = this.jdbcTemplate.queryForList(sql4);
         model.addAttribute("lista", datos);
+        model.addAttribute("pais", pais);
+        model.addAttribute("region", region);
+        model.addAttribute("comuna", comuna);
           return "/cvPostulante";   
       }
    
