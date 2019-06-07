@@ -14,37 +14,41 @@
     <body>
 
         <!-- Navbar-->
-        <nav class="navbar navbar-expand-sm colorbg sticky-top">
-            <div class="container">
-                <!-- Logo -->
-                <a class="navbar-brand img-fluid" href="index.htm">
-                    <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                </a>
-                <!--             Toggle icon 
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                <img src="img/Menu_32.png">
-                            </button>-->
-                <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="index.html">Inicio</a>
-                        </li>
+        <div id="nav-fixed" class="container-fluid nav-intervid static">
+            <div class="navbar navbar-expand-sm black">
+                <div class="container-fluid">
+                    <!-- Logo -->
+                    <a class="navbar-brand img-fluid" href="index.htm">
+                        <img id="logo" src="img/letra 5mm.png" alt="InterVid">
+                    </a>
+                    <!--                    Toggle icon 
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                            <img src="img/Menu_32.png">
+                                        </button>-->
 
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="productos.html">Productos e é</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                        </li>
-                    </ul>
+                    <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-primary nav-link" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
 
-        <div class="container-fluid" >
+        <div class="container-fluid div-principal pt-4" >
+            
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 bg-danger">
+                        asdf
+                    </div>
+                </div>
+            </div>
+            
+            
+            
             <div class="row">
                 <div class="col-lg-1  "></div>
                 <!--FILTROS-->
@@ -151,7 +155,7 @@
         </div>
 
 
- <!--                 FOOTER                  --> 
+        <!--                 FOOTER                  --> 
         <div id="footer" class="container-fluid bg-black">
             <div class="container-fluid">
                 <div class="row pt-4 ">
@@ -200,7 +204,6 @@
                 </div>
             </div>
         </div>
-
 
 
     </body>

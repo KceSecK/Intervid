@@ -3,7 +3,6 @@
     Created on : abr 22, 2019, 6:19:48 p.m.
     Author     : Saitam
 --%>
-<c:redirect url="/cvPostulante.htm"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +11,7 @@
         <title>JSP Page</title> 
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom2.css" rel="stylesheet" type="text/css"/>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -23,8 +23,7 @@
     </head>
 
 
-    <body>
-
+    <body class="body-gris">
         <!-- Navbar-->
         <div id="nav-fixed" class="container-fluid nav-intervid static">
             <div class="navbar navbar-expand-sm black">
@@ -48,9 +47,9 @@
                 </div>
             </div>
         </div>
-        
+
         <!--Container principal-->
-        <div id="div-principal" class="container-fluid">
+        <div class="container-fluid div-principal">
             <div class="row">
                 <!--Nav lateral-->
                 <div class="col-lg-2 bg-intervid">
@@ -84,21 +83,29 @@
                     <div class="container">
                         <!--Primer cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Mi CV</p></div>
-                        <div class="row">
+                        <div class="row div-border">
                             <div class="card col-md-12">
-                                <div class="card-body ">
+                                <div class="card-body">
                                     <div class="container ">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                Estado cv <img src="img/100.png" class="rounded-circle" height="70px" width="70px"> 
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Estado CV</p>
                                             </div>
-                                            <div class="col-md-4">
-                                                Foto perfil  <img src="img/icons8-person-64.png" class="rounded-circle" height="70px" width="70px"> 
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
                                             </div>
-                                            <div class="col-md-4">
-                                                Video pitch  <img src="img/icons8-circled-play-64.png" class="rounded-circle" height="70px" width="70px"> 
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Foto Perfil</p>
                                             </div>
-
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Video Pitch</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -108,186 +115,235 @@
 
 
                         <!--Segundo cuadro-->
-                        <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos Personales</p></div>
-                        <div class="row">
 
-                            <div class="card col-md-9">
-                                <div class="card-body ">
 
+
+                        <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos de Personales</p></div>
+                        <div id="DPersonales" class="row">
+                            <div class="col-lg-9 div-border">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="EditarPersonales" type="button" class="btn btn-link btn-right">Editar</button>
+                                        <table id="s">
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Nombre(s):</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Apellido(s)</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Género:</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Nacionalidad</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Tipo de identificación</td>
+                                                <td>data</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Fecha de nacimiento:</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Estado civil</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Licencia de conducir</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Vehículo propio</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Discapacidad</td>
+                                                <td>data</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--datos personales edit-->
+                        <div id="ddpersonales" class="row">
+                            <div class="col-md-9 div-border">
+                                <div class="card-body">
                                     <div class="col-lg-9">
-                                        <div class="container">
+                                        <form method="POST"> 
+                                            <div class="form-group ">
+                                                <label class="col-form-label text-intervid">Nombre(s):</label>
 
+                                                <input type="text"  name="nombre" class="form-control">
 
-                                            <form method="POST"> 
-                                                <div class="form-group ">
-                                                    <label class="col-form-label text-intervid">Nombre(s):</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-intervid">Apellido(s):</label><input type="text" name="apellido" class="form-control">
+                                            </div>
 
-                                                    <input type="text"  name="nombre" class="form-control">
-
-                                                </div>
+                                            <div class="form-row">
                                                 <div class="form-group">
-                                                    <label class="text-intervid">Apellido(s):</label><input type="text" name="apellido" class="form-control">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <div class="form-group">
-                                                        <label class="text-intervid">Género:</label>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                            <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                            <label class="form-check-label" for="inlineRadio2">Femenino</label>
-                                                        </div>
+                                                    <label class="text-intervid">Género:</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio2">Femenino</label>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-row">
+                                            <div class="form-row">
 
-                                                    <label class="text-intervid">Nacionalidad</label>
+                                                <label class="text-intervid">Nacionalidad</label>
+                                                <select name="" class="form-control">
+                                                    <option selected>Cosa</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <label class="text-intervid">Tipo de Identificación</label>
+                                                <div class="col-md-3"></div>
+                                                <div class="form-group col-md-6">
+
                                                     <select name="" class="form-control">
-                                                        <option selected>Cosa</option>
+                                                        <option selected value="CI">Cédula de identidad</option>
+                                                        <option selected value="CE">Cédula de extranjeria</option>
+                                                        <option selected value="PA">Pasaporte</option>
+                                                        <option selected value="IFE">Credencial para votar</option>
                                                     </select>
                                                 </div>
-
-                                                <div class="form-row">
-
-                                                    <label class="text-intervid">Tipo de Identificación</label>
-                                                    <div class="col-md-3"></div>
-                                                    <div class="form-group col-md-6">
-
-                                                        <select name="" class="form-control">
-                                                            <option selected value="CI">Cédula de identidad</option>
-                                                            <option selected value="CE">Cédula de extranjeria</option>
-                                                            <option selected value="PA">Pasaporte</option>
-                                                            <option selected value="IFE">Credencial para votar</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <input type="text" name="identificacion" class="form-control">
-                                                    </div>
-
+                                                <div class="form-group col-md-6">
+                                                    <input type="text" name="identificacion" class="form-control">
                                                 </div>
 
-                                                <div class="form-row">
+                                            </div>
 
-                                                    <label class="text-intervid">Fecha de nacimiento</label>
-                                                    <div class="col-md-6"></div>
+                                            <div class="form-row">
 
-                                                    <input id="datepicker"  type="date" class="form-control" name="fechaNac" >
+                                                <label class="text-intervid">Fecha de nacimiento</label>
+                                                <div class="col-md-6"></div>
+
+                                                <input id="datepicker"  type="date" class="form-control" name="fechaNac" >
+                                            </div>
+
+                                            <div class="form-row ">
+                                                <label class="col-form-label text-intervid">Estado Civil:</label>
+                                                <div class="col-md-6"></div>
+                                                <div class="form-group col-md-8">
+                                                    <select name="" class="form-control ">
+                                                        <option value="soltero/a">Soltero/a</option>
+                                                        <option value="casado/a">Casado/a</option>
+                                                        <option value="viudo/a">Viudo/a</option>
+                                                        <option value="divorciado/a">Divorciado/a</option>
+                                                        <option value="conviviente">Conviviente civil</option>
+                                                    </select>
                                                 </div>
+                                                <div class="form-check col-md-4">
 
-                                                <div class="form-row ">
-                                                    <label class="col-form-label text-intervid">Estado Civil:</label>
-                                                    <div class="col-md-6"></div>
-                                                    <div class="form-group col-md-8">
-                                                        <select name="" class="form-control ">
-                                                            <option value="soltero/a">Soltero/a</option>
-                                                            <option value="casado/a">Casado/a</option>
-                                                            <option value="viudo/a">Viudo/a</option>
-                                                            <option value="divorciado/a">Divorciado/a</option>
-                                                            <option value="conviviente">Conviviente civil</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-check col-md-4">
-
-                                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                                            Mostrar en CV
-                                                        </div>
+                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                        Mostrar en CV
                                                     </div>
                                                 </div>
+                                            </div>
 
 
-                                                <div class="form-row">
-                                                    <!--licencias a--> 
-                                                    <label class="col-form-label text-intervid">Licencia de Conducir:</label>
-                                                    <div class="col-md-6"></div>
-                                                    <div class="form-group col-lg-12">
+                                            <div class="form-row">
+                                                <!--licencias a--> 
+                                                <label class="col-form-label text-intervid">Licencia de Conducir:</label>
+                                                <div class="col-md-6"></div>
+                                                <div class="form-group col-lg-12">
 
 
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                                            <label class="form-check-label" for="inlineCheckbox1">A1</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">A2</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">A3</label>
-                                                        </div>
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">A4</label>
-                                                        </div>
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">A5</label>
-                                                        </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                        <label class="form-check-label" for="inlineCheckbox1">A1</label>
                                                     </div>
-                                                    <!--licencias b-->
-                                                    <div class="form-group col-lg-12">
-
-
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                                            <label class="form-check-label" for="inlineCheckbox1">B</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">C</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">D</label>
-                                                        </div>
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">E</label>
-                                                        </div>
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">F</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                            <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
-                                                        </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">A2</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">A3</label>
                                                     </div>
 
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">A4</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">A5</label>
+                                                    </div>
                                                 </div>
+                                                <!--licencias b-->
+                                                <div class="form-group col-lg-12">
 
-                                                <div class="form-row">
-                                                    <div class="form-group">
-                                                        <label class="text-intervid">Vehículo propio:</label>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                            <label class="form-check-label" for="inlineRadio1">Si</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                            <label class="form-check-label" for="inlineRadio2">No</label>
-                                                        </div>
+
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                        <label class="form-check-label" for="inlineCheckbox1">B</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">C</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">D</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">E</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">F</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                        <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
                                                     </div>
                                                 </div>
 
+                                            </div>
 
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                                    <label class="form-check-label" for="inlineRadio1">Poseeo algún tipo de discapacidad</label>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label class="text-intervid">Vehículo propio:</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                                    </div>
                                                 </div>
-                                                <input type="submit" value="Crear Cuenta" class="btn btn-success">  <button type="button" class="btn btn-primary">Cancelar</button>
-                                            </form>
-                                        </div>
+                                            </div>
+
+
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                <label class="form-check-label" for="inlineRadio1">Poseeo algún tipo de discapacidad</label>
+                                            </div>
+                                            <input type="submit" value="Crear Cuenta" class="btn btn-success">  <button type="button" class="btn btn-primary">Cancelar</button>
+                                        </form>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div> 
@@ -295,7 +351,7 @@
                         <!--Tercer cuadro-->
                         <div class="row mt-2" id="datosContacto"><p class="letraMediaPerfil">Datos de Contacto</p></div>
                         <div class="row">
-                            <div class="card col-md-9 ">
+                            <div class="col-md-9 div-border">
                                 <div class="card-body ">
                                     <form method="POST"> 
                                         <div class="form-row">
@@ -364,8 +420,8 @@
                         <!--Cuerto cuadro-->
                         <div class="row mt-2" id="educacion"><p class="letraMediaPerfil">Educación</p></div>
                         <div class="row">
-                            <div class="card col-md-9 ">
-                                <div class="card-body ">
+                            <div class="col-md-9 div-border ">
+                                <div class="card-body">
                                     <div class="form-group ">
                                         <label class="col-form-label text-intervid">Institución:</label>
                                         <input type="text"  name="correo" class="form-control">
@@ -416,7 +472,7 @@
                         <!--Quinto cuadro-->
                         <div class="row mt-2" id="expectativasLaborales"><p class="letraMediaPerfil">Expectativas Laborales</p></div>
                         <div class="row">
-                            <div class="card col-md-9 ">
+                            <div class="col-md-9 div-border">
                                 <div class="card-body ">
 
                                     <div class="form-group ">
@@ -424,7 +480,6 @@
                                         <input type="text"  name="correo" class="form-control">
                                     </div>
                                     <div class="form-row">
-
                                         <label class="text-intervid">Moneda:</label>
                                         <select name="moneda" class="form-control">
                                             <option value="clp">Chilena</option>
@@ -434,7 +489,6 @@
                                     </div>
 
                                     <div class="form-row">
-
                                         <label class="text-intervid">Region/Estado preferente para trabajar:</label>
                                         <select name="" class="form-control">
                                             <option selected>Cosa</option>
@@ -488,7 +542,7 @@
                         <!--Sexto cuadro-->
                         <div class="row mt-2" id="experienciaProfesional"><p class="letraMediaPerfil">Experiencia Profesional</p></div>
                         <div class="row">
-                            <div class="card col-md-9 ">
+                            <div class="col-md-9 div-border">
                                 <div class="card-body ">
 
                                     <div class="form-group ">
@@ -525,7 +579,7 @@
                         <!--Septimo cuadro-->
                         <div class="row mt-2" id="idiomas"><p class="letraMediaPerfil">Idiomas</p></div>
                         <div class="row">
-                            <div class="card col-md-9 ">
+                            <div class="col-md-9 div-border ">
                                 <div class="card-body ">
                                     <div class="form-row ">
                                         <label class="col-form-label text-intervid">Idioma:</label>
@@ -575,7 +629,7 @@
                         <!--Segundo cuadro-->
                         <div class="row mt-2" id="otrosConocimientos"><p class="letraMediaPerfil">Otros Conocimientos</p></div>
                         <div class="row mb-5">
-                            <div class="card col-md-9 ">
+                            <div class="col-md-9 div-border">
                                 <div class="card-body ">
                                     <div class="form-group ">
 
@@ -674,4 +728,5 @@
     $("#datepicker").click(function () {
         $("#datepicker").datepicker("setDate", "-117y");
     });
+
 </script>

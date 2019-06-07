@@ -5,6 +5,7 @@ import entidades.Usuario;
 import entidades.UsuarioPostulante;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,7 +43,7 @@ public class CtrlConexion {
     public ModelAndView Agregar(Usuario u, UsuarioPostulante uP) {
         String sql = "insert into usuario (correoUsuario,Contraseña,TipoCuenta,NombreUsuario,ApellidoUsuario)values(?,?,?,?,?)";
         u.setTipoCuenta("Postulante");
-        this.jdbcTemplate.update(sql, u.getCorreo(), u.getClave(),u.getTipoCuenta(),u.getNomUsPos(),u.getApeUsPos());
+        this.jdbcTemplate.update(sql, u.getCorreo(), u.getClave(), u.getTipoCuenta(), u.getNomUsPos(), u.getApeUsPos());
         return new ModelAndView("redirect:/index.htm");
     }
 
@@ -67,11 +68,15 @@ public class CtrlConexion {
         mav.setViewName("loginPostulante");
         return mav;
     }
-    
+
     @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.POST)
     public ModelAndView VerificarUsuario(Usuario u) {
-        String sql = "SELECT count(*) FROM Usuario WHERE CorreoUsuario=? AND Contraseña=?";
-//        this.jdbcTemplate.query(sql, u.getCorreo(),u.getClave());
+
+        String sql = "SELECT count(*) FROM Usuario WHERE CorreoUsuario=? AND Contraseña=aes_decrypt('?','llave')";
+//        Object asdf = false;
+//        int cont = this.jdbcTemplate.queryForObject(
+//                sql, new Object[]{asdf}, Integer.class);
+//                
         return new ModelAndView("redirect:/index.htm");
     }
 
