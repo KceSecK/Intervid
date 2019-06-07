@@ -139,12 +139,12 @@
                                                     <label class="text-intervid">Género:</label>
                                                     
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="Genero" id="Genero" value="Masculino"
+                                                        <input class="form-check-input" type="radio" name="genero" id="Genero" value="Masculino"
                                                                ${lista[0].Genero == 'Masculino' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineRadio1">Masculino</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="Genero" id="Genero" value="Femenino"
+                                                        <input class="form-check-input" type="radio" name="genero" id="Genero" value="Femenino"
                                                                ${lista[0].Genero == 'Femenino' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineRadio2">Femenino</label>
                                                     </div>
@@ -186,7 +186,8 @@
                                                 <label class="text-intervid">Fecha de nacimiento</label>
                                                 <div class="col-md-6"></div>
 
-                                                <input id="datepicker"  type="date" value="${lista[0].FechaNacimiento}" class="form-control" name="fechaNac" >
+                                                <input id="datepicker"  type="date" value="${lista[0].FechaNacimiento}" class="form-control"
+                                                       name="fechaNacimiento" >
                                             </div>
 
                                             <div class="form-row ">
@@ -218,29 +219,29 @@
 
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="a1"
+                                                        <input class="form-check-input" type="checkbox" name="LicenciaTipo"  value="a1"
                                                                 ${lista[0].LicenciaTipo == 'a1' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox1">A1</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a2"
+                                                        <input class="form-check-input" type="checkbox" name="LicenciaTipo"    value="a2"
                                                                 ${lista[0].LicenciaTipo == 'a2' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A2</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a3"
+                                                        <input class="form-check-input" type="checkbox" name="LicenciaTipo"    value="a3"
                                                                 ${lista[0].LicenciaTipo == 'a3' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A3</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a4"
+                                                        <input class="form-check-input" type="checkbox" name="LicenciaTipo"    value="a4"
                                                                 ${lista[0].LicenciaTipo == 'a4' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A4</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="a5"
+                                                        <input class="form-check-input" type="checkbox"  value="a5" name="LicenciaTipo"
                                                                 ${lista[0].LicenciaTipo == 'a5' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A5</label>
                                                     </div>
@@ -251,34 +252,34 @@
 
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="b"
+                                                        <input class="form-check-input" type="checkbox" value="b" name="LicenciaTipo"
                                                                ${lista[0].LicenciaTipo == 'b' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox1">B</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="c"
+                                                        <input class="form-check-input" type="checkbox"  value="c" name="LicenciaTipo"
                                                                 ${lista[0].LicenciaTipo == 'c' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">C</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="d"
+                                                        <input class="form-check-input" type="checkbox"  value="d" name="LicenciaTipo"
                                                                 ${lista[0].LicenciaTipo == 'd' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">D</label>
                                                     </div>
-
+ 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="e"
+                                                        <input class="form-check-input" type="checkbox"  name="LicenciaTipo" value="e"
                                                                 ${lista[0].LicenciaTipo == 'e' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">E</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="f"
+                                                        <input class="form-check-input" type="checkbox"  value="f" name="LicenciaTipo"
                                                                 ${lista[0].LicenciaTipo == 'f' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">F</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="x"
+                                                        <input class="form-check-input" type="checkbox" value="x" name="LicenciaTipo"
                                                                 ${lista[0].LicenciaTipo == 'x' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
                                                     </div>
