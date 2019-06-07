@@ -6,6 +6,8 @@
 package Controller;
 import Config.Conexion;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import entidades.Licencia;
+import entidades.NumeroContacto;
 import entidades.Usuario;
 import entidades.UsuarioPostulante;
 import java.sql.ResultSet;
@@ -109,6 +111,13 @@ public class CtrlPostulante {
         model.addAttribute("lista", datos);
           return "/cvPostulante";   
       }
+   
+    @RequestMapping(value="cvPostulante.htm",method=RequestMethod.POST)
+    public String editarPrimerCuadro(Usuario u, UsuarioPostulante up,NumeroContacto nc
+    ,Licencia l){
+         String sql ="";
+        return "/cvPostulante";
+}
    
       @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)
    public ModelAndView vistaOfertasLaborales(){
