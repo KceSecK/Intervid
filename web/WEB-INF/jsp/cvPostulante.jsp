@@ -108,7 +108,60 @@
                             </div>
                         </div>
                             
-                       
+                       <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos de Personales</p></div>
+                        <div id="DPersonales" class="row">
+                            <div class="col-lg-9 div-border">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="EditarPersonales" type="button" class="btn btn-link btn-right">Editar</button>
+                                        <table id="s">
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Nombre(s):</td>
+                                                <td>${lista[0].NombreUsuario}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Apellido(s)</td>
+                                                <td>${lista[0].ApellidoUsuario}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Género:</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Nacionalidad</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Tipo de identificación</td>
+                                                <td>data</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Fecha de nacimiento:</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Estado civil</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Licencia de conducir</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Vehículo propio</td>
+                                                <td>data</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Discapacidad</td>
+                                                <td>data</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                        
 
 
@@ -291,12 +344,12 @@
                                                 <div class="form-group">
                                                     <label class="text-intervid">Vehículo propio:</label>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="vehiculoPropioSi" id="vehiculo" value="true" 
+                                                        <input class="form-check-input" type="radio" name="vehiculoPropio" id="vehiculo" value="true" 
                                                                ${lista[0].VehiculoUsuario == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineRadio1">Si</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="vehiculoPropioNo" id="vehiculo" value="false"
+                                                        <input class="form-check-input" type="radio" name="vehiculoPropio" id="vehiculo" value="false"
                                                                ${lista[0].VehiculoUsuario == 'false' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineRadio2">No</label>
                                                     </div>
