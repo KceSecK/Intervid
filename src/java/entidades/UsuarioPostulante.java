@@ -10,7 +10,7 @@ public class UsuarioPostulante {
    private String nacionalidad;
    private String documento;
    private String numDocumento;
-   private Date fechaNacimiento;
+   private String fechaNacimiento;
    private String estadoCivil;
    private int vehiculoUsuario;
    private int discapacidadUsuario;
@@ -55,11 +55,11 @@ public class UsuarioPostulante {
         this.numDocumento = numDocumento;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

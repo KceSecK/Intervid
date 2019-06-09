@@ -129,37 +129,66 @@ public class CtrlPostulante {
    
     @RequestMapping(value= "cvPostulante.htm" , method=RequestMethod.POST)
     public ModelAndView cvPostulante( Usuario u, UsuarioPostulante up,Licencia l){ 
-        try {
+        
             
        
         System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()WWWWWWWWWWWWWWWWWWWWWWWW" );
         
-       System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()"+ u.getUsuarioID()+u.getCorreo()
-          +u.getNombre()+u.getApellido()+up.getId_usuarioPostulante()+up.getGenero()
-          +up.getNacionalidad()+up.getNumDocumento()+up.getDocumento()+up.getFechaNacimiento()
-          +up.getEstadoCivil()+up.getVehiculoUsuario()+up.getDiscapacidadUsuario()+
-          l.getLicenciaTipoA1()+l.getLicenciaTipoA2()+l.getLicenciaTipoA3()
-          +l.getLicenciaTipoA4()+l.getLicenciaTipoA5()+l.getLicenciaTipoB()+
-          l.getLicenciaTipoC()+l.getLicenciaTipoD()+l.getLicenciaTipoE()+l.getLicenciaTipoF()
+       System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()"+ 
+           u.getUsuarioID()
+          +u.getNombre()+
+           u.getApellido()+
+           up.getId_usuarioPostulante()+
+           up.getGenero()
+          +up.getNacionalidad()+
+           up.getNumDocumento()+
+           up.getDocumento()+
+           up.getFechaNacimiento()
+          +up.getEstadoCivil()+
+           up.getVehiculoUsuario()+
+           up.getDiscapacidadUsuario()+
+           l.getLicenciaTipoA1()+
+           l.getLicenciaTipoA2()+
+           l.getLicenciaTipoA3()
+          +l.getLicenciaTipoA4()+
+           l.getLicenciaTipoA5()+
+           l.getLicenciaTipoB()+
+           l.getLicenciaTipoC()+
+           l.getLicenciaTipoD()+
+           l.getLicenciaTipoE()+
+           l.getLicenciaTipoF()
           +l.getNoLicencia());
         
            
 
-          this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",u.getUsuarioID(),u.getCorreo()
-          ,u.getNombre(),u.getApellido(),up.getId_usuarioPostulante(),up.getGenero()
-          ,up.getNacionalidad(),up.getNumDocumento(),up.getDocumento(),up.getFechaNacimiento()
-          ,up.getEstadoCivil(),up.getVehiculoUsuario(),up.getDiscapacidadUsuario(),
-          l.getLicenciaTipoA1(),l.getLicenciaTipoA2(),l.getLicenciaTipoA3()
-          ,l.getLicenciaTipoA4(),l.getLicenciaTipoA5(),l.getLicenciaTipoB(),
-          l.getLicenciaTipoC(),l.getLicenciaTipoD(),l.getLicenciaTipoE(),l.getLicenciaTipoF()
-          ,l.getNoLicencia());
-          
-            
-        return new ModelAndView ("redirect:/cvPostulante.htm"); 
-         } catch (Exception e) {
-                     System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()WWWWWWWWWWWWWWWWWWWWWWWW" );
-                    return mav;
-        }
+          this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+          ,u.getUsuarioID()
+          ,u.getNombre()
+          ,u.getApellido()
+          ,up.getId_usuarioPostulante()
+          ,up.getGenero()
+          ,up.getNacionalidad()
+          ,up.getNumDocumento()
+          ,up.getDocumento()
+          ,up.getFechaNacimiento()
+          ,up.getEstadoCivil()
+          ,up.getVehiculoUsuario()
+          ,up.getDiscapacidadUsuario()
+          ,l.getLicenciaTipoA1()
+          ,l.getLicenciaTipoA2()
+          ,l.getLicenciaTipoA3()
+          ,l.getLicenciaTipoA4()
+          ,l.getLicenciaTipoA5()
+          ,l.getLicenciaTipoB()
+          ,l.getLicenciaTipoC()
+          ,l.getLicenciaTipoD()
+          ,l.getLicenciaTipoE()
+          ,l.getLicenciaTipoF()
+          ,l.getNoLicencia()
+          );
+                      
+        return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()); 
+        
     
 }
    

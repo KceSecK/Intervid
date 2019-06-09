@@ -243,7 +243,7 @@
                                                 <label class="text-intervid">Fecha de nacimiento</label>
                                                 <div class="col-md-6"></div>
 
-                                                <input id="datepicker"  type="date" value="${lista[0].FechaNacimiento}" class="form-control"
+                                                <input  type="date" value="${lista[0].FechaNacimiento}" class="form-control"
                                                        name="fechaNacimiento" >
                                             </div>
 
@@ -771,26 +771,27 @@
         })
     
     
-    $(function () {
-        $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
-        }, function (start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
-    });
-     $(function () {
-        $('input[name="daterange2"]').daterangepicker({
-            opens: 'left'
-        }, function (start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
-    });  
-    $.datepicker.setDefaults($.datepicker.regional["es"]);
-$("#datepicker").datepicker({
-firstDay: 1
-});
-$("#datepicker").click(function () {
-$("#datepicker").datepicker("setDate", "-117y");
-});
+//    $(function () {
+//        $('input[name="daterange"]').daterangepicker({
+//            opens: 'left'
+//        }, function (start, end, label) {
+//            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+//        });
+//    });
+//     $(function () {
+//        $('input[name="daterange2"]').daterangepicker({
+//            opens: 'left'
+//        }, function (start, end, label) {
+//            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+//        });
+//    });  
+    
+//$.datepicker.setDefaults($.datepicker.regional["es"]);
+//$("#datepicker").datepicker({
+//firstDay: 1
+//});
+//$("#datepicker").click(function () {
+//$("#datepicker").datepicker("setDate", "-117y");
+//});
 </script>
 
