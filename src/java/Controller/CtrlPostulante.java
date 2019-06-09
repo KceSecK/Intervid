@@ -30,9 +30,12 @@ import org.springframework.stereotype.Controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,6 +45,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @SessionAttributes({"tipoCuenta","CorreoUsuario","NombreUsuario","CuentaActiva","ID"})
+
 public class CtrlPostulante {
     
         Conexion con = new Conexion();
@@ -58,7 +62,7 @@ public class CtrlPostulante {
          @RequestMapping(value = "registro.htm",method = RequestMethod.POST)
       public String Agregar(Usuario u){
        try{
-        this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)",u.getCorreo(),u.getClave(),u.getNomUsPos(),u.getApeUsPos());
+        this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)",u.getCorreo(),u.getClave(),u.getNombre(),u.getApellido());
          return "/index";
        }
        catch(DataIntegrityViolationException e){
@@ -77,10 +81,13 @@ public class CtrlPostulante {
    
    
       @RequestMapping(value="cvPostulante.htm",method=RequestMethod.GET)
-   public String cvPostulante(HttpServletRequest request, ModelMap model){
+   public ModelAndView cvPostulante(HttpServletRequest request){
         mav.addObject(new UsuarioPostulante());
-        mav.setViewName("cvPostulante");
-        int idUsuarioPostulante= Integer.parseInt(request.getParameter("id"));
+        mav.addObject(new Usuario());
+        mav.addObject(new Licencia());
+       
+        int idUsuarioPostulante= Integer.parseInt(request.getParameter("idUS"));
+         
         String sql="SELECT * FROM usuario \n" +
 "LEFT JOIN usuariopostulante \n" +
 "	ON usuariopostulante.PostulanteUsuarioFK = usuario.UsuarioID \n" +
@@ -103,20 +110,57 @@ public class CtrlPostulante {
 "WHERE usuariopostulante.UsuarioPostulanteID= "+idUsuarioPostulante+"";
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
+        String sql4 = "select * from Comuna";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
         List region = this.jdbcTemplate.queryForList(sql3);
-        model.addAttribute("pais",pais);
-        model.addAttribute("region",region);
-        model.addAttribute("lista", datos);
-          return "/cvPostulante";   
+        List comuna = this.jdbcTemplate.queryForList(sql4);
+//        model.addAttribute("pais",pais);
+//        model.addAttribute("region",region);
+//        model.addAttribute("comuna",comuna);
+//        model.addAttribute("lista", datos);
+        mav.addObject("lista",datos);
+        mav.addObject("pais",pais);
+        mav.addObject("region",region);
+        mav.addObject("comuna",comuna); 
+         mav.setViewName("cvPostulante");
+          return mav;   
       }
    
-    @RequestMapping(value="cvPostulante.htm",method=RequestMethod.POST)
-    public String editarPrimerCuadro(Usuario u, UsuarioPostulante up,NumeroContacto nc
-    ,Licencia l){
-         String sql ="";
-        return "/cvPostulante";
+    @RequestMapping(value= "cvPostulante.htm" , method=RequestMethod.POST)
+    public ModelAndView cvPostulante( Usuario u, UsuarioPostulante up,Licencia l){ 
+        try {
+            
+       
+        System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()WWWWWWWWWWWWWWWWWWWWWWWW" );
+        
+       System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()"+ u.getUsuarioID()+u.getCorreo()
+          +u.getNombre()+u.getApellido()+up.getId_usuarioPostulante()+up.getGenero()
+          +up.getNacionalidad()+up.getNumDocumento()+up.getDocumento()+up.getFechaNacimiento()
+          +up.getEstadoCivil()+up.getVehiculoUsuario()+up.getDiscapacidadUsuario()+
+          l.getLicenciaTipoA1()+l.getLicenciaTipoA2()+l.getLicenciaTipoA3()
+          +l.getLicenciaTipoA4()+l.getLicenciaTipoA5()+l.getLicenciaTipoB()+
+          l.getLicenciaTipoC()+l.getLicenciaTipoD()+l.getLicenciaTipoE()+l.getLicenciaTipoF()
+          +l.getNoLicencia());
+        
+           
+
+          this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",u.getUsuarioID(),u.getCorreo()
+          ,u.getNombre(),u.getApellido(),up.getId_usuarioPostulante(),up.getGenero()
+          ,up.getNacionalidad(),up.getNumDocumento(),up.getDocumento(),up.getFechaNacimiento()
+          ,up.getEstadoCivil(),up.getVehiculoUsuario(),up.getDiscapacidadUsuario(),
+          l.getLicenciaTipoA1(),l.getLicenciaTipoA2(),l.getLicenciaTipoA3()
+          ,l.getLicenciaTipoA4(),l.getLicenciaTipoA5(),l.getLicenciaTipoB(),
+          l.getLicenciaTipoC(),l.getLicenciaTipoD(),l.getLicenciaTipoE(),l.getLicenciaTipoF()
+          ,l.getNoLicencia());
+          
+            
+        return new ModelAndView ("redirect:/cvPostulante.htm"); 
+         } catch (Exception e) {
+                     System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()WWWWWWWWWWWWWWWWWWWWWWWW" );
+                    return mav;
+        }
+    
 }
    
       @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)

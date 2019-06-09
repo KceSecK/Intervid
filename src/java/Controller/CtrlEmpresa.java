@@ -43,7 +43,7 @@ public class CtrlEmpresa {
         public String Agregar(Usuario u, UsuarioEmpresa ue, NumeroContacto nc){
   
         this.jdbcTemplate.update("call creacion_UsuarioEmpresa(?,?,?,?,?,?,?,?)",u.getCorreo(),
-                u.getClave(),u.getNomUsPos(),u.getApeUsPos(),ue.getRazonSocial()
+                u.getClave(),u.getNombre(),u.getApellido(),ue.getRazonSocial()
         ,ue.getRutEmpresa(),ue.getNombreEmpresa(),nc.getNumeroTelefonico());
         
          return "/index";
@@ -88,7 +88,7 @@ public class CtrlEmpresa {
         public String AgregarReclutador(Usuario u, UsuarioEmpresa ue,UsuarioReclutador ur){
   
         this.jdbcTemplate.update("call creacion_UsuarioReclutador(?,?,?,?,?,?,?)",u.getCorreo(),
-                u.getClave(),u.getNomUsPos(),u.getApeUsPos(),ue.getUsuarioEmpresaID()
+                u.getClave(),u.getNombre(),u.getApellido(),ue.getUsuarioEmpresaID()
         ,ur.getReclutadorCargo(),ur.getReclutadorGenero());
         
          return "/index?idExt=1";

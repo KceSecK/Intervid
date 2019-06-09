@@ -135,11 +135,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="text-intervid">Nombres</label>
-                                <input type="text" class="form-control" name="nomUsPos">
+                                <input type="text" class="form-control" name="nombre">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="text-intervid">Apellidos</label>
-                                <input type="text" class="form-control" name="apeUsPos">
+                                <input type="text" class="form-control" name="apellido">
                             </div>
                         </div>
                         <div class="form-group">

@@ -9,27 +9,28 @@ public class Usuario {
    private String correo;
    private String clave;
    private String tipoCuenta;
-   private String nomUsPos;
-   private String apeUsPos;
+   private String nombre;
+   private String apellido;
    private int CuentaActiva;
    private Date fechaRegistro;
 
-    public String getNomUsPos() {
-        return nomUsPos;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNomUsPos(String nomUsPos) {
-        this.nomUsPos = nomUsPos;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getApeUsPos() {
-        return apeUsPos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApeUsPos(String apeUsPos) {
-        this.apeUsPos = apeUsPos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
+  
    
 
     
