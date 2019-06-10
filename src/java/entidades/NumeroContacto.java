@@ -1,8 +1,16 @@
 package entidades;
+
+
+
+
+
 public class NumeroContacto {
+    
+ 
  private int numeroContactoID;
  private int numeroUsuarioFK;
  private String contactoTipo;
+
  private String NumeroTelefonico;
 
     public int getNumeroContactoID() {

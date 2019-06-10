@@ -6,6 +6,8 @@
 package Controller;
 import Config.Conexion;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import entidades.Comuna;
+import entidades.ContactoPostulante;
 import entidades.Licencia;
 import entidades.NumeroContacto;
 import entidades.Usuario;
@@ -104,7 +106,7 @@ public class CtrlPostulante {
 "LEFT JOIN experienciaprofesional\n" +
 "	ON experienciaprofesional.ExperienciaPostulanteFK = usuariopostulante.UsuarioPostulanteID\n" +
 "LEFT JOIN numerocontacto\n" +
-"	ON numerocontacto.NumeroUsuarioFK = usuariopostulante.UsuarioPostulanteID\n" +
+"	ON numerocontacto.NumeroUsuarioFK = usuario.UsuarioID\n" +
 "LEFT JOIN otrosconocimientos\n" +
 "	ON otrosconocimientos.ConocimientoPostulante = usuariopostulante.UsuarioPostulanteID \n" +
 "WHERE usuariopostulante.UsuarioPostulanteID= "+idUsuarioPostulante+"";
@@ -128,40 +130,12 @@ public class CtrlPostulante {
       }
    
     @RequestMapping(value= "cvPostulante.htm" , method=RequestMethod.POST)
-    public ModelAndView cvPostulante( Usuario u, UsuarioPostulante up,Licencia l){ 
-        
-            
-       
-        System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()WWWWWWWWWWWWWWWWWWWWWWWW" );
-        
-       System.out.println("Controller.CtrlPostulante.editarPrimerCuadro()"+ 
-           u.getUsuarioID()
-          +u.getNombre()+
-           u.getApellido()+
-           up.getId_usuarioPostulante()+
-           up.getGenero()
-          +up.getNacionalidad()+
-           up.getNumDocumento()+
-           up.getDocumento()+
-           up.getFechaNacimiento()
-          +up.getEstadoCivil()+
-           up.getVehiculoUsuario()+
-           up.getDiscapacidadUsuario()+
-           l.getLicenciaTipoA1()+
-           l.getLicenciaTipoA2()+
-           l.getLicenciaTipoA3()
-          +l.getLicenciaTipoA4()+
-           l.getLicenciaTipoA5()+
-           l.getLicenciaTipoB()+
-           l.getLicenciaTipoC()+
-           l.getLicenciaTipoD()+
-           l.getLicenciaTipoE()+
-           l.getLicenciaTipoF()
-          +l.getNoLicencia());
-        
-           
-
-          this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+    public ModelAndView cvPostulante( HttpServletRequest request, Usuario u, UsuarioPostulante up,Licencia l,
+            ContactoPostulante cp, NumeroContacto nc){ 
+        int form= Integer.parseInt(request.getParameter("Cuadro"));
+        System.out.println("WAAAAAAAAAAAAAAAAAAA: "+form);
+        if (form==1) {
+               this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
           ,u.getUsuarioID()
           ,u.getNombre()
           ,u.getApellido()
@@ -188,10 +162,37 @@ public class CtrlPostulante {
           );
                       
         return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()); 
-        
+        }
+        else if (form==2){
+            
+               this.jdbcTemplate.update("call ingresar_DatosContactoPostulante(?,?,?,?,?,?,?)",
+            up.getId_usuarioPostulante()
+            ,cp.getComunaResidencia()
+            ,cp.getDireccionResidencia()
+            ,cp.getCorreoContacto()
+            ,u.getUsuarioID()
+            ,nc.getContactoTipo()
+            ,nc.getNumeroTelefonico());
+               
+//              this.jdbcTemplate.update("call edit_datosContactoPostulante(?,?,?,?,?,?,?)"
+//            ,up.getId_usuarioPostulante()
+//            ,cp.getComunaResidencia()
+//            ,cp.getDireccionResidencia()
+//            ,cp.getCorreoContacto()
+//            ,u.getUsuarioID()
+//            ,nc.getContactoTipo()
+//            ,nc.getNumeroTelefonico()
+//            
+//          );
+                      
+        return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WA="+u.getUsuarioID()); 
+        }
+       
+        else
+             return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WEEEE="+u.getUsuarioID());
     
 }
-   
+
       @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)
    public ModelAndView vistaOfertasLaborales(){
         mav.addObject(new UsuarioPostulante());

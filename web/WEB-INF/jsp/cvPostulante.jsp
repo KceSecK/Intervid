@@ -125,24 +125,24 @@
                                             </tr>
                                             <tr>
                                                 <td class="pr-5 text-intervid">Género:</td>
-                                                <td>data</td>
+                                                <td>${lista[0].Genero}</td>
                                             </tr>
                                             <tr>
                                                 <td class="pr-5 text-intervid">Nacionalidad</td>
-                                                <td>data</td>
+                                                <td>${lista[0].Nacionalidad}</td>
                                             </tr>
                                             <tr>
                                                 <td class="pr-5 text-intervid">Tipo de identificación</td>
-                                                <td>data</td>
-                                                <td>data</td>
+                                                <td>${lista[0].Documento}</td>
+                                                <td>${lista[0].NumDocumento}</td>
                                             </tr>
                                             <tr>
                                                 <td class="pr-5 text-intervid">Fecha de nacimiento:</td>
-                                                <td>data</td>
+                                                <td>${lista[0].FechaNacimiento}</td>
                                             </tr>
                                             <tr>
                                                 <td class="pr-5 text-intervid">Estado civil</td>
-                                                <td>data</td>
+                                                <td>${lista[0].EstadoCivil}</td>
                                             </tr>
                                             <tr>
                                                 <td class="pr-5 text-intervid">Licencia de conducir</td>
@@ -176,10 +176,10 @@
                                     <div class="container">
 
 
-                                        <form method="POST" id="form"> 
+                                        <form method="POST"> 
                                             <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
-                                            
                                             <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                            <input type="hidden" value="1" name="Cuadro">
                                             
                                             <div class="form-group ">
                                                 <label class="col-form-label text-intervid">Nombre(s):</label>
@@ -384,11 +384,14 @@
                         <div class="card col-md-9 ">
                             <div class="card-body ">
                                 
-                                <form method="POST"> 
+                                <form method="POST" > 
                                     <div class="form-row">
+                                            <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                            <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                            <input type="hidden" value="2" name="Cuadro">
 
                                         <label class="text-intervid">País de residencia</label>
-                                        <select name="" class="form-control">
+                                        <select name="pais" class="form-control">
                                             <c:forEach var="p" items="${pais}">                                                        
                                                <option ${region[0].RegionPaisFK == p.PaisID ? 'selected' : '' } value="${p.PaisID}">${p.PaisNombre}</option>
                                             </c:forEach>
@@ -408,7 +411,7 @@
                                     <div class="form-row">
 
                                         <label class="text-intervid">Comuna/Municipio</label>
-                                        <select name="" class="form-control">
+                                        <select name="ComunaResidencia" class="form-control">
                                                <c:forEach var="c" items="${comuna}">                                                        
                                                <option ${lista[0].ComunaResidencia == c.ComunaID ? 'selected' : '' } value="${c.ComunaID}">${c.ComunaNombre}</option>
                                             </c:forEach>
@@ -418,15 +421,15 @@
                                     <div class="form-row ">
                                         <label class="col-form-label text-intervid">Dirección:</label>
 
-                                        <input type="text"  name="direccion" class="form-control"
+                                        <input type="text"  name="DireccionResidencia" class="form-control"
                                                 value="${lista[0].DireccionResidencia}">
                                     </div>
 
                                     <div class="form-row ">
                                         <label class="col-form-label text-intervid">Correo electrónico:</label>
 
-                                        <input type="email"  name="correo" class="form-control"
-                                               value="${lista[0].CorreoUsuario}">
+                                        <input type="email"  name="CorreoContacto" class="form-control"
+                                               value="${lista[0].CorreoContacto}">
                                     </div>
 
 
@@ -435,20 +438,21 @@
                                         <div class="col-md-6"></div>
                                         <div class="form-row col-md-6">
 
-                                            <select name="tipoTel" class="form-control">
-                                                <option value="fijo">Fijo</option>
-                                                <option value="movil">Movil</option>
+                                            <select name="contactoTipo" class="form-control">
+                                                <option ${lista[0].ContactoTipo == "fijo" ? 'selected' : '' } value="fijo">Fijo</option>
+                                                <option ${lista[0].ContactoTipo == "movil" ? 'selected' : '' } value="movil">Movil</option>
                                             </select>
                                         </div>
                                         <div class="form-row col-md-6">
-                                            <input type="text" name="telefono" class="form-control"
+                                            <input type="text" name="NumeroTelefonico" class="form-control"
                                                    value="${lista[0].NumeroTelefonico}">
                                         </div>
 
                                     </div>
                                     <a href="">+Añadir otro télefono</a>
                                     <div class="col-md-6"></div>
-                                    <input type="submit" value="Ingresar" class="btn btn-success">  
+                                    
+                                    <input type="submit" name="edit" value="Editar" class="btn btn-success">  
                                     <button type="button" class="btn btn-primary">Cancelar</button>
                                 </form>
                             </div>
