@@ -5,9 +5,24 @@
     top: 100%;
     bottom: 0;
     width: 100%;
-    z-index: 5000;
+    z-index: 2;
 
 }
+
+.scale{
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.scale:hover{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transition: all 0.3s;
+    transform: scale(1.1);
+    opacity: 90%;
+}
+
 .box-img{
     height: 500px;
     width: 100%;
@@ -32,7 +47,6 @@
 }
 .p-12{
     font-size: 12px;
-
 }
 
 .inner {
@@ -93,25 +107,20 @@
 
 .perfil{
     background: #37589F;
-    width: 10%;
-    height: 1000px;
 }
 .headerCardTitle{
     background: #37589F;
     width: 100%;
-   
+
 }
-.letraGrande
-{
+.letraGrande{
     font-size: 35px;
 }
-.letraMedia
-{
+.letraMedia{
     font-size: 25px;
     text-align: center;
 }
-.letraMediaPerfil
-{
+.letraMediaPerfil{
     font-size: 20px;
     text-align: center;
     color:#37589F;
@@ -127,18 +136,27 @@
     background:  #37589F;
 }
 
+.center{
+    display:table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .loginEM{
     background: #37589F;
     width: auto;
     height: 200px;
 }
-.loginBody
-{
+.loginBody{
     width: auto;
-    height: 530px;
+    padding: 10px;
 }
-.verdeEmpresaLogo
-{
+
+.nav-intervid{
+    border-bottom: 1px solid #37589F;
+}
+
+.verdeEmpresaLogo{
     color:#54B692;
 }
 .height100{
@@ -151,33 +169,85 @@
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
 }
 .txtarea {
-  resize: none;
+    resize: none;
 }
 
- .input-icons i { 
-            position: absolute;
-  padding: 10px;
-  pointer-events: none;
-        } 
-          
-        .input-icons { 
-         position: relative; 
-        } 
+.input-icons i { 
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+} 
 
-        .icon { 
-           left: 0px;
-        } 
-          
-        .input-field { 
-            width: 100%; 
-            padding-left: 28px; 
-     
-        } 
-        
-        .iconStar{
-            height:25px;
-        }
-      
-        .greyTxt{
-           color: grey;
-        }
+.input-icons { 
+    position: relative; 
+} 
+
+.icon { 
+    left: 0px;
+} 
+
+.input-field { 
+    width: 100%; 
+    padding-left: 28px; 
+
+} 
+
+.iconStar{
+    height:25px;
+}
+
+.greyTxt{
+    color: grey;
+}
+
+.static{
+    position: fixed;
+}
+
+.div-principal{
+    position: relative;
+    top: 60px;
+}
+
+#nav-fixed{
+    z-index: 1;
+    background-color: #FFF;
+}
+
+.perfil-usuario{
+    width: 150px;
+    min-height: 150px;
+    min-width: 150px;
+    height: auto;
+    border: 1px #37589F;
+    border-style: outset;
+}
+
+.body-gris{
+    background-color: #F5F5F5;
+}
+
+
+.div-border{
+    border: 1px solid #37589F;
+    border-radius: 5px;
+    background-color: #fff;
+    
+}
+
+.btn-right{
+    float: right;
+}
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+  padding-top: 60px;
+}

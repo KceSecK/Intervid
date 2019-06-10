@@ -29,91 +29,101 @@
     <body>
 
         <!-- Navbar-->
-        <nav class="navbar navbar-expand-sm colorbg sticky-top">
-            <div class="container">
-                <!-- Logo -->
-                <a class="navbar-brand img-fluid" href="index.htm">
-                    <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                </a>
-                <!--             Toggle icon 
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                <img src="img/Menu_32.png">
-                            </button>-->
-                <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="index.html">Inicio</a>
-                        </li>
+        <div id="nav-fixed" class="container-fluid nav-intervid static">
+            <div class="navbar navbar-expand-sm black">
+                <div class="container-fluid">
+                    <!-- Logo -->
+                    <a class="navbar-brand img-fluid" href="index.htm">
+                        <img id="logo" src="img/letra 5mm.png" alt="InterVid">
+                    </a>
+                    <!--                    Toggle icon 
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                            <img src="img/Menu_32.png">
+                                        </button>-->
 
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="productos.html">Productos e é</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-
-        <div class="container-fluid">
-            <div class="row flex-xl-nowrap">
-                <!--Lado Derecho-->
-                <div class="col-12 col-md-3 col-xl-2 height100 perfil">
-                    <div class="container ">
-                        
-                        <a class="alink nav-link border-link pb-0" href="#datosPersonales">Datos Personales</a>
-                        <a class="alink nav-link border-link pb-0" href="#datosContacto">Datos de Contacto</a>
-                        <a class="alink nav-link border-link pb-0" href="#educacion">Educación</a>
-                        <a class="alink nav-link border-link pb-0" href="#expectativasLaborales">Expectativas Laborales</a>
-                        <a class="alink nav-link border-link pb-0" href="#experienciaProfesional">Experiencia Profesional</a>
-                        <a class="alink nav-link border-link pb-0" href="#idiomas">Idiomas</a>
-                        <a class="alink nav-link border-link pb-0" href="#otrosConocimientos">Otros Conocimientos</a>
-                        
+                    <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-primary nav-link" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                
-                
-                <!--Lado Izquierdo-->
+            </div>
+        </div>
+        <!--Container pincipal-->
+        <div class="container-fluid principal">
+            <div class="row">
+                <!--nav lateral-->
+                <div class="col-lg-2 bg-intervid">
+                    <div class="container">
+                        <ul class="list-unstyled static ">
+                            <li>
+                                <a class="alink nav-link border-link" href="#datosPersonales">Datos Personales</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#datosContacto">Datos de Contacto</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#educacion">Educación</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#expectativasLaborales">Expectativas Laborales</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#experienciaProfesional">Experiencia Profesional</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#idiomas">Idiomas</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#otrosConocimientos">Otros Conocimientos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-                <div class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 ">
 
-                    <div class="container ">
-
+                <div class="col-lg-9 mb-5">
+                    <div class="container">
                         <!--Primer cuadro-->
                         <div class="row mt-2"><p class="letraMediaPerfil">Mi CV</p></div>
-                        <div class="row">
-                        <div class="card col-md-12">
-                            <div class="card-body ">
-                                 <div class="container ">
-                                    <div class="row">
-                                <div class="col-md-4">
-                                Estado cv <img src="img/100.png" class="rounded-circle" height="70px" width="70px"> 
+                        <div class="row div-border">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <div class="container ">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Estado CV</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Foto Perfil</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Video Pitch</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                  Foto perfil  <img src="img/icons8-person-64.png" class="rounded-circle" height="70px" width="70px"> 
-                                </div>
-                                <div class="col-md-4">
-                                  Video pitch  <img src="img/icons8-circled-play-64.png" class="rounded-circle" height="70px" width="70px"> 
-                                </div>
-                                
-                            </div>
-                            </div>
-                            </div>
                             </div>
                         </div>
-                            
-                       <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos de Personales</p></div>
+                        <!--Vista de datos Personales--> 
+
+                        <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos de Personales</p></div>
                         <div id="DPersonales" class="row">
                             <div class="col-lg-9 div-border">
                                 <div class="card-body">
                                     <div class="container">
-                                        <button id="EditarPersonales" type="button" class="btn btn-link btn-right">Editar</button>
+                                        <button id="EditarPersonales" onclick="document.getElementById('id01').style.display = 'block'" type="button" class="btn btn-link btn-right">Editar</button>
                                         <table id="s">
                                             <tr>
                                                 <td class="pr-5 text-intervid">Nombre(s):</td>
@@ -159,28 +169,56 @@
                                         </table>
 
                                     </div>
+                                    </div>
+                                </div>
+                                    <div class="col-lg-9 div-border">            
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="EditarPersonales" onclick="document.getElementById('id02').style.display = 'block'" type="button" class="btn btn-link btn-right">Editar</button>
+                                        <table id="s">
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Dirección</td>
+                                                <td>${lista[0].DireccionResidencia}, ${lista[0].ComunaNombre}, ${lista[0].RegionNombre}, ${lista[0].PaisNombre}</td>
+                                            </tr>                                       
+                                        </table>
+
+                                    </div>
+                                    </div>
+                                </div>
+                                            
+                                <div class="col-lg-9 div-border">            
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="EditarPersonales" onclick="document.getElementById('id03').style.display = 'block'" type="button" class="btn btn-link btn-right">Agregar</button>
+                                        <c:forEach var="es" items="${edu}">
+                                        <table id="s">
+                                            <tr>
+                                                <td class="pr-5 text-intervid">Institucion</td>
+                                                <td>${es.Institucion }</td> <button class="btn btn-link btn-right" onclick="document.getElementById('id03').style.display = 'block'">Editar</button>
+                                            </tr>
+                                            </c:forEach>
+                                        </table>
+
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                       
 
 
-                        <!--Segundo cuadro-->
-                        <div class="row mt-2" id="datosPersonales"><p class="letraMediaPerfil">Datos Personales</p></div>
-                    <div class="row">
 
-                        <div class="card col-md-9">
-                            <div class="card-body ">
-
-                                <div class="col-lg-9">
-                                    <div class="container">
-
+                        <!--Formulario datos Personales -->
+                        <div id="id01" class="modal">
+                            
+                            <div class="col-md-9 div-border">
+                                <div class="card-body">
+                                    <div class="col-lg-9">
 
                                         <form method="POST"> 
                                             <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
                                             <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                             <input type="hidden" value="1" name="Cuadro">
-                                            
+
                                             <div class="form-group ">
                                                 <label class="col-form-label text-intervid">Nombre(s):</label>
                                                 <input type="text" value="${lista[0].NombreUsuario}"  name="nombre" class="form-control">
@@ -194,7 +232,7 @@
                                             <div class="form-row">
                                                 <div class="form-group">
                                                     <label class="text-intervid">Género:</label>
-                                                    
+
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="genero" id="Genero" value="Masculino"
                                                                ${lista[0].Genero == 'Masculino' ? 'checked' : '' }>
@@ -205,7 +243,7 @@
                                                                ${lista[0].Genero == 'Femenino' ? 'checked' : '' }>
                                                         <label class="form-check-label">Femenino</label>
                                                     </div>
-                                                  
+
                                                 </div>
                                             </div>
 
@@ -244,7 +282,7 @@
                                                 <div class="col-md-6"></div>
 
                                                 <input  type="date" value="${lista[0].FechaNacimiento}" class="form-control"
-                                                       name="fechaNacimiento" >
+                                                        name="fechaNacimiento" >
                                             </div>
 
                                             <div class="form-row ">
@@ -277,29 +315,29 @@
 
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox" name="LicenciaTipoA1" value="1" 
-                                                                ${lista[0].LicenciaTipoA1 == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoA1 == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox1">A1</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox" name="LicenciaTipoA2"  value="1" 
-                                                                ${lista[0].LicenciaTipoA2  == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoA2  == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A2</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox" name="LicenciaTipoA3"   value="1"  
-                                                                ${lista[0].LicenciaTipoA3  == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoA3  == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A3</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox" name="LicenciaTipoA4" value="1"   
-                                                                ${lista[0].LicenciaTipoA4  == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoA4  == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A4</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox"   name="LicenciaTipoA5" value="1"  
-                                                                ${lista[0].LicenciaTipoA5  == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoA5  == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">A5</label>
                                                     </div>
                                                 </div>
@@ -315,30 +353,30 @@
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox"   name="LicenciaTipoC" value="1" 
-                                                                ${lista[0].LicenciaTipoC == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoC == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">C</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox"  name="LicenciaTipoD" value="1" 
-                                                                ${lista[0].LicenciaTipoD == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoD == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">D</label>
                                                     </div>
- 
+
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox"  name="LicenciaTipoE"  value="1" 
-                                                                ${lista[0].LicenciaTipoE == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoE == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">E</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="checkbox"   name="LicenciaTipoF" value="1"  
-                                                                ${lista[0].LicenciaTipoF == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].LicenciaTipoF == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">F</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        
+
                                                         <input class="form-check-input" type="checkbox" name="NoLicencia" value="1" 
-                                                                ${lista[0].NoLicencia == 'true' ? 'checked' : '' }>
+                                                               ${lista[0].NoLicencia == 'true' ? 'checked' : '' }>
                                                         <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
                                                     </div>
                                                 </div>
@@ -362,157 +400,164 @@
                                             </div>
 
 
-                                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="discapacidadUsuario"
-                                                                            ${lista[0].DiscapacidadUsuario == 'true' ? 'checked' : '' }>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="discapacidadUsuario"
+                                                                           ${lista[0].DiscapacidadUsuario == 'true' ? 'checked' : '' }>
                                                 <label class="form-check-label" >Poseeo algún tipo de discapacidad</label>
                                             </div>
-                                                <input type="submit" value="Editar" class="btn btn-success"> 
-                                            <button type="button"  class="btn btn-primary">Cancelar</button>
+                                            <input type="submit" value="Editar" class="btn btn-success"> 
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn btn-primary">Cancelar</button>
                                         </form>
-                                                
+
+
+
                                     </div>
                                 </div>
-
-
-                            </div>
-                            </div>
-                        </div> 
+                            </div> 
+                        </div>
 
                         <!--Tercer cuadro-->
-                        <div class="row mt-2" id="datosContacto"><p class="letraMediaPerfil">Datos de Contacto</p></div>
-    <div class="row">
-                        <div class="card col-md-9 ">
-                            <div class="card-body ">
-                                
-                                <form method="POST" > 
-                                    <div class="form-row">
-                                            <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
-                                            <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
-                                            <input type="hidden" value="2" name="Cuadro">
+                        <div id="id02" class="modal">
+                            <div class="row mt-2" id="datosContacto"><p class="letraMediaPerfil">Datos de Contacto</p></div>
+                            <div class="row">
+                                <div class="card col-md-9 ">
+                                    <div class="card-body ">
 
-                                        <label class="text-intervid">País de residencia</label>
-                                        <select name="pais" class="form-control">
-                                            <c:forEach var="p" items="${pais}">                                                        
-                                               <option ${region[0].RegionPaisFK == p.PaisID ? 'selected' : '' } value="${p.PaisID}">${p.PaisNombre}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <form method="POST" > 
+                                            <div class="form-row">
+                                                <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="2" name="Cuadro">
+
+                                                <label class="text-intervid">País de residencia</label>
+                                                <select name="pais" class="form-control">
+                                                    <c:forEach var="p" items="${pais}">                                                        
+                                                        <option ${region[0].RegionPaisFK == p.PaisID ? 'selected' : '' } value="${p.PaisID}">${p.PaisNombre}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <label class="text-intervid">Región/Estado</label>
+                                                <select name="" class="form-control">
+                                                    <c:forEach var="r" items="${region}">                                                        
+                                                        <option ${comuna[0].ComunaRegionFK == r.RegionID ? 'selected' : '' } value="${r.RegionID}">${r.RegionNombre}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <label class="text-intervid">Comuna/Municipio</label>
+                                                <select name="ComunaResidencia" class="form-control">
+                                                    <c:forEach var="c" items="${comuna}">                                                        
+                                                        <option ${lista[0].ComunaResidencia == c.ComunaID ? 'selected' : '' } value="${c.ComunaID}">${c.ComunaNombre}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-row ">
+                                                <label class="col-form-label text-intervid">Dirección:</label>
+
+                                                <input type="text"  name="DireccionResidencia" class="form-control"
+                                                       value="${lista[0].DireccionResidencia}">
+                                            </div>
+
+                                            <div class="form-row ">
+                                                <label class="col-form-label text-intervid">Correo electrónico:</label>
+
+                                                <input type="email"  name="CorreoContacto" class="form-control"
+                                                       value="${lista[0].CorreoContacto}">
+                                            </div>
+
+
+                                            <div class="form-row">
+                                                <label class="text-intervid">Télefono</label>
+                                                <div class="col-md-6"></div>
+                                                <div class="form-row col-md-6">
+
+                                                    <select name="contactoTipo" class="form-control">
+                                                        <option ${lista[0].ContactoTipo == "fijo" ? 'selected' : '' } value="fijo">Fijo</option>
+                                                        <option ${lista[0].ContactoTipo == "movil" ? 'selected' : '' } value="movil">Movil</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-row col-md-6">
+                                                    <input type="text" name="NumeroTelefonico" class="form-control"
+                                                           value="${lista[0].NumeroTelefonico}">
+                                                </div>
+
+                                            </div>
+                                            <a href="">+Añadir otro télefono</a>
+                                            <div class="col-md-6"></div>
+
+                                            <input type="submit" name="edit" value="Editar" class="btn btn-success">  
+                                            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="btn btn-primary">Cancelar</button>
+                                        </form>
                                     </div>
 
-                                    <div class="form-row">
-
-                                        <label class="text-intervid">Región/Estado</label>
-                                        <select name="" class="form-control">
-                                            <c:forEach var="r" items="${region}">                                                        
-                                               <option ${comuna[0].ComunaRegionFK == r.RegionID ? 'selected' : '' } value="${r.RegionID}">${r.RegionNombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-row">
-
-                                        <label class="text-intervid">Comuna/Municipio</label>
-                                        <select name="ComunaResidencia" class="form-control">
-                                               <c:forEach var="c" items="${comuna}">                                                        
-                                               <option ${lista[0].ComunaResidencia == c.ComunaID ? 'selected' : '' } value="${c.ComunaID}">${c.ComunaNombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-row ">
-                                        <label class="col-form-label text-intervid">Dirección:</label>
-
-                                        <input type="text"  name="DireccionResidencia" class="form-control"
-                                                value="${lista[0].DireccionResidencia}">
-                                    </div>
-
-                                    <div class="form-row ">
-                                        <label class="col-form-label text-intervid">Correo electrónico:</label>
-
-                                        <input type="email"  name="CorreoContacto" class="form-control"
-                                               value="${lista[0].CorreoContacto}">
-                                    </div>
-
-
-                                    <div class="form-row">
-                                        <label class="text-intervid">Télefono</label>
-                                        <div class="col-md-6"></div>
-                                        <div class="form-row col-md-6">
-
-                                            <select name="contactoTipo" class="form-control">
-                                                <option ${lista[0].ContactoTipo == "fijo" ? 'selected' : '' } value="fijo">Fijo</option>
-                                                <option ${lista[0].ContactoTipo == "movil" ? 'selected' : '' } value="movil">Movil</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-row col-md-6">
-                                            <input type="text" name="NumeroTelefonico" class="form-control"
-                                                   value="${lista[0].NumeroTelefonico}">
-                                        </div>
-
-                                    </div>
-                                    <a href="">+Añadir otro télefono</a>
-                                    <div class="col-md-6"></div>
-                                    
-                                    <input type="submit" name="edit" value="Editar" class="btn btn-success">  
-                                    <button type="button" class="btn btn-primary">Cancelar</button>
-                                </form>
-                            </div>
-
+                                </div> 
+                            </div> 
                         </div> 
-                        </div> 
 
 
-                        <!--Cuerto cuadro-->
+                        <!--Cuarto cuadro-->
+                           <div id="id03" class="modal">
                         <div class="row mt-2" id="educacion"><p class="letraMediaPerfil">Educación</p></div>
-    <div class="row">
-                        <div class="card col-md-9 ">
-                            <div class="card-body ">
-                                <div class="form-group ">
-                                    <label class="col-form-label text-intervid">Institución:</label>
-                                    <input type="text"  name="text" class="form-control"
-                                           value="${lista[0].Institucion}">
-                                </div>
-
-                                <div class="form-row">
-
-                                    <label class="text-intervid">Nivel de estudios:</label>
-                                    <select name="estudios" class="form-control">
-                                        <option ${lista[0].NivelEstudio == 'basico' ? 'selected' : '' } value="basico">Básico</option>
-                                        <option ${lista[0].NivelEstudio == 'medio' ? 'selected' : '' } value="medio">Medio</option>
-                                        <option ${lista[0].NivelEstudio == 'superior' ? 'selected' : '' } value="superior">Superior</option>
-                                    </select>
-                                </div>
-                                <div class="form-row">
-
-                                    <label class="text-intervid">Estado:</label>
-                                    <select name="" class="form-control">
-                                        <option ${lista[0].EstadoEstudio == 'en curso' ? 'selected' : '' } value="en curso">En Curso</option>
-                                        <option ${lista[0].EstadoEstudio == 'graduado' ? 'selected' : '' } value="graduado">Graduado</option>
-                                        <option ${lista[0].EstadoEstudio == 'abandonado' ? 'selected' : '' } value="abandonado">Abandonado</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-row">
-                                    <label class="text-intervid">Período:</label>
-                                    <div class="col-md-11"></div>
-                                    <div class="form-group col-md-8">
-
-                                        <input  class="form-control" type="text" name="daterange" value="${d.PeriodoInicio} ${d.PeriodoFin}" />
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                    
+                                         <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="3" name="Cuadro">
+                                    <div class="form-group ">
+                                        <label class="col-form-label text-intervid">Institución:</label>
+                                        <input type="text"  name="text" class="form-control"
+                                               value="${lista[0].Institucion}">
                                     </div>
 
-                                    <div class="form-check col-md-4">
+                                    <div class="form-row">
 
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck"
-                                                                ${lista[0].PeriodoActual == 'true' ? 'checked' : '' }>
-                                            A la actualidad
+                                        <label class="text-intervid">Nivel de estudios:</label>
+                                        <select name="estudios" class="form-control">
+                                            <option ${lista[0].NivelEstudio == 'basico' ? 'selected' : '' } value="basico">Básico</option>
+                                            <option ${lista[0].NivelEstudio == 'medio' ? 'selected' : '' } value="medio">Medio</option>
+                                            <option ${lista[0].NivelEstudio == 'superior' ? 'selected' : '' } value="superior">Superior</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+
+                                        <label class="text-intervid">Estado:</label>
+                                        <select name="" class="form-control">
+                                            <option ${lista[0].EstadoEstudio == 'en curso' ? 'selected' : '' } value="en curso">En Curso</option>
+                                            <option ${lista[0].EstadoEstudio == 'graduado' ? 'selected' : '' } value="graduado">Graduado</option>
+                                            <option ${lista[0].EstadoEstudio == 'abandonado' ? 'selected' : '' } value="abandonado">Abandonado</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <label class="text-intervid">Período:</label>
+                                        <div class="col-md-11"></div>
+                                        <div class="form-group col-md-8">
+
+                                            <input  class="form-control" type="text" name="daterange" value="${d.PeriodoInicio} ${d.PeriodoFin}" />
                                         </div>
-                                    </div>
+
+                                        <div class="form-check col-md-4">
+
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck"
+                                                                           ${lista[0].PeriodoActual == 'true' ? 'checked' : '' }>
+                                                A la actualidad
+                                            </div>
+                                        </div>
 
 
-                                </div><input type="submit" value="Añadir" class="btn btn-success">  
-                                <button type="button" class="btn btn-primary">Cancelar</button>
-                            </div>
+                                    </div><input type="submit" value="Añadir" class="btn btn-success">  
+                                    <button type="button" class="btn btn-primary">Cancelar</button>
+                                </div>
 
-                        </div> 
+                            </div> 
+                            </div> 
                         </div> 
 
                         <!--Quinto cuadro-->
@@ -760,21 +805,29 @@
 
 
 <script>
- 
-    
-     
-        $("#form").on('submit', function() {
-       
-            if($('input[type="checkbox"]').val() !== null) {
-                $('input[type="checkbox"]').val(1);
-                console.log("WAAA");
-            } else {
-                $('input[type="checkbox"]').val(0)
-                console.log("weee");;
-            }
-        })
-    
-    
+
+
+
+    $("#form").on('submit', function () {
+
+        if ($('input[type="checkbox"]').val() !== null) {
+            $('input[type="checkbox"]').val(1);
+            console.log("WAAA");
+        } else {
+            $('input[type="checkbox"]').val(0)
+            console.log("weee");
+            ;
+        }
+    })
+
+    var modal = document.getElementByClassName('#modal');
+
+// When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 //    $(function () {
 //        $('input[name="daterange"]').daterangepicker({
 //            opens: 'left'
@@ -789,7 +842,7 @@
 //            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
 //        });
 //    });  
-    
+
 //$.datepicker.setDefaults($.datepicker.regional["es"]);
 //$("#datepicker").datepicker({
 //firstDay: 1

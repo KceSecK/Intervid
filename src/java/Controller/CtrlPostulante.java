@@ -108,15 +108,23 @@ public class CtrlPostulante {
 "LEFT JOIN numerocontacto\n" +
 "	ON numerocontacto.NumeroUsuarioFK = usuario.UsuarioID\n" +
 "LEFT JOIN otrosconocimientos\n" +
-"	ON otrosconocimientos.ConocimientoPostulante = usuariopostulante.UsuarioPostulanteID \n" +
+"	ON otrosconocimientos.ConocimientoPostulante = usuariopostulante.UsuarioPostulanteID"
+                + " LEFT JOIN comuna\n" +
+"ON comuna.ComunaID=contactopostulante.ComunaResidencia\n" +
+"LEFT JOIN region\n" +
+"ON region.RegionID=comuna.ComunaRegionFK\n" +
+"LEFT JOIN pais\n" +
+"ON pais.PaisID=region.RegionPaisFK \n" +
 "WHERE usuariopostulante.UsuarioPostulanteID= "+idUsuarioPostulante+"";
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
+        String sql5 = "SELECT * FROM `educacionpostulante` WHERE EducacionPostulanteFK ="+idUsuarioPostulante;
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
         List region = this.jdbcTemplate.queryForList(sql3);
         List comuna = this.jdbcTemplate.queryForList(sql4);
+        List educacion = this.jdbcTemplate.queryForList(sql5);
 //        model.addAttribute("pais",pais);
 //        model.addAttribute("region",region);
 //        model.addAttribute("comuna",comuna);
@@ -125,6 +133,7 @@ public class CtrlPostulante {
         mav.addObject("pais",pais);
         mav.addObject("region",region);
         mav.addObject("comuna",comuna); 
+        mav.addObject("edu",educacion); 
          mav.setViewName("cvPostulante");
           return mav;   
       }
@@ -165,29 +174,34 @@ public class CtrlPostulante {
         }
         else if (form==2){
             
-               this.jdbcTemplate.update("call ingresar_DatosContactoPostulante(?,?,?,?,?,?,?)",
-            up.getId_usuarioPostulante()
-            ,cp.getComunaResidencia()
-            ,cp.getDireccionResidencia()
-            ,cp.getCorreoContacto()
-            ,u.getUsuarioID()
-            ,nc.getContactoTipo()
-            ,nc.getNumeroTelefonico());
-               
-//              this.jdbcTemplate.update("call edit_datosContactoPostulante(?,?,?,?,?,?,?)"
-//            ,up.getId_usuarioPostulante()
+//               this.jdbcTemplate.update("call ingresar_DatosContactoPostulante(?,?,?,?,?,?,?)",
+//            up.getId_usuarioPostulante()
 //            ,cp.getComunaResidencia()
 //            ,cp.getDireccionResidencia()
 //            ,cp.getCorreoContacto()
 //            ,u.getUsuarioID()
 //            ,nc.getContactoTipo()
-//            ,nc.getNumeroTelefonico()
-//            
-//          );
+//            ,nc.getNumeroTelefonico());
+               
+              this.jdbcTemplate.update("call edit_datosContactoPostulante(?,?,?,?,?,?,?)"
+            ,up.getId_usuarioPostulante()
+            ,cp.getComunaResidencia()
+            ,cp.getDireccionResidencia()
+            ,cp.getCorreoContacto()
+            ,u.getUsuarioID()
+            ,nc.getContactoTipo()
+            ,nc.getNumeroTelefonico()
+            
+          );
                       
         return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WA="+u.getUsuarioID()); 
         }
-       
+        else if (form==3) {
+            
+            
+            return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WA="+u.getUsuarioID()); 
+
+        }
         else
              return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WEEEE="+u.getUsuarioID());
     
