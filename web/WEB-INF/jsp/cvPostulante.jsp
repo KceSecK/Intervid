@@ -15,14 +15,10 @@
         <title>JSP Page</title> 
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-        <script src="jquery.ui.datepicker-es.js"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+     
     </head>
 
 
@@ -194,9 +190,13 @@
                                         <table id="s">
                                             <tr>
                                                 <td class="pr-5 text-intervid">Institucion</td>
-                                                <td>${es.Institucion }</td> <button class="btn btn-link btn-right" onclick="document.getElementById('id03').style.display = 'block'">Editar</button>
+                                                <td>${es.Institucion }</td>          
+                                                <td>${es.EducacionPostulanteID }</td>          
+                                                <td> <input type="button" 
+                                                       class="btn btn-link btn-right edit_data" name="edit" value="Editar" id="${es.EducacionPostulanteID}" ></button></td>
                                             </tr>
                                             </c:forEach>
+                                              
                                         </table>
 
                                     </div>
@@ -208,13 +208,13 @@
 
 
                         <!--Formulario datos Personales -->
-                        <div id="id01" class="modal">
+                        <div id="id01" class="modal ">
                             
                             <div class="col-md-9 div-border">
                                 <div class="card-body">
                                     <div class="col-lg-9">
 
-                                        <form method="POST"> 
+                                        <form method="POST" id="form"> 
                                             <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
                                             <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                             <input type="hidden" value="1" name="Cuadro">
@@ -501,37 +501,38 @@
 
 
                         <!--Cuarto cuadro-->
-                           <div id="id03" class="modal">
+                        
+                      
+                        
+                        <div id="educacion_modal" class="modal fade">
+                           
                         <div class="row mt-2" id="educacion"><p class="letraMediaPerfil">Educación</p></div>
                         <div class="row">
                             <div class="card col-md-9 ">
                                 <div class="card-body ">
-                                    
-                                         <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
-                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
-                                                <input type="hidden" value="3" name="Cuadro">
+                                                <input type="hidden" value="${edu[0].EducacionPostulanteFK}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="4" name="Cuadro">
                                     <div class="form-group ">
                                         <label class="col-form-label text-intervid">Institución:</label>
-                                        <input type="text"  name="text" class="form-control"
-                                               value="${lista[0].Institucion}">
+                                        <input type="text" id="institucion"  name="institucion" class="form-control"/>
                                     </div>
 
                                     <div class="form-row">
 
                                         <label class="text-intervid">Nivel de estudios:</label>
                                         <select name="estudios" class="form-control">
-                                            <option ${lista[0].NivelEstudio == 'basico' ? 'selected' : '' } value="basico">Básico</option>
-                                            <option ${lista[0].NivelEstudio == 'medio' ? 'selected' : '' } value="medio">Medio</option>
-                                            <option ${lista[0].NivelEstudio == 'superior' ? 'selected' : '' } value="superior">Superior</option>
+                                            <option ${edu[0].NivelEstudio == 'basico' ? 'selected' : '' } value="basico">Básico</option>
+                                            <option ${edu[0].NivelEstudio == 'medio' ? 'selected' : '' } value="medio">Medio</option>
+                                            <option ${edu[0].NivelEstudio == 'superior' ? 'selected' : '' } value="superior">Superior</option>
                                         </select>
                                     </div>
                                     <div class="form-row">
 
                                         <label class="text-intervid">Estado:</label>
-                                        <select name="" class="form-control">
-                                            <option ${lista[0].EstadoEstudio == 'en curso' ? 'selected' : '' } value="en curso">En Curso</option>
-                                            <option ${lista[0].EstadoEstudio == 'graduado' ? 'selected' : '' } value="graduado">Graduado</option>
-                                            <option ${lista[0].EstadoEstudio == 'abandonado' ? 'selected' : '' } value="abandonado">Abandonado</option>
+                                        <select name="estadoEstudio" class="form-control">
+                                            <option ${edu[0].EstadoEstudio == 'en curso' ? 'selected' : '' } value="en curso">En Curso</option>
+                                            <option ${edu[0].EstadoEstudio == 'graduado' ? 'selected' : '' } value="graduado">Graduado</option>
+                                            <option ${edu[0].EstadoEstudio == 'abandonado' ? 'selected' : '' } value="abandonado">Abandonado</option>
                                         </select>
                                     </div>
 
@@ -540,24 +541,26 @@
                                         <div class="col-md-11"></div>
                                         <div class="form-group col-md-8">
 
-                                            <input  class="form-control" type="text" name="daterange" value="${d.PeriodoInicio} ${d.PeriodoFin}" />
+                                            <input  class="form-control" type="text" name="daterange" value="${edu[0].PeriodoInicio} ${edu[0].PeriodoFin}" />
                                         </div>
 
                                         <div class="form-check col-md-4">
 
                                             <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck"
-                                                                           ${lista[0].PeriodoActual == 'true' ? 'checked' : '' }>
+                                                                           ${edu[0].PeriodoActual == 'true' ? 'checked' : '' }>
                                                 A la actualidad
                                             </div>
                                         </div>
 
 
                                     </div><input type="submit" value="Añadir" class="btn btn-success">  
-                                    <button type="button" class="btn btn-primary">Cancelar</button>
+                                    <button type="button" onclick="document.getElementById('educacion_modal').style.display='none'" data-dismiss="modal"class="btn btn-primary">Cancelar</button>
+
                                 </div>
 
                             </div> 
                             </div> 
+                          
                         </div> 
 
                         <!--Quinto cuadro-->
@@ -805,10 +808,31 @@
 
 
 <script>
+    
+    $(document).ready(function (){
+       $(document).on('click','.edit_data',function(){ 
+           
+        var id_estudio = $(this).attr("id");
+       
+        $.ajax({
+            url:"cosa.htm",
+            type:"POST",
+            data:{
+                id2:id_estudio
+            },
+            success:function(data){
+                
+                $("#institucion").val("${estudio[0].Institucion}");
+                $('#estudios').val("${estudio[0].NivelEstudio}");
+                $('#estadoEstudio').val("${estudio[0].EstadoEstudio}");
+                $("#educacion_modal").modal('show');
 
+            }
+        });
+    });
+    });
 
-
-    $("#form").on('submit', function () {
+$("#form").on('submit', function () {
 
         if ($('input[type="checkbox"]').val() !== null) {
             $('input[type="checkbox"]').val(1);
@@ -819,15 +843,14 @@
             ;
         }
     })
-
-    var modal = document.getElementByClassName('#modal');
-
-// When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+//    var modal = document.getElementByClassName('#modal');
+//
+//// When the user clicks anywhere outside of the modal, close it
+//    window.onclick = function (event) {
+//        if (event.target == modal) {
+//            modal.style.display = "none";
+//        }
+//    }
 //    $(function () {
 //        $('input[name="daterange"]').daterangepicker({
 //            opens: 'left'

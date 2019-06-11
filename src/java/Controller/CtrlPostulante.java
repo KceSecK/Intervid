@@ -8,6 +8,7 @@ import Config.Conexion;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import entidades.Comuna;
 import entidades.ContactoPostulante;
+import entidades.EducacionPostulante;
 import entidades.Licencia;
 import entidades.NumeroContacto;
 import entidades.Usuario;
@@ -35,9 +36,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -83,11 +86,11 @@ public class CtrlPostulante {
    
    
       @RequestMapping(value="cvPostulante.htm",method=RequestMethod.GET)
+      
    public ModelAndView cvPostulante(HttpServletRequest request){
         mav.addObject(new UsuarioPostulante());
         mav.addObject(new Usuario());
         mav.addObject(new Licencia());
-       
         int idUsuarioPostulante= Integer.parseInt(request.getParameter("idUS"));
          
         String sql="SELECT * FROM usuario \n" +
@@ -142,7 +145,8 @@ public class CtrlPostulante {
     public ModelAndView cvPostulante( HttpServletRequest request, Usuario u, UsuarioPostulante up,Licencia l,
             ContactoPostulante cp, NumeroContacto nc){ 
         int form= Integer.parseInt(request.getParameter("Cuadro"));
-        System.out.println("WAAAAAAAAAAAAAAAAAAA: "+form);
+       
+  
         if (form==1) {
                this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
           ,u.getUsuarioID()
@@ -198,6 +202,7 @@ public class CtrlPostulante {
         }
         else if (form==3) {
             
+          
             
             return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WA="+u.getUsuarioID()); 
 
@@ -206,6 +211,18 @@ public class CtrlPostulante {
              return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WEEEE="+u.getUsuarioID());
     
 }
+  
+    @RequestMapping(value="cosa.htm",method=RequestMethod.POST)
+    public ModelAndView WA (HttpServletRequest request){
+        
+        String sql="SELECT * FROM `educacionpostulante` WHERE "
+                + "EducacionPostulanteID= "+request.getParameter("id2");  
+         List estudio = this.jdbcTemplate.queryForList(sql);
+         mav.addObject("estudio",estudio);
+        System.out.println("WAWASD"+ estudio.get(0));
+        System.out.println("SARAGDAR: ");
+        return mav;
+    }
 
       @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)
    public ModelAndView vistaOfertasLaborales(){

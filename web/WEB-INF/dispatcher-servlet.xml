@@ -11,6 +11,7 @@
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
+
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -26,7 +27,9 @@
                 <prop key="registro.htm">conexionController2</prop> 
                 <prop key="loginPostulante.htm">conexionController2</prop>
                 <prop key="cvPostulante.htm">conexionController2</prop>
+                <prop key="cosa.htm">conexionController2</prop>
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
+
                 
             <!--Usuario Empresa-->
                  <prop key="registroEmpresa.htm">conexionController3</prop>
