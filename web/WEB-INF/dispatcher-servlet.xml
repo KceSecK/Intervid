@@ -26,8 +26,8 @@
             <!--Usuario Postulante--> 
                 <prop key="registro.htm">conexionController2</prop> 
                 <prop key="loginPostulante.htm">conexionController2</prop>
-                <prop key="cvPostulante.htm">conexionController2</prop>
-                <prop key="cosa.htm">conexionController2</prop>
+                <prop key="cvPostulante.htm">conexionController2</prop>                      
+                <prop key="editEstudioPostulante.htm">conexionController2</prop>
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
 
                 

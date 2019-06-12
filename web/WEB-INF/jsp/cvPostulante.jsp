@@ -11,7 +11,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>JSP Page</title> 
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
@@ -185,15 +186,22 @@
                                 <div class="col-lg-9 div-border">            
                                 <div class="card-body">
                                     <div class="container">
-                                        <button id="EditarPersonales" onclick="document.getElementById('id03').style.display = 'block'" type="button" class="btn btn-link btn-right">Agregar</button>
-                                        <c:forEach var="es" items="${edu}">
-                                        <table id="s">
+                                        <button  onclick="document.getElementById('educacion_modalIngreso').style.display = 'block'" type="button" class="btn btn-link btn-right">Agregar</button>
+                                       
+                                        <table id="s"> 
+                                            <c:forEach var="es" items="${edu}">
                                             <tr>
                                                 <td class="pr-5 text-intervid">Institucion</td>
                                                 <td>${es.Institucion }</td>          
                                                 <td>${es.EducacionPostulanteID }</td>          
-                                                <td> <input type="button" 
-                                                       class="btn btn-link btn-right edit_data" name="edit" value="Editar" id="${es.EducacionPostulanteID}" ></button></td>
+                                                <td> 
+                                                    <input type="button" 
+                                                    class="btn btn-link btn-right edit_data"  
+                                                    name="edit" value="Editar" 
+                                                    id="${es.EducacionPostulanteID}" 
+                                                    onclick="document.getElementById('educacion_modal').style.display = 'block'"
+                                                    ></button>
+                                                </td>
                                             </tr>
                                             </c:forEach>
                                               
@@ -498,41 +506,37 @@
                                 </div> 
                             </div> 
                         </div> 
-
-
-                        <!--Cuarto cuadro-->
-                        
-                      
-                        
-                        <div id="educacion_modal" class="modal fade">
-                           
-                        <div class="row mt-2" id="educacion"><p class="letraMediaPerfil">Educación</p></div>
+                          
+<!--                            Cuadro educacion Ingreso
+                                                
+-->                           <div id="educacion_modalIngreso" class="modal">                       
                         <div class="row">
                             <div class="card col-md-9 ">
                                 <div class="card-body ">
+                                    <form method="POST">
                                                 <input type="hidden" value="${edu[0].EducacionPostulanteFK}" name="id_usuarioPostulante">
-                                                <input type="hidden" value="4" name="Cuadro">
+                                                <input type="hidden" value="3" name="Cuadro">
                                     <div class="form-group ">
                                         <label class="col-form-label text-intervid">Institución:</label>
-                                        <input type="text" id="institucion"  name="institucion" class="form-control"/>
+                                        <input type="text"   name="Institucion" class="form-control"/>
                                     </div>
 
                                     <div class="form-row">
 
                                         <label class="text-intervid">Nivel de estudios:</label>
-                                        <select name="estudios" class="form-control">
-                                            <option ${edu[0].NivelEstudio == 'basico' ? 'selected' : '' } value="basico">Básico</option>
-                                            <option ${edu[0].NivelEstudio == 'medio' ? 'selected' : '' } value="medio">Medio</option>
-                                            <option ${edu[0].NivelEstudio == 'superior' ? 'selected' : '' } value="superior">Superior</option>
+                                        <select name="NivelEstudio"  class="form-control">
+                                            <option  value="basico">Básico</option>
+                                            <option  value="medio" >Medio</option>
+                                            <option value="superior">Superior</option>
                                         </select>
                                     </div>
                                     <div class="form-row">
 
                                         <label class="text-intervid">Estado:</label>
-                                        <select name="estadoEstudio" class="form-control">
-                                            <option ${edu[0].EstadoEstudio == 'en curso' ? 'selected' : '' } value="en curso">En Curso</option>
-                                            <option ${edu[0].EstadoEstudio == 'graduado' ? 'selected' : '' } value="graduado">Graduado</option>
-                                            <option ${edu[0].EstadoEstudio == 'abandonado' ? 'selected' : '' } value="abandonado">Abandonado</option>
+                                        <select name="EstadoEstudio"  class="form-control">
+                                            <option  value="en curso">En Curso</option>
+                                            <option value="graduado">Graduado</option>
+                                            <option value="abandonado">Abandonado</option>
                                         </select>
                                     </div>
 
@@ -541,28 +545,89 @@
                                         <div class="col-md-11"></div>
                                         <div class="form-group col-md-8">
 
-                                            <input  class="form-control" type="text" name="daterange" value="${edu[0].PeriodoInicio} ${edu[0].PeriodoFin}" />
+                                            <input  class="form-control" type="date"  name="PeriodoInicio"  />
+                                            <input  class="form-control" type="date"  name="PeriodoFin"  />
                                         </div>
 
                                         <div class="form-check col-md-4">
 
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck"
-                                                                           ${edu[0].PeriodoActual == 'true' ? 'checked' : '' }>
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="1" type="checkbox" name="PeriodoActualidad" >
                                                 A la actualidad
                                             </div>
                                         </div>
 
 
                                     </div><input type="submit" value="Añadir" class="btn btn-success">  
-                                    <button type="button" onclick="document.getElementById('educacion_modal').style.display='none'" data-dismiss="modal"class="btn btn-primary">Cancelar</button>
+                                    <button type="button"  onclick="document.getElementById('educacion_modalIngreso').style.display='none'" class="btn btn-primary">Cancelar</button>
 
-                                </div>
-
+                                </form>
                             </div> 
                             </div> 
-                          
+                            </div>          
+                        </div>                        
+                                                
+                        <!--Cuarto cuadro modal edit-->
+                        
+                      
+                        
+                        <div id="educacion_modal" class="modal">                       
+                        <div class="row">
+                            <div class="card col-md-9 ">
+                                <div class="card-body ">
+                                    <form method="POST">              
+                                    <div class="form-group ">
+                                        <label class="col-form-label text-intervid">Institución:</label>
+                                        <input type="text" id="institucion"  name="institucion" class="form-control"/>
+                                    </div>
+
+                                    <div class="form-row">
+
+                                        <label class="text-intervid">Nivel de estudios:</label>
+                                        <select name="estudios" id="estudios" class="form-control">
+                                            <option  value="basico">Básico</option>
+                                            <option  value="medio" >Medio</option>
+                                            <option value="superior">Superior</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+
+                                        <label class="text-intervid">Estado:</label>
+                                        <select name="EstadoEstudio" id="estadoEstudio" class="form-control">
+                                            <option  value="en curso">En Curso</option>
+                                            <option value="graduado">Graduado</option>
+                                            <option value="abandonado">Abandonado</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <label class="text-intervid">Período:</label>
+                                        <div class="col-md-11"></div>
+                                        <div class="form-group col-md-8">
+
+                                            <input  class="form-control" type="date" id="periodoInicio" name="periodoInicio"  />
+                                            <input  class="form-control" type="date" id="periodoFin" name="periodoFin"  />
+                                        </div>
+
+                                        <div class="form-check col-md-4">
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="true" type="checkbox" name="PeriodoActualidad" id="PeriodoActualidad">
+                                                A la actualidad
+                                            </div>
+                                        </div>
+
+
+                                    </div><input type="submit" value="Añadir" class="btn btn-success">  
+                                    <button type="button"  onclick="document.getElementById('educacion_modal').style.display='none'" class="btn btn-primary">Cancelar</button>
+
+                                </form>
+                            </div> 
+                            </div> 
+                            </div>          
                         </div> 
 
+                                                
                         <!--Quinto cuadro-->
                         <div class="row mt-2" id="expectativasLaborales"><p class="letraMediaPerfil">Expectativas Laborales</p></div>
                         <div class="row">
@@ -813,44 +878,45 @@
        $(document).on('click','.edit_data',function(){ 
            
         var id_estudio = $(this).attr("id");
-       
+       console.log(id_estudio);
         $.ajax({
-            url:"cosa.htm",
-            type:"POST",
-            data:{
-                id2:id_estudio
-            },
+            url:"editEstudioPostulante.htm",
+            method:"POST",
+            cache: false,
+            data:{id2:id_estudio},
+            dataType:"json",
             success:function(data){
+                console.log("SUCCESS: ",data[0])
                 
-                $("#institucion").val("${estudio[0].Institucion}");
-                $('#estudios').val("${estudio[0].NivelEstudio}");
-                $('#estadoEstudio').val("${estudio[0].EstadoEstudio}");
-                $("#educacion_modal").modal('show');
-
-            }
+                $('#institucion').val(data[0].Institucion); 
+                $('#estudios').val(data[0].NivelEstudio).prop('selected',true);
+                $('#estadoEstudio').val(data[0].EstadoEstudio).prop('selected',true);
+                $('#PeriodoActualidad').val(data[0].PeriodoActual).prop('checked',true);
+                $('#periodoInicio').val(data[0].PeriodoInicio);
+                $('#periodoFin').val(data[0].PeriodoFin);
+                $("#educacion_modal").modal('');
+               
+               
+                }  
+    
+            
         });
     });
+    
     });
 
-$("#form").on('submit', function () {
-
-        if ($('input[type="checkbox"]').val() !== null) {
-            $('input[type="checkbox"]').val(1);
-            console.log("WAAA");
-        } else {
-            $('input[type="checkbox"]').val(0)
-            console.log("weee");
-            ;
-        }
-    })
-//    var modal = document.getElementByClassName('#modal');
+//$("#form").on('submit', function () {
 //
-//// When the user clicks anywhere outside of the modal, close it
-//    window.onclick = function (event) {
-//        if (event.target == modal) {
-//            modal.style.display = "none";
+//        if ($('input[type="checkbox"]').val() !== null) {
+//            $('input[type="checkbox"]').val(1);
+//            console.log("WAAA");
+//        } else {
+//            $('input[type="checkbox"]').val(0)
+//            console.log("weee");
+//            ;
 //        }
-//    }
+//    })
+
 //    $(function () {
 //        $('input[name="daterange"]').daterangepicker({
 //            opens: 'left'

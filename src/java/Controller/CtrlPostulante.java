@@ -14,6 +14,7 @@ import entidades.NumeroContacto;
 import entidades.Usuario;
 import entidades.UsuarioPostulante;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -43,6 +45,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
 
 /**
  *
@@ -83,7 +87,7 @@ public class CtrlPostulante {
           return mav;   
       }
    
-   
+
    
       @RequestMapping(value="cvPostulante.htm",method=RequestMethod.GET)
       
@@ -143,10 +147,10 @@ public class CtrlPostulante {
    
     @RequestMapping(value= "cvPostulante.htm" , method=RequestMethod.POST)
     public ModelAndView cvPostulante( HttpServletRequest request, Usuario u, UsuarioPostulante up,Licencia l,
-            ContactoPostulante cp, NumeroContacto nc){ 
+            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep){ 
         int form= Integer.parseInt(request.getParameter("Cuadro"));
-       
-  
+        
+        System.out.println("WASFASG: "+form);
         if (form==1) {
                this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
           ,u.getUsuarioID()
@@ -198,32 +202,42 @@ public class CtrlPostulante {
             
           );
                       
-        return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WA="+u.getUsuarioID()); 
+        return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()); 
         }
         else if (form==3) {
+        
+   
+            this.jdbcTemplate.update("CALL creacion_educacionPostulante(?,?,?,?,?,?,?)",
+                    up.getId_usuarioPostulante()
+                    ,ep.getInstitucion()
+                    ,ep.getEstadoEstudio()
+                    ,ep.getNivelEstudio()
+                    ,ep.getPeriodoInicio()
+                    ,ep.getPeriodoFin()
+                    ,ep.getPeriodoActual()
+                    );
             
-          
-            
-            return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WA="+u.getUsuarioID()); 
+            return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()); 
 
         }
         else
-             return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante()+"&WEEEE="+u.getUsuarioID());
+             return new ModelAndView ("redirect:/cvPostulante.htm?idUS="+up.getId_usuarioPostulante());
     
 }
-  
-    @RequestMapping(value="cosa.htm",method=RequestMethod.POST)
-    public ModelAndView WA (HttpServletRequest request){
-        
+    
+//    Rellenar modal para editar educacionPostulante
+    @RequestMapping(value="editEstudioPostulante.htm",method=RequestMethod.POST)
+    public @ResponseBody String ObtenerEducacionPostulante (HttpServletRequest request) throws JsonProcessingException{
         String sql="SELECT * FROM `educacionpostulante` WHERE "
                 + "EducacionPostulanteID= "+request.getParameter("id2");  
-         List estudio = this.jdbcTemplate.queryForList(sql);
-         mav.addObject("estudio",estudio);
-        System.out.println("WAWASD"+ estudio.get(0));
-        System.out.println("SARAGDAR: ");
-        return mav;
+         List estudio = jdbcTemplate.queryForList(sql);      
+        ObjectMapper mapper = new ObjectMapper();
+         String json = mapper.writeValueAsString(estudio);
+         System.out.println(json);
+        return json;
     }
 
+    
       @RequestMapping(value="ofertasLaboralesPostulante.htm",method=RequestMethod.GET)
    public ModelAndView vistaOfertasLaborales(){
         mav.addObject(new UsuarioPostulante());

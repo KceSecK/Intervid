@@ -1,6 +1,7 @@
 
 package entidades;
 
+
 public class EducacionPostulante {
     
     private int EducacionPostulanteID;
@@ -8,6 +9,37 @@ public class EducacionPostulante {
     private String Institucion;
     private String NivelEstudio;
     private String EstadoEstudio;
+    private String PeriodoInicio;
+    private String PeriodoFin;
+    private int PeriodoActual;
+
+    public String getPeriodoInicio() {
+        return PeriodoInicio;
+    }
+
+    public void setPeriodoInicio(String PeriodoInicio) {
+        this.PeriodoInicio = PeriodoInicio;
+    }
+
+    public String getPeriodoFin() {
+        return PeriodoFin;
+    }
+
+    public void setPeriodoFin(String PeriodoFin) {
+        this.PeriodoFin = PeriodoFin;
+    }
+
+ 
+
+    public int getPeriodoActual() {
+        return PeriodoActual;
+    }
+
+    public void setPeriodoActual(int PeriodoActual) {
+        this.PeriodoActual = PeriodoActual;
+    }
+    
+    
 
     public int getEducacionPostulanteID() {
         return EducacionPostulanteID;
