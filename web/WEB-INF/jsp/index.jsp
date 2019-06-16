@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
+        <link rel="shortcut icon" type="image/x-icon" href="img/ico_vitrimetal.ico" />
         <title>InterVid</title>
     </head>
     <body>

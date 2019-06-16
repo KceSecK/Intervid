@@ -16,127 +16,64 @@
     </head>
 
     <body>
-        <!-- Navbar-->
-        <nav class="navbar navbar-expand-sm colorbg sticky-top">
-            <div class="container">
-                <!-- Logo -->
-                <a class="navbar-brand img-fluid" href="index.htm">
-                    <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                </a>
-                <!--             Toggle icon 
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                <img src="img/Menu_32.png">
-                            </button>-->
+        <!--navbar-->
+        <div class="container-fluid nav-intervid">
+            <!-- Navbar-->
+            <div class="navbar navbar-expand-sm black">
+                <div class="container-fluid">
+                    <!-- Logo -->
+                    <a class="navbar-brand img-fluid" href="index.htm">
+                        <img id="logo" src="img/letra 5mm.png" alt="InterVid">
+                    </a>
+                    <!--                    Toggle icon 
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                                            <img src="img/Menu_32.png">
+                                        </button>-->
 
-                <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="index.html">Inicio</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="productos.html">Productos e é</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        
-        <div class='container-fluid'>
-            <div class="row">
-                <div class="col-lg-3 bg-intervid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-
-                            </div>
-                            <div class="col-5">
-                                <p class="text-white letraMedia">Encuentra el candidato ideal para tu empresa</p>
-                            </div>
-                            <div class="col">
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-
-                            </div>
-                            <div class="col-5">
-                                <img src="img/icons8-permanent-job-48.png" class="inner">
-                            </div>
-                            <div class="col">
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-
-                            </div>
-                            <div class="col-5">
-                                <p class="text-white letraMedia">Ahorra al realizar las entrevistas de forma ONLINE</p>
-
-                            </div>
-                            <div class="col">
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-
-                            </div>
-                            <div class="col-5">
-                                <img src="img/icons8-money-box-64.png" class="inner">
-                            </div>
-                            <div class="col">
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-
-                            </div>
-                            <div class="col-5">   
-                                <p class="text-white letraMedia"> Más de 1.000.000 de CV's en nuestras bases de datos</p>
-                            </div>
-                            <div class="col">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-
-                            </div>
-                            <div class="col-5">
-                                <img src="img/icons8-profile-64.png" class="inner">
-                            </div>
-                            <div class="col">
-
-                            </div>
-                        </div>
-
+                    <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="loginEmpresa.htm" role="button">Ingresar</a>                            
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!--              Registro Usuario Empresa  -->
 
-                <div class="col-lg-9">
+        <!--Container central-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 bg-intervid">
+                    <div class="container pt-3 pb-5 mb-5">
+                        <div class="row">
+                            <div class="col-lg-12 mt-3 mb-3">
+                                <P class="text-white letraMedia">Encuentra el canditato ideal para tu empresa</p>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <img src="img/permanent_job_80px.png" class="inner img-fluid">
+                            </div>
+                            <div class="col-lg-12 mt-3 mb-3">
+                                <p class="text-white letraMedia">Ahorra al realizar las entrevistas de forma ONLINE</p>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <img src="img/money_box_80px.png" class="inner img-fluid">
+                            </div>
+                            <div class="col-lg-12 mt-3 mb-3">
+                                <p class="text-white letraMedia">Más de 1.000.000 de CV's en nuestra base de datos</p>
+                            </div>
+                            <div class="col-lg-12 mt-3">
+                                <img src="img/parse_resume_80px.png" class="inner img-fluid" style="width: 80px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 mt-5 mb-5 p-5">
+                    <p class="letraGrande text-intervid">
+                        Registro de Empresas 
+                    </p>
                     <div class="container">
-
-                        <p class="letraGrande text-intervid">
-                            Registro de Empresas 
-                        </p>
-
                         <form method="POST"> 
                             <div class="form-group">
                                 <label class="text-intervid">Correo Electronico:</label>
@@ -149,11 +86,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">RUT de la empresa</label>
-                                    <input type="text" class="form-control" name="RutEmpresa">
+                                    <input type="text" class="form-control" name="nomUsPos">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Razón Social</label>
-                                    <input type="text" class="form-control" name="RazonSocial">
+                                    <input type="text" class="form-control" name="apeUsPos">
                                 </div>
                             </div>
 
@@ -161,11 +98,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombre de la empresa</label>
-                                    <input type="text" class="form-control" name="NombreEmpresa">
+                                    <input type="text" class="form-control" name="nomUsPos">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Teléfono</label>
-                                    <input type="text" class="form-control" name="NumeroTelefonico">
+                                    <input type="text" class="form-control" name="apeUsPos">
                                 </div>
                             </div>
 
@@ -173,11 +110,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombre de contacto empresa</label>
-                                    <input type="text" class="form-control" name="nombre">
+                                    <input type="text" class="form-control" name="nomUsPos">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Apellido contacto empresa</label>
-                                    <input type="text" class="form-control" name="apellido">
+                                    <input type="text" class="form-control" name="apeUsPos">
                                 </div>
                             </div>
 
@@ -191,30 +128,35 @@
                 </div>
             </div>
         </div>
-        
+
+
         <!--                 FOOTER                  --> 
         <div id="footer" class="container-fluid bg-black">
             <div class="container-fluid">
                 <div class="row pt-4 ">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Postulantes</h5>
-                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <hr class="hr-custom-white" />
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Reclutadores</h5>
-                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <hr class="hr-custom-white" />
+
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-3">
+                            <div class="col-lg-3 mt-1">
                                 <h5 class="text-white">Empresas</h5>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
-                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
+                                <hr class="hr-custom-white" />
+                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             </div>
                             <div class="col-lg-3 mt-3 text-right">
                                 <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
@@ -223,7 +165,10 @@
                                 <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
                             </div>
                         </div>
-                        <div class="row mt-5">
+                        <div class="row mt-1">
+                            <div class="col-lg-12">
+                                <hr class="hr-custom-white"/>
+                            </div>
                             <div class="col-lg-12">
                                 <p class="text-white p-12">
                                     &copy; 2019 InterVid . Todos los derechos reservados.
@@ -235,9 +180,5 @@
             </div>
         </div>
 
-
-
-
     </body>
-
 </html>
