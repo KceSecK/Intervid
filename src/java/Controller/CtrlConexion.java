@@ -1,6 +1,6 @@
 package Controller;
 
-import Config.Conexion;
+
 import entidades.NumeroContacto;
 import entidades.Usuario;
 import entidades.UsuarioEmpresa;
@@ -26,19 +26,17 @@ import org.springframework.web.servlet.ModelAndView;
  * @author sdasd
  */
 @Controller
-@SessionAttributes("tipoCuenta")
+
 
 public class CtrlConexion {
     
-    Conexion con = new Conexion();
-    JdbcTemplate jdbcTemplate = new JdbcTemplate(con.Conectar());
+
     ModelAndView mav = new ModelAndView();
     
     @RequestMapping("index.htm")
     public ModelAndView Listar(){
+      
         String sql = "select * from usuario";
-        List datos =this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista",datos);
         mav.setViewName("index");
         return mav;
     }

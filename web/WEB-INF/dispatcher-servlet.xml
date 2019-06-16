@@ -24,11 +24,13 @@
                 <prop key="index.htm">conexionController</prop>
                 
             <!--Usuario Postulante--> 
+                <prop key="indexp.htm">conexionController2</prop> 
                 <prop key="registro.htm">conexionController2</prop> 
                 <prop key="loginPostulante.htm">conexionController2</prop>
                 <prop key="cvPostulante.htm">conexionController2</prop>                      
                 <prop key="editEstudioPostulante.htm">conexionController2</prop>
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
+         
 
                 
             <!--Usuario Empresa-->
@@ -47,9 +49,7 @@
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
 
-   
-    
-    <bean name="conexionController"
+<bean name="conexionController"
           class="Controller.CtrlConexion"/>
 <bean name="conexionController2"
           class="Controller.CtrlPostulante"/>

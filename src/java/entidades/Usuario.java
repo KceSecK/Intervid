@@ -1,5 +1,5 @@
 package entidades;
-import Config.Conexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Date;
@@ -29,11 +29,7 @@ public class Usuario {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
   
-   
-
-    
     public int getUsuarioID() {
         return UsuarioID;
     }

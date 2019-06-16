@@ -4,7 +4,10 @@
     Author     : Saitam
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -63,9 +66,9 @@
                             </p>
                           
                                 <div class="card-body ">
-                                    <form method="POST"> 
-
-                                    <div class="form-group">
+                                    <form action="" method="POST"> 
+                                        
+                                 <div class="form-group">
                                          <div class="col-12">
                                         <label class="text-intervid">Correo</label>
                                         <input type="text" class="form-control " name="correo">
@@ -74,7 +77,7 @@
                                     <div class="form-group">
                                          <div class="col-12">
                                         <label class="text-intervid">Contraseña</label>
-                                        <input type="text" class="form-control" name="clave">
+                                        <input type="password" class="form-control" name="clave">
                                     </div>
                                     </div>
                                     
@@ -97,7 +100,7 @@
                                   </div>         
                                       
                                                     </div>
-                                             <div class="row mt-3">  </div>
+                                            <div class="row mt-3"> </div>
                                             <div class="row align-items-end">
                                                 <div class="col "></div>
                                                 <div class="col ">

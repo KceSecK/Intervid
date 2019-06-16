@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -49,7 +48,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p class="text-white font-weight-bold text-center p-22">${tipoCuenta} El único portal de entrevistas por video</p>
+                        <p class="text-white font-weight-bold text-center p-22">El único portal de entrevistas por video</p>
                     </div>
                 </div>
                 <div class="row justify-content-md-center mt-5">

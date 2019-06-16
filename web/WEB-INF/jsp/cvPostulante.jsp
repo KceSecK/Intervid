@@ -41,7 +41,15 @@
                     <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="btn btn-primary nav-link" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                                <c:choose>
+                                    <c:when test="${empty Session}"> <a class="btn btn-primary nav-link" href="loginPostulante.htm" role="button">Ingresar</a> 
+                                    </c:when>
+                                    <c:otherwise>
+                                        Hello ${Session[0].NombreUsuario} &nbsp;
+                                        <a href="logout">Cerrar Sesion</a>
+                                    </c:otherwise>
+                                </c:choose>
+                                                          
                             </li>
                         </ul>
                     </div>
@@ -123,6 +131,8 @@
                                         <button id="EditarPersonales" onclick="document.getElementById('id01').style.display = 'block'" type="button" class="btn btn-link btn-right">Editar</button>
                                         <table id="s">
                                             <tr>
+                                            <input type="hidden" name="ID" value="${lista[0].UsuarioID}">
+                                            <input type="hidden" name="IdPostulante" value="${lista[0].UsuarioPostulanteID}">
                                                 <td class="pr-5 text-intervid">Nombre(s):</td>
                                                 <td>${lista[0].NombreUsuario}</td>
                                             </tr>
@@ -894,7 +904,7 @@
                 $('#PeriodoActualidad').val(data[0].PeriodoActual).prop('checked',true);
                 $('#periodoInicio').val(data[0].PeriodoInicio);
                 $('#periodoFin').val(data[0].PeriodoFin);
-                $("#educacion_modal").modal('');
+               
                
                
                 }  
