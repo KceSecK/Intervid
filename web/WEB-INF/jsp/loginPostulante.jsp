@@ -4,15 +4,22 @@
     Author     : Saitam
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
+        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/validaremail.js" type="text/javascript"></script>
     </head>
     <body>
 
@@ -35,24 +42,41 @@
                         <div class="container">
                             <div class="row mt-3">  </div>
                             <div class="row mt-3">  </div>
+
+
+
                             <div class="card mx-auto col-lg-6">
                                 <p class="letraGrande text-intervid text-center">
                                     Ingresar como postulante a INTERVID
                                 </p>
 
                                 <div class="card-body ">
-                                    <form method="POST"> 
 
+                                    <form action="<c:url value="/login" />" method="POST"> 
+
+                                        <c:if test="${param.error != null}">        
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                Correo o clave invalidos.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${param.logout != null}">       
+                                            <p>
+                                                Has sido desconectado.
+                                            </p>
+                                        </c:if>
                                         <div class="form-group">
                                             <div class="col-12">
-                                                <label class="text-intervid">Correo</label>
-                                                <input type="text" class="form-control " name="correo">
+                                                <label class="text-intervid">Correo</label>                                 
+                                                <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-12">
                                                 <label class="text-intervid">Contraseña</label>
-                                                <input type="text" class="form-control" name="contraseña">
+                                                <input type="password" class="form-control" name="clave">
                                             </div>
                                         </div>
 
@@ -62,6 +86,8 @@
                                                     <input class="form-check-input" type="checkbox" id="gridCheck">
                                                     <p>Mantenerme conectado</p>
                                                 </div>
+
+
                                                 <input type="submit" value="Ingresar" class="btn btn-success" style="width:100%">
                                             </div>
                                         </div>
@@ -101,27 +127,23 @@
                 <div class="row pt-4 ">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-3 mt-1">
+                            <div class="col-lg-3 mt-3">
                                 <h5 class="text-white">Postulantes</h5>
-                                <hr class="hr-custom-white" />
-                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-1">
+                            <div class="col-lg-3 mt-3">
                                 <h5 class="text-white">Reclutadores</h5>
-                                <hr class="hr-custom-white" />
-
-                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link" href="contacto.php">Contáctanos</a>
+                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
+                                <a class="alink nav-link border-link" href="nosotros.html">Sobre Nosotros</a>
                             </div>
-                            <div class="col-lg-3 mt-1">
+                            <div class="col-lg-3 mt-3">
                                 <h5 class="text-white">Empresas</h5>
-                                <hr class="hr-custom-white" />
-                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
+                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
+                                <div class="nav-link"><a class="alink border-link text-decoration-none" href="">Contáctanos</a></div>
                             </div>
                             <div class="col-lg-3 mt-3 text-right">
                                 <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
@@ -130,10 +152,7 @@
                                 <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
                             </div>
                         </div>
-                        <div class="row mt-1">
-                            <div class="col-lg-12">
-                                <hr class="hr-custom-white"/>
-                            </div>
+                        <div class="row mt-5">
                             <div class="col-lg-12">
                                 <p class="text-white p-12">
                                     &copy; 2019 InterVid . Todos los derechos reservados.
@@ -144,6 +163,5 @@
                 </div>
             </div>
         </div>
-
     </body>
 </html>

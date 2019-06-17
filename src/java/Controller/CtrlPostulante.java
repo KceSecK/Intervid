@@ -15,7 +15,6 @@ import entidades.UsuarioPostulante;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +25,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -49,21 +51,43 @@ public class CtrlPostulante {
     }
 
     @RequestMapping(value = "registro.htm", method = RequestMethod.POST)
-    public String Agregar(Usuario u) {
-        try {
-            this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
-            return "/index";
-        } catch (DataIntegrityViolationException e) {
-            return "/index.htm?idErr=1";
+    public ModelAndView Agregar(Usuario u) {
+        ModelAndView model = new ModelAndView();
 
-        }
+        String password = u.getClave();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        System.out.println(hashedPassword);
+        u.setClave(hashedPassword);
+        System.out.println(u.getCorreo() + u.getClave() + u.getNombre() + u.getApellido());
+        this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
+
+        model.setViewName("index");
+        return model;
+
+    }
+    
+    @RequestMapping(value = "indexp.htm", method = RequestMethod.GET)
+    public ModelAndView indexPostulante() {
+        mav.setViewName("indexp");
+        return mav;
     }
 
     @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.GET)
-    public ModelAndView loginPostulante() {
-        mav.addObject(new Usuario());
-        mav.setViewName("loginPostulante");
-        return mav;
+
+    public ModelAndView loginUsuarioPostulante(@RequestParam(value = "error", required = false) String error,
+            HttpServletRequest request, Usuario u) throws Exception {
+
+        ModelAndView model = new ModelAndView();
+
+        if (error != null) {
+
+            model.addObject("error", true);
+
+        }
+        model.setViewName("loginPostulante");
+
+        return model;
     }
 
     @RequestMapping(value = "cvPostulante.htm", method = RequestMethod.GET)
@@ -262,4 +286,5 @@ public class CtrlPostulante {
             return "/loginPostulante";
         }
     }
+
 }

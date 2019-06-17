@@ -1,7 +1,4 @@
 package entidades;
-import Config.Conexion;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.Date;
 
 public class Usuario {

@@ -10,13 +10,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
+        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/validaremail.js" type="text/javascript"></script>
     </head>
-    <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-    <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="js/validaremail.js" type="text/javascript"></script>
     <body>
         <!-- Navbar-->
         <div class="container-fluid nav-intervid">
@@ -75,11 +76,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombres</label>
-                                    <input type="text" class="form-control" name="nomUsPos" required>
+                                    <input type="text" class="form-control" name="nombre" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Apellidos</label>
-                                    <input type="text" class="form-control" name="apeUsPos" required>
+                                    <input type="text" class="form-control" name="apellido" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -150,16 +151,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-
-
 
     </body>
 </html>
