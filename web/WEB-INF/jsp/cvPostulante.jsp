@@ -16,10 +16,12 @@
         <title>Intervid - Curriculum de usuario</title> 
         <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="js/loadata.js" type="text/javascript"></script>
+        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
 
     </head>
 
@@ -49,6 +51,8 @@
                 </div>
             </div>
         </div>
+        
+        
 
         <!--Container principal-->
         <div class="container-fluid div-principal">
@@ -153,6 +157,208 @@
                                                     <td>${lista[0].EstadoCivil}</td>
                                                 </tr>
                                             </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="dpersonales" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid" id="">Datos Personales</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST" id="form"> 
+                                                    <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                                    <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                    <input type="hidden" value="1" name="Cuadro">
+
+                                                    <div class="form-group ">
+                                                        <label class="text-intervid">Nombre(s):</label>
+                                                        <input type="text" value="${lista[0].NombreUsuario}"  name="nombre" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Apellido(s):</label>
+                                                        <input type="text" value="${lista[0].ApellidoUsuario}" name="apellido" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label class="text-intervid">Género:</label>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="genero" id="Genero" value="Masculino"
+                                                                       ${lista[0].Genero == 'Masculino' ? 'checked' : '' }>
+                                                                <label class="form-check-label" >Masculino</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="genero" id="Genero" value="Femenino"
+                                                                       ${lista[0].Genero == 'Femenino' ? 'checked' : '' }>
+                                                                <label class="form-check-label">Femenino</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label class="text-intervid">Nacionalidad</label>
+                                                            <select name="nacionalidad" class="form-control">
+                                                                <c:forEach var="p" items="${pais}">                                                        
+                                                                    <option ${lista[0].Nacionalidad == p.PaisNombre ? 'selected' : '' } value="${p.PaisNombre}">${p.PaisNombre}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-lg-12">
+                                                            <label class="text-intervid">Tipo de Identificación</label>
+                                                        </div>
+                                                        <div class="form-group col-lg-4">
+                                                            <select name="documento" class="form-control col">
+                                                                <option  ${lista[0].Documento == 'CI' ? 'selected' : '' } value="CI">Cédula de identidad</option>
+                                                                <option  ${lista[0].Documento == 'CE' ? 'selected' : '' } value="CE">Cédula de extranjeria</option>
+                                                                <option  ${lista[0].Documento == 'PA' ? 'selected' : '' } value="PA">Pasaporte</option>
+                                                                <option  ${lista[0].Documento == 'IFE' ? 'selected' : '' } value="IFE">Credencial para votar</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-lg-8">
+                                                            <input type="text" name="numDocumento" value="${lista[0].NumDocumento}" class="form-control col">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <label class="text-intervid">Fecha de nacimiento</label>
+                                                        <input id="datefield" min="01-01-1990" max="01-01-2005" type="date" value="${lista[0].FechaNacimiento}" class="form-control"
+                                                               name="fechaNacimiento" >
+                                                    </div>
+
+                                                    <div class="form-row ">
+                                                        <label class="col-form-label text-intervid">Estado Civil:</label>
+                                                        <div class="form-group col-md-8">
+                                                            <select name="estadoCivil" class="form-control ">
+                                                                <option ${lista[0].EstadoCivil == 'so' ? 'selected' : '' } value="so">Soltero/a</option>
+                                                                <option ${lista[0].EstadoCivil == 'ca' ? 'selected' : '' } value="ca">Casado/a</option>
+                                                                <option ${lista[0].EstadoCivil == 'vi' ? 'selected' : '' } value="vi">Viudo/a</option>
+                                                                <option ${lista[0].EstadoCivil == 'di' ? 'selected' : '' } value="di">Divorciado/a</option>
+                                                                <option ${lista[0].EstadoCivil == 'co' ? 'selected' : '' } value="co">Conviviente civil</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                                                                Mostrar en CV
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-row">
+                                                        <!--licencias a--> 
+                                                        <label class="col-form-label text-intervid">Licencia de Conducir:</label>
+                                                        <div class="col-md-6"></div>
+                                                        <div class="form-group col-lg-12">
+
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA1" value="1" 
+                                                                       ${lista[0].LicenciaTipoA1 == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox1">A1</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA2"  value="1" 
+                                                                       ${lista[0].LicenciaTipoA2  == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">A2</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA3"   value="1"  
+                                                                       ${lista[0].LicenciaTipoA3  == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">A3</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA4" value="1"   
+                                                                       ${lista[0].LicenciaTipoA4  == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">A4</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"   name="LicenciaTipoA5" value="1"  
+                                                                       ${lista[0].LicenciaTipoA5  == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">A5</label>
+                                                            </div>
+                                                        </div>
+                                                        <!--licencias b-->
+                                                        <div class="form-group col-lg-12">
+
+
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"  name="LicenciaTipoB" value="1" 
+                                                                       ${lista[0].LicenciaTipoB == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox1">B</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"   name="LicenciaTipoC" value="1" 
+                                                                       ${lista[0].LicenciaTipoC == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">C</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"  name="LicenciaTipoD" value="1" 
+                                                                       ${lista[0].LicenciaTipoD == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">D</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"  name="LicenciaTipoE"  value="1" 
+                                                                       ${lista[0].LicenciaTipoE == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">E</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"   name="LicenciaTipoF" value="1"  
+                                                                       ${lista[0].LicenciaTipoF == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">F</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+
+                                                                <input class="form-check-input" type="checkbox" name="NoLicencia" value="1" 
+                                                                       ${lista[0].NoLicencia == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label class="text-intervid">Vehículo propio:</label>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="vehiculoUsuario" id="vehiculo" value="1"  
+                                                                       ${lista[0].VehiculoUsuario == 'true' ? 'checked' : '' }>
+                                                                <label class="form-check-label" >Si</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="vehiculoUsuario" id="vehiculo" value="0" 
+                                                                       ${lista[0].VehiculoUsuario == 'false' ? 'checked' : '' }>
+                                                                <label class="form-check-label" >No</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="discapacidadUsuario"
+                                                                                   ${lista[0].DiscapacidadUsuario == 'true' ? 'checked' : '' }>
+                                                        <label class="form-check-label" >Poseeo algún tipo de discapacidad</label>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                    <input type="submit" value="Editar" class="btn btn-success btn-right"> 
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -626,207 +832,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="dpersonales" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-intervid" id="">Datos Personales</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <form method="POST" id="form"> 
-                                <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
-                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
-                                <input type="hidden" value="1" name="Cuadro">
 
-                                <div class="form-group ">
-                                    <label class="text-intervid">Nombre(s):</label>
-                                    <input type="text" value="${lista[0].NombreUsuario}"  name="nombre" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="text-intervid">Apellido(s):</label>
-                                    <input type="text" value="${lista[0].ApellidoUsuario}" name="apellido" class="form-control">
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="text-intervid">Género:</label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="genero" id="Genero" value="Masculino"
-                                                   ${lista[0].Genero == 'Masculino' ? 'checked' : '' }>
-                                            <label class="form-check-label" >Masculino</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="genero" id="Genero" value="Femenino"
-                                                   ${lista[0].Genero == 'Femenino' ? 'checked' : '' }>
-                                            <label class="form-check-label">Femenino</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="text-intervid">Nacionalidad</label>
-                                        <select name="nacionalidad" class="form-control">
-                                            <c:forEach var="p" items="${pais}">                                                        
-                                                <option ${lista[0].Nacionalidad == p.PaisNombre ? 'selected' : '' } value="${p.PaisNombre}">${p.PaisNombre}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <label class="text-intervid">Tipo de Identificación</label>
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        <select name="documento" class="form-control col">
-                                            <option  ${lista[0].Documento == 'CI' ? 'selected' : '' } value="CI">Cédula de identidad</option>
-                                            <option  ${lista[0].Documento == 'CE' ? 'selected' : '' } value="CE">Cédula de extranjeria</option>
-                                            <option  ${lista[0].Documento == 'PA' ? 'selected' : '' } value="PA">Pasaporte</option>
-                                            <option  ${lista[0].Documento == 'IFE' ? 'selected' : '' } value="IFE">Credencial para votar</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-lg-8">
-                                        <input type="text" name="numDocumento" value="${lista[0].NumDocumento}" class="form-control col">
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <label class="text-intervid">Fecha de nacimiento</label>
-                                    <input id="datefield" min="01-01-1990" max="01-01-2005" type="date" value="${lista[0].FechaNacimiento}" class="form-control"
-                                           name="fechaNacimiento" >
-                                </div>
-
-                                <div class="form-row ">
-                                    <label class="col-form-label text-intervid">Estado Civil:</label>
-                                    <div class="form-group col-md-8">
-                                        <select name="estadoCivil" class="form-control ">
-                                            <option ${lista[0].EstadoCivil == 'so' ? 'selected' : '' } value="so">Soltero/a</option>
-                                            <option ${lista[0].EstadoCivil == 'ca' ? 'selected' : '' } value="ca">Casado/a</option>
-                                            <option ${lista[0].EstadoCivil == 'vi' ? 'selected' : '' } value="vi">Viudo/a</option>
-                                            <option ${lista[0].EstadoCivil == 'di' ? 'selected' : '' } value="di">Divorciado/a</option>
-                                            <option ${lista[0].EstadoCivil == 'co' ? 'selected' : '' } value="co">Conviviente civil</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-check">
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
-                                            Mostrar en CV
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="form-row">
-                                    <!--licencias a--> 
-                                    <label class="col-form-label text-intervid">Licencia de Conducir:</label>
-                                    <div class="col-md-6"></div>
-                                    <div class="form-group col-lg-12">
-
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="LicenciaTipoA1" value="1" 
-                                                   ${lista[0].LicenciaTipoA1 == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox1">A1</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="LicenciaTipoA2"  value="1" 
-                                                   ${lista[0].LicenciaTipoA2  == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">A2</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="LicenciaTipoA3"   value="1"  
-                                                   ${lista[0].LicenciaTipoA3  == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">A3</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="LicenciaTipoA4" value="1"   
-                                                   ${lista[0].LicenciaTipoA4  == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">A4</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"   name="LicenciaTipoA5" value="1"  
-                                                   ${lista[0].LicenciaTipoA5  == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">A5</label>
-                                        </div>
-                                    </div>
-                                    <!--licencias b-->
-                                    <div class="form-group col-lg-12">
-
-
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"  name="LicenciaTipoB" value="1" 
-                                                   ${lista[0].LicenciaTipoB == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox1">B</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"   name="LicenciaTipoC" value="1" 
-                                                   ${lista[0].LicenciaTipoC == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">C</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"  name="LicenciaTipoD" value="1" 
-                                                   ${lista[0].LicenciaTipoD == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">D</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"  name="LicenciaTipoE"  value="1" 
-                                                   ${lista[0].LicenciaTipoE == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">E</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox"   name="LicenciaTipoF" value="1"  
-                                                   ${lista[0].LicenciaTipoF == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">F</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-
-                                            <input class="form-check-input" type="checkbox" name="NoLicencia" value="1" 
-                                                   ${lista[0].NoLicencia == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="text-intervid">Vehículo propio:</label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="vehiculoUsuario" id="vehiculo" value="1"  
-                                                   ${lista[0].VehiculoUsuario == 'true' ? 'checked' : '' }>
-                                            <label class="form-check-label" >Si</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="vehiculoUsuario" id="vehiculo" value="0" 
-                                                   ${lista[0].VehiculoUsuario == 'false' ? 'checked' : '' }>
-                                            <label class="form-check-label" >No</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="discapacidadUsuario"
-                                                               ${lista[0].DiscapacidadUsuario == 'true' ? 'checked' : '' }>
-                                    <label class="form-check-label" >Poseeo algún tipo de discapacidad</label>
-                                </div>
-                                <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                <input type="submit" value="Editar" class="btn btn-success btn-right"> 
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 

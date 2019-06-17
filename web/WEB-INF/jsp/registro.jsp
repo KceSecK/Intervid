@@ -13,9 +13,10 @@
     </head>
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
     <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/validaremail.js" type="text/javascript"></script>
     <body>
         <!-- Navbar-->
         <div class="container-fluid nav-intervid">
@@ -74,24 +75,25 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombres</label>
-                                    <input type="text" class="form-control" name="nomUsPos">
+                                    <input type="text" class="form-control" name="nomUsPos" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Apellidos</label>
-                                    <input type="text" class="form-control" name="apeUsPos">
+                                    <input type="text" class="form-control" name="apeUsPos" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="text-intervid">Correo Electronico:</label><input type="mail"  name="correo" class="form-control">
+                                <label class="text-intervid">Correo Electronico: <e id="errorco"></e></label>
+                                <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
                             </div>
                             <div class="form-group">
-                                <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control">
+                                <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control" required>
                             </div>
                             <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
                                 <p>He leído y acepto los <a href="">Los términos y condiciones de Servicio</a> y la <a href="">
                                         Política de privacidad</a> de INTERVID</p>
                             </div>
-                            <input type="submit" value="Crear Cuenta" class="btn btn-success">
+                            <input id="ingresar" type="submit" value="Crear Cuenta" class="btn btn-success">
                         </form>
                     </div>
                 </div>
@@ -148,6 +150,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+
 
     </body>
 </html>
