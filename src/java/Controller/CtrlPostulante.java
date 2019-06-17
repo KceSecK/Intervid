@@ -69,12 +69,11 @@ public class CtrlPostulante {
     
     @RequestMapping(value = "indexp.htm", method = RequestMethod.GET)
     public ModelAndView indexPostulante() {
-        mav.setViewName("indexp");
+        mav.setViewName("postulante/indexp");
         return mav;
     }
 
     @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.GET)
-
     public ModelAndView loginUsuarioPostulante(@RequestParam(value = "error", required = false) String error,
             HttpServletRequest request, Usuario u) throws Exception {
 
@@ -150,7 +149,7 @@ public class CtrlPostulante {
         mav.addObject("edu", educacion);
         mav.addObject("num", numero);
         mav.addObject("prc", prc);
-        mav.setViewName("cvPostulante");
+        mav.setViewName("postulante/cvPostulante");
         return mav;
     }
 
