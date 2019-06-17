@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+
 <html>
     <head>
       <meta charset="UTF-8">
@@ -45,7 +46,14 @@
                     </div>
                 </div>
             </div>
+            
+<c:choose>
+    <c:when test="${empty Session}"> <p>Debe iniciar Sesion</p> 
+</c:when>
 
+      <c:otherwise>
+                                        
+                                   
             <div class="container">
                 <div class="row mt-3"></div>
                 <div class="row">
@@ -187,4 +195,6 @@
         </div>
 
     </body>
+     </c:otherwise>
+                                </c:choose> 
 </html>

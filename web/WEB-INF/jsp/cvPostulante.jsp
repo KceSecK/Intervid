@@ -270,7 +270,7 @@
                                                 <label class="text-intervid">Nacionalidad</label>
                                                 <select name="nacionalidad" class="form-control">
                                                     <c:forEach var="p" items="${pais}">                                                        
-                                                        <option ${lista[0].Nacionalidad == p.PaisNombre ? 'selected' : '' } value="${p.PaisNombre}">${p.PaisNombre}</option>
+                                                        <option ${lista[0].Nacionalidad == p.PaisNombre ? '' : '' } value="${p.PaisNombre}">${p.PaisNombre}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -594,7 +594,7 @@
                                     <div class="form-row">
 
                                         <label class="text-intervid">Nivel de estudios:</label>
-                                        <select name="estudios" id="estudios" class="form-control">
+                                        <select name="NivelEstudio" id="estudios" class="form-control">
                                             <option  value="basico">Básico</option>
                                             <option  value="medio" >Medio</option>
                                             <option value="superior">Superior</option>

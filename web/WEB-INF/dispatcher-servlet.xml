@@ -26,7 +26,7 @@
             <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
                 <prop key="registro.htm">conexionController2</prop> 
-                <prop key="loginPostulante.htm">conexionController2</prop>
+                <prop key="loginPostulante.htm">conexionController2</prop>              
                 <prop key="cvPostulante.htm">conexionController2</prop>                      
                 <prop key="editEstudioPostulante.htm">conexionController2</prop>
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
@@ -50,9 +50,11 @@
           p:suffix=".jsp" />
 
 <bean name="conexionController"
-          class="Controller.CtrlConexion"/>
+          class="Controller.CtrlConexion"/>         
 <bean name="conexionController2"
           class="Controller.CtrlPostulante"/>
 <bean name="conexionController3"
           class="Controller.CtrlEmpresa"/>
+
+
 </beans>

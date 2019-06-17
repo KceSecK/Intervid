@@ -45,6 +45,10 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
@@ -67,45 +71,42 @@ ModelAndView mav = new ModelAndView();
         return mav;
     }
     
-        @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.GET)
-    public String vistaLoginPostulante(ModelMap model) {
-   
-        return "loginPostulante";
-    }
+  
 
+ @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.GET)
 
- @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.POST)
-    public String loginUsuarioPostulante(HttpServletRequest request, ModelMap model, Usuario u) {
-        String cor = request.getParameter("correo");
-        String cla = request.getParameter("clave");
+    public ModelAndView loginUsuarioPostulante(@RequestParam(value="error", required = false)String error,
+            HttpServletRequest request, Usuario u) throws Exception {
+       
+  
+	  ModelAndView model = new ModelAndView();
         
-        String sql = "select * from usuario where correoUsuario='" + cor + "' and Contraseña=AES_ENCRYPT('" + cla + "','userpass')";
-        
-        List rows = this.jdbcTemplate.queryForList(sql);
 
-        if (rows.size() > 0) {
+        if (error != null) {
 
-            
-            model.put("Session", rows);
+        model.addObject("error",true);
 
-            return "redirect:/indexp.htm";
+        } 
+          model.setViewName("loginPostulante");
 
-        } else {
-          
-            model.addAttribute("error", "Correo o contraseña invalidas");
-            return "redirect:/loginPostulante.htm";
-        }
+	  return model;
     }
 
     @RequestMapping(value = "registro.htm", method = RequestMethod.POST)
-    public String Agregar(Usuario u) {
-        try {
+    public ModelAndView Agregar(Usuario u) {
+         ModelAndView model = new ModelAndView();
+       
+            String password = u.getClave();
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(password);
+            System.out.println(hashedPassword);
+            u.setClave(hashedPassword);
+            System.out.println(u.getCorreo()+u.getClave()+u.getNombre()+u.getApellido());
             this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
-            return "index";
-        } catch (DataIntegrityViolationException e) {
-            return "/index.htm?idErr=1";
+            
+                      model.setViewName("index");
+                      return model;
 
-        }
     }
        
      
@@ -171,6 +172,7 @@ ModelAndView mav = new ModelAndView();
         mav.addObject("comuna", comuna);
         mav.addObject("edu", educacion);
         mav.setViewName("cvPostulante");
+      
         return mav;
     }
 
@@ -235,8 +237,8 @@ ModelAndView mav = new ModelAndView();
             this.jdbcTemplate.update("CALL creacion_educacionPostulante(?,?,?,?,?,?,?)",
                     up.getId_usuarioPostulante(),
                      ep.getInstitucion(),
-                     ep.getEstadoEstudio(),
                      ep.getNivelEstudio(),
+                     ep.getEstadoEstudio(),
                      ep.getPeriodoInicio(),
                      ep.getPeriodoFin(),
                      ep.getPeriodoActual()

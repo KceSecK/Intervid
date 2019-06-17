@@ -26,8 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author sdasd
  */
 @Controller
-
-
 public class CtrlConexion {
     
 

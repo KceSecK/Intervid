@@ -66,8 +66,18 @@
                             </p>
                           
                                 <div class="card-body ">
-                                    <form action="" method="POST"> 
-                                        
+                                    
+                                    <form action="<c:url value="/login" />" method="POST"> 
+                                         <c:if test="${param.error != null}">        
+                                        <p>
+                                         Correo o clave invalidos.
+                                        </p>
+                                       </c:if>
+                                       <c:if test="${param.logout != null}">       
+                                        <p>
+                                         Has sido desconectado.
+                                        </p>
+                                       </c:if>
                                  <div class="form-group">
                                          <div class="col-12">
                                         <label class="text-intervid">Correo</label>
