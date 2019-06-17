@@ -106,11 +106,15 @@ public class CtrlPostulante {
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
         String sql5 = "SELECT * FROM `educacionpostulante` WHERE EducacionPostulanteFK =" + idUsuarioPostulante;
+        String sql6 = "SELECT * FROM NumeroContacto WHERE NumeroUsuarioFK =" + idUsuario;
+        String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
         List region = this.jdbcTemplate.queryForList(sql3);
         List comuna = this.jdbcTemplate.queryForList(sql4);
         List educacion = this.jdbcTemplate.queryForList(sql5);
+        List numero = this.jdbcTemplate.queryForList(sql6);
+        List prc = this.jdbcTemplate.queryForList(sql7);
 //        model.addAttribute("pais",pais);
 //        model.addAttribute("region",region);
 //        model.addAttribute("comuna",comuna);
@@ -120,6 +124,8 @@ public class CtrlPostulante {
         mav.addObject("region", region);
         mav.addObject("comuna", comuna);
         mav.addObject("edu", educacion);
+        mav.addObject("num", numero);
+        mav.addObject("prc", prc);
         mav.setViewName("cvPostulante");
         return mav;
     }
@@ -132,57 +138,81 @@ public class CtrlPostulante {
         System.out.println("Formulario: " + form);
         if (form == 1) {
             this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                     u.getUsuarioID(),
-                     u.getNombre(),
-                     u.getApellido(),
-                     up.getId_usuarioPostulante(),
-                     up.getGenero(),
-                     up.getNacionalidad(),
-                     up.getNumDocumento(),
-                     up.getDocumento(),
-                     up.getFechaNacimiento(),
-                     up.getEstadoCivil(),
-                     up.getVehiculoUsuario(),
-                     up.getDiscapacidadUsuario(),
-                     l.getLicenciaTipoA1(),
-                     l.getLicenciaTipoA2(),
-                     l.getLicenciaTipoA3(),
-                     l.getLicenciaTipoA4(),
-                     l.getLicenciaTipoA5(),
-                     l.getLicenciaTipoB(),
-                     l.getLicenciaTipoC(),
-                     l.getLicenciaTipoD(),
-                     l.getLicenciaTipoE(),
-                     l.getLicenciaTipoF(),
-                     l.getNoLicencia()
+                    u.getUsuarioID(),
+                    u.getNombre(),
+                    u.getApellido(),
+                    up.getId_usuarioPostulante(),
+                    up.getGenero(),
+                    up.getNacionalidad(),
+                    up.getNumDocumento(),
+                    up.getDocumento(),
+                    up.getFechaNacimiento(),
+                    up.getEstadoCivil(),
+                    up.getVehiculoUsuario(),
+                    up.getDiscapacidadUsuario(),
+                    l.getLicenciaTipoA1(),
+                    l.getLicenciaTipoA2(),
+                    l.getLicenciaTipoA3(),
+                    l.getLicenciaTipoA4(),
+                    l.getLicenciaTipoA5(),
+                    l.getLicenciaTipoB(),
+                    l.getLicenciaTipoC(),
+                    l.getLicenciaTipoD(),
+                    l.getLicenciaTipoE(),
+                    l.getLicenciaTipoF(),
+                    l.getNoLicencia()
             );
+            System.out.println(u.getUsuarioID());
+            System.out.println(u.getNombre());
+            System.out.println(u.getApellido());
+            System.out.println(up.getId_usuarioPostulante());
+            System.out.println(up.getGenero());
+            System.out.println(up.getNacionalidad());
+            System.out.println(up.getNumDocumento());
+            System.out.println(up.getDocumento());
+            System.out.println(up.getFechaNacimiento());
+            System.out.println(up.getEstadoCivil());
+            System.out.println(up.getVehiculoUsuario());
+            System.out.println(up.getDiscapacidadUsuario());
+            System.out.println(l.getLicenciaTipoA1());
+            System.out.println(l.getLicenciaTipoA2());
+            System.out.println(l.getLicenciaTipoA3());
+            System.out.println(l.getLicenciaTipoA4());
+            System.out.println(l.getLicenciaTipoA5());
+            System.out.println(l.getLicenciaTipoB());
+            System.out.println(l.getLicenciaTipoC());
+            System.out.println(l.getLicenciaTipoD());
+            System.out.println(l.getLicenciaTipoE());
+            System.out.println(l.getLicenciaTipoF());
+            System.out.println(l.getNoLicencia());
 
-            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + u.getUsuarioID() + "&IdPostulante=" + up.getId_usuarioPostulante());
         } else if (form == 2) {
 
             this.jdbcTemplate.update("call edit_datosContactoPostulante(?,?,?,?)",
-                     up.getId_usuarioPostulante(),
-                     cp.getComunaResidencia(),
-                     cp.getDireccionResidencia(),
-                     cp.getCorreoContacto()
+                    up.getId_usuarioPostulante(),
+                    cp.getComunaResidencia(),
+                    cp.getDireccionResidencia(),
+                    cp.getCorreoContacto()
             );
 
-            return new ModelAndView("redirect:/cvPostulante.htm?ID=" +u.getUsuarioID() +"&IdPostulante="+ up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + u.getUsuarioID() + "&IdPostulante=" + up.getId_usuarioPostulante());
         } else if (form == 3) {
 
             this.jdbcTemplate.update("CALL creacion_educacionPostulante(?,?,?,?,?,?,?)",
                     up.getId_usuarioPostulante(),
-                     ep.getInstitucion(),
-                     ep.getEstadoEstudio(),
-                     ep.getNivelEstudio(),
-                     ep.getPeriodoInicio(),
-                     ep.getPeriodoFin(),
-                     ep.getPeriodoActual()
+                    ep.getInstitucion(),
+                    ep.getEstadoEstudio(),
+                    ep.getNivelEstudio(),
+                    ep.getPeriodoInicio(),
+                    ep.getPeriodoFin(),
+                    ep.getPeriodoActual()
             );
 
             return new ModelAndView("redirect:/cvPostulante.htm?idUS=" + up.getId_usuarioPostulante());
 
         } else {
+
             return new ModelAndView("redirect:/cvPostulante.htm?idUS=" + up.getId_usuarioPostulante());
         }
 
