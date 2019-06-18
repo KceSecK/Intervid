@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import javax.servlet.http.HttpSession;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,13 +96,17 @@ public class CtrlPostulante {
     @RequestMapping(value = "cvPostulante.htm", method = RequestMethod.GET)
 
     public ModelAndView cvPostulante(HttpServletRequest request) {
-        mav.addObject(new UsuarioPostulante());
-        mav.addObject(new Usuario());
-        mav.addObject(new Licencia());
-        int idUsuario = Integer.parseInt(request.getParameter("ID"));
-        int idUsuarioPostulante = Integer.parseInt(request.getParameter("IdPostulante"));
-        System.out.println(idUsuario + " " + idUsuarioPostulante);
+        HttpSession session = request.getSession();
+        SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        Authentication auth = ctx.getAuthentication();
+        System.out.println("Nombre de usuario: "+auth.getName());
 
+//        mav.addObject(new UsuarioPostulante());
+//        mav.addObject(new Usuario());
+//        mav.addObject(new Licencia());
+//        int idUsuario = Integer.parseInt(request.getParameter("ID"));
+//        int idUsuarioPostulante = Integer.parseInt(request.getParameter("IdPostulante"));
+//
         String sql = "SELECT * FROM usuario \n"
                 + "LEFT JOIN usuariopostulante \n"
                 + "	ON usuariopostulante.PostulanteUsuarioFK = usuario.UsuarioID \n"
@@ -124,12 +132,12 @@ public class CtrlPostulante {
                 + "ON region.RegionID=comuna.ComunaRegionFK\n"
                 + "LEFT JOIN pais\n"
                 + "ON pais.PaisID=region.RegionPaisFK \n"
-                + "WHERE usuario.UsuarioID= " + idUsuario + "";
+                + "WHERE usuario.CorreoUsuario= '" + auth.getName() + "'";
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
-        String sql5 = "SELECT * FROM `educacionpostulante` WHERE EducacionPostulanteFK =" + idUsuarioPostulante;
-        String sql6 = "SELECT * FROM NumeroContacto WHERE NumeroUsuarioFK =" + idUsuario;
+        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '"+auth.getName()+"'";
+        String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName()+"'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
@@ -138,6 +146,8 @@ public class CtrlPostulante {
         List educacion = this.jdbcTemplate.queryForList(sql5);
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
+
+
 //        model.addAttribute("pais",pais);
 //        model.addAttribute("region",region);
 //        model.addAttribute("comuna",comuna);

@@ -64,7 +64,7 @@
                                         </a>
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Mi Perfil</a>
+                                            <a class="dropdown-item" href="cvPostulante.htm">Mi Perfil</a>
                                             <a class="dropdown-item" href="#">Notificaciones</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Cerrar Sesión</a>
