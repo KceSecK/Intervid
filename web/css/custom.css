@@ -238,3 +238,7 @@
 .btn-right{
     float: right;
 }
+
+.intervid-fixed-nav{
+    min-height: 300px;
+}

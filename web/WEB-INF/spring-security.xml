@@ -16,16 +16,16 @@
                     login-processing-url="/login" authentication-failure-url="/loginPostulante.htm?error" 
                     username-parameter="correo"
                     password-parameter="clave" />  
-         <logout logout-success-url="/login.htm" logout-url="/salir" />  
+         <logout logout-success-url="/loginPostulante.htm" logout-url="/logout" />  
 
-         <!-- enable csrf protection       
-            <form-login login-page="/login"  default-target-url="/index" authentication-failure-url="/login?error" 
+          <!--enable csrf protection-->       
+<!--            <form-login login-page="/login"  default-target-url="/index" authentication-failure-url="/login?error" 
                         username-parameter="usuario" password-parameter="lacontra" />
             <logout logout-success-url="/login?logout"/>
-            <csrf/>
+            <csrf/>-->
             
             
-        -->   
+           
     </http>
     
     <authentication-manager alias="authenticationManager">

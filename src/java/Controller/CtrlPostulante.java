@@ -66,7 +66,7 @@ public class CtrlPostulante {
         return model;
 
     }
-    
+
     @RequestMapping(value = "indexp.htm", method = RequestMethod.GET)
     public ModelAndView indexPostulante() {
         mav.setViewName("postulante/indexp");

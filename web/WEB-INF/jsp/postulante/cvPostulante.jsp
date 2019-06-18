@@ -57,7 +57,7 @@
         <div class="container-fluid div-principal">
             <div class="row">
                 <!--Nav lateral-->
-                <div class="col-lg-2 bg-intervid">
+                <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
                     <div class="container">
                         <ul class="list-unstyled static ">
                             <li>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-10 mb-5">
+                <div class="col-lg-10 col-md-9 mb-5">
                     <div class="container">
                         <!--Primer cuadro-->
                         <div class="row mt-4"><p class="letraMediaPerfil">Mi CV</p></div>
