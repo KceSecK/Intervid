@@ -62,11 +62,6 @@
                                                 </button>
                                             </div>
                                         </c:if>
-                                        <c:if test="${param.logout != null}">       
-                                            <p>
-                                                Has sido desconectado.
-                                            </p>
-                                        </c:if>
                                         <div class="form-group">
                                             <div class="col-12">
                                                 <label class="text-intervid">Correo</label>                                 
