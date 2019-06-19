@@ -25,8 +25,10 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -116,19 +118,22 @@ public class CtrlPostulante {
             String sql = "SELECT contraseña FROM Usuario WHERE CorreoUsuario = ?";
             String validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class);
             boolean match = passwordEncoder.matches(password, validar);
-            if (match == true) {
-                String sql2 = "UPDATE Usuario SET CorreoUsuario = ? WHERE CorreoUsuario = ?";
+            boolean match2 = npass1.equals(npass2);
+            System.out.println("match1: " + match);
+            System.out.println("match2: " + match2);
+            if (match == true & match2 == true) {
+                String hashedPassword = passwordEncoder.encode(npass1);
+                String sql2 = "UPDATE Usuario SET Contraseña = ? WHERE CorreoUsuario = ?";
                 this.jdbcTemplate.update(sql2, (PreparedStatement ps) -> {
-                    ps.setString(1, correo);
+                    ps.setString(1, hashedPassword);
                     ps.setString(2, auth.getName());
                 });
-                mav.setViewName("redirect:/logout");
+                mav.setViewName("redirect:/indexp.htm?success=1");
                 return mav;
             } else {
                 mav.setViewName("redirect:/indexp.htm?error=4");
                 return mav;
             }
-
         } else {
             mav.setViewName("redirect:/indexp.htm?error=999");
             return mav;
@@ -140,6 +145,14 @@ public class CtrlPostulante {
             HttpServletRequest request, Usuario u) throws Exception {
 
         ModelAndView model = new ModelAndView();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+            /* The user is logged in :) */
+            return new ModelAndView("forward:/indexp.htm");
+        }
 
         if (error != null) {
 

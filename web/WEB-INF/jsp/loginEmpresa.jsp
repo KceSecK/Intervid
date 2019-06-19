@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,18 +50,26 @@
                                 </p>
 
                                 <div class="card-body ">
-                                    <form method="POST"> 
 
+                                    <form action="<c:url value="/loginempresa" />" method="POST"> 
+                                          <c:if test="${param.error != null}">        
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                Correo o clave invalidos.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </c:if>
                                         <div class="form-group">
                                             <div class="col-12">
-                                                <label class="text-intervid">Correo</label>
-                                                <input type="text" class="form-control " name="correo">
+                                                <label class="text-intervid">Correo</label>                                 
+                                                <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-12">
                                                 <label class="text-intervid">Contraseña</label>
-                                                <input type="text" class="form-control" name="contraseña">
+                                                <input type="password" class="form-control" name="clave">
                                             </div>
                                         </div>
 
@@ -79,11 +90,10 @@
                                                     <div class="col-lg-12">
                                                         <a href="">¿Olvidó su contraseña?</a> 
                                                     </div>         
-
                                                 </div>
-                                                <div class="row mt-3">  </div>
-                                                <div class="row align-items-end">
-                                                    <div class="col-lg-12 text-center ">
+                                                <div class="row mt-4">  </div>
+                                                <div class="row text-center">
+                                                    <div class="col-lg-12 ">
                                                         <a href="registroEmpresa.htm">¿No tienes cuenta? Registrate ahora</a>
                                                     </div>
                                                 </div>
@@ -91,7 +101,6 @@
                                         </div>
 
                                     </form>  
-
                                 </div>
                             </div>
                         </div>
@@ -100,59 +109,6 @@
             </div>
         </div>
 
-
-
-
-
-        <!--                 FOOTER                  --> 
-        <div id="footer" class="container-fluid bg-black">
-            <div class="container-fluid">
-                <div class="row pt-4 ">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-3 mt-1">
-                                <h5 class="text-white">Postulantes</h5>
-                                <hr class="hr-custom-white" />
-                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                            </div>
-                            <div class="col-lg-3 mt-1">
-                                <h5 class="text-white">Reclutadores</h5>
-                                <hr class="hr-custom-white" />
-
-                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                            </div>
-                            <div class="col-lg-3 mt-1">
-                                <h5 class="text-white">Empresas</h5>
-                                <hr class="hr-custom-white" />
-                                <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                            </div>
-                            <div class="col-lg-3 mt-3 text-right">
-                                <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
-                                <div class="text-white p-12">INVID Ltda</div>
-                                <div class="text-white p-12">Santiago, Chile</div>
-                                <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
-                            </div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-lg-12">
-                                <hr class="hr-custom-white"/>
-                            </div>
-                            <div class="col-lg-12">
-                                <p class="text-white p-12">
-                                    &copy; 2019 InterVid . Todos los derechos reservados.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

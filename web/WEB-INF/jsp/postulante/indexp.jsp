@@ -27,6 +27,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/scrolling.js" type="text/javascript"></script>
         <script src="js/validaremail.js" type="text/javascript"></script>
+        <script src="js/compararpass.js" type="text/javascript"></script>
         <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
     </head>
     <body>
@@ -49,7 +50,6 @@
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                         </form>
                     </div>
-
                     <!--                    Toggle icon 
                                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                                             <img src="img/Menu_32.png">
@@ -135,9 +135,25 @@
                                     </button>
                                 </div>
                             </c:when>
+                            <c:when test="${param.error == '4'}">        
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    Las contraseñas no coinciden o la contraseña actual son incorrectas.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
                             <c:when test="${param.error == '999'}">        
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     Ups!, algo salió mal. Si el problema persiste, contacte al administrador del sistema.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.success == '1'}">        
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    La contraseña ha sido cambiada exitosamente!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -185,8 +201,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
 
                                             <div id="contraseña">
                                                 <div class="row mt-4"><p class="letraMediaPerfil">Contraseña</p></div>
@@ -248,14 +262,13 @@
                                                     </div>
 
                                                     <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                                    <input type="submit" value="Editar" class="btn btn-success btn-right">
+                                                    <input type="submit" value="Guardar Cambios" class="btn btn-success btn-right">
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                             <!--editar contraseña-->
                             <div class="modal fade" id="dcontraseña" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -276,15 +289,15 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-form-label text-intervid">Nueva Contraseña </label>
-                                                        <input id="pass" name="pass" type="password" class="form-control" required/>
+                                                        <input id="npass1" name="npass1" type="password" class="form-control" onchange="validarPass();" required/>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-form-label text-intervid">Repetir Contraseña</label>
-                                                        <input id="pass" name="pass" type="password" class="form-control" required/>
+                                                        <input id="npass2" name="npass2" type="password" class="form-control" onkeyup="validarPass();" required/>
                                                     </div>
 
                                                     <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                                    <input type="submit" value="Editar" class="btn btn-success btn-right">
+                                                    <input id="sumb" type="submit" value="Guardar Cambios" class="btn btn-success btn-right">
                                                 </form>
                                             </div>
                                         </div>
@@ -293,67 +306,10 @@
                             </div>
 
 
-
-
-
-
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-                <!--                 FOOTER                  --> 
-                <div id="footer" class="container-fluid bg-black">
-                    <div class="container-fluid">
-                        <div class="row pt-4 ">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-3 mt-1">
-                                        <h5 class="text-white">Postulantes</h5>
-                                        <hr class="hr-custom-white" />
-                                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                    </div>
-                                    <div class="col-lg-3 mt-1">
-                                        <h5 class="text-white">Reclutadores</h5>
-                                        <hr class="hr-custom-white" />
-
-                                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                    </div>
-                                    <div class="col-lg-3 mt-1">
-                                        <h5 class="text-white">Empresas</h5>
-                                        <hr class="hr-custom-white" />
-                                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                                    </div>
-                                    <div class="col-lg-3 mt-3 text-right">
-                                        <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
-                                        <div class="text-white p-12">INVID Ltda</div>
-                                        <div class="text-white p-12">Santiago, Chile</div>
-                                        <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-lg-12">
-                                        <hr class="hr-custom-white"/>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p class="text-white p-12">
-                                            &copy; 2019 InterVid . Todos los derechos reservados.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <jsp:include page="../footer.jsp"></jsp:include>
             </div>
     </body>
 </html>
