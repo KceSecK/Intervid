@@ -13,11 +13,9 @@ import entidades.NumeroContacto;
 import entidades.Usuario;
 import entidades.UsuarioPostulante;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,10 +23,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,9 +59,7 @@ public class CtrlPostulante {
         String password = u.getClave();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
-        System.out.println(hashedPassword);
         u.setClave(hashedPassword);
-        System.out.println(u.getCorreo() + u.getClave() + u.getNombre() + u.getApellido());
         this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
 
         model.setViewName("index");
@@ -75,6 +71,68 @@ public class CtrlPostulante {
     public ModelAndView indexPostulante() {
         mav.setViewName("postulante/indexp");
         return mav;
+    }
+
+    @RequestMapping(value = "indexp.htm", method = RequestMethod.POST)
+    public ModelAndView validarCambioCorreo(HttpServletRequest request) {
+        int form = Integer.parseInt(request.getParameter("formulario"));
+        String password = request.getParameter("pass");
+        String correo = request.getParameter("correo");
+
+        String npass1 = request.getParameter("npass1");
+        String npass2 = request.getParameter("npass2");
+
+        HttpSession session = request.getSession();
+        SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        Authentication auth = ctx.getAuthentication();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if (form == 1) {
+            String sqlexiste = "SELECT COUNT(CorreoUsuario) FROM Usuario WHERE CorreoUsuario = ?";
+            String existe = (String) jdbcTemplate.queryForObject(sqlexiste, new Object[]{correo}, String.class);
+
+            if (existe.equals("0")) {
+                String sql = "SELECT contraseña FROM Usuario WHERE CorreoUsuario = ?";
+                String validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class);
+
+                boolean match = passwordEncoder.matches(password, validar);
+                if (match == true) {
+                    String sql2 = "UPDATE Usuario SET CorreoUsuario = ? WHERE CorreoUsuario = ?";
+                    this.jdbcTemplate.update(sql2, (PreparedStatement ps) -> {
+                        ps.setString(1, correo);
+                        ps.setString(2, auth.getName());
+                    });
+                    mav.setViewName("redirect:/logout");
+                    return mav;
+                } else {
+                    mav.setViewName("redirect:/indexp.htm?error=2");
+                    return mav;
+                }
+            } else {
+                mav.setViewName("redirect:/indexp.htm?error=3");
+                return mav;
+            }
+        } else if (form == 2) {
+            String sql = "SELECT contraseña FROM Usuario WHERE CorreoUsuario = ?";
+            String validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class);
+            boolean match = passwordEncoder.matches(password, validar);
+            if (match == true) {
+                String sql2 = "UPDATE Usuario SET CorreoUsuario = ? WHERE CorreoUsuario = ?";
+                this.jdbcTemplate.update(sql2, (PreparedStatement ps) -> {
+                    ps.setString(1, correo);
+                    ps.setString(2, auth.getName());
+                });
+                mav.setViewName("redirect:/logout");
+                return mav;
+            } else {
+                mav.setViewName("redirect:/indexp.htm?error=4");
+                return mav;
+            }
+
+        } else {
+            mav.setViewName("redirect:/indexp.htm?error=999");
+            return mav;
+        }
     }
 
     @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.GET)
@@ -99,7 +157,7 @@ public class CtrlPostulante {
         HttpSession session = request.getSession();
         SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         Authentication auth = ctx.getAuthentication();
-        System.out.println("Nombre de usuario: "+auth.getName());
+        System.out.println("Nombre de usuario: " + auth.getName());
 
 //        mav.addObject(new UsuarioPostulante());
 //        mav.addObject(new Usuario());
@@ -136,8 +194,8 @@ public class CtrlPostulante {
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
-        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '"+auth.getName()+"'";
-        String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName()+"'";
+        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
+        String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
@@ -146,7 +204,6 @@ public class CtrlPostulante {
         List educacion = this.jdbcTemplate.queryForList(sql5);
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
-
 
 //        model.addAttribute("pais",pais);
 //        model.addAttribute("region",region);
@@ -271,29 +328,28 @@ public class CtrlPostulante {
         return mav;
     }
 
-    @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.POST)
-    public String loginUsuarioPostulante(HttpServletRequest request, ModelMap model) {
-        String cor = request.getParameter("correo");
-        String cla = request.getParameter("clave");
-        String sql = "select usuarioID,CorreoUsuario,TipoCuenta,"
-                + "nombreUsuario,ApellidoUsuario from usuario where correoUsuario='" + cor + "' and Contraseña=AES_ENCRYPT('" + cla + "','userpass')";
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-
-        if (rows.size() > 0) {
-
-            for (Map row : rows) {
-                model.put("tipoCuenta", (String) row.get("TipoCuenta").toString());
-                model.put("CorreoUsuario", (String) row.get("CorreoUsuario").toString());
-                model.put("NombreUsuario", (String) row.get("NombreUsuario").toString());
-                model.put("CuentaActiva", (Integer) row.get("CuentaActiva"));
-                model.put("ID", (Integer) row.get("usuarioID"));
-            }
-
-            return "/index";
-
-        } else {
-            return "/loginPostulante";
-        }
-    }
-
+//    @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.POST)
+//    public String loginUsuarioPostulante(HttpServletRequest request, ModelMap model) {
+//        String cor = request.getParameter("correo");
+//        String cla = request.getParameter("clave");
+//        String sql = "select usuarioID,CorreoUsuario,TipoCuenta,"
+//                + "nombreUsuario,ApellidoUsuario from usuario where correoUsuario='" + cor + "' and Contraseña=AES_ENCRYPT('" + cla + "','userpass')";
+//        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+//
+//        if (rows.size() > 0) {
+//
+//            for (Map row : rows) {
+//                model.put("tipoCuenta", (String) row.get("TipoCuenta").toString());
+//                model.put("CorreoUsuario", (String) row.get("CorreoUsuario").toString());
+//                model.put("NombreUsuario", (String) row.get("NombreUsuario").toString());
+//                model.put("CuentaActiva", (Integer) row.get("CuentaActiva"));
+//                model.put("ID", (Integer) row.get("usuarioID"));
+//            }
+//
+//            return "/index";
+//
+//        } else {
+//            return "/loginPostulante";
+//        }
+//    }
 }
