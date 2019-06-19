@@ -29,6 +29,8 @@
                 <prop key="loginPostulante.htm">conexionController2</prop>
                 <prop key="cvPostulante.htm">conexionController2</prop>                      
                 <prop key="editEstudioPostulante.htm">conexionController2</prop>
+                <prop key="listaRegion.htm">conexionController2</prop>
+                <prop key="listaComuna.htm">conexionController2</prop>
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
 
                 

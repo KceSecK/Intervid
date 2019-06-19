@@ -22,10 +22,7 @@
 <!--            <form-login login-page="/login"  default-target-url="/index" authentication-failure-url="/login?error" 
                         username-parameter="usuario" password-parameter="lacontra" />
             <logout logout-success-url="/login?logout"/>
-            <csrf/>-->
-            
-            
-           
+            <csrf/>-->           
     </http>
     
     <authentication-manager alias="authenticationManager">

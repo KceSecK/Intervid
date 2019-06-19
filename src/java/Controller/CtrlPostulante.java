@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -38,8 +39,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Saitam
  */
 @Controller
-@SessionAttributes({"tipoCuenta", "CorreoUsuario", "NombreUsuario", "CuentaActiva", "ID"})
-
 public class CtrlPostulante {
 
     Conexion con = new Conexion();
@@ -66,7 +65,7 @@ public class CtrlPostulante {
         System.out.println(u.getCorreo() + u.getClave() + u.getNombre() + u.getApellido());
         this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
 
-        model.setViewName("index");
+        model.setViewName("loginPostulante");
         return model;
 
     }
@@ -99,14 +98,7 @@ public class CtrlPostulante {
         HttpSession session = request.getSession();
         SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         Authentication auth = ctx.getAuthentication();
-        System.out.println("Nombre de usuario: "+auth.getName());
 
-//        mav.addObject(new UsuarioPostulante());
-//        mav.addObject(new Usuario());
-//        mav.addObject(new Licencia());
-//        int idUsuario = Integer.parseInt(request.getParameter("ID"));
-//        int idUsuarioPostulante = Integer.parseInt(request.getParameter("IdPostulante"));
-//
         String sql = "SELECT * FROM usuario \n"
                 + "LEFT JOIN usuariopostulante \n"
                 + "	ON usuariopostulante.PostulanteUsuarioFK = usuario.UsuarioID \n"
@@ -136,8 +128,8 @@ public class CtrlPostulante {
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
-        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '"+auth.getName()+"'";
-        String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName()+"'";
+        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
+        String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
@@ -146,7 +138,6 @@ public class CtrlPostulante {
         List educacion = this.jdbcTemplate.queryForList(sql5);
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
-
 
 //        model.addAttribute("pais",pais);
 //        model.addAttribute("region",region);
@@ -159,6 +150,7 @@ public class CtrlPostulante {
         mav.addObject("edu", educacion);
         mav.addObject("num", numero);
         mav.addObject("prc", prc);
+        System.out.println();
         mav.setViewName("postulante/cvPostulante");
         return mav;
     }
@@ -169,6 +161,8 @@ public class CtrlPostulante {
         int form = Integer.parseInt(request.getParameter("Cuadro"));
 
         System.out.println("Formulario: " + form);
+        System.out.println(u.getNombre());
+        System.out.println("México");
         if (form == 1) {
             this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     u.getUsuarioID(),
@@ -195,31 +189,8 @@ public class CtrlPostulante {
                     l.getLicenciaTipoF(),
                     l.getNoLicencia()
             );
-            System.out.println(u.getUsuarioID());
-            System.out.println(u.getNombre());
-            System.out.println(u.getApellido());
-            System.out.println(up.getId_usuarioPostulante());
-            System.out.println(up.getGenero());
-            System.out.println(up.getNacionalidad());
-            System.out.println(up.getNumDocumento());
-            System.out.println(up.getDocumento());
-            System.out.println(up.getFechaNacimiento());
-            System.out.println(up.getEstadoCivil());
-            System.out.println(up.getVehiculoUsuario());
-            System.out.println(up.getDiscapacidadUsuario());
-            System.out.println(l.getLicenciaTipoA1());
-            System.out.println(l.getLicenciaTipoA2());
-            System.out.println(l.getLicenciaTipoA3());
-            System.out.println(l.getLicenciaTipoA4());
-            System.out.println(l.getLicenciaTipoA5());
-            System.out.println(l.getLicenciaTipoB());
-            System.out.println(l.getLicenciaTipoC());
-            System.out.println(l.getLicenciaTipoD());
-            System.out.println(l.getLicenciaTipoE());
-            System.out.println(l.getLicenciaTipoF());
-            System.out.println(l.getNoLicencia());
 
-            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + u.getUsuarioID() + "&IdPostulante=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm");
         } else if (form == 2) {
 
             this.jdbcTemplate.update("call edit_datosContactoPostulante(?,?,?,?)",
@@ -229,8 +200,18 @@ public class CtrlPostulante {
                     cp.getCorreoContacto()
             );
 
-            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + u.getUsuarioID() + "&IdPostulante=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm");
         } else if (form == 3) {
+            String sql = "INSERT INTO `numerocontacto`( `NumeroUsuarioFK`, `ContactoTipo`, `NumeroTelefonico`) "
+                    + "VALUES (?,?,?)";
+            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, u.getUsuarioID());
+                ps.setString(2,nc.getContactoTipo());
+                ps.setString(3, nc.getNumeroTelefonico());
+            });
+            
+            return new ModelAndView("redirect:/cvPostulante.htm");
+        } else if (form == 4) {
 
             this.jdbcTemplate.update("CALL creacion_educacionPostulante(?,?,?,?,?,?,?)",
                     up.getId_usuarioPostulante(),
@@ -262,6 +243,31 @@ public class CtrlPostulante {
         String json = mapper.writeValueAsString(estudio);
         System.out.println(json);
         return json;
+    }
+    // Select dinamico pais-region
+
+    @RequestMapping(value = "listaRegion.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String listaRegiones(HttpServletRequest request) throws JsonProcessingException {
+
+        String sql = "select * from region where regionPaisFK=" + request.getParameter("pais_id");
+        List regiones = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonRegiones = mapper.writeValueAsString(regiones);
+        return jsonRegiones;
+    }
+
+    // Select dinamico pais-region
+    @RequestMapping(value = "listaComuna.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String listaComunas(HttpServletRequest request) throws JsonProcessingException {
+
+        String sql = "select * from comuna where comunaRegionFK=" + request.getParameter("region_id");
+        List comunas = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(comunas);
+        String jsonComuna = mapper.writeValueAsString(comunas);
+        return jsonComuna;
     }
 
     @RequestMapping(value = "ofertasLaboralesPostulante.htm", method = RequestMethod.GET)

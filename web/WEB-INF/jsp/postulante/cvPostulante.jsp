@@ -6,12 +6,13 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/htm, charset=utf-8_spanish_ci" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Intervid - Curriculum de usuario</title> 
         <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
@@ -20,8 +21,8 @@
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
-
+        <script src="js/validarRUT.js"></script>
+        <script src="js/datosPostulante.js"></script>
     </head>
 
 
@@ -50,8 +51,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
 
         <!--Container principal-->
         <div class="container-fluid div-principal">
@@ -67,7 +68,7 @@
                                 <a class="alink nav-link border-link" href="#datoscontacto">Datos de Contacto</a>
                             </li>
                             <li>
-                                <a class="alink nav-link border-link" href="#educacion">Educaci贸n</a>
+                                <a class="alink nav-link border-link" href="#educacion">Educaci髇</a>
                             </li>
                             <li>
                                 <a class="alink nav-link border-link" href="#expectativaslaborales">Expectativas Laborales</a>
@@ -136,7 +137,7 @@
                                                     <td>${lista[0].ApellidoUsuario}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="pr-5 text-intervid">G茅nero:</td>
+                                                    <td class="pr-5 text-intervid">G閚ero:</td>
                                                     <td>${lista[0].Genero}</td>
                                                 </tr>
                                                 <tr>
@@ -144,8 +145,11 @@
                                                     <td>${lista[0].Nacionalidad}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="pr-5 text-intervid">Tipo de identificaci贸n</td>
-                                                    <td>${lista[0].Documento} - ${lista[0].NumDocumento} </td>
+                                                    <td class="pr-5 text-intervid">Documento</td>
+                                                    <td><c:if test="${lista[0].Documento == 'CI'}">Cedula Identidad</c:if>
+                                                        <c:if test="${lista[0].Documento == 'CE'}">Cedula Identidad</c:if>
+                                                        <c:if test="${lista[0].Documento == 'PA'}">Cedula Identidad</c:if>
+                                                        - ${lista[0].NumDocumento} </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="pr-5 text-intervid">Fecha de nacimiento:</td>
@@ -153,27 +157,33 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="pr-5 text-intervid">Estado civil</td>
-                                                    <td>${lista[0].EstadoCivil}</td>
-                                                </tr>
-                                            </table>
+                                                    <td>
+                                                        <c:if test="${lista[0].EstadoCivil == 'so'}">Soltero/a</c:if>
+                                                        <c:if test="${lista[0].EstadoCivil == 'ca'}">Casado/a</c:if>
+                                                        <c:if test="${lista[0].EstadoCivil == 'vi'}">Viudo/a</c:if>
+                                                        <c:if test="${lista[0].EstadoCivil == 'di'}">Divorciado/a</c:if>
+                                                        <c:if test="${lista[0].EstadoCivil == 'co'}">Conviviente civil</c:if>      
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="modal fade" id="dpersonales" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-intervid" id="">Datos Personales</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container">
-                                                <form method="POST" id="form"> 
-                                                    <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                <div class="modal fade" id="dpersonales" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-intervid" id="">Datos Personales</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <form method="POST" id="form"> 
+                                                        <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
                                                     <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                     <input type="hidden" value="1" name="Cuadro">
 
@@ -189,7 +199,7 @@
 
                                                     <div class="form-row">
                                                         <div class="form-group">
-                                                            <label class="text-intervid">G茅nero:</label>
+                                                            <label class="text-intervid">G閚ero:</label>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="genero" id="Genero" value="Masculino"
                                                                        ${lista[0].Genero == 'Masculino' ? 'checked' : '' }>
@@ -216,18 +226,18 @@
 
                                                     <div class="form-row">
                                                         <div class="col-lg-12">
-                                                            <label class="text-intervid">Tipo de Identificaci贸n</label>
+                                                            <label class="text-intervid">Tipo de Identificaci髇</label>
                                                         </div>
                                                         <div class="form-group col-lg-4">
                                                             <select name="documento" class="form-control col">
-                                                                <option  ${lista[0].Documento == 'CI' ? 'selected' : '' } value="CI">C茅dula de identidad</option>
-                                                                <option  ${lista[0].Documento == 'CE' ? 'selected' : '' } value="CE">C茅dula de extranjeria</option>
+                                                                <option  ${lista[0].Documento == 'CI' ? 'selected' : '' } value="CI">C閐ula de identidad</option>
+                                                                <option  ${lista[0].Documento == 'CE' ? 'selected' : '' } value="CE">C閐ula de extranjeria</option>
                                                                 <option  ${lista[0].Documento == 'PA' ? 'selected' : '' } value="PA">Pasaporte</option>
-                                                                <option  ${lista[0].Documento == 'IFE' ? 'selected' : '' } value="IFE">Credencial para votar</option>
+
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-8">
-                                                            <input type="text" name="numDocumento" value="${lista[0].NumDocumento}" class="form-control col">
+                                                            <input type="text" name="numDocumento" oninput="checkRut(this)" maxlength="10" value="${lista[0].NumDocumento}" class="form-control col">
                                                         </div>
                                                     </div>
 
@@ -256,7 +266,7 @@
                                                     </div>
 
 
-                                                    <div class="form-row">
+                                                    <div class="form-row" >
                                                         <!--licencias a--> 
                                                         <label class="col-form-label text-intervid">Licencia de Conducir:</label>
                                                         <div class="col-md-6"></div>
@@ -264,29 +274,29 @@
 
 
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA1" value="1" 
+                                                                <input class="form-check-input lic" type="checkbox" id="a1" name="LicenciaTipoA1" value="1" 
                                                                        ${lista[0].LicenciaTipoA1 == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox1">A1</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA2"  value="1" 
+                                                                <input class="form-check-input lic" type="checkbox" id="a2" name="LicenciaTipoA2"  value="1" 
                                                                        ${lista[0].LicenciaTipoA2  == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">A2</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA3"   value="1"  
+                                                                <input class="form-check-input lic" type="checkbox" id="a3" name="LicenciaTipoA3"   value="1"  
                                                                        ${lista[0].LicenciaTipoA3  == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">A3</label>
                                                             </div>
 
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox" name="LicenciaTipoA4" value="1"   
+                                                                <input class="form-check-input lic" type="checkbox" id="a4" name="LicenciaTipoA4" value="1"   
                                                                        ${lista[0].LicenciaTipoA4  == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">A4</label>
                                                             </div>
 
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"   name="LicenciaTipoA5" value="1"  
+                                                                <input class="form-check-input lic" type="checkbox" id="a5"  name="LicenciaTipoA5" value="1"  
                                                                        ${lista[0].LicenciaTipoA5  == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">A5</label>
                                                             </div>
@@ -297,35 +307,35 @@
 
 
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"  name="LicenciaTipoB" value="1" 
+                                                                <input class="form-check-input lic" type="checkbox" id="b" name="LicenciaTipoB" value="1" 
                                                                        ${lista[0].LicenciaTipoB == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox1">B</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"   name="LicenciaTipoC" value="1" 
+                                                                <input class="form-check-input lic" type="checkbox" id="c"  name="LicenciaTipoC" value="1" 
                                                                        ${lista[0].LicenciaTipoC == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">C</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"  name="LicenciaTipoD" value="1" 
+                                                                <input class="form-check-input lic" type="checkbox" id="d" name="LicenciaTipoD" value="1" 
                                                                        ${lista[0].LicenciaTipoD == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">D</label>
                                                             </div>
 
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"  name="LicenciaTipoE"  value="1" 
+                                                                <input class="form-check-input lic" type="checkbox" id="e" name="LicenciaTipoE"  value="1" 
                                                                        ${lista[0].LicenciaTipoE == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">E</label>
                                                             </div>
 
                                                             <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox"   name="LicenciaTipoF" value="1"  
+                                                                <input class="form-check-input lic" type="checkbox" id="f"  name="LicenciaTipoF" value="1"  
                                                                        ${lista[0].LicenciaTipoF == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">F</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
 
-                                                                <input class="form-check-input" type="checkbox" name="NoLicencia" value="1" 
+                                                                <input class="form-check-input" type="checkbox" id="NoLicencia" name="NoLicencia" value="1"
                                                                        ${lista[0].NoLicencia == 'true' ? 'checked' : '' }>
                                                                 <label class="form-check-label" for="inlineCheckbox2">No tengo</label>
                                                             </div>
@@ -335,7 +345,7 @@
 
                                                     <div class="form-row">
                                                         <div class="form-group">
-                                                            <label class="text-intervid">Veh铆culo propio:</label>
+                                                            <label class="text-intervid">Veh韈ulo propio:</label>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="vehiculoUsuario" id="vehiculo" value="1"  
                                                                        ${lista[0].VehiculoUsuario == 'true' ? 'checked' : '' }>
@@ -352,7 +362,7 @@
 
                                                     <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="discapacidadUsuario"
                                                                                    ${lista[0].DiscapacidadUsuario == 'true' ? 'checked' : '' }>
-                                                        <label class="form-check-label" >Poseeo alg煤n tipo de discapacidad</label>
+                                                        <label class="form-check-label" >Poseeo alg鷑 tipo de discapacidad</label>
                                                     </div>
                                                     <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
                                                     <input type="submit" value="Editar" class="btn btn-success btn-right"> 
@@ -376,16 +386,20 @@
                                             </button>
                                             <table class="table table-sm">
                                                 <tr>
-                                                    <td class="pr-5 text-intervid">Direcci贸n</td>
+                                                    <td class="pr-5 text-intervid">Direcci髇</td>
                                                     <td>${lista[0].DireccionResidencia}, ${lista[0].ComunaNombre}, ${lista[0].RegionNombre}, ${lista[0].PaisNombre}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="pr-5 text-intervid">Correo Electr贸nico</td>
+                                                    <td class="pr-5 text-intervid">Correo Electr髇ico</td>
                                                     <td>${lista[0].CorreoContacto}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="pr-5 text-intervid">T茅lefonos</td>
-                                                    <td></td>
+                                                    <td class="pr-5 text-intervid">T閘efonos</td>
+                                                    <td>
+                                                        <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dtelefono">
+                                                            Agregar
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                                 <c:forEach var="contacto" items="${num}">
                                                     <tr>
@@ -433,20 +447,20 @@
                                                         <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                         <input type="hidden" value="2" name="Cuadro">
 
-                                                        <label class="text-intervid">Pa铆s de residencia</label>
-                                                        <select name="pais" class="form-control">
+                                                        <label class="text-intervid">Pa韘 de residencia</label>
+                                                        <select name="pais" id="pais" class="form-control">
                                                             <c:forEach var="p" items="${pais}">                                                        
-                                                                <option ${region[0].RegionPaisFK == p.PaisID ? 'selected' : '' } value="${p.PaisID}">${p.PaisNombre}</option>
+                                                                <option ${lista[0].PaisID == p.PaisID ? 'selected' : '' } value="${p.PaisID}">${p.PaisNombre}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Regi贸n/Estado</label>
-                                                        <select name="" class="form-control">
+                                                        <label class="text-intervid">Regi髇/Estado</label>
+                                                        <select  class="form-control" id="region" name="region">
                                                             <c:forEach var="r" items="${region}">                                                        
-                                                                <option ${comuna[0].ComunaRegionFK == r.RegionID ? 'selected' : '' } value="${r.RegionID}">${r.RegionNombre}</option>
+                                                                <option ${lista[0].RegionID == r.RegionID ? 'selected' : '' } value="${r.RegionID}">${r.RegionNombre}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </div>
@@ -454,7 +468,7 @@
                                                     <div class="form-row">
 
                                                         <label class="text-intervid">Comuna/Municipio</label>
-                                                        <select name="ComunaResidencia" class="form-control">
+                                                        <select name="ComunaResidencia" id="comuna" class="form-control">
                                                             <c:forEach var="c" items="${comuna}">                                                        
                                                                 <option ${lista[0].ComunaResidencia == c.ComunaID ? 'selected' : '' } value="${c.ComunaID}">${c.ComunaNombre}</option>
                                                             </c:forEach>
@@ -462,14 +476,14 @@
                                                     </div>
 
                                                     <div class="form-row ">
-                                                        <label class="col-form-label text-intervid">Direcci贸n:</label>
+                                                        <label class="col-form-label text-intervid">Direcci髇:</label>
 
                                                         <input type="text"  name="DireccionResidencia" class="form-control"
                                                                value="${lista[0].DireccionResidencia}">
                                                     </div>
 
                                                     <div class="form-row mb-5 ">
-                                                        <label class="col-form-label text-intervid">Correo electr贸nico:</label>
+                                                        <label class="col-form-label text-intervid">Correo electr髇ico:</label>
 
                                                         <input type="email"  name="CorreoContacto" class="form-control"
                                                                value="${lista[0].CorreoContacto}">
@@ -484,24 +498,66 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!--Modal para Agregar telefonos-->
+                        
+                         <div class="modal fade" id="dtelefono" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid">Agregar Telefono</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST">
+                                                    <div class="form-row">
+                                                        <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                                        <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                        <input type="hidden" value="3" name="Cuadro">
 
+                                                        <label class="text-intervid">Tipo de Tel閒ono</label>
+                                                          <select name="contactoTipo" class="form-control">
+                                                                    <option value="fijo">Fijo</option>
+                                                                    <option value="movil">M髒il</option>
+                                                                </select>
+                                                    </div>
+
+                                                    <div class="form-row ">
+                                                        <label class="col-form-label text-intervid">Direcci髇:</label>
+
+                                                        <input type="text" placeholder="9 4242 5644" name="NumeroTelefonico" class="form-control">
+                                                    </div>
+
+
+                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                    <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!--Datos de educacion-->
                         <div id="educacion">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Educaci贸n</p></div>
+                            <div class="row mt-4"><p class="letraMediaPerfil">Educaci髇</p></div>
                             <div class="row">
                                 <div class="card col-md-12">
                                     <div class="card-body">
                                         <div class="container">
                                             <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#deducacion">
-                                                Agregar nueva instituci贸n
+                                                Agregar nueva instituci髇
                                             </button>
                                             <div class="table-responsive">
 
                                                 <table class="table table-sm table-hover">
                                                     <c:forEach var="nid" items="${edu}">
                                                         <tr>
-                                                            <td class="text-intervid">Instituci贸n</td>
+                                                            <td class="text-intervid">Instituci髇</td>
                                                             <td>${nid.Institucion}</td>
                                                             <td class="text-intervid">Nivel de Estudio</td>
                                                             <td>${nid.NivelEstudio}</td>
@@ -510,7 +566,7 @@
                                                             <td class="text-intervid">Perido</td>
                                                             <td>${nid.PeriodoInicio} - ${nid.PeriodoActual == '0' ? nid.PeriodoFin:'Actualidad'}</td>
                                                             <td>
-                                                                <button class="btn btn-link">
+                                                                <button class="btn btn-link edit_data">
                                                                     <img src="img/edit_24px.png"/>
                                                                 </button>
                                                             </td>
@@ -534,7 +590,7 @@
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-intervid">Datos de Educaci贸n</h5>
+                                            <h5 class="modal-title text-intervid">Datos de Educaci髇</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -545,7 +601,7 @@
                                                     <input type="hidden" value="${edu[0].EducacionPostulanteFK}" name="id_usuarioPostulante">
                                                     <input type="hidden" value="3" name="Cuadro">
                                                     <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Instituci贸n:</label>
+                                                        <label class="col-form-label text-intervid">Instituci髇:</label>
                                                         <input type="text"   name="Institucion" class="form-control"/>
                                                     </div>
 
@@ -553,7 +609,7 @@
 
                                                         <label class="text-intervid">Nivel de estudios:</label>
                                                         <select name="NivelEstudio"  class="form-control">
-                                                            <option  value="B谩sico">B谩sico</option>
+                                                            <option  value="B醩ico">B醩ico</option>
                                                             <option  value="Medio" >Medio</option>
                                                             <option value="Superior">Superior</option>
                                                         </select>
@@ -569,7 +625,7 @@
                                                     </div>
 
                                                     <div class="form-row">
-                                                        <label class="text-intervid">Per铆odo:</label>
+                                                        <label class="text-intervid">Per韔do:</label>
                                                         <div class="col-md-11"></div>
                                                         <div class="form-group col-md-8">
 
@@ -611,7 +667,7 @@
 
                                                 <table class="table table-hover">
                                                     <tr>
-                                                        <td class="text-intervid">Regi贸n de preferencia</td>
+                                                        <td class="text-intervid">Regi髇 de preferencia</td>
                                                         <td>
                                                             <c:forEach var="reg" items="${region}">
                                                                 ${reg.RegionID == lista[0].RegionPreferente ? reg.RegionNombre : ""}
@@ -658,7 +714,7 @@
                                                         <select name="moneda" class="form-control">
                                                             <option ${lista[0].TipoMoneda == 'CLP' ? 'selected' : '' } value="CLP">Pesos Chilenos</option>
                                                             <option ${lista[0].TipoMoneda == 'MXN' ? 'selected' : '' } value="MXN">Pesos Mexicanos</option>
-                                                            <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">D贸lar</option>
+                                                            <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">D髄ar</option>
                                                         </select>
                                                     </div>
 
@@ -844,7 +900,7 @@
                         <div class="col-lg-3 mt-1">
                             <h5 class="text-white">Postulantes</h5>
                             <hr class="hr-custom-white" />
-                            <a class="alink nav-link border-link pb-0" href="contacto.php">Cont谩ctanos</a>
+                            <a class="alink nav-link border-link pb-0" href="contacto.php">Cont醕tanos</a>
                             <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                         </div>
@@ -852,14 +908,14 @@
                             <h5 class="text-white">Reclutadores</h5>
                             <hr class="hr-custom-white" />
 
-                            <a class="alink nav-link border-link pb-0" href="contacto.php">Cont谩ctanos</a>
+                            <a class="alink nav-link border-link pb-0" href="contacto.php">Cont醕tanos</a>
                             <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                         </div>
                         <div class="col-lg-3 mt-1">
                             <h5 class="text-white">Empresas</h5>
                             <hr class="hr-custom-white" />
-                            <a class="alink nav-link border-link pb-0" href="contacto.php">Cont谩ctanos</a>
+                            <a class="alink nav-link border-link pb-0" href="contacto.php">Cont醕tanos</a>
                             <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                             <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                         </div>
@@ -890,36 +946,6 @@
 
 <script>
 
-    $(document).ready(function () {
-        $(document).on('click', '.edit_data', function () {
-
-            var id_estudio = $(this).attr("id");
-            console.log(id_estudio);
-            $.ajax({
-                url: "editEstudioPostulante.htm",
-                method: "POST",
-                cache: false,
-                data: {id2: id_estudio},
-                dataType: "json",
-                success: function (data) {
-                    console.log("SUCCESS: ", data[0])
-
-                    $('#institucion').val(data[0].Institucion);
-                    $('#estudios').val(data[0].NivelEstudio).prop('selected', true);
-                    $('#estadoEstudio').val(data[0].EstadoEstudio).prop('selected', true);
-                    $('#PeriodoActualidad').val(data[0].PeriodoActual).prop('checked', true);
-                    $('#periodoInicio').val(data[0].PeriodoInicio);
-                    $('#periodoFin').val(data[0].PeriodoFin);
-                    $("#educacion_modal").modal('');
-
-
-                }
-
-
-            });
-        });
-
-    });
 
     //$("#form").on('submit', function () {
     //
