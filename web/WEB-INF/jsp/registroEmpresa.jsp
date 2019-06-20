@@ -108,11 +108,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">RUT de la empresa</label>
-                                    <input type="text" class="form-control" name="RutEmpresa" oninput="checkRut(this)" required>
+                                    <input type="text" class="form-control" name="RutEmpresa" oninput="checkRut(this)" maxlength="10" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Razón Social</label>
-                                    <input type="text" class="form-control" name="RazonSocial" required>
+                                    <input type="text" class="form-control" name="RazonSocial" onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)" required>
                                 </div>
                             </div>
 
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Teléfono</label>
-                                    <input type="text" class="form-control" name="NumeroTelefonico"  onKeyPress="return SoloNumeros(event);" required>
+                                    <input type="text" class="form-control" name="NumeroTelefonico"  onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" required>
                                 </div>
                             </div>
 
@@ -132,11 +132,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombre de contacto empresa</label>
-                                    <input type="text" class="form-control" name="nombre" onkeypress="return soloLetras(event);" required>
+                                    <input type="text" class="form-control" name="nombre" onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Apellido contacto empresa</label>
-                                    <input type="text" class="form-control" name="apellido" onkeypress="return soloLetras(event);" required>
+                                    <input type="text" class="form-control" name="apellido" onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)" required>
                                 </div>
                             </div>
 

@@ -19,10 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import entidades.ExpectativaLaboral;
+import entidades.ExperienciaProfesional;
 import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -38,8 +39,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Saitam
  */
 @Controller
-@SessionAttributes({"tipoCuenta", "CorreoUsuario", "NombreUsuario", "CuentaActiva", "ID"})
-
 public class CtrlPostulante {
 
     Conexion con = new Conexion();
@@ -221,9 +220,12 @@ public class CtrlPostulante {
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
-        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
+        String sql5 = "SELECT * FROM educacionpostulante,usuariopostulante,usuario "
+                + "WHERE EducacionPostulanteFK = UsuarioPostulanteID   AND CorreoUsuario ='" + auth.getName() + "'";
         String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
+        String sql8 = "SELECT * FROM experienciaprofesional,usuario,usuariopostulante"
+                + "    WHERE ExperienciaPostulanteFK=UsuarioPostulanteID and CorreoUsuario='"+auth.getName()+" '";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
         List region = this.jdbcTemplate.queryForList(sql3);
@@ -231,7 +233,12 @@ public class CtrlPostulante {
         List educacion = this.jdbcTemplate.queryForList(sql5);
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
-        
+        List exp = this.jdbcTemplate.queryForList(sql8);
+
+//        model.addAttribute("pais",pais);
+//        model.addAttribute("region",region);
+//        model.addAttribute("comuna",comuna);
+//        model.addAttribute("lista", datos);
         mav.addObject("lista", datos);
         mav.addObject("pais", pais);
         mav.addObject("region", region);
@@ -239,16 +246,19 @@ public class CtrlPostulante {
         mav.addObject("edu", educacion);
         mav.addObject("num", numero);
         mav.addObject("prc", prc);
+        mav.addObject("exp", exp);
+        System.out.println();
         mav.setViewName("postulante/cvPostulante");
         return mav;
     }
 
     @RequestMapping(value = "cvPostulante.htm", method = RequestMethod.POST)
     public ModelAndView cvPostulante(HttpServletRequest request, Usuario u, UsuarioPostulante up, Licencia l,
-            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep) {
+            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep,ExpectativaLaboral el,ExperienciaProfesional exp) {
         int form = Integer.parseInt(request.getParameter("Cuadro"));
 
         System.out.println("Formulario: " + form);
+        
         if (form == 1) {
             this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     u.getUsuarioID(),
@@ -275,31 +285,8 @@ public class CtrlPostulante {
                     l.getLicenciaTipoF(),
                     l.getNoLicencia()
             );
-            System.out.println(u.getUsuarioID());
-            System.out.println(u.getNombre());
-            System.out.println(u.getApellido());
-            System.out.println(up.getId_usuarioPostulante());
-            System.out.println(up.getGenero());
-            System.out.println(up.getNacionalidad());
-            System.out.println(up.getNumDocumento());
-            System.out.println(up.getDocumento());
-            System.out.println(up.getFechaNacimiento());
-            System.out.println(up.getEstadoCivil());
-            System.out.println(up.getVehiculoUsuario());
-            System.out.println(up.getDiscapacidadUsuario());
-            System.out.println(l.getLicenciaTipoA1());
-            System.out.println(l.getLicenciaTipoA2());
-            System.out.println(l.getLicenciaTipoA3());
-            System.out.println(l.getLicenciaTipoA4());
-            System.out.println(l.getLicenciaTipoA5());
-            System.out.println(l.getLicenciaTipoB());
-            System.out.println(l.getLicenciaTipoC());
-            System.out.println(l.getLicenciaTipoD());
-            System.out.println(l.getLicenciaTipoE());
-            System.out.println(l.getLicenciaTipoF());
-            System.out.println(l.getNoLicencia());
 
-            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + u.getUsuarioID() + "&IdPostulante=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm");
         } else if (form == 2) {
 
             this.jdbcTemplate.update("call edit_datosContactoPostulante(?,?,?,?)",
@@ -309,24 +296,104 @@ public class CtrlPostulante {
                     cp.getCorreoContacto()
             );
 
-            return new ModelAndView("redirect:/cvPostulante.htm?ID=" + u.getUsuarioID() + "&IdPostulante=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm");
         } else if (form == 3) {
+            
+            String sql = "INSERT INTO `numerocontacto`( `NumeroUsuarioFK`, `ContactoTipo`, `NumeroTelefonico`) "
+                    + "VALUES (?,?,?)";
+            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, u.getUsuarioID());
+                ps.setString(2,nc.getContactoTipo());
+                ps.setString(3, nc.getNumeroTelefonico());
+            });
+            
+            return new ModelAndView("redirect:/cvPostulante.htm");
+        } else if (form == 4) {
 
             this.jdbcTemplate.update("CALL creacion_educacionPostulante(?,?,?,?,?,?,?)",
                     up.getId_usuarioPostulante(),
                     ep.getInstitucion(),
-                    ep.getEstadoEstudio(),
                     ep.getNivelEstudio(),
+                    ep.getEstadoEstudio(),
                     ep.getPeriodoInicio(),
                     ep.getPeriodoFin(),
                     ep.getPeriodoActual()
             );
+             
+            return new ModelAndView("redirect:/cvPostulante.htm");
 
-            return new ModelAndView("redirect:/cvPostulante.htm?idUS=" + up.getId_usuarioPostulante());
+        }
+        else if(form==5){
+            String sql ="UPDATE `educacionpostulante` SET "
+                    + "`Institucion`=? ,`NivelEstudio`=? ,`EstadoEstudio`=? ,"
+                    + "`PeriodoInicio`=? ,`PeriodoFin`=? ,`PeriodoActual`=? WHERE "
+                    + "EducacionPostulanteID=?";
+      
+           
+            
+            int periodoActual;
+            if (request.getParameter("PeriodoActual")==null) {
+                periodoActual=0;
+            }
+            else{
+                periodoActual=1;
+            }
+           
+            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setString(1,request.getParameter("Institucion"));
+                ps.setString(2,request.getParameter("NivelEstudio"));
+                ps.setString(3,request.getParameter("EstadoEstudio"));
+                ps.setString(4,request.getParameter("PeriodoInicio"));
+                ps.setString(5,request.getParameter("PeriodoFin"));
+                ps.setInt(6, periodoActual);
+                ps.setInt(7, Integer.parseInt(request.getParameter("id_educacion")));
+                
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm");
+        }
+        else if(form==6){
+            System.out.println(el.getRegionPreferente());
+            System.out.println(el.getExpectativaRenta());
+            System.out.println(el.getTipoMoneda());
+            System.out.println(el.getJornadaPreferente());
+            System.out.println(el.getDisponibilidadViaje());
+            System.out.println(el.getCambioResidencia());
+            System.out.println(request.getParameter("id_usuarioPostulante"));
+                String sql="UPDATE `expectativalaboral` SET "
+                        + "`RegionPreferente`=?,`ExpectativaRenta`=?,"
+                        + "`TipoMoneda`=?,`JornadaPreferente`=?,"
+                        + "`DisponibilidadViaje`=?,`CambioResidencia`=? "
+                        + "WHERE ExpectativaPostulanteFK=?";
+                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setLong(1,el.getRegionPreferente());
+                ps.setInt(2,el.getExpectativaRenta());
+                ps.setString(3,el.getTipoMoneda());
+                ps.setString(4,el.getJornadaPreferente());
+                ps.setInt(5,el.getDisponibilidadViaje());
+                ps.setInt(6, el.getCambioResidencia());
+                ps.setInt(7, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
+                
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm");
+        }
+        else if (form==7){
+            String sql = "INSERT INTO `experienciaprofesional`(`ExperienciaPostulanteFK`, "
+                    + "`EmpresaExperiencia`, `CargoDesempeñado`, `InicioPeriodo`, `FinPeriodo`, `FuncionesLogros`) "
+                    + "VALUES (?,?,?,?,?,?)";
+            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
+                ps.setString(2,exp.getEmpresaExperiencia());
+                ps.setString(3,exp.getCargoDesempeño());
+                ps.setString(4,exp.getInicioPeriodo());
+                ps.setString(5,exp.getFinPeriodo());
+                ps.setString(6,exp.getFuncionesLogros());
+                
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
+        }
+        else {
 
-        } else {
-
-            return new ModelAndView("redirect:/cvPostulante.htm?idUS=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm");
         }
 
     }
@@ -338,12 +405,99 @@ public class CtrlPostulante {
         String sql = "SELECT * FROM `educacionpostulante` WHERE "
                 + "EducacionPostulanteID= " + request.getParameter("id2");
         List estudio = jdbcTemplate.queryForList(sql);
+        
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(estudio);
-        System.out.println(json);
+        //cambio configuracion para obtener fecha correctamente
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        String json = mapper.writeValueAsString(estudio);       
+      
         return json;
     }
+//    Rellenar modal para editar experienciaPostulante
+    @RequestMapping(value = "editExperienciaPostulante.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String ObtenerExperienciaPostulante(HttpServletRequest request) throws JsonProcessingException {
+        String sql = "SELECT * FROM `experienciaProfesional` WHERE "
+                + "ExperienciaProfesionalID= " + request.getParameter("id");
+        List experiencia = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        //cambio configuracion para obtener fecha correctamente
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        String json = mapper.writeValueAsString(experiencia);       
+      
+        return json;
+    }
+    // Select dinamico pais-region
 
+    @RequestMapping(value = "listaRegion.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String listaRegiones(HttpServletRequest request) throws JsonProcessingException {
+
+        String sql = "select * from region where regionPaisFK=" + request.getParameter("pais_id");
+        List regiones = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonRegiones = mapper.writeValueAsString(regiones);
+        return jsonRegiones;
+    }
+
+    // Select dinamico pais-region
+    @RequestMapping(value = "listaComuna.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String listaComunas(HttpServletRequest request) throws JsonProcessingException {
+
+        String sql = "select * from comuna where comunaRegionFK=" + request.getParameter("region_id");
+        List comunas = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(comunas);
+        String jsonComuna = mapper.writeValueAsString(comunas);
+        return jsonComuna;
+    }
+    //Borrar numero de contacto 
+    @RequestMapping(value="borrarTelefono.htm",method = RequestMethod.GET)
+    public ModelAndView borrarNumeroContacto(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+       String sql="DELETE FROM `numerocontacto` WHERE numeroContactoID=? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, id);                
+       });
+       return new ModelAndView("redirect:/cvPostulante.htm"); 
+    }
+    //editar numero de contacto
+    @RequestMapping(value="editarTelefono.htm",method = RequestMethod.GET)
+    public ModelAndView editarNumeroContacto(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println(id);
+       String nt = request.getParameter("numTel");
+       String ct = request.getParameter("conTipo");
+        System.out.println(id+nt+ct);
+       String sql="UPDATE `numerocontacto` SET `ContactoTipo`=?,`NumeroTelefonico`=? WHERE NumeroContactoID ? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setString(1, ct);                
+                ps.setString(2, nt);                
+                ps.setInt(3, id);                
+       });
+       return new ModelAndView("redirect:/cvPostulante.htm");
+    }
+    
+    @RequestMapping(value = "borrarEducacion.htm", method = RequestMethod.GET)
+    public ModelAndView borrarEducacion(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+       String sql="DELETE FROM `educacionPostulante` WHERE educacionPostulanteID=? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, id);                
+       });
+        return new ModelAndView("redirect:/cvPostulante.htm");
+    }
+    
+    @RequestMapping(value = "borrarExperienciaLaboral.htm", method = RequestMethod.GET)
+    public ModelAndView borrarExperienciaLaboral(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+       String sql="DELETE FROM `experienciaProfesional` WHERE experienciaProfesionalID=? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, id);                
+       });
+        return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
+    }
     @RequestMapping(value = "ofertasLaboralesPostulante.htm", method = RequestMethod.GET)
     public ModelAndView vistaOfertasLaborales() {
         mav.addObject(new UsuarioPostulante());

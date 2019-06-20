@@ -135,7 +135,7 @@
                                                 <h3 class="text-intervid">${ol.NombreOferta}</h3>
                                                 <hr class="hr-custom-black" />
                                             </div>
-                                            <div class="col-lg-2 mt-2">
+                                            <div class="col-lg-2 mt-2 text-dark">
                                                 ${ol.FechaPublicacionOferta}
                                             </div>
                                         </div>
@@ -143,13 +143,13 @@
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-lg-9">
-                                                        <div class="row font-weight-bold p-22">
+                                                        <div class="row font-weight-bold text-dark p-22">
                                                             ${ol.NombreEmpresa}
                                                         </div>
-                                                        <div class="row p-14">
+                                                        <div class="row p-14 text-secondary">
                                                             ${ol.ComunaNombre}, ${ol.regionNombre}
                                                         </div>
-                                                        <div id="dcargo" class="row mt-3 text-truncate">
+                                                        <div id="dcargo" class="row mt-3 text-truncate text-dark">
                                                             ${ol.DescripcionCargo}
                                                         </div>
                                                     </div>
