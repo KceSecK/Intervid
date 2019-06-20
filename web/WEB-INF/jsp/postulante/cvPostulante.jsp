@@ -47,7 +47,7 @@
                         <form class="form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Buscar">
                             <select class="form-control mr-sm-2">
-                                <option>Seccione</option>
+                                <option>Seleccione</option>
                             </select>
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                         </form>

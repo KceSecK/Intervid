@@ -22,6 +22,7 @@
             <props>
             <!--Comunes-->
                 <prop key="index.htm">conexionController</prop>
+                <prop key="trabajos.htm">conexionController</prop>
                 
             <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 

@@ -51,8 +51,18 @@
 
                                 <div class="card-body ">
 
-                                    <form action="<c:url value="/loginempresa" />" method="POST"> 
-                                          <c:if test="${param.error != null}">        
+                                    <form action="<c:url value="/loginempresa" />" method="POST">
+                                        <c:choose>
+                                            <c:when test="${param.success == '1'}">        
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    Cuenta creada con éxito!!!
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </c:when>
+                                        </c:choose>
+                                        <c:if test="${param.error != null}">        
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                 Correo o clave invalidos.
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

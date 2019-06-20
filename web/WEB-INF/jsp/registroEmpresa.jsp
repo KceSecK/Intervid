@@ -5,14 +5,22 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Intervid - Registro empresas</title>
+        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/validaremail.js" type="text/javascript"></script>
+        <script src="js/validarletra.js" type="text/javascript"></script>
+        <script src="js/validarnumeros.js" type="text/javascript"></script>
+        <script src="js/validarrut.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -70,6 +78,19 @@
                     </div>
                 </div>
                 <div class="col-lg-9 mt-5 mb-5 p-5">
+                    <c:choose>
+                        <c:when test="${param.error == '1'}">        
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Esta cuenta ya existe, porfavor intente usar otra.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            
+                        </c:otherwise>
+                    </c:choose>
                     <p class="letraGrande text-intervid">
                         Registro de Empresas 
                     </p>
@@ -77,20 +98,21 @@
                         <form method="POST"> 
                             <div class="form-group">
                                 <label class="text-intervid">Correo Electronico:</label>
-                                <input type="mail"  name="correo" class="form-control">
+                                <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
                             </div>
                             <div class="form-group">
-                                <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control">
+                                <label class="text-intervid"> Contraseña:</label>
+                                <input type="password" name="clave" class="form-control" required>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">RUT de la empresa</label>
-                                    <input type="text" class="form-control" name="nomUsPos">
+                                    <input type="text" class="form-control" name="RutEmpresa" oninput="checkRut(this)" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Razón Social</label>
-                                    <input type="text" class="form-control" name="apeUsPos">
+                                    <input type="text" class="form-control" name="RazonSocial" required>
                                 </div>
                             </div>
 
@@ -98,11 +120,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombre de la empresa</label>
-                                    <input type="text" class="form-control" name="nomUsPos">
+                                    <input type="text" class="form-control" name="NombreEmpresa" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Teléfono</label>
-                                    <input type="text" class="form-control" name="apeUsPos">
+                                    <input type="text" class="form-control" name="NumeroTelefonico"  onKeyPress="return SoloNumeros(event);" required>
                                 </div>
                             </div>
 
@@ -110,15 +132,15 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Nombre de contacto empresa</label>
-                                    <input type="text" class="form-control" name="nomUsPos">
+                                    <input type="text" class="form-control" name="nombre" onkeypress="return soloLetras(event);" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="text-intervid">Apellido contacto empresa</label>
-                                    <input type="text" class="form-control" name="apeUsPos">
+                                    <input type="text" class="form-control" name="apellido" onkeypress="return soloLetras(event);" required>
                                 </div>
                             </div>
 
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" required>
                                 <p>He leído y acepto los <a href="">Los términos y condiciones de Servicio</a> y la <a href="">
                                         Política de privacidad</a> de INTERVID</p>
                             </div>

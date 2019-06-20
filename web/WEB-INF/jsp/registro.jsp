@@ -4,6 +4,7 @@
     Author     : Saitam
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -67,6 +68,19 @@
                     </div>
                 </div>
                 <div class="col-lg-9 mt-5 mb-5 p-5">
+                    <c:choose>
+                        <c:when test="${param.error == '1'}">        
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Esta cuenta ya existe, porfavor intente usar otra.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            
+                        </c:otherwise>
+                    </c:choose>
                     <p class="letraGrande text-intervid">
                         Crea tu cuenta y súmate al mundo de las video 
                         entrevistas  
@@ -88,9 +102,10 @@
                                 <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
                             </div>
                             <div class="form-group">
-                                <label class="text-intervid"> Contraseña:</label><input type="password" name="clave" class="form-control" required>
+                                <label class="text-intervid"> Contraseña:</label>
+                                <input type="password" name="clave" class="form-control" required>
                             </div>
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck">
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" required>
                                 <p>He leído y acepto los <a href="">Los términos y condiciones de Servicio</a> y la <a href="">
                                         Política de privacidad</a> de INTERVID</p>
                             </div>

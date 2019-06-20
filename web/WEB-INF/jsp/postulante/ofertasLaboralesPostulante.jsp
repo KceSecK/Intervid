@@ -25,6 +25,7 @@
                                 <img src="img/Menu_32.png">
                             </button>-->
                 <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+                    <h3>Filtrar</h3>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="alink nav-link border-link" href="index.html">Inicio</a>

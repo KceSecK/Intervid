@@ -12,15 +12,22 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author Saitam
  */
+@Controller
+@SessionAttributes({"tipoCuenta", "CorreoUsuario", "NombreUsuario", "CuentaActiva", "ID"})
+
 public class CtrlEmpresa {
 
     Conexion con = new Conexion();
@@ -36,14 +43,44 @@ public class CtrlEmpresa {
 
     @RequestMapping(value = "registroEmpresa.htm", method = RequestMethod.POST)
 
-    public String Agregar(Usuario u, UsuarioEmpresa ue, NumeroContacto nc) {
+    public ModelAndView Agregar(Usuario u, UsuarioEmpresa ue, NumeroContacto nc) {
 
-        this.jdbcTemplate.update("call creacion_UsuarioEmpresa(?,?,?,?,?,?,?,?)", u.getCorreo(),
-                u.getClave(), u.getNombre(), u.getApellido(), ue.getRazonSocial(),
-                 ue.getRutEmpresa(), ue.getNombreEmpresa(), nc.getNumeroTelefonico());
+        String password = u.getClave();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        u.setClave(hashedPassword);
 
-        return "/index";
+        System.out.println("Nombre: " + u.getNombre());
+        System.out.println("Apellido: " + u.getApellido());
+        System.out.println("Clave: " + u.getClave());
+        System.out.println("Correo: " + u.getCorreo());
 
+        System.out.println("RUT: " + ue.getRutEmpresa());
+        System.out.println("Razon Social: " + ue.getRazonSocial());
+        System.out.println("Nombre Empresa: " + ue.getNombreEmpresa());
+
+        System.out.println("Numero: " + nc.getNumeroTelefonico());
+
+        String sql = "SELECT COUNT(CorreoUsuario) FROM Usuario WHERE CorreoUsuario = ?";
+        String existe = (String) jdbcTemplate.queryForObject(sql, new Object[]{u.getCorreo()}, String.class);
+        System.out.println("Existe: " + existe);
+        if (existe.equals("1")) {
+            System.out.println("redirect: error");
+            mav.setViewName("redirect:/registroEmpresa.htm?error=1");
+            return mav;
+        } else if (existe.equals("0")) {
+            System.out.println("creacion de empresa");
+//            this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
+            this.jdbcTemplate.update("call creacion_UsuarioEmpresa(?,?,?,?,?,?,?,?)", u.getCorreo(),
+                    u.getClave(), u.getNombre(), u.getApellido(), ue.getRazonSocial(),
+                    ue.getRutEmpresa(), ue.getNombreEmpresa(), nc.getNumeroTelefonico());
+            mav.setViewName("redirect:/loginEmpresa.htm?success=1");
+            return mav;
+        } else {
+            System.out.println("Else");
+            mav.setViewName("registroEmpresa");
+            return mav;
+        }
     }
 
     @RequestMapping(value = "loginEmpresa.htm", method = RequestMethod.GET)
@@ -63,7 +100,6 @@ public class CtrlEmpresa {
         if (error != null) {
             System.out.println("empresa error");
             model.addObject("error", true);
-
         }
         model.setViewName("loginEmpresa");
 
@@ -80,7 +116,7 @@ public class CtrlEmpresa {
                     + "FechaFinalizacionOferta,RequisitosOferta,BeneficiosOferta,"
                     + "HorarioEntrevista,TipoCargo,TipoContrato,JornadaTrabajo,SueldoOfrecido) "
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                     of.getNombreOferta(), u.getUsuarioID(), ue.getUsuarioEmpresaID(), of.getLugarTrabajo(),
+                    of.getNombreOferta(), u.getUsuarioID(), ue.getUsuarioEmpresaID(), of.getLugarTrabajo(),
                     of.getTipoEntrevista(), of.getPlanOferta(), of.getDescripcionCargo(),
                     of.getFechaPublicacionOferta(), of.getFechaFinalizacionOferta(),
                     of.getRequisitosOferta(), of.getBeneficiosOferta(), of.getHorarioEntrevista(),
@@ -101,7 +137,7 @@ public class CtrlEmpresa {
 
         this.jdbcTemplate.update("call creacion_UsuarioReclutador(?,?,?,?,?,?,?)", u.getCorreo(),
                 u.getClave(), u.getNombre(), u.getApellido(), ue.getUsuarioEmpresaID(),
-                 ur.getReclutadorCargo(), ur.getReclutadorGenero());
+                ur.getReclutadorCargo(), ur.getReclutadorGenero());
 
         return "/index?idExt=1";
 

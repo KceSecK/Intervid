@@ -56,17 +56,29 @@ public class CtrlPostulante {
 
     @RequestMapping(value = "registro.htm", method = RequestMethod.POST)
     public ModelAndView Agregar(Usuario u) {
-        ModelAndView model = new ModelAndView();
 
         String password = u.getClave();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         u.setClave(hashedPassword);
-        this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
 
-        model.setViewName("index");
-        return model;
-
+        String sql = "SELECT COUNT(CorreoUsuario) FROM Usuario WHERE CorreoUsuario = ?";
+        String existe = (String) jdbcTemplate.queryForObject(sql, new Object[]{u.getCorreo()}, String.class);
+        System.out.println("Existe: " + existe);
+        if (existe.equals("1")) {
+            System.out.println("redirect: error");
+            mav.setViewName("redirect:/registro.htm?error=1");
+            return mav;
+        } else if (existe.equals("0")) {
+            System.out.println("loginpostulante");
+            this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
+            mav.setViewName("redirect:/loginPostulante.htm");
+            return mav;
+        } else {
+            System.out.println("Else");
+            mav.setViewName("registro");
+            return mav;
+        }
     }
 
     @RequestMapping(value = "indexp.htm", method = RequestMethod.GET)
@@ -149,9 +161,18 @@ public class CtrlPostulante {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(auth instanceof AnonymousAuthenticationToken)) {
-
-            /* The user is logged in :) */
-            return new ModelAndView("forward:/indexp.htm");
+            System.out.println("rol: " + auth.getAuthorities());
+            String rol = auth.getAuthorities().toString();
+            System.out.println("asdfr: "+rol);
+            if (rol.equals("[Postulante]")) {
+                /* The user is logged in :) */
+                System.out.println("if rol");
+                model.setViewName("redirect:/indexp.htm");
+                return model;
+            } else {
+                System.out.println("else");
+                model.setViewName("redirect:/index.htm");
+            }
         }
 
         if (error != null) {
@@ -172,12 +193,6 @@ public class CtrlPostulante {
         Authentication auth = ctx.getAuthentication();
         System.out.println("Nombre de usuario: " + auth.getName());
 
-//        mav.addObject(new UsuarioPostulante());
-//        mav.addObject(new Usuario());
-//        mav.addObject(new Licencia());
-//        int idUsuario = Integer.parseInt(request.getParameter("ID"));
-//        int idUsuarioPostulante = Integer.parseInt(request.getParameter("IdPostulante"));
-//
         String sql = "SELECT * FROM usuario \n"
                 + "LEFT JOIN usuariopostulante \n"
                 + "	ON usuariopostulante.PostulanteUsuarioFK = usuario.UsuarioID \n"
@@ -218,10 +233,6 @@ public class CtrlPostulante {
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
 
-//        model.addAttribute("pais",pais);
-//        model.addAttribute("region",region);
-//        model.addAttribute("comuna",comuna);
-//        model.addAttribute("lista", datos);
         mav.addObject("lista", datos);
         mav.addObject("pais", pais);
         mav.addObject("region", region);

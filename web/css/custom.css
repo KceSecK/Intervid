@@ -42,6 +42,13 @@
 .p-22{
     font-size: 22px;
 }
+
+.p-16{
+    font-size: 16px;
+}
+.p-14{
+    font-size: 14px;
+}
 .p-28{
     font-size: 28px;
 }
@@ -245,4 +252,21 @@
 
 red{
     color: #FF0000;
+}
+
+#filtro{
+    border: 1px grey solid;
+    border-radius: 5px;
+}
+
+grey{
+    color: #808080;
+}
+
+.div-filtro{
+    min-height: 800px;
+}
+
+.labcontainer:hover{
+    border: solid 1px #10707f;
 }
