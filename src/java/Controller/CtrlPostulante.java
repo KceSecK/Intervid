@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import entidades.ExpectativaLaboral;
+import entidades.ExperienciaProfesional;
 import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
@@ -133,6 +134,8 @@ public class CtrlPostulante {
                 + "WHERE EducacionPostulanteFK = UsuarioPostulanteID   AND CorreoUsuario ='" + auth.getName() + "'";
         String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
+        String sql8 = "SELECT * FROM experienciaprofesional,usuario,usuariopostulante"
+                + "    WHERE ExperienciaPostulanteFK=UsuarioPostulanteID and CorreoUsuario='"+auth.getName()+" '";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
         List region = this.jdbcTemplate.queryForList(sql3);
@@ -140,6 +143,7 @@ public class CtrlPostulante {
         List educacion = this.jdbcTemplate.queryForList(sql5);
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
+        List exp = this.jdbcTemplate.queryForList(sql8);
 
 //        model.addAttribute("pais",pais);
 //        model.addAttribute("region",region);
@@ -152,6 +156,7 @@ public class CtrlPostulante {
         mav.addObject("edu", educacion);
         mav.addObject("num", numero);
         mav.addObject("prc", prc);
+        mav.addObject("exp", exp);
         System.out.println();
         mav.setViewName("postulante/cvPostulante");
         return mav;
@@ -159,7 +164,7 @@ public class CtrlPostulante {
 
     @RequestMapping(value = "cvPostulante.htm", method = RequestMethod.POST)
     public ModelAndView cvPostulante(HttpServletRequest request, Usuario u, UsuarioPostulante up, Licencia l,
-            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep,ExpectativaLaboral el) {
+            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep,ExpectativaLaboral el,ExperienciaProfesional exp) {
         int form = Integer.parseInt(request.getParameter("Cuadro"));
 
         System.out.println("Formulario: " + form);
@@ -281,6 +286,21 @@ public class CtrlPostulante {
             });
             return new ModelAndView("redirect:/cvPostulante.htm");
         }
+        else if (form==7){
+            String sql = "INSERT INTO `experienciaprofesional`(`ExperienciaPostulanteFK`, "
+                    + "`EmpresaExperiencia`, `CargoDesempeñado`, `InicioPeriodo`, `FinPeriodo`, `FuncionesLogros`) "
+                    + "VALUES (?,?,?,?,?,?)";
+            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
+                ps.setString(2,exp.getEmpresaExperiencia());
+                ps.setString(3,exp.getCargoDesempeño());
+                ps.setString(4,exp.getInicioPeriodo());
+                ps.setString(5,exp.getFinPeriodo());
+                ps.setString(6,exp.getFuncionesLogros());
+                
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
+        }
         else {
 
             return new ModelAndView("redirect:/cvPostulante.htm");
@@ -300,6 +320,20 @@ public class CtrlPostulante {
         //cambio configuracion para obtener fecha correctamente
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         String json = mapper.writeValueAsString(estudio);       
+      
+        return json;
+    }
+//    Rellenar modal para editar experienciaPostulante
+    @RequestMapping(value = "editExperienciaPostulante.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String ObtenerExperienciaPostulante(HttpServletRequest request) throws JsonProcessingException {
+        String sql = "SELECT * FROM `experienciaProfesional` WHERE "
+                + "ExperienciaProfesionalID= " + request.getParameter("id");
+        List experiencia = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        //cambio configuracion para obtener fecha correctamente
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        String json = mapper.writeValueAsString(experiencia);       
       
         return json;
     }
@@ -363,6 +397,16 @@ public class CtrlPostulante {
                 ps.setInt(1, id);                
        });
         return new ModelAndView("redirect:/cvPostulante.htm");
+    }
+    
+    @RequestMapping(value = "borrarExperienciaLaboral.htm", method = RequestMethod.GET)
+    public ModelAndView borrarExperienciaLaboral(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+       String sql="DELETE FROM `experienciaProfesional` WHERE experienciaProfesionalID=? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, id);                
+       });
+        return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
     }
     @RequestMapping(value = "ofertasLaboralesPostulante.htm", method = RequestMethod.GET)
     public ModelAndView vistaOfertasLaborales() {

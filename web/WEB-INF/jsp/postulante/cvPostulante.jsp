@@ -502,8 +502,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>                       
 
                         <!--Modal para Agregar telefonos-->
 
@@ -547,7 +546,7 @@
                             </div>
                         </div>
                     </div>
-
+               
                     <!--Datos de educacion-->
                     <div id="educacion">
                         <div class="row mt-4"><p class="letraMediaPerfil">Educación</p></div>
@@ -865,18 +864,49 @@
                                 <div class="card-body">
                                     <div class="container">
                                         <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dexpro">
-                                            Editar
+                                            Agregar experiencia
                                         </button>
+                                        <div class="table-responsive">
 
+                                            <table class="table table-hover">
+                                                <c:forEach var="ex" items="${exp}">
 
+                                                    <tr>
+                                                        <td class="text-intervid">Empresa</td>
+                                                        <td>
+                                                            ${ex.EmpresaExperiencia}
+                                                        </td>
 
+                                                        <td class="text-intervid">Cargo</td>
+                                                        <td>${ex.CargoDesempeñado}</td>
 
+                                                        <td class="text-intervid text-truncate">
+                                                            Descripcion funciones</td>
+                                                        <td>${ex.FuncionesLogros}
+                                                        </td>
+
+                                                        <td class="text-intervid">Perido</td>
+                                                        <td>${ex.InicioPeriodo} - ${ex.FinPeriodo}</td>
+                                                        <td>
+                                                            <button class="btn btn-link edit_data_exp" id="${ex.ExperienciaProfesionalID}">
+                                                                <img src="img/edit_24px.png"/>
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn" href="borrarExperienciaLaboral.htm?id=${ex.ExperienciaProfesionalID}">
+                                                                <img src="img/delete_sign_24px.png"/>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!--editar datos-->
+                        <!--agregar datos Experiencia Profesional-->
                         <div class="modal fade" id="dexpro" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -889,25 +919,95 @@
                                     <div class="modal-body">
                                         <div class="container">
                                             <form method="POST">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="7" name="Cuadro">
+                                                <div class="form-group ">
+                                                    <label class="col-form-label text-intervid">Nombre de la empresa:</label>
+                                                    <input type="text" id="EmpresaExperiencia" name="EmpresaExperiencia" class="form-control"/>
+                                                </div>
+
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Cargo Desempeñado:</label>
+                                                    <input type="text" id="CargoDesempeño" name="CargoDesempeño" class="form-control"/>
+                                                </div>
 
 
+                                                <div class="form-row">
+                                                    <label class="text-intervid">Período:</label>
+                                                    <div class="col-md-11"></div>
+                                                    <div class="form-group col-md-8">
 
+                                                        <input  class="form-control" type="date" id="InicioPeriodo" name="InicioPeriodo"/>
+                                                        <input  class="form-control"  type="date"  id="FinPeriodo" name="FinPeriodo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
 
-
-
-
-
-
-
+                                                    <label class="text-intervid">Descripción de funciones:</label>
+                                                    <textarea name="FuncionesLogros" id="FuncionesLogros" class="form-control"></textarea>
+                                                    
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
                                             </form>
-                                            <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                            <input type="submit" value="Editar" class="btn btn-success btn-right">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                    <!--Modal editar datos Experiencia Profesional-->
+                        <div class="modal fade" id="deditexpro" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-intervid">Experiencia Profesional</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form method="POST">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="7" name="Cuadro">
+                                                <div class="form-group ">
+                                                    <label class="col-form-label text-intervid">Nombre de la empresa:</label>
+                                                    <input type="text" name="EmpresaExperiencia" class="form-control"/>
+                                                </div>
 
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Cargo Desempeñado:</label>
+                                                    <input type="text" name="CargoDesempeño" class="form-control"/>
+                                                </div>
+
+
+                                                <div class="form-row">
+                                                    <label class="text-intervid">Período:</label>
+                                                    <div class="col-md-11"></div>
+                                                    <div class="form-group col-md-8">
+
+                                                        <input  class="form-control" type="date" placeholder="Inicio" name="InicioPeriodo"  />
+                                                        <input  class="form-control"  type="date" placeholder="Fin"  name="FinPeriodo"  />
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Descripción de funciones:</label>
+                                                    <textarea name="FuncionesLogros" class="form-control"></textarea>
+                                                    
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                
                     </div>
 
 
@@ -1025,6 +1125,28 @@
 
 <script>
 
+    $(window).on("load", function () {
+        $('#actualidadEstudio').on('change', function ()
+        {
+            if ($(this).is(':checked'))
+            {
+                $("#perFin").prop("disabled", true);
+
+            } else {
+                $("#perFin").prop("disabled", false);
+            }
+        });
+    });
+
+    $(window).on("load", function () {
+        if ($('#actualidadEstudioEdit').is(':checked'))
+        {
+            $("#perFinEdit").prop("disabled", true);
+
+        } else {
+            $("#perFinEdit").prop("disabled", false);
+        }
+    });
 
     $(window).on("load", function () {
         $('#actualidadEstudioEdit').on('change', function ()
@@ -1038,18 +1160,10 @@
             }
         });
     });
-    $(window).on("load", function () {
-        $('#actualidadEstudio').on('change', function ()
-        {
-            if ($(this).is(':checked'))
-            {
-                $("#perFin").prop("disabled", true);
 
-            } else {
-                $("#perFin").prop("disabled", false);
-            }
-        });
-    });
+
+
+
 
 
 

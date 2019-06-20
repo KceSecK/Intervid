@@ -118,7 +118,37 @@
         
         });
    
-    
+        
+//    rellenar Modal Experiencia profesional 
+    $(document).ready(function () {
+        $(document).on('click', '.edit_data_exp', function () {
+
+            var id_experiencia = $(this).attr("id");
+            console.log(id_experiencia);
+            $.ajax({
+                url: "editExperienciaPostulante.htm",
+                method: "POST",
+                cache: false,
+                data: {id: id_experiencia},
+                dataType: "json",
+                success: function (data) {
+                   
+
+                    $('#EmpresaExperiencia').val(data[0].EmpresaExperiencia);
+                    $('#CargoDesempeño').val(data[0].CargoDesempeño);
+                    $('#InicioPeriodo').val(data[0].InicioPeriodo);
+                    $('#FinPeriodo').val(data[0].FinPeriodo);
+                    $('#FuncionesLogros').val(data[0].FuncionesLogros);
+                    $("#deditexpro").modal('show');
+
+
+                }
+
+
+            });
+        });
+
+    });
     $(document).ready(function () {
         $(document).on('click', '.edit_data', function () {
 
@@ -138,13 +168,13 @@
                     $('#estudios').val(data[0].NivelEstudio).prop('selected', true);
                     $('#estadoEstudio').val(data[0].EstadoEstudio).prop('selected', true);
                  
-                   console.log(data[0].PeriodoActual)
-                    if ((data[0].PeriodoActual)==="true") {
-                         $('#actualidadEstudioEdit').prop('checked', "false");
+                   console.log(data[0].PeriodoActual);
+                    if (data[0].PeriodoActual) {
+                         $('#actualidadEstudioEdit').prop('checked', true);
                     
                 }
                 else{
-                   $('#actualidadEstudioEdit').prop('checked', "true");
+                   $('#actualidadEstudioEdit').prop('checked', false);
                 }
                     
                     $('#periodoInicio').val(data[0].PeriodoInicio);

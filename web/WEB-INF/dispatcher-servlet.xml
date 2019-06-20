@@ -35,6 +35,8 @@
                 <prop key="editarTelefono.htm">conexionController2</prop>
                 <prop key="borrarEducacion.htm">conexionController2</prop>
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
+                <prop key="borrarExperienciaLaboral.htm">conexionController2</prop>
+                <prop key="editExperienciaPostulante.htm">conexionController2</prop>
 
                 
             <!--Usuario Empresa-->
