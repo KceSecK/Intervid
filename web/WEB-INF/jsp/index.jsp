@@ -1,3 +1,6 @@
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
+<%@page import="org.springframework.security.core.context.SecurityContext"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,6 +16,15 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>InterVid</title>
     </head>
+    <%
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        String rol = auth.getAuthorities().toString();
+        System.out.println("rol: " + rol);
+
+
+    %>
+
     <body>
 
         <div class="container-fluid home">
@@ -52,31 +64,38 @@
                         <p class="text-white font-weight-bold text-center p-22">El único portal de entrevistas por video</p>
                     </div>
                 </div>
-                <div class="row justify-content-md-center mt-5">
-                    <div class="col-lg-5">
-                        <div class="input-group m-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend2">
-                                    <img src="icon/icons8_search_filled_20px.png" alt=""/>
-                                </span>
+                <form method="POST">
+                    <div class="row justify-content-md-center mt-5">
+                        <div class="col-lg-6">
+                            <div class="input-group m-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend2">
+                                        <img src="icon/icons8_search_filled_20px.png" alt=""/>
+                                    </span>
+                                </div>
+                                <input id="buscar" name="buscar" class="form-control" placeholder="Buscar por cargo, empresa, palabra clave"/>
                             </div>
-                            <input class="form-control" placeholder="Buscar por cargo, empresa, palabra clave"/>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group m-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend2">
+                                        <img src="icon/icons8_marker_22px.png" alt=""/>
+                                    </span>
+                                </div>
+                                <select id="region" name="region" class="custom-select">
+                                    <option value="" selected disabled hidden>Región</option>
+                                    <c:forEach var="re" items="${reg}">
+                                        <option value="${re.RegionID}">${re.RegionNombre}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 m-2 text-right">
+                            <button class="btn btn-success font-weight-bold">Buscar Empleos</button>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="input-group m-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend2">
-                                    <img src="icon/icons8_marker_22px.png" alt=""/>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Lugar" aria-describedby="inputGroupPrepend2" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 m-2 text-right">
-                        <a class="btn btn-success font-weight-bold" href="ofertasLaboralesPostulante.htm" role="button">Buscar Empleos</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 

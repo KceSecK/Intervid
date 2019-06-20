@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <a class="dropdown-item" href="logout">Cerrar Sesión</a>
     </body>
 </html>

@@ -4,6 +4,8 @@
     Author     : sdasd
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -22,6 +24,7 @@
         <script src="js/validarletra.js" type="text/javascript"></script>
         <script src="js/validarnumeros.js" type="text/javascript"></script>
     </head>
+
     <body>
         <!-- Navbar-->
         <div id="nav-fixed" class="container-fluid nav-intervid static">
@@ -82,7 +85,7 @@
 
         <div class="container div-principal static div-filtro">
             <div class="row">
-                <div id="filtro" class="col-lg-3 bg-light mt-5 justify-content-center">
+                <div id="filtro" class="col-lg-3 bg-light mt-5 justify-content-center position-static">
                     <div class="col-lg-12 bg-intervid">
                         <h3 class="text-white">Filtros</h3>
                     </div>
@@ -122,63 +125,58 @@
                 </div>
                 <!--ofertas laborales-->
                 <div class="col-lg-9 mt-5">
-                    <div class="container border rounded labcontainer">
-                        <div class="row bg-intervid">
-                            <div class="col-lg-10 mt-2">
-                                <h3 class="text-white">Programador</h3>
-                            </div>
-                            <div class="col-lg-2 mt-2">
-                                Hace 2 horas
-                            </div>
-                        </div>
-                        <div class="row p-3">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <div class="row font-weight-bold p-22">
-                                            Chanchitos S.A  
-                                            <img src="img/icons8_filled_star_32.png" alt=""/>
-                                            <img src="img/icons8_filled_star_32.png" alt=""/>
-                                            <img src="img/icons8_filled_star_32.png" alt=""/>
-                                            <img src="img/icons8_filled_star_32.png" alt=""/>
-                                            <img src="img/star_half_empty_32px.png" alt=""/>
+                    <c:forEach var="ol" items="${ofertas}">
+                        <div class="row mb-4">
+                            <div class="col-lg-12">
+                                <a class="d-block a-lab" href="">
+                                    <div class="container border rounded border-primary">
+                                        <div class="row bg-">
+                                            <div class="col-lg-10 mt-2 rounded">
+                                                <h3 class="text-intervid">${ol.NombreOferta}</h3>
+                                                <hr class="hr-custom-black" />
+                                            </div>
+                                            <div class="col-lg-2 mt-2">
+                                                ${ol.FechaPublicacionOferta}
+                                            </div>
                                         </div>
-                                        <div class="row p-14">
-                                            Las condes, Región Metropolitana
-                                        </div>
-                                        <div class="row">
-                                            $ 1.000.000 - $ 1.500.000 Mensual
-                                        </div>
-                                        <div class="row mt-3">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div class="row">
-                                            <figure class="d-none d-md-block figure img-thumbnail img-fluid mx-auto">
-                                                <img src="img/letra 100mm.png" class="figure-img img-fluid rounded" alt="...">
-                                                <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="row">
-                                            <p class="text-right text-dark p-16">
-                                                <img src="img/checkmark_32px.png" alt=""/>
-                                                Entrevista en Diferido
-                                            </p>
+                                        <div class="row pb-3 pl-3 pr-3">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-lg-9">
+                                                        <div class="row font-weight-bold p-22">
+                                                            ${ol.NombreEmpresa}
+                                                        </div>
+                                                        <div class="row p-14">
+                                                            ${ol.ComunaNombre}, ${ol.regionNombre}
+                                                        </div>
+                                                        <div id="dcargo" class="row mt-3 text-truncate">
+                                                            ${ol.DescripcionCargo}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="row">
+                                                            <figure class="d-none d-md-block figure img-thumbnail mx-auto">
+                                                                <img src="${ol.LogoEmpresa}" class="figure-img img-fluid rounded max-img " alt="...">
+                                                            </figure>
+                                                        </div>
+                                                        <div class="row">
+                                                            <p class="text-right text-dark p-16">
+                                                                <img src="img/checkmark_32px.png" alt=""/>
+                                                                Entrevista en Diferido
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
+                    </c:forEach>
 
-
-                    </div>
                 </div>
+
             </div>
 
         </div>

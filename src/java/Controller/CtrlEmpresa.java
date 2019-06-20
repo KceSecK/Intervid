@@ -34,6 +34,11 @@ public class CtrlEmpresa {
     JdbcTemplate jdbcTemplate = new JdbcTemplate(con.Conectar());
     ModelAndView mav = new ModelAndView();
 
+    @RequestMapping("empresas")
+    public String Empresas() {
+        return ("empresa/empresas");
+    }
+
     @RequestMapping(value = "registroEmpresa.htm", method = RequestMethod.GET)
     public ModelAndView AgregarEmpresa() {
         mav.addObject(new Usuario());
@@ -92,13 +97,17 @@ public class CtrlEmpresa {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(auth instanceof AnonymousAuthenticationToken)) {
-
-            /* The user is logged in :) */
-            return new ModelAndView("forward:/empresas.htm");
+            String rol = auth.getAuthorities().toString();
+            if (rol.equals("[Empresa]")) {
+                /* The user is logged in :) */
+                model.setViewName("redirect:/empresas.htm");
+                return model;
+            } else {
+                model.setViewName("redirect:/index.htm");
+            }
         }
 
         if (error != null) {
-            System.out.println("empresa error");
             model.addObject("error", true);
         }
         model.setViewName("loginEmpresa");

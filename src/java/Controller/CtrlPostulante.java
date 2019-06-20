@@ -191,7 +191,6 @@ public class CtrlPostulante {
         HttpSession session = request.getSession();
         SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         Authentication auth = ctx.getAuthentication();
-        System.out.println("Nombre de usuario: " + auth.getName());
 
         String sql = "SELECT * FROM usuario \n"
                 + "LEFT JOIN usuariopostulante \n"
@@ -232,7 +231,7 @@ public class CtrlPostulante {
         List educacion = this.jdbcTemplate.queryForList(sql5);
         List numero = this.jdbcTemplate.queryForList(sql6);
         List prc = this.jdbcTemplate.queryForList(sql7);
-
+        
         mav.addObject("lista", datos);
         mav.addObject("pais", pais);
         mav.addObject("region", region);

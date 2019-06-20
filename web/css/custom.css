@@ -239,7 +239,7 @@
     border: 1px solid #37589F;
     border-radius: 5px;
     background-color: #fff;
-    
+
 }
 
 .btn-right{
@@ -267,6 +267,14 @@ grey{
     min-height: 800px;
 }
 
-.labcontainer:hover{
-    border: solid 1px #10707f;
+
+.max-img{
+    max-height: 150px;
+    height: auto;
+}
+
+.a-lab:hover{
+    border: 1px solid red;
+    text-decoration: none;
+    overflow: hidden;
 }

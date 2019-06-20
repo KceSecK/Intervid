@@ -8,17 +8,20 @@
     http://www.springframework.org/schema/security 
     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
   
-    <http auto-config="true" use-expressions="true">                                                    
-        <intercept-url pattern="/cvPostulante.jsp" access="hasAnyRole('Postulante')"/>
+         
+         
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/cvPostulante.htm" access="hasAnyRole('Postulante')"/>
         <intercept-url pattern="/indexp.htm" access="hasAnyRole('Postulante')"/>
+        <intercept-url pattern="/empresas.htm" access="hasAnyRole('Empresa')"/>
               
-        <form-login login-page="/loginPostulante.htm" default-target-url="/indexp.htm"  
+        <form-login login-page="/login.jsp" default-target-url="/redirect.htm"  
                     login-processing-url="/login" authentication-failure-url="/loginPostulante.htm?error" 
                     username-parameter="correo"
                     password-parameter="clave" />  
-         <logout logout-success-url="/login.htm" logout-url="/logout" />   
+         <logout logout-success-url="/index.htm" logout-url="/logout" invalidate-session="true" />
+         <access-denied-handler error-page="/accesodenegado.htm" ></access-denied-handler>   
         
-
         <!--enable csrf protection-->       
         <!--            <form-login login-page="/login"  default-target-url="/index" authentication-failure-url="/login?error" 
                     username-parameter="usuario" password-parameter="lacontra" />

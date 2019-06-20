@@ -23,6 +23,8 @@
             <!--Comunes-->
                 <prop key="index.htm">conexionController</prop>
                 <prop key="trabajos.htm">conexionController</prop>
+                <prop key="accesodenegado.htm">conexionController</prop>
+                <prop key="redirect.htm">conexionController</prop>
                 
             <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
