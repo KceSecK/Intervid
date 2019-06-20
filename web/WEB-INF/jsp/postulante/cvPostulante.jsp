@@ -401,11 +401,11 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-                                                <c:forEach var="contacto" items="${num}">
+                                                <c:forEach var="contacto" items="${num}">                                                    
                                                     <tr>
                                                         <td>
                                                             <div class="form-row">
-                                                                <select name="contactoTipo" class="form-control">
+                                                                <select name="ContactoTipo" id="contactoTipo"  class="form-control">
                                                                     <option ${contacto.ContactoTipo == "fijo" ? 'selected' : '' } value="fijo">Fijo</option>
                                                                     <option ${contacto.ContactoTipo == "movil" ? 'selected' : '' } value="movil">Movil</option>
                                                                 </select>
@@ -413,16 +413,22 @@
                                                         </td>
                                                         <td>
                                                             <div class="form-row col-lg-12">
-                                                                <input type="text" name="NumeroTelefonico" class="form-control"
+                                                                <input type="hidden" id="idTel" value="${contacto.NumeroContactoID}">
+                                                                <input type="text" id="NumeroTelefonico" name="NumeroTelefonico" class="form-control"
                                                                        value="${contacto.NumeroTelefonico}"/>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <button class="btn">
+
+                                                            <a class="btn" id="editarTelefono">
+                                                                <img src="img/edit_24px.png" alt=""/>
+                                                            </a>
+                                                            <a class="btn" href="borrarTelefono.htm?id=${contacto.NumeroContactoID}">
                                                                 <img src="img/delete_sign_24px.png" alt=""/>
-                                                            </button>
+                                                            </a>
                                                         </td>
-                                                    </tr>
+                                                    </tr> 
+
                                                 </c:forEach>
                                             </table>
                                         </div>
@@ -498,453 +504,553 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!--Modal para Agregar telefonos-->
-                        
-                         <div class="modal fade" id="dtelefono" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-intervid">Agregar Telefono</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container">
-                                                <form method="POST">
-                                                    <div class="form-row">
-                                                        <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
-                                                        <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
-                                                        <input type="hidden" value="3" name="Cuadro">
 
-                                                        <label class="text-intervid">Tipo de Teléfono</label>
-                                                          <select name="contactoTipo" class="form-control">
-                                                                    <option value="fijo">Fijo</option>
-                                                                    <option value="movil">Móvil</option>
-                                                                </select>
-                                                    </div>
-
-                                                    <div class="form-row ">
-                                                        <label class="col-form-label text-intervid">Dirección:</label>
-
-                                                        <input type="text" placeholder="9 4242 5644" name="NumeroTelefonico" class="form-control">
-                                                    </div>
-
-
-                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                                    <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
-                                                </form>
-                                            </div>
-                                        </div>
+                        <div class="modal fade" id="dtelefono" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-intervid">Agregar Telefono</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Datos de educacion-->
-                        <div id="educacion">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Educación</p></div>
-                            <div class="row">
-                                <div class="card col-md-12">
-                                    <div class="card-body">
+                                    <div class="modal-body">
                                         <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#deducacion">
-                                                Agregar nueva institución
-                                            </button>
-                                            <div class="table-responsive">
-
-                                                <table class="table table-sm table-hover">
-                                                    <c:forEach var="nid" items="${edu}">
-                                                        <tr>
-                                                            <td class="text-intervid">Institución</td>
-                                                            <td>${nid.Institucion}</td>
-                                                            <td class="text-intervid">Nivel de Estudio</td>
-                                                            <td>${nid.NivelEstudio}</td>
-                                                            <td class="text-intervid">Estado</td>
-                                                            <td>${nid.EstadoEstudio == '0' ? 'Abandonado': nid.EstadoEstudio == '1' ? 'En curso': nid.EstadoEstudio == '2' ? 'Graduado':'No informado' }</td>
-                                                            <td class="text-intervid">Perido</td>
-                                                            <td>${nid.PeriodoInicio} - ${nid.PeriodoActual == '0' ? nid.PeriodoFin:'Actualidad'}</td>
-                                                            <td>
-                                                                <button class="btn btn-link edit_data">
-                                                                    <img src="img/edit_24px.png"/>
-                                                                </button>
-                                                            </td>
-                                                            <td>
-                                                                <button class="btn btn-link">
-                                                                    <img src="img/delete_sign_24px.png"/>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </table>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--modal editar datos educacion-->
-                            <div class="modal fade" id="deducacion" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-intervid">Datos de Educación</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container">
-                                                <form method="POST">
-                                                    <input type="hidden" value="${edu[0].EducacionPostulanteFK}" name="id_usuarioPostulante">
+                                            <form method="POST">
+                                                <div class="form-row">
+                                                    <input type="hidden" value="${lista[0].UsuarioID}" name="UsuarioID">
+                                                    <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                     <input type="hidden" value="3" name="Cuadro">
-                                                    <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Institución:</label>
-                                                        <input type="text"   name="Institucion" class="form-control"/>
-                                                    </div>
 
-                                                    <div class="form-row">
+                                                    <label class="text-intervid">Tipo de Teléfono</label>
+                                                    <select name="contactoTipo" class="form-control">
+                                                        <option value="fijo">Fijo</option>
+                                                        <option value="movil">Móvil</option>
+                                                    </select>
+                                                </div>
 
-                                                        <label class="text-intervid">Nivel de estudios:</label>
-                                                        <select name="NivelEstudio"  class="form-control">
-                                                            <option  value="Básico">Básico</option>
-                                                            <option  value="Medio" >Medio</option>
-                                                            <option value="Superior">Superior</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-row">
+                                                <div class="form-row ">
+                                                    <label class="col-form-label text-intervid">Dirección:</label>
 
-                                                        <label class="text-intervid">Estado:</label>
-                                                        <select name="EstadoEstudio"  class="form-control">
-                                                            <option  value="En curso">En Curso</option>
-                                                            <option value="Graduado">Graduado</option>
-                                                            <option value="Abandonado">Abandonado</option>
-                                                        </select>
-                                                    </div>
+                                                    <input type="text" placeholder="9 4242 5644" name="NumeroTelefonico" class="form-control">
+                                                </div>
 
-                                                    <div class="form-row">
-                                                        <label class="text-intervid">Período:</label>
-                                                        <div class="col-md-11"></div>
-                                                        <div class="form-group col-md-8">
 
-                                                            <input  class="form-control" type="date"  name="PeriodoInicio"  />
-                                                            <input  class="form-control" type="date"  name="PeriodoFin"  />
-                                                        </div>
-
-                                                        <div class="form-check col-md-4">
-
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" value="1" type="checkbox" name="PeriodoActualidad" >
-                                                                A la actualidad
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                                    <input type="submit" value="Editar" class="btn btn-success btn-right"> 
-                                                </form>
-                                            </div>
+                                                <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
 
-                        <!--Datos de expectativas laborales-->
-                        <div id="expectativaslaborales">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Expectativas Laborales</p></div>
-                            <div class="row">
-                                <div class="card col-md-12">
-                                    <div class="card-body">
-                                        <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dexplaboral">
-                                                Editar
-                                            </button>
-                                            <div class="table-responsive">
+                    <!--Datos de educacion-->
+                    <div id="educacion">
+                        <div class="row mt-4"><p class="letraMediaPerfil">Educación</p></div>
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#deducacion">
+                                            Agregar nueva institución
+                                        </button>
+                                        <div class="table-responsive">
 
-                                                <table class="table table-hover">
+                                            <table class="table table-sm table-hover">
+                                                <c:forEach var="nid" items="${edu}">
                                                     <tr>
-                                                        <td class="text-intervid">Región de preferencia</td>
+                                                        <td class="text-intervid">Institución</td>
+                                                        <td>${nid.Institucion}</td>
+                                                        <td class="text-intervid">Nivel de Estudio</td>
+                                                        <td>${nid.NivelEstudio}</td>
+                                                        <td class="text-intervid">Estado</td>
+                                                        <td>${nid.EstadoEstudio == 'Abandonado' ? 'Abandonado': nid.EstadoEstudio == 'En curso' ? 'En curso': nid.EstadoEstudio == 'Graduado' ? 'Graduado':'No informado' }</td>
+                                                        <td class="text-intervid">Perido</td>
+                                                        <td>${nid.PeriodoInicio} - ${nid.PeriodoActual == '0' ? nid.PeriodoFin:'Actualidad'}</td>
                                                         <td>
-                                                            <c:forEach var="reg" items="${region}">
-                                                                ${reg.RegionID == lista[0].RegionPreferente ? reg.RegionNombre : ""}
-                                                            </c:forEach>
+                                                            <button class="btn btn-link edit_data" id="${nid.EducacionPostulanteID}">
+                                                                <img src="img/edit_24px.png"/>
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn" href="borrarEducacion.htm?id=${nid.EducacionPostulanteID}">
+                                                                <img src="img/delete_sign_24px.png"/>
+                                                            </a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="text-intervid">Expectativas de renta</td>
-                                                        <td>${lista[0].TipoMoneda} - $ ${lista[0].ExpectativaRenta}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-intervid">Jornada preferente</td>
-                                                        <td>${lista[0].JornadaPreferente}</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-
+                                                </c:forEach>
+                                            </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <!--editar datos-->
-                            <div class="modal fade" id="dexplaboral" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-intervid">Expectativas Laborales</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container">
-                                                <form method="POST">
-
-                                                    <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Expectativas de renta:</label>
-                                                        <input type="text"  name="text" class="form-control"
-                                                               value="${lista[0].ExpectativaRenta}">
-                                                    </div>
-                                                    <div class="form-row">
-
-                                                        <label class="text-intervid">Moneda:</label>
-                                                        <select name="moneda" class="form-control">
-                                                            <option ${lista[0].TipoMoneda == 'CLP' ? 'selected' : '' } value="CLP">Pesos Chilenos</option>
-                                                            <option ${lista[0].TipoMoneda == 'MXN' ? 'selected' : '' } value="MXN">Pesos Mexicanos</option>
-                                                            <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">Dólar</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-row">
-
-                                                        <label class="text-intervid">Region/Estado preferente para trabajar:</label>
-                                                        <select name="" class="form-control">
-                                                            <option selected>Cosa</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-row">
-
-                                                        <label class="text-intervid">Jornada:</label>
-                                                        <select name="" class="form-control">
-                                                            <option ${lista[0].JornadaPreferente == 'ft' ? 'selected' : '' } value="ft">Full-Time</option>
-                                                            <option ${lista[0].JornadaPreferente == 'pt' ? 'selected' : '' } value="pt">Part-Time</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-row">
-                                                        <div class="form-group">
-                                                            <label class="text-intervid">Disponibilidad para viajar:</label>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="disponibilidadViajar"value="true"
-                                                                       ${lista[0].DisponibilidadViaje == 'true' ? 'checked' : '' }>
-                                                                <label class="form-check-label" >Si</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="disponibilidadViajar" value="false"
-                                                                       ${lista[0].DisponibilidadViaje == 'false' ? 'checked' : '' }>
-                                                                <label class="form-check-label" >No</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-row">
-                                                        <div class="form-group">
-                                                            <label class="text-intervid">Disponibilidad para cambiar de residencia:</label>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="cambioResicencia"  value="true">
-                                                                <label class="form-check-label" 
-                                                                       ${lista[0].CambioResidencia == 'true' ? 'checked' : '' }>Si</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="cambioResicencia" value="false"
-                                                                       ${lista[0].CambioResidencia == 'false' ? 'checked' : '' }>
-                                                                <label class="form-check-label" >No</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                                    <input type="submit" value="Editar" class="btn btn-success btn-right"> 
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
-                        <!--Datos de experiencia profesional-->
-                        <div id="experienciaprofesional">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Experiencia Profesional</p></div>
-                            <div class="row">
-                                <div class="card col-md-12">
-                                    <div class="card-body">
-                                        <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dexpro">
-                                                Editar
-                                            </button>
-
-
-
-
-                                        </div>
+                        <!--modal agregar datos educacion-->
+                        <div class="modal fade" id="deducacion" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-intervid">Datos de Educación</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form method="POST">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="4" name="Cuadro">
+                                                <div class="form-group ">
+                                                    <label class="col-form-label text-intervid">Institución:</label>
+                                                    <input type="text"   name="Institucion" class="form-control"/>
+                                                </div>
 
-                            <!--editar datos-->
-                            <div class="modal fade" id="dexpro" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-intervid">Experiencia Profesional</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container">
-                                                <form method="POST">
+                                                <div class="form-row">
 
+                                                    <label class="text-intervid">Nivel de estudios:</label>
+                                                    <select name="NivelEstudio"  class="form-control">
+                                                        <option  value="Básico">Básico</option>
+                                                        <option  value="Medio" >Medio</option>
+                                                        <option value="Superior">Superior</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-row">
 
+                                                    <label class="text-intervid">Estado:</label>
+                                                    <select name="EstadoEstudio"  class="form-control">
+                                                        <option  value="En curso">En Curso</option>
+                                                        <option value="Graduado">Graduado</option>
+                                                        <option value="Abandonado">Abandonado</option>
+                                                    </select>
+                                                </div>
 
+                                                <div class="form-row">
+                                                    <label class="text-intervid">Período:</label>
+                                                    <div class="col-md-11"></div>
+                                                    <div class="form-group col-md-8">
 
+                                                        <input  class="form-control" type="date"  name="PeriodoInicio"  />
+                                                        <input  class="form-control" id="perFin" type="date"  name="PeriodoFin"  />
+                                                    </div>
 
+                                                    <div class="form-check col-md-4">
 
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" id="actualidadEstudio" type="checkbox" name="PeriodoActual" value="1" >
+                                                            A la actualidad
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-
-
-
-                                                </form>
                                                 <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
-                                                <input type="submit" value="Editar" class="btn btn-success btn-right">
-                                            </div>
+                                                <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
-
-
-
-
-                        <!--Datos de idiomas -->
-                        <div id="idiomas">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Idiomas</p></div>
-                            <div class="row">
-                                <div class="card col-md-12">
-                                    <div class="card-body">
+                        <!--modal editar datos educacion-->
+                        <div class="modal fade" id="dediteducacion" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-intervid">Datos de Educación</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
                                         <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#">
-                                                Editar
-                                            </button>
+                                            <form method="POST">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" id="id_educacion" name="id_educacion">
+                                                <input type="hidden" value="5" name="Cuadro">
+                                                <div class="form-group ">
+                                                    <label class="col-form-label text-intervid">Institución:</label>
+                                                    <input type="text" id="institucion"  name="Institucion" class="form-control"/>
+                                                </div>
 
+                                                <div class="form-row">
 
+                                                    <label class="text-intervid">Nivel de estudios:</label>
+                                                    <select name="NivelEstudio" id="estudios" class="form-control">
+                                                        <option  value="Básico">Básico</option>
+                                                        <option  value="Medio" >Medio</option>
+                                                        <option value="Superior">Superior</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-row">
 
+                                                    <label class="text-intervid">Estado:</label>
+                                                    <select id="estadoEstudio" name="EstadoEstudio"  class="form-control">
+                                                        <option  value="En curso">En Curso</option>
+                                                        <option value="Graduado">Graduado</option>
+                                                        <option value="Abandonado">Abandonado</option>
+                                                    </select>
+                                                </div>
 
+                                                <div class="form-row">
+                                                    <label class="text-intervid">Período:</label>
+                                                    <div class="col-md-11"></div>
+                                                    <div class="form-group col-md-8">
+
+                                                        <input id="periodoInicio" class="form-control" type="date"  name="PeriodoInicio"  />
+                                                        <input  class="form-control"id="perFinEdit" type="date"  name="PeriodoFin"  />
+                                                    </div>
+
+                                                    <div class="form-check col-md-4">
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" id="actualidadEstudioEdit" type="checkbox"  name="PeriodoActual" value="1">
+                                                            A la actualidad
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                <input type="submit" value="Editar" class="btn btn-success btn-right"> 
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!--Datos de otros conocimientos -->
-                        <div id="otrosconocimientos">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Otros Conocimientos</p></div>
-                            <div class="row">
-                                <div class="card col-md-12 mb-5">
-                                    <div class="card-body">
-                                        <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#">
-                                                Editar
-                                            </button>
-
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
 
                     </div>
-                    <!--div de cerrado container-->
+
+                    <!--Datos de expectativas laborales-->
+                    <div id="expectativaslaborales">
+                        <div class="row mt-4"><p class="letraMediaPerfil">Expectativas Laborales</p></div>
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dexplaboral">
+                                            Editar
+                                        </button>
+                                        <div class="table-responsive">
+
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td class="text-intervid">Región de preferencia</td>
+                                                    <td>
+                                                        <c:forEach var="reg" items="${region}">
+                                                            ${reg.RegionID == lista[0].RegionPreferente ? reg.RegionNombre : ""}
+                                                        </c:forEach>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-intervid">Expectativas de renta</td>
+                                                    <td>${lista[0].TipoMoneda} - $ ${lista[0].ExpectativaRenta}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-intervid">Jornada preferente</td>
+                                                    <td>${lista[0].JornadaPreferente == 'ft'?'Full-Time':''}
+                                                        ${lista[0].JornadaPreferente == 'pt'?'Part-Time':''}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--editar datos Expectativa Laboral-->
+                        <div class="modal fade" id="dexplaboral" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-intervid">Expectativas Laborales</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form method="POST">
+                                                <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                <input type="hidden" value="6" name="Cuadro">
+                                                <div class="form-group ">
+                                                    <label class="col-form-label text-intervid">Expectativas de renta:</label>
+                                                    <input type="text"  name="ExpectativaRenta" class="form-control"
+                                                           value="${lista[0].ExpectativaRenta}">
+                                                </div>
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Moneda:</label>
+                                                    <select name="TipoMoneda" class="form-control">
+                                                        <option ${lista[0].TipoMoneda == 'CLP' ? 'selected' : '' } value="CLP">Pesos Chilenos</option>
+                                                        <option ${lista[0].TipoMoneda == 'MXN' ? 'selected' : '' } value="MXN">Pesos Mexicanos</option>
+                                                        <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">Dólar</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Region/Estado preferente para trabajar:</label>
+                                                    <select name="RegionPreferente" class="form-control">
+                                                        <c:forEach var="r" items="${region}">
+                                                            <option ${lista[0].RegionPreferente == r.RegionID ? 'selected':''}
+                                                                value="${r.RegionID}">${r.RegionNombre}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-row">
+
+                                                    <label class="text-intervid">Jornada:</label>
+                                                    <select name="JornadaPreferente" class="form-control">
+                                                        <option ${lista[0].JornadaPreferente == 'ft' ? 'selected' : '' } value="ft">Full-Time</option>
+                                                        <option ${lista[0].JornadaPreferente == 'pt' ? 'selected' : '' } value="pt">Part-Time</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Disponibilidad para viajar:</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="DisponibilidadViaje"value="1"
+                                                                   ${lista[0].DisponibilidadViaje == 'true' ? 'checked' : '' }>
+                                                            <label class="form-check-label" >Si</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="DisponibilidadViaje" value="0"
+                                                                   ${lista[0].DisponibilidadViaje == 'false' ? 'checked' : '' }>
+                                                            <label class="form-check-label" >No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Disponibilidad para cambiar de residencia:</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" 
+                                                                   ${lista[0].CambioResidencia == 'true' ? 'checked' : '' } type="radio" name="CambioResidencia"  value="1">
+                                                            <label class="form-check-label" >Si</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="CambioResidencia" value="0"
+                                                                   ${lista[0].CambioResidencia == 'false' ? 'checked' : '' }>
+                                                            <label class="form-check-label" >No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                <input type="submit" value="Editar" class="btn btn-success btn-right"> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--Datos de experiencia profesional-->
+                    <div id="experienciaprofesional">
+                        <div class="row mt-4"><p class="letraMediaPerfil">Experiencia Profesional</p></div>
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dexpro">
+                                            Editar
+                                        </button>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--editar datos-->
+                        <div class="modal fade" id="dexpro" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-intervid">Experiencia Profesional</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form method="POST">
+
+
+
+
+
+
+
+
+
+
+                                            </form>
+                                            <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                            <input type="submit" value="Editar" class="btn btn-success btn-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <!--Datos de idiomas -->
+                    <div id="idiomas">
+                        <div class="row mt-4"><p class="letraMediaPerfil">Idiomas</p></div>
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#">
+                                            Editar
+                                        </button>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Datos de otros conocimientos -->
+                    <div id="otrosconocimientos">
+                        <div class="row mt-4"><p class="letraMediaPerfil">Otros Conocimientos</p></div>
+                        <div class="row">
+                            <div class="card col-md-12 mb-5">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#">
+                                            Editar
+                                        </button>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
                 </div>
-                <!--Termino div central-->
+                <!--div de cerrado container-->
             </div>
+            <!--Termino div central-->
         </div>
-
-
     </div>
 
 
-    <!--                 FOOTER                  --> 
-    <div id="footer" class="container-fluid bg-black">
-        <div class="container-fluid">
-            <div class="row pt-4 ">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 mt-1">
-                            <h5 class="text-white">Postulantes</h5>
-                            <hr class="hr-custom-white" />
-                            <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                            <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                            <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                        </div>
-                        <div class="col-lg-3 mt-1">
-                            <h5 class="text-white">Reclutadores</h5>
-                            <hr class="hr-custom-white" />
+</div>
 
-                            <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                            <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                            <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                        </div>
-                        <div class="col-lg-3 mt-1">
-                            <h5 class="text-white">Empresas</h5>
-                            <hr class="hr-custom-white" />
-                            <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                            <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                            <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                        </div>
-                        <div class="col-lg-3 mt-3 text-right">
-                            <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
-                            <div class="text-white p-12">INVID Ltda</div>
-                            <div class="text-white p-12">Santiago, Chile</div>
-                            <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
-                        </div>
+
+<!--                 FOOTER                  --> 
+<div id="footer" class="container-fluid bg-black">
+    <div class="container-fluid">
+        <div class="row pt-4 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 mt-1">
+                        <h5 class="text-white">Postulantes</h5>
+                        <hr class="hr-custom-white" />
+                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                     </div>
-                    <div class="row mt-1">
-                        <div class="col-lg-12">
-                            <hr class="hr-custom-white"/>
-                        </div>
-                        <div class="col-lg-12">
-                            <p class="text-white p-12">
-                                &copy; 2019 InterVid . Todos los derechos reservados.
-                            </p>
-                        </div>
+                    <div class="col-lg-3 mt-1">
+                        <h5 class="text-white">Reclutadores</h5>
+                        <hr class="hr-custom-white" />
+
+                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                    </div>
+                    <div class="col-lg-3 mt-1">
+                        <h5 class="text-white">Empresas</h5>
+                        <hr class="hr-custom-white" />
+                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                    </div>
+                    <div class="col-lg-3 mt-3 text-right">
+                        <img class="mb-3" src="img/letra 5mm_render.png" alt=""/>
+                        <div class="text-white p-12">INVID Ltda</div>
+                        <div class="text-white p-12">Santiago, Chile</div>
+                        <div class="text-white p-12"><a href="mailto:contacto@inter-vid.com">contacto@inter-vid.com</a></div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-lg-12">
+                        <hr class="hr-custom-white"/>
+                    </div>
+                    <div class="col-lg-12">
+                        <p class="text-white p-12">
+                            &copy; 2019 InterVid . Todos los derechos reservados.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 </html>
 
 <script>
+
+
+    $(window).on("load", function () {
+        $('#actualidadEstudioEdit').on('change', function ()
+        {
+            if ($(this).is(':checked'))
+            {
+                $("#perFinEdit").prop("disabled", true);
+
+            } else {
+                $("#perFinEdit").prop("disabled", false);
+            }
+        });
+    });
+    $(window).on("load", function () {
+        $('#actualidadEstudio').on('change', function ()
+        {
+            if ($(this).is(':checked'))
+            {
+                $("#perFin").prop("disabled", true);
+
+            } else {
+                $("#perFin").prop("disabled", false);
+            }
+        });
+    });
+
 
 
     //$("#form").on('submit', function () {

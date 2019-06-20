@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import entidades.ExpectativaLaboral;
 import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
@@ -128,7 +129,8 @@ public class CtrlPostulante {
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
-        String sql5 = "SELECT * FROM educacionpostulante, usuario WHERE EducacionPostulanteFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
+        String sql5 = "SELECT * FROM educacionpostulante,usuariopostulante,usuario "
+                + "WHERE EducacionPostulanteFK = UsuarioPostulanteID   AND CorreoUsuario ='" + auth.getName() + "'";
         String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         List datos = this.jdbcTemplate.queryForList(sql);
@@ -157,12 +159,11 @@ public class CtrlPostulante {
 
     @RequestMapping(value = "cvPostulante.htm", method = RequestMethod.POST)
     public ModelAndView cvPostulante(HttpServletRequest request, Usuario u, UsuarioPostulante up, Licencia l,
-            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep) {
+            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep,ExpectativaLaboral el) {
         int form = Integer.parseInt(request.getParameter("Cuadro"));
 
         System.out.println("Formulario: " + form);
-        System.out.println(u.getNombre());
-        System.out.println("México");
+        
         if (form == 1) {
             this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     u.getUsuarioID(),
@@ -202,6 +203,7 @@ public class CtrlPostulante {
 
             return new ModelAndView("redirect:/cvPostulante.htm");
         } else if (form == 3) {
+            
             String sql = "INSERT INTO `numerocontacto`( `NumeroUsuarioFK`, `ContactoTipo`, `NumeroTelefonico`) "
                     + "VALUES (?,?,?)";
             this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
@@ -216,18 +218,72 @@ public class CtrlPostulante {
             this.jdbcTemplate.update("CALL creacion_educacionPostulante(?,?,?,?,?,?,?)",
                     up.getId_usuarioPostulante(),
                     ep.getInstitucion(),
-                    ep.getEstadoEstudio(),
                     ep.getNivelEstudio(),
+                    ep.getEstadoEstudio(),
                     ep.getPeriodoInicio(),
                     ep.getPeriodoFin(),
                     ep.getPeriodoActual()
             );
+             
+            return new ModelAndView("redirect:/cvPostulante.htm");
 
-            return new ModelAndView("redirect:/cvPostulante.htm?idUS=" + up.getId_usuarioPostulante());
+        }
+        else if(form==5){
+            String sql ="UPDATE `educacionpostulante` SET "
+                    + "`Institucion`=? ,`NivelEstudio`=? ,`EstadoEstudio`=? ,"
+                    + "`PeriodoInicio`=? ,`PeriodoFin`=? ,`PeriodoActual`=? WHERE "
+                    + "EducacionPostulanteID=?";
+      
+           
+            
+            int periodoActual;
+            if (request.getParameter("PeriodoActual")==null) {
+                periodoActual=0;
+            }
+            else{
+                periodoActual=1;
+            }
+           
+            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setString(1,request.getParameter("Institucion"));
+                ps.setString(2,request.getParameter("NivelEstudio"));
+                ps.setString(3,request.getParameter("EstadoEstudio"));
+                ps.setString(4,request.getParameter("PeriodoInicio"));
+                ps.setString(5,request.getParameter("PeriodoFin"));
+                ps.setInt(6, periodoActual);
+                ps.setInt(7, Integer.parseInt(request.getParameter("id_educacion")));
+                
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm");
+        }
+        else if(form==6){
+            System.out.println(el.getRegionPreferente());
+            System.out.println(el.getExpectativaRenta());
+            System.out.println(el.getTipoMoneda());
+            System.out.println(el.getJornadaPreferente());
+            System.out.println(el.getDisponibilidadViaje());
+            System.out.println(el.getCambioResidencia());
+            System.out.println(request.getParameter("id_usuarioPostulante"));
+                String sql="UPDATE `expectativalaboral` SET "
+                        + "`RegionPreferente`=?,`ExpectativaRenta`=?,"
+                        + "`TipoMoneda`=?,`JornadaPreferente`=?,"
+                        + "`DisponibilidadViaje`=?,`CambioResidencia`=? "
+                        + "WHERE ExpectativaPostulanteFK=?";
+                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setLong(1,el.getRegionPreferente());
+                ps.setInt(2,el.getExpectativaRenta());
+                ps.setString(3,el.getTipoMoneda());
+                ps.setString(4,el.getJornadaPreferente());
+                ps.setInt(5,el.getDisponibilidadViaje());
+                ps.setInt(6, el.getCambioResidencia());
+                ps.setInt(7, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
+                
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm");
+        }
+        else {
 
-        } else {
-
-            return new ModelAndView("redirect:/cvPostulante.htm?idUS=" + up.getId_usuarioPostulante());
+            return new ModelAndView("redirect:/cvPostulante.htm");
         }
 
     }
@@ -239,9 +295,12 @@ public class CtrlPostulante {
         String sql = "SELECT * FROM `educacionpostulante` WHERE "
                 + "EducacionPostulanteID= " + request.getParameter("id2");
         List estudio = jdbcTemplate.queryForList(sql);
+        
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(estudio);
-        System.out.println(json);
+        //cambio configuracion para obtener fecha correctamente
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        String json = mapper.writeValueAsString(estudio);       
+      
         return json;
     }
     // Select dinamico pais-region
@@ -269,37 +328,47 @@ public class CtrlPostulante {
         String jsonComuna = mapper.writeValueAsString(comunas);
         return jsonComuna;
     }
-
+    //Borrar numero de contacto 
+    @RequestMapping(value="borrarTelefono.htm",method = RequestMethod.GET)
+    public ModelAndView borrarNumeroContacto(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+       String sql="DELETE FROM `numerocontacto` WHERE numeroContactoID=? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, id);                
+       });
+       return new ModelAndView("redirect:/cvPostulante.htm"); 
+    }
+    //editar numero de contacto
+    @RequestMapping(value="editarTelefono.htm",method = RequestMethod.GET)
+    public ModelAndView editarNumeroContacto(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println(id);
+       String nt = request.getParameter("numTel");
+       String ct = request.getParameter("conTipo");
+        System.out.println(id+nt+ct);
+       String sql="UPDATE `numerocontacto` SET `ContactoTipo`=?,`NumeroTelefonico`=? WHERE NumeroContactoID ? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setString(1, ct);                
+                ps.setString(2, nt);                
+                ps.setInt(3, id);                
+       });
+       return new ModelAndView("redirect:/cvPostulante.htm");
+    }
+    
+    @RequestMapping(value = "borrarEducacion.htm", method = RequestMethod.GET)
+    public ModelAndView borrarEducacion(HttpServletRequest request){
+       int id = Integer.parseInt(request.getParameter("id"));
+       String sql="DELETE FROM `educacionPostulante` WHERE educacionPostulanteID=? ";
+       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+                ps.setInt(1, id);                
+       });
+        return new ModelAndView("redirect:/cvPostulante.htm");
+    }
     @RequestMapping(value = "ofertasLaboralesPostulante.htm", method = RequestMethod.GET)
     public ModelAndView vistaOfertasLaborales() {
         mav.addObject(new UsuarioPostulante());
         mav.setViewName("ofertasLaboralesPostulante");
         return mav;
-    }
-
-    @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.POST)
-    public String loginUsuarioPostulante(HttpServletRequest request, ModelMap model) {
-        String cor = request.getParameter("correo");
-        String cla = request.getParameter("clave");
-        String sql = "select usuarioID,CorreoUsuario,TipoCuenta,"
-                + "nombreUsuario,ApellidoUsuario from usuario where correoUsuario='" + cor + "' and Contraseña=AES_ENCRYPT('" + cla + "','userpass')";
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-
-        if (rows.size() > 0) {
-
-            for (Map row : rows) {
-                model.put("tipoCuenta", (String) row.get("TipoCuenta").toString());
-                model.put("CorreoUsuario", (String) row.get("CorreoUsuario").toString());
-                model.put("NombreUsuario", (String) row.get("NombreUsuario").toString());
-                model.put("CuentaActiva", (Integer) row.get("CuentaActiva"));
-                model.put("ID", (Integer) row.get("usuarioID"));
-            }
-
-            return "/index";
-
-        } else {
-            return "/loginPostulante";
-        }
     }
 
 }

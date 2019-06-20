@@ -84,6 +84,41 @@
     }); 
     });
     
+    
+    
+    $(document).ready(function () {
+        $(document).on('click', '#editarTelefono', function () {
+            var conTipo = document.getElementById("contactoTipo");
+            var numTel = document.getElementById("NumeroTelefonico");
+            var idTel = document.getElementById("idTel");
+            var ct = conTipo.value;
+            var nt = numTel.value;
+            var id = idTel.value;
+            console.log(id);
+            console.log(ct);
+            console.log(nt);
+            $.ajax({
+                type: "GET",
+                url: "editarTelefono.htm",
+                cache:false,
+                data: {
+                    conTipo: ct,
+                    numTel: nt,
+                    id: id
+                },
+                dataType:"text",
+                success: function (data) {
+                    if (data) {
+                        window.location.reload("cvPostulante.htm");
+}
+                }
+            
+            });
+        });
+        
+        });
+   
+    
     $(document).ready(function () {
         $(document).on('click', '.edit_data', function () {
 
@@ -96,15 +131,25 @@
                 data: {id2: id_estudio},
                 dataType: "json",
                 success: function (data) {
-                    console.log("SUCCESS: ", data[0])
+                   
 
+                    $('#id_educacion').val(data[0].EducacionPostulanteID);
                     $('#institucion').val(data[0].Institucion);
                     $('#estudios').val(data[0].NivelEstudio).prop('selected', true);
                     $('#estadoEstudio').val(data[0].EstadoEstudio).prop('selected', true);
-                    $('#PeriodoActualidad').val(data[0].PeriodoActual).prop('checked', true);
+                 
+                   console.log(data[0].PeriodoActual)
+                    if ((data[0].PeriodoActual)==="true") {
+                         $('#actualidadEstudioEdit').prop('checked', "false");
+                    
+                }
+                else{
+                   $('#actualidadEstudioEdit').prop('checked', "true");
+                }
+                    
                     $('#periodoInicio').val(data[0].PeriodoInicio);
                     $('#periodoFin').val(data[0].PeriodoFin);
-                    $("#educacion_modal").modal('');
+                     $("#dediteducacion").modal('show');
 
 
                 }
