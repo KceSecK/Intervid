@@ -40,6 +40,11 @@
                 <prop key="ofertasLaboralesPostulante.htm">conexionController2</prop>
                 <prop key="borrarExperienciaLaboral.htm">conexionController2</prop>
                 <prop key="editExperienciaPostulante.htm">conexionController2</prop>
+                <prop key="editTelefonoPostulante.htm">conexionController2</prop>
+                <prop key="borrarIdiomaPostulante.htm">conexionController2</prop>
+                <prop key="editIdiomaPostulante.htm">conexionController2</prop>
+                <prop key="borrarConocimientoPostulante.htm">conexionController2</prop>
+                <prop key="editConocimientoPostulante.htm">conexionController2</prop>
 
                 
             <!--Usuario Empresa-->

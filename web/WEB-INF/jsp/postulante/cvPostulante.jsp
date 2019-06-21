@@ -230,21 +230,24 @@
                                                     <input type="hidden" value="1" name="Cuadro">
 
                                                     <div class="form-group ">
-                                                        <label class="text-intervid">Nombre(s):</label>
-                                                        <input type="text" value="${lista[0].NombreUsuario}"  name="nombre" class="form-control">
+                                                        <label class="text-intervid">Nombre(s):<red>*</red></label>
+                                                        <input type="text" value="${lista[0].NombreUsuario}" required  name="nombre" class="form-control" 
+                                                               onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)"
+>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label class="text-intervid">Apellido(s):</label>
-                                                        <input type="text" value="${lista[0].ApellidoUsuario}" name="apellido" class="form-control">
+                                                        <label class="text-intervid">Apellido(s):<red>*</red></label>
+                                                        <input type="text" value="${lista[0].ApellidoUsuario}"  required name="apellido" class="form-control"
+                                                               onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)">
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="form-group">
-                                                            <label class="text-intervid">Género:</label>
+                                                            <label class="text-intervid">Género :<red>*</red></label>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="genero" id="Genero" value="Masculino"
-                                                                       ${lista[0].Genero == 'Masculino' ? 'checked' : '' }>
+                                                                       ${lista[0].Genero == 'Masculino' ? 'checked' : '' } required>
                                                                 <label class="form-check-label" >Masculino</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
@@ -257,8 +260,8 @@
 
                                                     <div class="form-row">
                                                         <div class="form-group">
-                                                            <label class="text-intervid">Nacionalidad</label>
-                                                            <select name="nacionalidad" class="form-control">
+                                                            <label class="text-intervid">Nacionalidad <red>*</red></label>
+                                                            <select name="nacionalidad" class="form-control" required>
                                                                 <c:forEach var="p" items="${pais}">                                                        
                                                                     <option ${lista[0].Nacionalidad == p.PaisNombre ? 'selected' : '' } value="${p.PaisNombre}">${p.PaisNombre}</option>
                                                                 </c:forEach>
@@ -268,10 +271,10 @@
 
                                                     <div class="form-row">
                                                         <div class="col-lg-12">
-                                                            <label class="text-intervid">Tipo de Identificación</label>
+                                                            <label class="text-intervid">Tipo de Identificación <red>*</red></label>
                                                         </div>
                                                         <div class="form-group col-lg-4">
-                                                            <select name="documento" class="form-control col">
+                                                            <select name="documento" class="form-control col" required>
                                                                 <option  ${lista[0].Documento == 'CI' ? 'selected' : '' } value="CI">Cédula de identidad</option>
                                                                 <option  ${lista[0].Documento == 'CE' ? 'selected' : '' } value="CE">Cédula de extranjeria</option>
                                                                 <option  ${lista[0].Documento == 'PA' ? 'selected' : '' } value="PA">Pasaporte</option>
@@ -279,14 +282,16 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-8">
-                                                            <input type="text" name="numDocumento" maxlength="10" value="${lista[0].NumDocumento}" class="form-control col" oninput="checkRut(this)" required>
+                                                            <input type="text" name="numDocumento" maxlength="10" value="${lista[0].NumDocumento}" class="form-control col"
+                                                                   oninput="checkRut(this)" required>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-row">
-                                                        <label class="text-intervid">Fecha de nacimiento</label>
+                                                        
+                                                        <label class="text-intervid">Fecha de nacimiento <red>*</red></label>
                                                         <input id="datefield" min="01-01-1990" max="01-01-2005" type="date" value="${lista[0].FechaNacimiento}" class="form-control"
-                                                               name="fechaNacimiento" >
+                                                               name="fechaNacimiento" required>
                                                     </div>
 
                                                     <div class="form-row ">
@@ -443,28 +448,20 @@
                                                         </button>
                                                     </td>
                                                 </tr>
+                                                <table class="table table-sm table-hover">
                                                 <c:forEach var="contacto" items="${num}">                                                    
                                                     <tr>
-                                                        <td>
-                                                            <div class="form-row">
-                                                                <select name="ContactoTipo" id="contactoTipo"  class="form-control">
-                                                                    <option ${contacto.ContactoTipo == "fijo" ? 'selected' : '' } value="fijo">Fijo</option>
-                                                                    <option ${contacto.ContactoTipo == "movil" ? 'selected' : '' } value="movil">Movil</option>
-                                                                </select>
-                                                            </div>
+                                                        <td class="text-intervid">Tipo:</td>
+                                                        <td >${contacto.ContactoTipo == "fijo" ? 'Fijo' : '' }
+                                                            ${contacto.ContactoTipo == "movil" ? 'Móvil' : '' }
                                                         </td>
-                                                        <td>
-                                                            <div class="form-row col-lg-12">
-                                                                <input type="hidden" id="idTel" value="${contacto.NumeroContactoID}">
-                                                                <input type="text" id="NumeroTelefonico" name="NumeroTelefonico" class="form-control"
-                                                                       value="${contacto.NumeroTelefonico}"/>
-                                                            </div>
-                                                        </td>
+                                                        <td class="text-intervid">Número: </td>
+                                                        <td>${contacto.NumeroTelefonico}</td>
                                                         <td>
 
-                                                            <a class="btn" id="editarTelefono">
+                                                            <button class="btn btn-link edit_data_tel" id="${contacto.NumeroContactoID}">
                                                                 <img src="img/edit_24px.png" alt=""/>
-                                                            </a>
+                                                            </button>
                                                             <a class="btn" href="borrarTelefono.htm?id=${contacto.NumeroContactoID}">
                                                                 <img src="img/delete_sign_24px.png" alt=""/>
                                                             </a>
@@ -472,6 +469,7 @@
                                                     </tr> 
 
                                                 </c:forEach>
+                                                    </table>
                                             </table>
                                         </div>
                                     </div>
@@ -495,8 +493,8 @@
                                                         <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                         <input type="hidden" value="2" name="Cuadro">
 
-                                                        <label class="text-intervid">País de residencia</label>
-                                                        <select name="pais" id="pais" class="form-control">
+                                                        <label class="text-intervid">País de residencia <red>*</red></label>
+                                                        <select name="pais" id="pais" class="form-control" required>
                                                             <c:forEach var="p" items="${pais}">                                                        
                                                                 <option ${lista[0].PaisID == p.PaisID ? 'selected' : '' } value="${p.PaisID}">${p.PaisNombre}</option>
                                                             </c:forEach>
@@ -505,8 +503,8 @@
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Región/Estado</label>
-                                                        <select  class="form-control" id="region" name="region">
+                                                        <label class="text-intervid">Región/Estado <red>*</red></label>
+                                                        <select  class="form-control" id="region" name="region" required>
                                                             <c:forEach var="r" items="${region}">                                                        
                                                                 <option ${lista[0].RegionID == r.RegionID ? 'selected' : '' } value="${r.RegionID}">${r.RegionNombre}</option>
                                                             </c:forEach>
@@ -515,8 +513,8 @@
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Comuna/Municipio</label>
-                                                        <select name="ComunaResidencia" id="comuna" class="form-control">
+                                                        <label class="text-intervid">Comuna/Municipio <red>*</red></label>
+                                                        <select name="ComunaResidencia" id="comuna" class="form-control" required>
                                                             <c:forEach var="c" items="${comuna}">                                                        
                                                                 <option ${lista[0].ComunaResidencia == c.ComunaID ? 'selected' : '' } value="${c.ComunaID}">${c.ComunaNombre}</option>
                                                             </c:forEach>
@@ -524,9 +522,9 @@
                                                     </div>
 
                                                     <div class="form-row ">
-                                                        <label class="col-form-label text-intervid">Dirección:</label>
+                                                        <label class="col-form-label text-intervid">Dirección: <red>*</red></label>
 
-                                                        <input type="text"  name="DireccionResidencia" class="form-control"
+                                                        <input type="text"  name="DireccionResidencia" class="form-control" required
                                                                value="${lista[0].DireccionResidencia}">
                                                     </div>
 
@@ -534,7 +532,7 @@
                                                         <label class="col-form-label text-intervid">Correo electrónico:</label>
 
                                                         <input type="email"  name="CorreoContacto" class="form-control"
-                                                               value="${lista[0].CorreoContacto}">
+                                                               value="${lista[0].CorreoContacto}" onKeyUp="validarEmail(this.form.correo.value);">
                                                     </div>
                                                     <div class="mt-3">
                                                         <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
@@ -566,7 +564,7 @@
                                                         <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                         <input type="hidden" value="3" name="Cuadro">
 
-                                                        <label class="text-intervid">Tipo de Teléfono</label>
+                                                        <label class="text-intervid">Tipo de Teléfono <red>*</red></label>
                                                         <select name="contactoTipo" class="form-control" required>
                                                             <option value="fijo">Fijo</option>
                                                             <option value="movil">Móvil</option>
@@ -574,9 +572,10 @@
                                                     </div>
 
                                                     <div class="form-row ">
-                                                        <label class="col-form-label text-intervid">Número:</label>
+                                                        <label class="col-form-label text-intervid">Número: <red>*</red></label>
 
-                                                        <input type="text" placeholder="Ej: 9 4242 5644" name="NumeroTelefonico" class="form-control" onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" required>
+                                                        <input type="text" placeholder="Ej: 9 4242 5644" name="NumeroTelefonico" 
+                                                               required maxlength="11" minlength="9" class="form-control" onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" required>
                                                     </div>
                                                     <div class="mt-3">
                                                         <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
@@ -588,6 +587,49 @@
                                     </div>
                                 </div>
                             </div>
+                                                        
+                            <!--Modal editar numero de telefono-->
+                            <div class="modal fade" id="dedittelefono" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid">Agregar Teléfono</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST">
+                                                    <div class="form-row">
+                                                        <input type="hidden"  id="id_telefono" name="id_telefono">
+                                                        <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                        <input type="hidden" value="8" name="Cuadro">
+
+                                                        <label class="text-intervid">Tipo de Teléfono <red>*</red></label>
+                                                        <select name="contactoTipo" id="contactoTipo" class="form-control" required>
+                                                            <option value="fijo">Fijo</option>
+                                                            <option value="movil">Móvil</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-row ">
+                                                        <label class="col-form-label text-intervid">Número: <red>*</red></label>
+
+                                                        <input type="text" id="NumeroTelefonico" placeholder="Ej: 9 4242 5644" name="NumeroTelefonico" 
+                                                               required maxlength="11" minlength="9" class="form-control" onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" required>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                        <input type="submit" value="Editar" class="btn btn-success btn-right"> 
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                        
                         </div>
 
                         <!--Datos de educacion-->
@@ -649,14 +691,14 @@
                                                     <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                     <input type="hidden" value="4" name="Cuadro">
                                                     <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Institución:</label>
-                                                        <input type="text"   name="Institucion" class="form-control"/>
+                                                        <label class="col-form-label text-intervid">Institución: <red>*</red></label>
+                                                        <input type="text"   name="Institucion" class="form-control" required/>
                                                     </div>
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Nivel de estudios:</label>
-                                                        <select name="NivelEstudio"  class="form-control">
+                                                        <label class="text-intervid">Nivel de estudios: <red>*</red></label>
+                                                        <select name="NivelEstudio"  class="form-control" required>
                                                             <option  value="Basico">Básico</option>
                                                             <option  value="Medio" >Medio</option>
                                                             <option value="Superior">Superior</option>
@@ -664,8 +706,8 @@
                                                     </div>
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Estado:</label>
-                                                        <select name="EstadoEstudio"  class="form-control">
+                                                        <label class="text-intervid">Estado: <red>*</red></label>
+                                                        <select name="EstadoEstudio"  class="form-control" required>
                                                             <option  value="En curso">En Curso</option>
                                                             <option value="Graduado">Graduado</option>
                                                             <option value="Abandonado">Abandonado</option>
@@ -673,11 +715,11 @@
                                                     </div>
 
                                                     <div class="form-row">
-                                                        <label class="text-intervid">Período:</label>
+                                                        <label class="text-intervid">Período: <red>*</red></label>
                                                         <div class="col-md-11"></div>
                                                         <div class="form-group col-md-8">
 
-                                                            <input  class="form-control" type="date"  name="PeriodoInicio"  />
+                                                            <input  class="form-control" type="date"  name="PeriodoInicio"  required/>
                                                             <input  class="form-control" id="perFin" type="date"  name="PeriodoFin"  />
                                                         </div>
 
@@ -716,14 +758,15 @@
                                                     <input type="hidden" id="id_educacion" name="id_educacion">
                                                     <input type="hidden" value="5" name="Cuadro">
                                                     <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Institución:</label>
-                                                        <input type="text" id="institucion"  name="Institucion" class="form-control"/>
+                                                        <label class="col-form-label text-intervid">Institución: <red>*</red></label>
+                                                        <input type="text" id="institucion"  name="Institucion" 
+                                                              required class="form-control"/>
                                                     </div>
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Nivel de estudios:</label>
-                                                        <select name="NivelEstudio" id="estudios" class="form-control">
+                                                        <label class="text-intervid">Nivel de estudios: <red>*</red></label>
+                                                        <select name="NivelEstudio" id="estudios" class="form-control" required>
                                                             <option  value="Basico">Básico</option>
                                                             <option  value="Medio" >Medio</option>
                                                             <option value="Superior">Superior</option>
@@ -731,8 +774,8 @@
                                                     </div>
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Estado:</label>
-                                                        <select id="estadoEstudio" name="EstadoEstudio"  class="form-control">
+                                                        <label class="text-intervid">Estado: <red>*</red></label>
+                                                        <select id="estadoEstudio" name="EstadoEstudio"  class="form-control" required>
                                                             <option  value="En curso">En Curso</option>
                                                             <option value="Graduado">Graduado</option>
                                                             <option value="Abandonado">Abandonado</option>
@@ -740,11 +783,11 @@
                                                     </div>
 
                                                     <div class="form-row">
-                                                        <label class="text-intervid">Período:</label>
+                                                        <label class="text-intervid">Período: <red>*</red></label>
                                                         <div class="col-md-11"></div>
                                                         <div class="form-group col-md-8">
 
-                                                            <input id="periodoInicio" class="form-control" type="date"  name="PeriodoInicio"  />
+                                                            <input id="periodoInicio" class="form-control" type="date"  name="PeriodoInicio" required />
                                                             <input  class="form-control"id="perFinEdit" type="date"  name="PeriodoFin"  />
                                                         </div>
 
@@ -822,14 +865,14 @@
                                                     <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                     <input type="hidden" value="6" name="Cuadro">
                                                     <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Expectativas de renta:</label>
+                                                        <label class="col-form-label text-intervid">Expectativas de renta: <red>*</red></label>
                                                         <input type="text"  name="ExpectativaRenta" class="form-control"
-                                                               value="${lista[0].ExpectativaRenta}" onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" >
+                                                               value="${lista[0].ExpectativaRenta}" required onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" >
                                                     </div>
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Moneda:</label>
-                                                        <select name="TipoMoneda" class="form-control">
+                                                        <label class="text-intervid">Moneda: <red>*</red></label>
+                                                        <select name="TipoMoneda" class="form-control" required>
                                                             <option ${lista[0].TipoMoneda == 'CLP' ? 'selected' : '' } value="CLP">Pesos Chilenos</option>
                                                             <option ${lista[0].TipoMoneda == 'MXN' ? 'selected' : '' } value="MXN">Pesos Mexicanos</option>
                                                             <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">D�lar</option>
@@ -838,8 +881,8 @@
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Region/Estado preferente para trabajar:</label>
-                                                        <select name="RegionPreferente" class="form-control">
+                                                        <label class="text-intervid">Region/Estado preferente para trabajar: <red>*</red></label>
+                                                        <select name="RegionPreferente" class="form-control" required>
                                                             <c:forEach var="r" items="${region}">
                                                                 <option ${lista[0].RegionPreferente == r.RegionID ? 'selected':''}
                                                                     value="${r.RegionID}">${r.RegionNombre}</option>
@@ -849,8 +892,8 @@
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Jornada:</label>
-                                                        <select name="JornadaPreferente" class="form-control">
+                                                        <label class="text-intervid">Jornada: <red>*</red></label>
+                                                        <select name="JornadaPreferente" class="form-control" required>
                                                             <option ${lista[0].JornadaPreferente == 'ft' ? 'selected' : '' } value="ft">Full-Time</option>
                                                             <option ${lista[0].JornadaPreferente == 'pt' ? 'selected' : '' } value="pt">Part-Time</option>
                                                         </select>
@@ -858,10 +901,10 @@
 
                                                     <div class="form-row">
                                                         <div class="form-group">
-                                                            <label class="text-intervid">Disponibilidad para viajar:</label>
+                                                            <label class="text-intervid">Disponibilidad para viajar: <red>*</red></label>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio" name="DisponibilidadViaje"value="1"
-                                                                       ${lista[0].DisponibilidadViaje == 'true' ? 'checked' : '' }>
+                                                                       ${lista[0].DisponibilidadViaje == 'true' ? 'checked' : '' } required>
                                                                 <label class="form-check-label" >Si</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
@@ -874,10 +917,10 @@
 
                                                     <div class="form-row">
                                                         <div class="form-group">
-                                                            <label class="text-intervid">Disponibilidad para cambiar de residencia:</label>
+                                                            <label class="text-intervid">Disponibilidad para cambiar de residencia: <red>*</red></label>
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" 
-                                                                       ${lista[0].CambioResidencia == 'true' ? 'checked' : '' } type="radio" name="CambioResidencia"  value="1">
+                                                                       ${lista[0].CambioResidencia == 'true' ? 'checked' : '' } required type="radio" name="CambioResidencia"  value="1">
                                                                 <label class="form-check-label" >Si</label>
                                                             </div>
                                                             <div class="form-check form-check-inline">
@@ -965,30 +1008,30 @@
                                                     <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
                                                     <input type="hidden" value="7" name="Cuadro">
                                                     <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Nombre de la empresa:</label>
-                                                        <input type="text" id="EmpresaExperiencia" name="EmpresaExperiencia" class="form-control"/>
+                                                        <label class="col-form-label text-intervid">Nombre de la empresa: <red>*</red></label>
+                                                        <input type="text"  required name="EmpresaExperiencia" class="form-control"/>
                                                     </div>
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Cargo Desempeñado:</label>
-                                                        <input type="text" id="CargoDesempe�o" name="CargoDesempe�o" class="form-control"/>
+                                                        <label class="text-intervid">Cargo Desempeñado: <red>*</red></label>
+                                                        <input type="text"  required name="CargoDesempeño" class="form-control"/>
                                                     </div>
 
 
                                                     <div class="form-row">
-                                                        <label class="text-intervid">Período:</label>
+                                                        <label class="text-intervid">Período: <red>*</red></label>
                                                         <div class="col-md-11"></div>
                                                         <div class="form-group col-md-8">
 
-                                                            <input  class="form-control" type="date" id="InicioPeriodo" name="InicioPeriodo"/>
-                                                            <input  class="form-control"  type="date"  id="FinPeriodo" name="FinPeriodo"/>
+                                                            <input  class="form-control" type="date" required  name="InicioPeriodo"/>
+                                                            <input  class="form-control"  type="date"   name="FinPeriodo"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
 
                                                         <label class="text-intervid">Descripción de funciones:</label>
-                                                        <textarea name="FuncionesLogros" id="FuncionesLogros" class="form-control"></textarea>
+                                                        <textarea name="FuncionesLogros"  class="form-control"></textarea>
 
                                                     </div>
                                                     <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
@@ -1013,33 +1056,35 @@
                                         <div class="modal-body">
                                             <div class="container">
                                                 <form method="POST">
-                                                    <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
-                                                    <input type="hidden" value="7" name="Cuadro">
+                                                    <input type="hidden" id="id_empresa" name="id_empresa">
+                                                    <input type="hidden" value="9" name="Cuadro">
                                                     <div class="form-group ">
-                                                        <label class="col-form-label text-intervid">Nombre de la empresa:</label>
-                                                        <input type="text" name="EmpresaExperiencia" class="form-control"/>
+                                                        <label class="col-form-label text-intervid">Nombre de la empresa: <red>*</red></label>
+                                                        <input type="text" id="EmpresaExperiencia" name="EmpresaExperiencia" class="form-control" required/>
                                                     </div>
 
                                                     <div class="form-row">
 
-                                                        <label class="text-intervid">Cargo Desempeñado:</label>
-                                                        <input type="text" name="CargoDesempe�o" class="form-control"/>
+                                                        <label class="text-intervid">Cargo Desempeñado: <red>*</red></label>
+                                                        <input type="text" id="CargoDesempeño" name="CargoDesempeño" class="form-control" required/>
                                                     </div>
 
 
                                                     <div class="form-row">
-                                                        <label class="text-intervid">Período:</label>
+                                                        <label class="text-intervid">Período: <red>*</red></label>
                                                         <div class="col-md-11"></div>
                                                         <div class="form-group col-md-8">
 
-                                                            <input  class="form-control" type="date" placeholder="Inicio" name="InicioPeriodo"  />
-                                                            <input  class="form-control"  type="date" placeholder="Fin"  name="FinPeriodo"  />
+                                                            <input  class="form-control" required type="date" placeholder="Inicio" 
+                                                                    name="InicioPeriodo" id="InicioPeriodo" />
+                                                            <input  class="form-control"  type="date" placeholder="Fin"  name="FinPeriodo"
+                                                                    id="FinPeriodo"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
 
                                                         <label class="text-intervid">Descripción de funciones:</label>
-                                                        <textarea name="FuncionesLogros" class="form-control"></textarea>
+                                                        <textarea name="FuncionesLogros" onkeyup="textAreaAdjust()" id="FuncionesLogros" class="form-control"></textarea>
 
                                                     </div>
                                                     <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
@@ -1064,17 +1109,153 @@
                                 <div class="card col-md-12">
                                     <div class="card-body">
                                         <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#">
-                                                Editar
+                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#didioma">
+                                                Agregar
                                             </button>
+                                            <div class="table-responsive">
 
+                                                <table class="table table-hover">
+                                                    <c:forEach var="idiPos" items="${idiPos}">
 
+                                                        <tr>
+                                                            <td class="text-intervid">Idioma</td>
+                                                            <td>
+                                                                ${idiPos.IdiomaFK == idi[0].IdiomaID ? idi[0].NombreIdioma:''}
+                                                            </td>
 
-
+                                                            <td class="text-intervid">Nivel Hablado</td>
+                                                            <td>
+                                                                ${idiPos.NivelHablado == 'basico' ? 'Básico':''}
+                                                                ${idiPos.NivelHablado == 'medio' ? 'Medio':''}
+                                                                ${idiPos.NivelHablado == 'avanzado' ? 'Avanzado':''}
+                                                            </td>
+                                                            <td class="text-intervid">Nivel Escrito</td>
+                                                            <td>
+                                                                ${idiPos.NivelEscrito == 'basico' ? 'Básico':''}
+                                                                ${idiPos.NivelEscrito == 'medio' ? 'Medio':''}
+                                                                ${idiPos.NivelEscrito == 'avanzado' ? 'Avanzado':''}
+                                                            </td>
+                                                             <td>
+                                                                <button class="btn btn-link edit_data_idio" id="${idiPos.IdiomaPostulanteID}">
+                                                                    <img src="img/edit_24px.png"/>
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn" href="borrarIdiomaPostulante.htm?id=${idiPos.IdiomaPostulanteID}">
+                                                                    <img src="img/delete_sign_24px.png"/>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
+                             <!-- agregar Idiomas -->
+                            <div class="modal fade" id="didioma" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid">Idioma</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST">
+                                                    <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                    <input type="hidden" value="10" name="Cuadro">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label text-intervid">Idioma: <red>*</red></label>
+                                                        <select  name="idiomaPostulante" required class="form-control">
+                                                        <c:forEach items="${idi}" var="i">
+                                                            <option value="${i.IdiomaID}">${i.NombreIdioma}</option>
+                                                        </c:forEach>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        
+                                                        <label class="text-intervid">Nivel Hablado: <red>*</red></label>
+                                                        <select class="form-control" name="nivelHablado" required>
+                                                            <option value="basico">Básico</option>
+                                                            <option value="medio">Medio</option>
+                                                            <option value="avanzado">Avanzado</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Nivel Escrito: <red>*</red></label>
+                                                        <select name="nivelEscrito" class="form-control" required>
+                                                            <option value="basico">Básico</option>
+                                                            <option value="medio">Medio</option>
+                                                            <option value="avanzado">Avanzado</option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                    <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- editar Idiomas -->
+                            <div class="modal fade" id="deditidioma" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid">Idioma</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST">
+                                                    <input type="hidden" id="idiomaPosID" name="idiomaPosID">
+                                                    <input type="hidden" value="11" name="Cuadro">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label text-intervid">Idioma: <red>*</red></label>
+                                                        <select id="idiomaPostulante" name="idiomaPostulante" required class="form-control">
+                                                        <c:forEach items="${idi}" var="i">
+                                                            <option value="${i.IdiomaID}">${i.NombreIdioma}</option>
+                                                        </c:forEach>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        
+                                                        <label class="text-intervid">Nivel Hablado: <red>*</red></label>
+                                                        <select class="form-control" id="nivelHablado"  name="nivelHablado" required>
+                                                            <option value="basico">Básico</option>
+                                                            <option value="medio">Medio</option>
+                                                            <option value="avanzado">Avanzado</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="text-intervid">Nivel Escrito: <red>*</red></label>
+                                                        <select name="nivelEscrito" id="nivelEscrito" class="form-control" required>
+                                                            <option value="basico">Básico</option>
+                                                            <option value="medio">Medio</option>
+                                                            <option value="avanzado">Avanzado</option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                    <input type="submit" value="Editar" class="btn btn-success btn-right"> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <!--Datos de otros conocimientos -->
@@ -1084,25 +1265,103 @@
                                 <div class="card col-md-12 mb-5">
                                     <div class="card-body">
                                         <div class="container">
-                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#">
-                                                Editar
+                                            <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dconocimiento">
+                                                Agregar
                                             </button>
+                                    <div class="table-responsive">
 
+                                                <table class="table table-hover">
+                                                    <c:forEach var="con" items="${con}">
 
+                                                        <tr>
+                                                            <td class="text-intervid">Otros Conocimientos</td>
+                                                            <td>
+                                                                ${con.Conocimiento}
+                                                            </td>
 
-
+                                                             <td>
+                                                                <button class="btn btn-link edit_data_cono" id="${con.OtrosConocimientosID}">
+                                                                    <img src="img/edit_24px.png"/>
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn" href="borrarConocimientoPostulante.htm?id=${con.OtrosConocimientosID}">
+                                                                    <img src="img/delete_sign_24px.png"/>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
+                             <!-- agregar otros conocimientos -->
+                            <div class="modal fade" id="dconocimiento" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid">Otros Conociemientos</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST">
+                                                    <input type="hidden" value="${lista[0].UsuarioPostulanteID}" name="id_usuarioPostulante">
+                                                    <input type="hidden" value="12" name="Cuadro">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label text-intervid">Conocimiento: <red>*</red></label>
+                                                        <textarea class="form-control" name="conocimiento" onkeyup="textAreaAdjust()" required=""
+                                                                  style="resize: none" ></textarea>
+                                                        </select>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                    <input type="submit" value="Agregar" class="btn btn-success btn-right"> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                                     <!-- agregar otros conocimientos -->
+                            <div class="modal fade" id="deditconocimiento" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-intervid">Otros Conociemientos</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <form method="POST">
+                                                    <input type="hidden" id="id_conocimiento" name="id_conocimiento">
+                                                    <input type="hidden" value="13" name="Cuadro">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label text-intervid">Conocimiento: <red>*</red></label>
+                                                        <textarea class="form-control" name="conocimiento" id="conocimiento" onkeyup="textAreaAdjust()" required=""
+                                                                  style="resize: none" ></textarea>
+                                                        </select>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-right ml-2" data-dismiss="modal">Cancelar</button>
+                                                    <input type="submit" value="Editar" class="btn btn-success btn-right"> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                                    
                         </div>
-
-
-
-
-
-
                     </div>
+                                                    
                     <!--div de cerrado container-->
                 </div>
                 <!--Termino div central-->
@@ -1151,45 +1410,71 @@
     });
 
 
+      function textAreaAdjust(o) {
+            o.style.height = "1px";
+            o.style.height = (25+o.scrollHeight)+"px";
+            }
+
+     $('#pais').change(function(){
+    var paisID = $(this).val();
+    if(paisID){
+        $.ajax({
+               method: "POST",
+                data: {pais_id: paisID},
+                dataType: "json",
+           url:"listaRegion.htm",
+           success:function(data){
+            if(data){
+                $("#region").empty();
+                $("#comuna").empty();
+                $("#comuna").append('<option>Seleccione región o estado</option>');
+                $("#region").append('<option>Seleccione</option>');
+                $.each(data,function(key,value){
+
+                    $("#region").append('<option value="'+data[key].RegionID+'">'+data[key].RegionNombre+'</option>');
+                });
+
+            }else{
+               $("#region").empty();
+            }
+           }
+        });
+    }else{
+        $("#region").empty();
+        $("#comuna").empty();
+    }
+   });
+    
+     
+    $('#region').on('change',function(){
+    var regionID = $(this).val();
+  
+    if(regionID){
+        $.ajax({
+               method: "POST",
+                data: {region_id: regionID},
+                dataType: "json",
+           url:"listaComuna.htm",
+           success:function(data){
+            if(data){
+                $("#comuna").empty();
+                $("#comuna").append('<option>Seleccione</option>');
+                $.each(data,function(key,value){
+
+                    $("#comuna").append('<option value="'+data[key].ComunaID+'">'+data[key].ComunaNombre+'</option>');
+                });
+
+            }else{
+               $("#comuna").empty();
+            }
+           }
+        });
+    }else{
+        $("#comuna").empty();
+    }
+   });
 
 
-
-
-
-    //$("#form").on('submit', function () {
-    //
-    //        if ($('input[type="checkbox"]').val() !== null) {
-    //            $('input[type="checkbox"]').val(1);
-    //            console.log("WAAA");
-    //        } else {
-    //            $('input[type="checkbox"]').val(0)
-    //            console.log("weee");
-    //            ;
-    //        }
-    //    })
-
-    //    $(function () {
-    //        $('input[name="daterange"]').daterangepicker({
-    //            opens: 'left'
-    //        }, function (start, end, label) {
-    //            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
-    //        });
-    //    });
-    //     $(function () {
-    //        $('input[name="daterange2"]').daterangepicker({
-    //            opens: 'left'
-    //        }, function (start, end, label) {
-    //            console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
-    //        });
-    //    });  
-
-    //$.datepicker.setDefaults($.datepicker.regional["es"]);
-    //$("#datepicker").datepicker({
-    //firstDay: 1
-    //});
-    //$("#datepicker").click(function () {
-    //$("#datepicker").datepicker("setDate", "-117y");
-    //});
 </script>
 <script type="text/javascript" src="js/datelimiter.js"></script>
 <script src="js/scrolling.js" type="text/javascript"></script>
