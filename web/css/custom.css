@@ -267,9 +267,8 @@ grey{
     min-height: 800px;
 }
 
-
 .max-img{
-    max-height: 150px;
+    max-height: 70px;
     height: auto;
 }
 
@@ -277,4 +276,24 @@ grey{
     border: 1px solid red;
     text-decoration: none;
     overflow: hidden;
+}
+
+.decoration-none{
+    text-decoration: none;
+}
+
+.decoration-none:hover{
+    text-decoration: none;
+}
+
+.p-20{
+    font-size: 20px;
+}
+
+.p-18{
+    font-size: 18px;
+}
+
+.minh{
+    min-height: 1000px;
 }

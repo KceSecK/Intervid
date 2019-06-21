@@ -46,6 +46,8 @@
                  <prop key="registroEmpresa.htm">conexionController3</prop>
                  <prop key="loginEmpresa.htm">conexionController3</prop>
                  <prop key="empresas.htm">conexionController3</prop>
+                 <prop key="cuentaempresa.htm">conexionController3</prop>
+                 <prop key="publicaciones.htm">conexionController3</prop>
                 
                  
                  

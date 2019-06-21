@@ -7,23 +7,22 @@
                     <div class="col-lg-3 mt-1">
                         <h5 class="text-white">Postulantes</h5>
                         <hr class="hr-custom-white" />
-                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
-                    </div>
-                    <div class="col-lg-3 mt-1">
-                        <h5 class="text-white">Reclutadores</h5>
-                        <hr class="hr-custom-white" />
-
-                        <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
+                        <a class="alink nav-link border-link pb-0" href="contacto.php">Planes</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html"></a>
                         <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                     </div>
                     <div class="col-lg-3 mt-1">
                         <h5 class="text-white">Empresas</h5>
                         <hr class="hr-custom-white" />
+
+                        <a class="alink nav-link border-link pb-0" href="contacto.php">Planes</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Reclutadores</a>
+                        <a class="alink nav-link border-link pb-0" href="nosotros.html"></a>
+                    </div>
+                    <div class="col-lg-3 mt-1">
+                        <h5 class="text-white">Intervid</h5>
+                        <hr class="hr-custom-white" />
                         <a class="alink nav-link border-link pb-0" href="contacto.php">Contáctanos</a>
-                        <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                         <a class="alink nav-link border-link pb-0" href="nosotros.html">Sobre Nosotros</a>
                     </div>
                     <div class="col-lg-3 mt-3 text-right">

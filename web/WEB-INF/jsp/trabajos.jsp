@@ -6,8 +6,20 @@
 
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.context.SecurityContext"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    SecurityContext ctx = SecurityContextHolder.getContext();
+    Authentication auth = ctx.getAuthentication();
+    String rol = auth.getAuthorities().toString();
+    String username = auth.getName();
+
+    System.out.println("rol: " + rol);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -37,12 +49,16 @@
                         </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-8 d-none d-sm-block d-md-block">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar">
-                            <select class="form-control mr-sm-2">
-                                <option>Seccione</option>
+                        <form method="POST" class="form-inline">
+                            <input type="hidden" name="form" value="1"/>
+                            <input id="buscar" name="buscar" class="form-control mr-sm-2 d-none d-md-block" type="search" placeholder="Buscar" required>
+                            <select id="region" name="region" class="d-none d-md-block custom-select mr-1">
+                                <option value="" selected disabled hidden>Región</option>
+                                <c:forEach var="re" items="${reg}">
+                                    <option value="${re.RegionID}">${re.RegionNombre}</option>
+                                </c:forEach>
                             </select>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                            <button class="btn btn-outline-success my-2 my-sm-0 d-none d-md-block" type="submit">Buscar</button>
                         </form>
                     </div>
 
@@ -50,7 +66,9 @@
                                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                                             <img src="img/Menu_32.png">
                                         </button>-->
-
+                    <%
+                        if (rol.equals("[Postulante]")) {
+                    %>
                     <div class="container">
                         <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav ml-auto">
@@ -60,6 +78,7 @@
                                             <img src="img/calendar_32px.png" alt=""/>
                                         </a>
                                         <a class="btn dropdown-toggle text-intervid " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <%= username%>
                                         </a>
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
@@ -73,58 +92,80 @@
                                         </div>
                                     </div>
                                 </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <%} else {%>
+                    <div class="container">
+                        <div class="ml-5 justify-content-center collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-
+                                    <a class="alink nav-link border-link" href="loginEmpresa.htm">Empresas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <p class="nav-link text-white font-weight-bold">|</p>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary" href="loginPostulante.htm" role="button">Ingresar</a>                            
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    <% }%>
                 </div>
             </div>
         </div>
 
         <div class="container div-principal static div-filtro">
             <div class="row">
-                <div id="filtro" class="col-lg-3 bg-light mt-5 justify-content-center position-static">
-                    <div class="col-lg-12 bg-intervid">
-                        <h3 class="text-white">Filtros</h3>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend2">
-                                    <img src="icon/icons8_search_filled_20px.png" alt=""/>
-                                </span>
-                            </div>
-                            <input class="form-control" placeholder="Buscar por cargo, empresa, palabra clave"/>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <ul class="list-unstyled">
-                            <li>asdf</li>
-                            <li>asdf</li>
-                        </ul>
-                    </div>
+                <div id="filtro" class="col-lg-3 bg-light mt-5 mb-5">
                     <div class="justify-content-center mb-5">
                         <h3 class="text-intervid">Filtros</h3>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Casdf
-                                <span class="badge badge-primary badge-pill ">14</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Dapibus ac facilisis in
-                                <span class="badge badge-primary badge-pill">2</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Morbi leo risus
-                                <span class="badge badge-primary badge-pill">1</span>
-                            </li>
-                        </ul>
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend2">
+                                        <img src="icon/icons8_search_filled_20px.png" alt=""/>
+                                    </span>
+                                </div>
+                                <input class="form-control" placeholder="Buscar por cargo, empresa, palabra clave"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-2">
+                            <a class="decoration-none text-intervid p-22" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Región
+                            </a>
+                            <hr class="hr-custom-black"/>
+                            <div class="collapse" id="collapseExample">
+                                <div class="bg-white border d-block">
+                                    <ul class="list-unstyled justify-content-end text-right p-2">
+                                        <c:forEach var="li" items="${reg}">
+                                            <a href="" class="d-block decoration-none mb-1"> 
+                                                <li class=" d-flex justify-content-between align-items-center">
+                                                    <span class="badge badge-primary badge-pill ">14</span>
+                                                    ${li.RegionNombre}
+                                                </li>
+                                            </a>
+                                        </c:forEach>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+
                 <!--ofertas laborales-->
                 <div class="col-lg-9 mt-5">
+                    <c:if test="${empty ofertas}">
+                        <div class="col-lg-12 align-self-center">
+                            <img class="justify-content-center mx-auto d-block" src="img/letra 10mm.png" alt=""/>
+                            <h5 class="text-intervid mt-2 text-center">
+                                Lo sentimos, no existen coincidencias para tu busqueda.
+                            </h5>
+                        </div>
+                    </c:if>
                     <c:forEach var="ol" items="${ofertas}">
                         <div class="row mb-4">
                             <div class="col-lg-12">

@@ -38,6 +38,16 @@ public class CtrlEmpresa {
     public String Empresas() {
         return ("empresa/empresas");
     }
+    
+    @RequestMapping("cuentaempresa")
+    public String Cuenta() {
+        return ("empresa/cuentaempresa");
+    }
+    
+    @RequestMapping("publicaciones")
+    public String Publicaciones() {
+        return ("empresa/publicaciones");
+    }
 
     @RequestMapping(value = "registroEmpresa.htm", method = RequestMethod.GET)
     public ModelAndView AgregarEmpresa() {

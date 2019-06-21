@@ -1,24 +1,29 @@
+<%-- 
+    Document   : cuentaempresa
+    Created on : 21-06-2019, 0:25:46
+    Author     : sdasd
+--%>
 <%@page import="org.springframework.security.core.userdetails.User"%>
 <%@page import="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"%>
 <%@page import="org.springframework.security.crypto.password.PasswordEncoder"%>
 <%@page import="org.springframework.security.core.Authentication"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="org.springframework.security.core.context.SecurityContext"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
+
 <%
     SecurityContext ctx = SecurityContextHolder.getContext();
     Authentication auth = ctx.getAuthentication();
     String username = auth.getName();
+    String rol = auth.getAuthorities().toString();
 
 %>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Intervid - Curriculum de usuario</title> 
+        <title>Intervid - Cuenta empresa</title> 
         <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
         <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -28,87 +33,34 @@
         <script src="js/scrolling.js" type="text/javascript"></script>
         <script src="js/validaremail.js" type="text/javascript"></script>
         <script src="js/compararpass.js" type="text/javascript"></script>
-        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
     </head>
     <body>
-        <!-- Navbar-->
-        <div id="nav-fixed" class="container-fluid nav-intervid static">
-            <div class="navbar navbar-expand-sm black">
-                <div class="container-fluid">
-                    <!-- Logo -->
-                    <div class="col-lg-2">
-                        <a class="navbar-brand img-fluid" href="index.htm">
-                            <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-8 d-none d-sm-block d-md-block">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar">
-                            <select class="form-control mr-sm-2">
-                                <option>Seleccione</option>
-                            </select>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                        </form>
-                    </div>
-                    <!--                    Toggle icon 
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                            <img src="img/Menu_32.png">
-                                        </button>-->
+        <jsp:include page="headerempresa.jsp"></jsp:include>
 
-                    <div class="container">
-                        <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <div class="dropdown">
-                                        <a class="btn" href="#"> 
-                                            <img src="img/calendar_32px.png" alt=""/>
-                                        </a>
-                                        <a class="btn dropdown-toggle text-intervid " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <%= username%>
-                                        </a>
+            <!--Container principal-->
+            <div class="container-fluid div-principal">
 
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="cvPostulante.htm">CV</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
-                                            <a class="dropdown-item" href="#">Notificaciones</a>
-                                            <a class="dropdown-item" href="indexp.htm">Cuenta</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="logout">Cerrar Sesión</a>
-                                        </div>
-                                    </div>
+                <div class="row">
+                    <!--Nav lateral-->
+                    <div class="col-lg-2 bg-intervid intervid-fixed-nav">
+                        <div class="container">
+                            <ul class="list-unstyled static ">
+                                <h3 class="text-white mt-3">Mi cuenta</h3>
+                                <hr class="hr-custom-white"/>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#contraseña">Contraseña</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!--Container principal-->
-        <div class="container-fluid div-principal">
-
-            <div class="row">
-                <!--Nav lateral-->
-                <div class="col-lg-2 bg-intervid intervid-fixed-nav">
-                    <div class="container">
-                        <ul class="list-unstyled static ">
-                            <h3 class="text-white mt-3">Mi cuenta</h3>
-                            <hr class="hr-custom-white"/>
-                            <li>
-                                <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#contraseña">Contraseña</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 mb-5">
-                    <div class="container">
-                        <c:choose>
-                            <c:when test="${param.error == '1'}">        
+                    <div class="col-lg-10 mb-5">
+                        <div class="container">
+                            <c:choose>
+                                <c:when test="${param.error == '1'}">        
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     Datos invalidos.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -306,7 +258,10 @@
                         </div>
                     </div>
                 </div>
-                <jsp:include page="../footer.jsp"></jsp:include>
-            </div>
-    </body>
-</html>
+
+
+
+
+                <jsp:include page="../footer.jsp" ></jsp:include>
+                </body>
+                </html>
