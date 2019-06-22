@@ -107,21 +107,24 @@
             </div>
             <div class="row justify-content-md-center pb-5">
                 <div class="col-lg-4 text-justify">
-                    <img class="inner mb-4 scale" src="img/letra 10mm.png" alt=""/>
+                    <img class="inner mb-4 scale" src="img/morning-news-scrolling.jpg" alt=""/>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Encuentra tu empleo ideal, postula, espera la notificación para poder realizar
+                        tu entrevista vía online y exprésate lo mejor que puedas para poder conseguir el empleo seleccionado.
                     </p>
                 </div>
                 <div class="col-lg-4 text-justify">
-                    <img class="inner mb-4 scale" src="img/letra 10mm.png" alt=""/>
+                    <img class="inner mb-4 scale" src="img/checking-information.jpg" alt=""/>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Ahorra tiempo y dinero gracias a las miles de ofertas laborales que ofrecen entrevistas vía online en INTERVID,
+                        podrás encontrar ofertas de las mejores empresas, se el primero en postularte!.
                     </p>
                 </div>
                 <div class="col-lg-4 text-justify">
-                    <img class="inner mb-4 scale" src="img/letra 10mm.png" alt=""/>
+                    <img class="inner mb-4 scale" src="img/ive-made-a-small-fortune.jpg" alt=""/>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Complementa tu curriculum con un video de presentación, donde podrás expresar tus habilidades 
+                        de una manera rápida y sencilla, así promocionarte al mercado laboral que estás buscando.
                     </p>
                 </div>
             </div>
@@ -137,13 +140,20 @@
                         </div>
                     </div>
                     <div class="col-lg-12 mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Regístrate, busca el empleo que más se adapte a tus necesidades y capacidades,
+                        revisa el estado de tu postulación, en el caso de que la empresa te seleccione para pasar a la siguiente etapa
+                        se agendará una entrevista la cual será realizada según el medio seleccionado por la empresa, en el lamentable caso de que
+                        no seas seleccionado se cambiará el estado de tu postulación a rechazada de este modo podrás continuar con la búsqueda del empleo que 
+                        espera por ti.
+
                     </div>
                 </div>
                 <div class="col-lg-6 mb-5">
-                    <div class="box-img">
-                        <img class="inner2" src="img/letra 5mm_render.png" alt=""/>
-                    </div>
+
+
+                    <img class="inner img-thumbnail" src="img/ideas-keep-coming.jpg" alt=""/>
+
+
                 </div>
             </div>
         </div>
