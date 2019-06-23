@@ -98,11 +98,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="text-intervid">Correo Electronico: <e id="errorco"></e></label>
+                                <label class="text-intervid">Correo Electrónico</label>
                                 <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
                             </div>
                             <div class="form-group">
-                                <label class="text-intervid"> Contraseña:</label>
+                                <label class="text-intervid"> Contraseña</label>
                                 <input type="password" name="clave" class="form-control" required>
                             </div>
                             <div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck" required>

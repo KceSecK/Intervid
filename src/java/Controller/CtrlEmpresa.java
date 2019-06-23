@@ -7,10 +7,12 @@ import entidades.Usuario;
 import entidades.UsuarioEmpresa;
 import entidades.UsuarioReclutador;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,21 +40,32 @@ public class CtrlEmpresa {
     public String Empresas() {
         return ("empresa/empresas");
     }
-    
+
     @RequestMapping("cuentaempresa")
     public String Cuenta() {
         return ("empresa/cuentaempresa");
     }
-    
+
     @RequestMapping("publicaciones")
     public String Publicaciones() {
         return ("empresa/publicaciones");
+    }
+
+    @RequestMapping("reclutadores")
+    public String Reclutadores() {
+        return ("empresa/reclutadores");
     }
 
     @RequestMapping(value = "registroEmpresa.htm", method = RequestMethod.GET)
     public ModelAndView AgregarEmpresa() {
         mav.addObject(new Usuario());
         mav.setViewName("registroEmpresa");
+        return mav;
+    }
+
+    @RequestMapping(value = "agregarreclutador.htm", method = RequestMethod.GET)
+    public ModelAndView AgregarReclutador() {
+        mav.setViewName("agregarreclutador.htm");
         return mav;
     }
 
@@ -85,17 +98,24 @@ public class CtrlEmpresa {
             return mav;
         } else if (existe.equals("0")) {
             System.out.println("creacion de empresa");
-//            this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
-            this.jdbcTemplate.update("call creacion_UsuarioEmpresa(?,?,?,?,?,?,?,?)", u.getCorreo(),
-                    u.getClave(), u.getNombre(), u.getApellido(), ue.getRazonSocial(),
-                    ue.getRutEmpresa(), ue.getNombreEmpresa(), nc.getNumeroTelefonico());
-            mav.setViewName("redirect:/loginEmpresa.htm?success=1");
-            return mav;
-        } else {
-            System.out.println("Else");
-            mav.setViewName("registroEmpresa");
-            return mav;
+            String sql3 = "SELECT COUNT(RutEmpresa) FROM UsuarioEmpresa WHERE RutEmpresa = ?";
+            String existerut = (String) jdbcTemplate.queryForObject(sql3, new Object[]{ue.getRutEmpresa()}, String.class);
+            System.out.println("Existerut: " + existerut);
+
+            if (existerut.equals("1")) {
+                mav.setViewName("redirect:/registroEmpresa.htm?error=2");
+                return mav;
+            } else if (existerut.equals("0")) {
+                this.jdbcTemplate.update("call creacion_UsuarioEmpresa(?,?,?,?,?,?,?,?)", u.getCorreo(),
+                        u.getClave(), u.getNombre(), u.getApellido(), ue.getRazonSocial(),
+                        ue.getRutEmpresa(), ue.getNombreEmpresa(), nc.getNumeroTelefonico());
+                mav.setViewName("redirect:/loginEmpresa.htm?success=1");
+                return mav;
+            }
         }
+        System.out.println("Else");
+        mav.setViewName("registroEmpresa");
+        return mav;
     }
 
     @RequestMapping(value = "loginEmpresa.htm", method = RequestMethod.GET)
@@ -150,15 +170,28 @@ public class CtrlEmpresa {
 
     }
 
-    @RequestMapping(value = "registroReclutador.htm", method = RequestMethod.POST)
+    @RequestMapping(value = "agregarreclutador.htm", method = RequestMethod.POST)
+    public ModelAndView AgregarReclutador(HttpServletRequest request, UsuarioReclutador ur, Usuario u) {
+        HttpSession session = request.getSession();
+        SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        Authentication auth = ctx.getAuthentication();
 
-    public String AgregarReclutador(Usuario u, UsuarioEmpresa ue, UsuarioReclutador ur) {
-
-        this.jdbcTemplate.update("call creacion_UsuarioReclutador(?,?,?,?,?,?,?)", u.getCorreo(),
-                u.getClave(), u.getNombre(), u.getApellido(), ue.getUsuarioEmpresaID(),
-                ur.getReclutadorCargo(), ur.getReclutadorGenero());
-
-        return "/index?idExt=1";
-
+        String sql = "SELECT COUNT(CorreoUsuario) FROM Usuario WHERE CorreoUsuario = ?";
+        System.out.println("Rcuenta: " + u.getCorreo());
+        String existe = (String) jdbcTemplate.queryForObject(sql, new Object[]{u.getCorreo()}, String.class);
+        System.out.println("Existe str: " + existe);
+        if (existe.equals("1")) {
+            System.out.println("redirect: error");
+            mav.setViewName("agregarreclutador?error=1");
+            return mav;
+        } else if (existe.equals("0")) {
+            System.out.println("call reclutador: ");
+            this.jdbcTemplate.update("call creacion_UsuarioReclutador(?,?,?,?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido(), auth.getName(), ur.getRgenero(), ur.getRcargo());
+            mav.setViewName("agregarreclutador.htm?success=1");
+            return mav;
+        }
+        mav.setViewName("agregarreclutador.htm");
+        return mav;
     }
+
 }

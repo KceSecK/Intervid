@@ -6,52 +6,49 @@ package entidades;
  * @author SaitaM
  */
 public class UsuarioReclutador{
-  private int UsuarioReclutadorID;
-  private int EmpresaAsociadaFK;
-  private int CuentaReclutador;
-  private String ReclutadorCargo;
-  private String ReclutadorGenero;
+  private int reclutadorid;
+  private int rempresa;
+  private int rcuenta;
+  private String rcargo;
+  private String rgenero;
 
-    public int getUsuarioReclutadorID() {
-        return UsuarioReclutadorID;
+    public int getReclutadorid() {
+        return reclutadorid;
     }
 
-    public void setUsuarioReclutadorID(int UsuarioReclutadorID) {
-        this.UsuarioReclutadorID = UsuarioReclutadorID;
+    public void setReclutadorid(int reclutadorid) {
+        this.reclutadorid = reclutadorid;
     }
 
-    public int getEmpresaAsociadaFK() {
-        return EmpresaAsociadaFK;
+    public int getRempresa() {
+        return rempresa;
     }
 
-    public void setEmpresaAsociadaFK(int EmpresaAsociadaFK) {
-        this.EmpresaAsociadaFK = EmpresaAsociadaFK;
+    public void setRempresa(int rempresa) {
+        this.rempresa = rempresa;
     }
 
-    public int getCuentaReclutador() {
-        return CuentaReclutador;
+    public int getRcuenta() {
+        return rcuenta;
     }
 
-    public void setCuentaReclutador(int CuentaReclutador) {
-        this.CuentaReclutador = CuentaReclutador;
+    public void setRcuenta(int rcuenta) {
+        this.rcuenta = rcuenta;
     }
 
-    public String getReclutadorCargo() {
-        return ReclutadorCargo;
+    public String getRcargo() {
+        return rcargo;
     }
 
-    public void setReclutadorCargo(String ReclutadorCargo) {
-        this.ReclutadorCargo = ReclutadorCargo;
+    public void setRcargo(String rcargo) {
+        this.rcargo = rcargo;
     }
 
-    public String getReclutadorGenero() {
-        return ReclutadorGenero;
+    public String getRgenero() {
+        return rgenero;
     }
 
-    public void setReclutadorGenero(String ReclutadorGenero) {
-        this.ReclutadorGenero = ReclutadorGenero;
+    public void setRgenero(String rgenero) {
+        this.rgenero = rgenero;
     }
-  
-  
-    
 }

@@ -10,7 +10,7 @@
     
     System.out.println("rol: " + rol);
     if (rol.equals("[Postulante]")) {
-        response.sendRedirect("indexp.htm");
+        response.sendRedirect("trabajos.htm");
     } else if (rol.equals("[Empresa]")) {
         response.sendRedirect("empresas.htm");
     } else if (rol.equals("[Reclutador]")) {

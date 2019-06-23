@@ -20,13 +20,13 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-            <!--Comunes-->
+                <!--Comunes-->
                 <prop key="index.htm">conexionController</prop>
                 <prop key="trabajos.htm">conexionController</prop>
                 <prop key="accesodenegado.htm">conexionController</prop>
                 <prop key="redirect.htm">conexionController</prop>
                 
-            <!--Usuario Postulante--> 
+                <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
                 <prop key="registro.htm">conexionController2</prop> 
                 <prop key="loginPostulante.htm">conexionController2</prop>
@@ -45,15 +45,23 @@
                 <prop key="editIdiomaPostulante.htm">conexionController2</prop>
                 <prop key="borrarConocimientoPostulante.htm">conexionController2</prop>
                 <prop key="editConocimientoPostulante.htm">conexionController2</prop>
+                <prop key="headerpostulante.htm">conexionController2</prop>
+                
 
                 
-            <!--Usuario Empresa-->
-                 <prop key="registroEmpresa.htm">conexionController3</prop>
-                 <prop key="loginEmpresa.htm">conexionController3</prop>
-                 <prop key="empresas.htm">conexionController3</prop>
-                 <prop key="cuentaempresa.htm">conexionController3</prop>
-                 <prop key="publicaciones.htm">conexionController3</prop>
+                <!--Usuario Empresa-->
+                <prop key="registroEmpresa.htm">conexionController3</prop>
+                <prop key="loginEmpresa.htm">conexionController3</prop>
+                <prop key="empresas.htm">conexionController3</prop>
+                <prop key="cuentaempresa.htm">conexionController3</prop>
+                <prop key="publicaciones.htm">conexionController3</prop>
+                <prop key="reclutadores.htm">conexionController3</prop>
+                <prop key="agregarreclutador.htm">conexionController3</prop>
                 
+                
+                <!--Usuario Reclutador-->
+                <prop key="indexr.htm">conexionController4</prop>
+
                  
                  
                  
@@ -70,8 +78,10 @@
     
     <bean name="conexionController"
           class="Controller.CtrlConexion"/>
-<bean name="conexionController2"
+    <bean name="conexionController2"
           class="Controller.CtrlPostulante"/>
-<bean name="conexionController3"
+    <bean name="conexionController3"
           class="Controller.CtrlEmpresa"/>
+    <bean name="conexionController4"
+          class="Controller.CtrlReclutador"/>
 </beans>

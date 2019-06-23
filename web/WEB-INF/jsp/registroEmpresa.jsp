@@ -87,6 +87,14 @@
                                 </button>
                             </div>
                         </c:when>
+                        <c:when test="${param.error == '2'}">        
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                El RUT de su empresa ya se encuentra registrado. Si usted nunca registro a su empresa en INTERVID, por favor, contacte a un administrador.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </c:when>
                         <c:otherwise>
                             
                         </c:otherwise>

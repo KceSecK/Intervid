@@ -1,7 +1,3 @@
- 
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="org.springframework.security.core.Authentication"%>
-<%@page import="org.springframework.security.core.context.SecurityContext"%>
 <%-- 
     Document   : cvPostulante
     Created on : abr 22, 2019, 6:19:48 p.m.
@@ -10,12 +6,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    SecurityContext ctx = SecurityContextHolder.getContext();
-    Authentication auth = ctx.getAuthentication();
-    String username = auth.getName();
-    System.out.println(auth.getName());
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,144 +25,85 @@
     </head>
 
     <body>
+        <jsp:include page="headerpostulante.jsp"></jsp:include>
 
-        <!-- Navbar-->
-        <div id="nav-fixed" class="container-fluid nav-intervid static">
-            <div class="navbar navbar-expand-sm black">
-                <div class="container-fluid">
-                    <!-- Logo -->
-                    <div class="col-lg-2">
-                        <a class="navbar-brand img-fluid" href="index.htm">
-                            <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-8 d-none d-sm-block d-md-block">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar">
-                            <select class="form-control mr-sm-2">
-                                <option>Seleccione</option>
-                            </select>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                        </form>
-                    </div>
-
-                    <!--                    Toggle icon 
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                            <img src="img/Menu_32.png">
-                                        </button>-->
-
-                    <div class="container">
-                        <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <div class="dropdown">
-                                        <a class="btn" href="#"> 
-                                            <img src="img/calendar_32px.png" alt=""/>
-                                        </a>
-                                        <a class="btn dropdown-toggle text-intervid " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <%= username%>
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="cvPostulante.htm">CV</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
-                                            <a class="dropdown-item" href="#">Notificaciones</a>
-                                            <a class="dropdown-item" href="indexp.htm">Cuenta</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="logout">Cerrar Sesión</a>
-                                        </div>
-                                    </div>
+            <!--Container principal-->
+            <div class="container-fluid div-principal">
+                <div class="row">
+                    <!--Nav lateral-->
+                    <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
+                        <div class="container">
+                            <ul class="list-unstyled static ">
+                                <li>
+                                    <a class="alink nav-link border-link" href="#datospersonales">Datos Personales</a>
                                 </li>
-                                <li class="nav-item">
-
+                                <li>
+                                    <a class="alink nav-link border-link" href="#datoscontacto">Datos de Contacto</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#educacion">Educación</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#expectativaslaborales">Expectativas Laborales</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#experienciaprofesional">Experiencia Profesional</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#idiomas">Idiomas</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#otrosconocimientos">Otros Conocimientos</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-
-
-        <!--Container principal-->
-        <div class="container-fluid div-principal">
-            <div class="row">
-                <!--Nav lateral-->
-                <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
-                    <div class="container">
-                        <ul class="list-unstyled static ">
-                            <li>
-                                <a class="alink nav-link border-link" href="#datospersonales">Datos Personales</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#datoscontacto">Datos de Contacto</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#educacion">Educación</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#expectativaslaborales">Expectativas Laborales</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#experienciaprofesional">Experiencia Profesional</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#idiomas">Idiomas</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#otrosconocimientos">Otros Conocimientos</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 col-md-9 mb-5">
-                    <div class="container">
-                        <!--Primer cuadro-->
-                        <div class="row mt-4"><p class="letraMediaPerfil">Mi CV</p></div>
-                        <div class="row">
-                            <div class="card col-md-12">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <p class="text-intervid">Estado CV</p>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <p class="text-intervid">Foto Perfil</p>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <p class="text-intervid">Video Pitch</p>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                    <div class="col-lg-10 col-md-9 mb-5">
+                        <div class="container">
+                            <!--Primer cuadro-->
+                            <div class="row mt-4"><p class="letraMediaPerfil">Mi CV</p></div>
+                            <div class="row">
+                                <div class="card col-md-12">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Estado CV</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Foto Perfil</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <p class="text-intervid">Video Pitch</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!--Vista datos personales-->
-                        <div id="datospersonales">
-                            <div class="row mt-4"><p class="letraMediaPerfil">Datos Personales</p></div>
-                            <div class="row">
-                                <div class="card col-md-12">
-                                    <div class="card-body">
-                                        <div class="container">
-                                            <button id="EditarPersonales" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dpersonales">
-                                                Editar
-                                            </button>
-                                            <table class="table table-sm table-hover">
-                                                <tr>
-                                                    <td class="pr-5 text-intervid">Nombre(s):</td>
-                                                    <td>${lista[0].NombreUsuario}</td>
+                            <!--Vista datos personales-->
+                            <div id="datospersonales">
+                                <div class="row mt-4"><p class="letraMediaPerfil">Datos Personales</p></div>
+                                <div class="row">
+                                    <div class="card col-md-12">
+                                        <div class="card-body">
+                                            <div class="container">
+                                                <button id="EditarPersonales" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dpersonales">
+                                                    Editar
+                                                </button>
+                                                <table class="table table-sm table-hover">
+                                                    <tr>
+                                                        <td class="pr-5 text-intervid">Nombre(s):</td>
+                                                        <td>${lista[0].NombreUsuario}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="pr-5 text-intervid">Apellido(s)</td>
@@ -233,7 +164,7 @@
                                                         <label class="text-intervid">Nombre(s):<red>*</red></label>
                                                         <input type="text" value="${lista[0].NombreUsuario}" required  name="nombre" class="form-control" 
                                                                onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)"
->
+                                                               >
                                                     </div>
 
                                                     <div class="form-group">
@@ -288,7 +219,7 @@
                                                     </div>
 
                                                     <div class="form-row">
-                                                        
+
                                                         <label class="text-intervid">Fecha de nacimiento <red>*</red></label>
                                                         <input id="datefield" min="01-01-1990" max="01-01-2005" type="date" value="${lista[0].FechaNacimiento}" class="form-control"
                                                                name="fechaNacimiento" required>
@@ -449,27 +380,27 @@
                                                     </td>
                                                 </tr>
                                                 <table class="table table-sm table-hover">
-                                                <c:forEach var="contacto" items="${num}">                                                    
-                                                    <tr>
-                                                        <td class="text-intervid">Tipo:</td>
-                                                        <td >${contacto.ContactoTipo == "fijo" ? 'Fijo' : '' }
-                                                            ${contacto.ContactoTipo == "movil" ? 'Móvil' : '' }
-                                                        </td>
-                                                        <td class="text-intervid">Número: </td>
-                                                        <td>${contacto.NumeroTelefonico}</td>
-                                                        <td>
+                                                    <c:forEach var="contacto" items="${num}">                                                    
+                                                        <tr>
+                                                            <td class="text-intervid">Tipo:</td>
+                                                            <td >${contacto.ContactoTipo == "fijo" ? 'Fijo' : '' }
+                                                                ${contacto.ContactoTipo == "movil" ? 'Móvil' : '' }
+                                                            </td>
+                                                            <td class="text-intervid">Número: </td>
+                                                            <td>${contacto.NumeroTelefonico}</td>
+                                                            <td>
 
-                                                            <button class="btn btn-link edit_data_tel" id="${contacto.NumeroContactoID}">
-                                                                <img src="img/edit_24px.png" alt=""/>
-                                                            </button>
-                                                            <a class="btn" href="borrarTelefono.htm?id=${contacto.NumeroContactoID}">
-                                                                <img src="img/delete_sign_24px.png" alt=""/>
-                                                            </a>
-                                                        </td>
-                                                    </tr> 
+                                                                <button class="btn btn-link edit_data_tel" id="${contacto.NumeroContactoID}">
+                                                                    <img src="img/edit_24px.png" alt=""/>
+                                                                </button>
+                                                                <a class="btn" href="borrarTelefono.htm?id=${contacto.NumeroContactoID}">
+                                                                    <img src="img/delete_sign_24px.png" alt=""/>
+                                                                </a>
+                                                            </td>
+                                                        </tr> 
 
-                                                </c:forEach>
-                                                    </table>
+                                                    </c:forEach>
+                                                </table>
                                             </table>
                                         </div>
                                     </div>
@@ -587,7 +518,7 @@
                                     </div>
                                 </div>
                             </div>
-                                                        
+
                             <!--Modal editar numero de telefono-->
                             <div class="modal fade" id="dedittelefono" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -629,7 +560,7 @@
                                     </div>
                                 </div>
                             </div>
-                                                        
+
                         </div>
 
                         <!--Datos de educacion-->
@@ -760,7 +691,7 @@
                                                     <div class="form-group ">
                                                         <label class="col-form-label text-intervid">Institución: <red>*</red></label>
                                                         <input type="text" id="institucion"  name="Institucion" 
-                                                              required class="form-control"/>
+                                                               required class="form-control"/>
                                                     </div>
 
                                                     <div class="form-row">
@@ -1135,7 +1066,7 @@
                                                                 ${idiPos.NivelEscrito == 'medio' ? 'Medio':''}
                                                                 ${idiPos.NivelEscrito == 'avanzado' ? 'Avanzado':''}
                                                             </td>
-                                                             <td>
+                                                            <td>
                                                                 <button class="btn btn-link edit_data_idio" id="${idiPos.IdiomaPostulanteID}">
                                                                     <img src="img/edit_24px.png"/>
                                                                 </button>
@@ -1153,8 +1084,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                             <!-- agregar Idiomas -->
+
+                            <!-- agregar Idiomas -->
                             <div class="modal fade" id="didioma" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
@@ -1172,14 +1103,14 @@
                                                     <div class="form-group">
                                                         <label class="col-form-label text-intervid">Idioma: <red>*</red></label>
                                                         <select  name="idiomaPostulante" required class="form-control">
-                                                        <c:forEach items="${idi}" var="i">
-                                                            <option value="${i.IdiomaID}">${i.NombreIdioma}</option>
-                                                        </c:forEach>
+                                                            <c:forEach items="${idi}" var="i">
+                                                                <option value="${i.IdiomaID}">${i.NombreIdioma}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        
+
                                                         <label class="text-intervid">Nivel Hablado: <red>*</red></label>
                                                         <select class="form-control" name="nivelHablado" required>
                                                             <option value="basico">Básico</option>
@@ -1187,7 +1118,7 @@
                                                             <option value="avanzado">Avanzado</option>
                                                         </select>
                                                     </div>
-                                                    
+
                                                     <div class="form-group">
                                                         <label class="text-intervid">Nivel Escrito: <red>*</red></label>
                                                         <select name="nivelEscrito" class="form-control" required>
@@ -1205,7 +1136,7 @@
                                 </div>
                             </div>
 
-                             <!-- editar Idiomas -->
+                            <!-- editar Idiomas -->
                             <div class="modal fade" id="deditidioma" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
@@ -1223,14 +1154,14 @@
                                                     <div class="form-group">
                                                         <label class="col-form-label text-intervid">Idioma: <red>*</red></label>
                                                         <select id="idiomaPostulante" name="idiomaPostulante" required class="form-control">
-                                                        <c:forEach items="${idi}" var="i">
-                                                            <option value="${i.IdiomaID}">${i.NombreIdioma}</option>
-                                                        </c:forEach>
+                                                            <c:forEach items="${idi}" var="i">
+                                                                <option value="${i.IdiomaID}">${i.NombreIdioma}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        
+
                                                         <label class="text-intervid">Nivel Hablado: <red>*</red></label>
                                                         <select class="form-control" id="nivelHablado"  name="nivelHablado" required>
                                                             <option value="basico">Básico</option>
@@ -1238,7 +1169,7 @@
                                                             <option value="avanzado">Avanzado</option>
                                                         </select>
                                                     </div>
-                                                    
+
                                                     <div class="form-group">
                                                         <label class="text-intervid">Nivel Escrito: <red>*</red></label>
                                                         <select name="nivelEscrito" id="nivelEscrito" class="form-control" required>
@@ -1268,7 +1199,7 @@
                                             <button id="" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dconocimiento">
                                                 Agregar
                                             </button>
-                                    <div class="table-responsive">
+                                            <div class="table-responsive">
 
                                                 <table class="table table-hover">
                                                     <c:forEach var="con" items="${con}">
@@ -1279,7 +1210,7 @@
                                                                 ${con.Conocimiento}
                                                             </td>
 
-                                                             <td>
+                                                            <td>
                                                                 <button class="btn btn-link edit_data_cono" id="${con.OtrosConocimientosID}">
                                                                     <img src="img/edit_24px.png"/>
                                                                 </button>
@@ -1292,13 +1223,13 @@
                                                         </tr>
                                                     </c:forEach>
                                                 </table>
-                                        </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                             <!-- agregar otros conocimientos -->
+
+                            <!-- agregar otros conocimientos -->
                             <div class="modal fade" id="dconocimiento" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
@@ -1327,8 +1258,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                                                     <!-- agregar otros conocimientos -->
+
+                            <!-- agregar otros conocimientos -->
                             <div class="modal fade" id="deditconocimiento" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
@@ -1357,11 +1288,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                                                    
+
+
                         </div>
                     </div>
-                                                    
+
                     <!--div de cerrado container-->
                 </div>
                 <!--Termino div central-->
@@ -1410,69 +1341,69 @@
     });
 
 
-      function textAreaAdjust(o) {
-            o.style.height = "1px";
-            o.style.height = (25+o.scrollHeight)+"px";
-            }
+    function textAreaAdjust(o) {
+        o.style.height = "1px";
+        o.style.height = (25 + o.scrollHeight) + "px";
+    }
 
-     $('#pais').change(function(){
-    var paisID = $(this).val();
-    if(paisID){
-        $.ajax({
-               method: "POST",
+    $('#pais').change(function () {
+        var paisID = $(this).val();
+        if (paisID) {
+            $.ajax({
+                method: "POST",
                 data: {pais_id: paisID},
                 dataType: "json",
-           url:"listaRegion.htm",
-           success:function(data){
-            if(data){
-                $("#region").empty();
-                $("#comuna").empty();
-                $("#comuna").append('<option>Seleccione región o estado</option>');
-                $("#region").append('<option>Seleccione</option>');
-                $.each(data,function(key,value){
+                url: "listaRegion.htm",
+                success: function (data) {
+                    if (data) {
+                        $("#region").empty();
+                        $("#comuna").empty();
+                        $("#comuna").append('<option>Seleccione región o estado</option>');
+                        $("#region").append('<option>Seleccione</option>');
+                        $.each(data, function (key, value) {
 
-                    $("#region").append('<option value="'+data[key].RegionID+'">'+data[key].RegionNombre+'</option>');
-                });
+                            $("#region").append('<option value="' + data[key].RegionID + '">' + data[key].RegionNombre + '</option>');
+                        });
 
-            }else{
-               $("#region").empty();
-            }
-           }
-        });
-    }else{
-        $("#region").empty();
-        $("#comuna").empty();
-    }
-   });
-    
-     
-    $('#region').on('change',function(){
-    var regionID = $(this).val();
-  
-    if(regionID){
-        $.ajax({
-               method: "POST",
+                    } else {
+                        $("#region").empty();
+                    }
+                }
+            });
+        } else {
+            $("#region").empty();
+            $("#comuna").empty();
+        }
+    });
+
+
+    $('#region').on('change', function () {
+        var regionID = $(this).val();
+
+        if (regionID) {
+            $.ajax({
+                method: "POST",
                 data: {region_id: regionID},
                 dataType: "json",
-           url:"listaComuna.htm",
-           success:function(data){
-            if(data){
-                $("#comuna").empty();
-                $("#comuna").append('<option>Seleccione</option>');
-                $.each(data,function(key,value){
+                url: "listaComuna.htm",
+                success: function (data) {
+                    if (data) {
+                        $("#comuna").empty();
+                        $("#comuna").append('<option>Seleccione</option>');
+                        $.each(data, function (key, value) {
 
-                    $("#comuna").append('<option value="'+data[key].ComunaID+'">'+data[key].ComunaNombre+'</option>');
-                });
+                            $("#comuna").append('<option value="' + data[key].ComunaID + '">' + data[key].ComunaNombre + '</option>');
+                        });
 
-            }else{
-               $("#comuna").empty();
-            }
-           }
-        });
-    }else{
-        $("#comuna").empty();
-    }
-   });
+                    } else {
+                        $("#comuna").empty();
+                    }
+                }
+            });
+        } else {
+            $("#comuna").empty();
+        }
+    });
 
 
 </script>

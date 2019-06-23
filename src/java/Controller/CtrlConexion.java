@@ -73,7 +73,7 @@ public class CtrlConexion {
     @RequestMapping(value = "trabajos.htm", method = RequestMethod.GET)
     public ModelAndView listarOfertas(HttpServletRequest request) {
 
-        String sqlr = "SELECT * FROM REGION";
+        String sqlr = "SELECT * FROM v_regionofertas";
         List region = this.jdbcTemplate.queryForList(sqlr);
         mav.addObject("reg", region);
 

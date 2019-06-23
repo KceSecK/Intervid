@@ -36,8 +36,13 @@
         <script src="js/validarletra.js" type="text/javascript"></script>
         <script src="js/validarnumeros.js" type="text/javascript"></script>
     </head>
-
+    <script>
+        window.onunload = function () {
+            $.get("${request.contextPath}/logout");
+        }
+    </script>
     <body>
+
         <!-- Navbar-->
         <div id="nav-fixed" class="container-fluid nav-intervid static">
             <div class="navbar navbar-expand-sm black">
@@ -117,8 +122,20 @@
         </div>
 
         <div class="container div-principal static div-filtro">
+
+
             <div class="row">
-                <div id="filtro" class="col-lg-3 bg-light mt-5 mb-5">
+                <div class="col-lg-12 mt-5">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-white">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Library</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <div id="filtro" class="col-lg-3 bg-light mt-2 mb-5">
                     <div class="justify-content-center mb-5">
                         <h3 class="text-intervid">Filtros</h3>
                         <div class="col-lg-12">
@@ -132,8 +149,9 @@
                             </div>
                         </div>
                         <div class="col-lg-12 mt-2">
-                            <a class="decoration-none text-intervid p-22" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <a class="decoration-none justify-content-between text-intervid p-22" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Región
+                                <span class="p-16 badge badge-primary badge-pill float-right ">${reg[0].Total}</span>
                             </a>
                             <hr class="hr-custom-black"/>
                             <div class="collapse" id="collapseExample">
@@ -142,7 +160,7 @@
                                         <c:forEach var="li" items="${reg}">
                                             <a href="" class="d-block decoration-none mb-1"> 
                                                 <li class=" d-flex justify-content-between align-items-center">
-                                                    <span class="badge badge-primary badge-pill ">14</span>
+                                                    <span class="badge badge-primary badge-pill ">${li.Ofertas}</span>
                                                     ${li.RegionNombre}
                                                 </li>
                                             </a>
@@ -157,7 +175,8 @@
                 </div>
 
                 <!--ofertas laborales-->
-                <div class="col-lg-9 mt-5">
+                <div class="col-lg-9 mt-2">
+
                     <c:if test="${empty ofertas}">
                         <div class="col-lg-12 align-self-center">
                             <img class="justify-content-center mx-auto d-block" src="img/letra 10mm.png" alt=""/>

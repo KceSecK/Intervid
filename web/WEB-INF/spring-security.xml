@@ -11,18 +11,25 @@
          
          
     <http auto-config="true" use-expressions="true">
+        <!--Postulante-->        
         <intercept-url pattern="/cvPostulante.htm" access="hasAnyRole('Postulante')"/>
         <intercept-url pattern="/indexp.htm" access="hasAnyRole('Postulante')"/>
+        
+        <!--Empresa-->
         <intercept-url pattern="/empresas.htm" access="hasAnyRole('Empresa')"/>
         <intercept-url pattern="/cuentaempresa.htm" access="hasAnyRole('Empresa')"/>
         <intercept-url pattern="/publicaciones.htm" access="hasAnyRole('Empresa')"/>
+        <intercept-url pattern="/reclutadores.htm" access="hasAnyRole('Empresa')"/>
+        
+        <!--Reclutador-->
+        <intercept-url pattern="/indexr.htm" access="hasAnyRole('Reclutador')"/>
               
-        <form-login login-page="/login.jsp" default-target-url="/redirect.htm"  
+        <form-login login-page="/redirect.htm" default-target-url="/redirect.htm"  
                     login-processing-url="/login" authentication-failure-url="/loginPostulante.htm?error" 
                     username-parameter="correo"
                     password-parameter="clave" />  
-         <logout logout-success-url="/index.htm" logout-url="/logout" invalidate-session="true" />
-         <access-denied-handler error-page="/accesodenegado.htm" ></access-denied-handler>   
+        <logout logout-success-url="/index.htm" logout-url="/logout" invalidate-session="true" delete-cookies="true" />
+        <access-denied-handler error-page="/accesodenegado.htm" ></access-denied-handler>   
         
         <!--enable csrf protection-->       
         <!--            <form-login login-page="/login"  default-target-url="/index" authentication-failure-url="/login?error" 

@@ -35,7 +35,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="publicaciones.htm">Mis publicaciones</a>
                                     <a class="dropdown-item" href="#">Mis entrevistas</a>
-                                    <a class="dropdown-item" href="#">Mis reclutadores</a>
+                                    <a class="dropdown-item" href="reclutadores.htm">Mis reclutadores</a>
                                     <a class="dropdown-item" href="#">Notificaciones</a>
                                     <a class="dropdown-item" href="cuentaempresa.htm">Cuenta</a>
                                     <div class="dropdown-divider"></div>

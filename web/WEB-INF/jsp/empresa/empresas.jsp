@@ -29,7 +29,6 @@
         <script src="js/scrolling.js" type="text/javascript"></script>
         <script src="js/validaremail.js" type="text/javascript"></script>
         <script src="js/compararpass.js" type="text/javascript"></script>
-        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
     </head>
     <body>
         <jsp:include page="headerempresa.jsp"></jsp:include>

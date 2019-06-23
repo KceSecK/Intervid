@@ -162,11 +162,11 @@ public class CtrlPostulante {
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             System.out.println("rol: " + auth.getAuthorities());
             String rol = auth.getAuthorities().toString();
-            System.out.println("asdfr: "+rol);
+            System.out.println("asdfr: " + rol);
             if (rol.equals("[Postulante]")) {
                 /* The user is logged in :) */
                 System.out.println("if rol");
-                model.setViewName("redirect:/indexp.htm");
+                model.setViewName("redirect:/trabajos.htm");
                 return model;
             } else {
                 System.out.println("else");
@@ -225,12 +225,12 @@ public class CtrlPostulante {
         String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         String sql8 = "SELECT * FROM experienciaprofesional,usuario,usuariopostulante"
-                + "    WHERE ExperienciaPostulanteFK=UsuarioPostulanteID and CorreoUsuario='"+auth.getName()+" '";
+                + "    WHERE ExperienciaPostulanteFK=UsuarioPostulanteID and CorreoUsuario='" + auth.getName() + " '";
         String sql9 = "SELECT * FROM IdiomaPostulante,usuario,usuariopostulante "
-                + "WHERE PostulanteIdiomaFK=UsuarioPostulanteID AND CorreoUsuario='"+auth.getName()+"'";
-        String sql10="select * from idioma";
-        String sql11="select * from otrosConocimientos,usuario,usuariopostulante"
-                + " WHERE ConocimientoPostulante=UsuarioPostulanteID AND CorreoUsuario='"+auth.getName()+"'";
+                + "WHERE PostulanteIdiomaFK=UsuarioPostulanteID AND CorreoUsuario='" + auth.getName() + "'";
+        String sql10 = "select * from idioma";
+        String sql11 = "select * from otrosConocimientos,usuario,usuariopostulante"
+                + " WHERE ConocimientoPostulante=UsuarioPostulanteID AND CorreoUsuario='" + auth.getName() + "'";
         List datos = this.jdbcTemplate.queryForList(sql);
         List pais = this.jdbcTemplate.queryForList(sql2);
         List region = this.jdbcTemplate.queryForList(sql3);
@@ -265,11 +265,11 @@ public class CtrlPostulante {
 
     @RequestMapping(value = "cvPostulante.htm", method = RequestMethod.POST)
     public ModelAndView cvPostulante(HttpServletRequest request, Usuario u, UsuarioPostulante up, Licencia l,
-            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep,ExpectativaLaboral el,ExperienciaProfesional exp) {
+            ContactoPostulante cp, NumeroContacto nc, EducacionPostulante ep, ExpectativaLaboral el, ExperienciaProfesional exp) {
         int form = Integer.parseInt(request.getParameter("Cuadro"));
 
         System.out.println("Formulario: " + form);
-        
+
         if (form == 1) {
             this.jdbcTemplate.update("call editar_UsuarioPostulante(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     u.getUsuarioID(),
@@ -309,15 +309,15 @@ public class CtrlPostulante {
 
             return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
         } else if (form == 3) {
-            
+
             String sql = "INSERT INTO `numerocontacto`( `NumeroUsuarioFK`, `ContactoTipo`, `NumeroTelefonico`) "
                     + "VALUES (?,?,?)";
-            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
                 ps.setInt(1, u.getUsuarioID());
-                ps.setString(2,nc.getContactoTipo());
+                ps.setString(2, nc.getContactoTipo());
                 ps.setString(3, nc.getNumeroTelefonico());
             });
-            
+
             return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
         } else if (form == 4) {
 
@@ -330,39 +330,34 @@ public class CtrlPostulante {
                     ep.getPeriodoFin(),
                     ep.getPeriodoActual()
             );
-             
+
             return new ModelAndView("redirect:/cvPostulante.htm#educacion");
 
-        }
-        else if(form==5){
-            String sql ="UPDATE `educacionpostulante` SET "
+        } else if (form == 5) {
+            String sql = "UPDATE `educacionpostulante` SET "
                     + "`Institucion`=? ,`NivelEstudio`=? ,`EstadoEstudio`=? ,"
                     + "`PeriodoInicio`=? ,`PeriodoFin`=? ,`PeriodoActual`=? WHERE "
                     + "EducacionPostulanteID=?";
-      
-           
-            
+
             int periodoActual;
-            if (request.getParameter("PeriodoActual")==null) {
-                periodoActual=0;
+            if (request.getParameter("PeriodoActual") == null) {
+                periodoActual = 0;
+            } else {
+                periodoActual = 1;
             }
-            else{
-                periodoActual=1;
-            }
-           
-            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setString(1,request.getParameter("Institucion"));
-                ps.setString(2,request.getParameter("NivelEstudio"));
-                ps.setString(3,request.getParameter("EstadoEstudio"));
-                ps.setString(4,request.getParameter("PeriodoInicio"));
-                ps.setString(5,request.getParameter("PeriodoFin"));
+
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setString(1, request.getParameter("Institucion"));
+                ps.setString(2, request.getParameter("NivelEstudio"));
+                ps.setString(3, request.getParameter("EstadoEstudio"));
+                ps.setString(4, request.getParameter("PeriodoInicio"));
+                ps.setString(5, request.getParameter("PeriodoFin"));
                 ps.setInt(6, periodoActual);
                 ps.setInt(7, Integer.parseInt(request.getParameter("id_educacion")));
-                
+
             });
             return new ModelAndView("redirect:/cvPostulante.htm#educacion");
-        }
-        else if(form==6){
+        } else if (form == 6) {
 //            System.out.println(el.getRegionPreferente());
 //            System.out.println(el.getExpectativaRenta());
 //            System.out.println(el.getTipoMoneda());
@@ -370,100 +365,90 @@ public class CtrlPostulante {
 //            System.out.println(el.getDisponibilidadViaje());
 //            System.out.println(el.getCambioResidencia());
             System.out.println(request.getParameter("id_usuarioPostulante"));
-                String sql="UPDATE `expectativalaboral` SET "
-                        + "`RegionPreferente`=?,`ExpectativaRenta`=?,"
-                        + "`TipoMoneda`=?,`JornadaPreferente`=?,"
-                        + "`DisponibilidadViaje`=?,`CambioResidencia`=? "
-                        + "WHERE ExpectativaPostulanteFK=?";
-                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setLong(1,el.getRegionPreferente());
-                ps.setInt(2,el.getExpectativaRenta());
-                ps.setString(3,el.getTipoMoneda());
-                ps.setString(4,el.getJornadaPreferente());
-                ps.setInt(5,el.getDisponibilidadViaje());
+            String sql = "UPDATE `expectativalaboral` SET "
+                    + "`RegionPreferente`=?,`ExpectativaRenta`=?,"
+                    + "`TipoMoneda`=?,`JornadaPreferente`=?,"
+                    + "`DisponibilidadViaje`=?,`CambioResidencia`=? "
+                    + "WHERE ExpectativaPostulanteFK=?";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setLong(1, el.getRegionPreferente());
+                ps.setInt(2, el.getExpectativaRenta());
+                ps.setString(3, el.getTipoMoneda());
+                ps.setString(4, el.getJornadaPreferente());
+                ps.setInt(5, el.getDisponibilidadViaje());
                 ps.setInt(6, el.getCambioResidencia());
                 ps.setInt(7, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
-                
+
             });
             return new ModelAndView("redirect:/cvPostulante.htm#expectativaslaborales");
-        }
-        else if (form==7){
+        } else if (form == 7) {
             String sql = "INSERT INTO `experienciaprofesional`(`ExperienciaPostulanteFK`, "
                     + "`EmpresaExperiencia`, `CargoDesempeñado`, `InicioPeriodo`, `FinPeriodo`, `FuncionesLogros`) "
                     + "VALUES (?,?,?,?,?,?)";
-            this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
                 ps.setInt(1, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
-                ps.setString(2,exp.getEmpresaExperiencia());
-                ps.setString(3,exp.getCargoDesempeño());
-                ps.setString(4,exp.getInicioPeriodo());
-                ps.setString(5,exp.getFinPeriodo());
-                ps.setString(6,exp.getFuncionesLogros());
-                
+                ps.setString(2, exp.getEmpresaExperiencia());
+                ps.setString(3, exp.getCargoDesempeño());
+                ps.setString(4, exp.getInicioPeriodo());
+                ps.setString(5, exp.getFinPeriodo());
+                ps.setString(6, exp.getFuncionesLogros());
+
             });
             return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
-        }
-        else if (form==8){
-            String sql="UPDATE `numerocontacto` SET `ContactoTipo`=?,`NumeroTelefonico`=? WHERE `NumeroContactoID`= ? ";
-              this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setString(1,request.getParameter("contactoTipo"));
-                ps.setString(2,request.getParameter("NumeroTelefonico"));
+        } else if (form == 8) {
+            String sql = "UPDATE `numerocontacto` SET `ContactoTipo`=?,`NumeroTelefonico`=? WHERE `NumeroContactoID`= ? ";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setString(1, request.getParameter("contactoTipo"));
+                ps.setString(2, request.getParameter("NumeroTelefonico"));
                 ps.setInt(3, Integer.parseInt(request.getParameter("id_telefono")));
-                
+
             });
             return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
-        }
-        else if(form==9){
-            
+        } else if (form == 9) {
+
             //edit Experiencia laboral
             return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
-        }
-        else if(form==10){
-                String sql="INSERT INTO `idiomapostulante`(`PostulanteIdiomaFK`, `IdiomaFK`, "
-                        + "`NivelEscrito`, `NivelHablado`) VALUES (?,?,?,?)";
-                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setInt(1,Integer.parseInt(request.getParameter("id_usuarioPostulante")));
-                ps.setInt(2,Integer.parseInt(request.getParameter("idiomaPostulante")));
-                ps.setString(3,request.getParameter("nivelEscrito"));
-                ps.setString(4,request.getParameter("nivelHablado"));
-               
-                
+        } else if (form == 10) {
+            String sql = "INSERT INTO `idiomapostulante`(`PostulanteIdiomaFK`, `IdiomaFK`, "
+                    + "`NivelEscrito`, `NivelHablado`) VALUES (?,?,?,?)";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setInt(1, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
+                ps.setInt(2, Integer.parseInt(request.getParameter("idiomaPostulante")));
+                ps.setString(3, request.getParameter("nivelEscrito"));
+                ps.setString(4, request.getParameter("nivelHablado"));
+
             });
             return new ModelAndView("redirect:/cvPostulante.htm#idiomas");
-        }
-        else if(form==11){
-                String sql="UPDATE `idiomapostulante` SET `IdiomaFK`=?,`NivelEscrito`=?,`NivelHablado`=? "
-                        + "WHERE `IdiomaPostulanteID`= ? ";
-                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{                
-                ps.setInt(1,Integer.parseInt(request.getParameter("idiomaPostulante")));
-                ps.setString(2,request.getParameter("nivelEscrito"));
-                ps.setString(3,request.getParameter("nivelHablado"));
-                ps.setInt(4,Integer.parseInt(request.getParameter("idiomaPosID")));
-               
-                
+        } else if (form == 11) {
+            String sql = "UPDATE `idiomapostulante` SET `IdiomaFK`=?,`NivelEscrito`=?,`NivelHablado`=? "
+                    + "WHERE `IdiomaPostulanteID`= ? ";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setInt(1, Integer.parseInt(request.getParameter("idiomaPostulante")));
+                ps.setString(2, request.getParameter("nivelEscrito"));
+                ps.setString(3, request.getParameter("nivelHablado"));
+                ps.setInt(4, Integer.parseInt(request.getParameter("idiomaPosID")));
+
             });
             return new ModelAndView("redirect:/cvPostulante.htm#idiomas");
-        }
-         else if(form==12){
-                String sql="INSERT INTO `otrosconocimientos`( `ConocimientoPostulante`, `Conocimiento`) "
-                        + "VALUES (?,?) ";
-                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{                
-                ps.setInt(1,Integer.parseInt(request.getParameter("id_usuarioPostulante")));
-                ps.setString(2,request.getParameter("conocimiento"));
-                
-            });
-            return new ModelAndView("redirect:/cvPostulante.htm#otrosconocimientos");
-        }
-         else if(form==13){
-                String sql="UPDATE `otrosconocimientos` SET `Conocimiento`=? "
-                        + "WHERE `OtrosConocimientosID`= ? ";
-                this.jdbcTemplate.update(sql,(PreparedStatement ps)->{                
-                ps.setString(1,request.getParameter("conocimiento"));
-                ps.setInt(2,Integer.parseInt(request.getParameter("id_conocimiento")));
+        } else if (form == 12) {
+            String sql = "INSERT INTO `otrosconocimientos`( `ConocimientoPostulante`, `Conocimiento`) "
+                    + "VALUES (?,?) ";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setInt(1, Integer.parseInt(request.getParameter("id_usuarioPostulante")));
+                ps.setString(2, request.getParameter("conocimiento"));
 
             });
             return new ModelAndView("redirect:/cvPostulante.htm#otrosconocimientos");
-        }
-        else {
+        } else if (form == 13) {
+            String sql = "UPDATE `otrosconocimientos` SET `Conocimiento`=? "
+                    + "WHERE `OtrosConocimientosID`= ? ";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setString(1, request.getParameter("conocimiento"));
+                ps.setInt(2, Integer.parseInt(request.getParameter("id_conocimiento")));
+
+            });
+            return new ModelAndView("redirect:/cvPostulante.htm#otrosconocimientos");
+        } else {
 
             return new ModelAndView("redirect:/cvPostulante.htm");
         }
@@ -477,15 +462,16 @@ public class CtrlPostulante {
         String sql = "SELECT * FROM `educacionpostulante` WHERE "
                 + "EducacionPostulanteID= " + request.getParameter("id2");
         List estudio = jdbcTemplate.queryForList(sql);
-        
+
         ObjectMapper mapper = new ObjectMapper();
         //cambio configuracion para obtener fecha correctamente
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        String json = mapper.writeValueAsString(estudio);       
-      
+        String json = mapper.writeValueAsString(estudio);
+
         return json;
     }
 //    Rellenar modal para editar experienciaPostulante
+
     @RequestMapping(value = "editExperienciaPostulante.htm", method = RequestMethod.POST)
     public @ResponseBody
     String ObtenerExperienciaPostulante(HttpServletRequest request) throws JsonProcessingException {
@@ -497,10 +483,11 @@ public class CtrlPostulante {
         //cambio configuracion para obtener fecha correctamente
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         String json = mapper.writeValueAsString(experiencia);
-        
+
         return json;
     }
 //    Rellenar modal para editar telefono
+
     @RequestMapping(value = "editTelefonoPostulante.htm", method = RequestMethod.POST)
     public @ResponseBody
     String ObtenerTelefonoPostulante(HttpServletRequest request) throws JsonProcessingException {
@@ -510,11 +497,12 @@ public class CtrlPostulante {
         ObjectMapper mapper = new ObjectMapper();
         //cambio configuracion para obtener fecha correctamente
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        String json = mapper.writeValueAsString(telefono);       
-      
+        String json = mapper.writeValueAsString(telefono);
+
         return json;
     }
 //    Rellenar modal para editar idiomaPostulante
+
     @RequestMapping(value = "editIdiomaPostulante.htm", method = RequestMethod.POST)
     public @ResponseBody
     String ObtenerIdiomasPostulante(HttpServletRequest request) throws JsonProcessingException {
@@ -524,11 +512,12 @@ public class CtrlPostulante {
         ObjectMapper mapper = new ObjectMapper();
         //cambio configuracion para obtener fecha correctamente
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        String json = mapper.writeValueAsString(idiomaPos);       
+        String json = mapper.writeValueAsString(idiomaPos);
         System.out.println();
         return json;
     }
 //    Rellenar modal para editar idiomaPostulante
+
     @RequestMapping(value = "editConocimientoPostulante.htm", method = RequestMethod.POST)
     public @ResponseBody
     String ObtenerConocimientoPostulante(HttpServletRequest request) throws JsonProcessingException {
@@ -538,7 +527,7 @@ public class CtrlPostulante {
         ObjectMapper mapper = new ObjectMapper();
         //cambio configuracion para obtener fecha correctamente
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        String json = mapper.writeValueAsString(conoPos);       
+        String json = mapper.writeValueAsString(conoPos);
         System.out.println();
         return json;
     }
@@ -567,101 +556,86 @@ public class CtrlPostulante {
         String jsonComuna = mapper.writeValueAsString(comunas);
         return jsonComuna;
     }
+
     //Borrar numero de contacto 
-    @RequestMapping(value="borrarTelefono.htm",method = RequestMethod.GET)
-    public ModelAndView borrarNumeroContacto(HttpServletRequest request){
-       int id = Integer.parseInt(request.getParameter("id"));
-       String sql="DELETE FROM `numerocontacto` WHERE numeroContactoID=? ";
-       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setInt(1, id);                
-       });
-       return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto"); 
-    }
-    //Borrar numero de contacto 
-    @RequestMapping(value="borrarIdiomaPostulante.htm",method = RequestMethod.GET)
-    public ModelAndView borrarIdiomaPostulante(HttpServletRequest request){
-       int id = Integer.parseInt(request.getParameter("id"));
-       String sql="DELETE FROM `idiomaPostulante` WHERE idiomaPostulanteID=? ";
-       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setInt(1, id);                
-       });
-       return new ModelAndView("redirect:/cvPostulante.htm#idiomas"); 
-    }
-    //Borrar conocimiento usuario 
-    @RequestMapping(value="borrarConocimientoPostulante.htm",method = RequestMethod.GET)
-    public ModelAndView borrarConociemtoPostulante(HttpServletRequest request){
-       int id = Integer.parseInt(request.getParameter("id"));
-       String sql="DELETE FROM `otrosconocimientos` WHERE OtrosConocimientosID=? ";
-       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setInt(1, id);                
-       });
-       return new ModelAndView("redirect:/cvPostulante.htm#otrosconocimientos"); 
-    }
-    //editar numero de contacto
-    @RequestMapping(value="editarTelefono.htm",method = RequestMethod.GET)
-    public ModelAndView editarNumeroContacto(HttpServletRequest request){
-       int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
-       String nt = request.getParameter("numTel");
-       String ct = request.getParameter("conTipo");
-        System.out.println(id+nt+ct);
-       String sql="UPDATE `numerocontacto` SET `ContactoTipo`=?,`NumeroTelefonico`=? WHERE NumeroContactoID ? ";
-       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setString(1, ct);                
-                ps.setString(2, nt);                
-                ps.setInt(3, id);                
-       });
-       return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
-    }
-    
-    @RequestMapping(value = "borrarEducacion.htm", method = RequestMethod.GET)
-    public ModelAndView borrarEducacion(HttpServletRequest request){
-       int id = Integer.parseInt(request.getParameter("id"));
-       String sql="DELETE FROM `educacionPostulante` WHERE educacionPostulanteID=? ";
-       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setInt(1, id);                
-       });
-        return new ModelAndView("redirect:/cvPostulante.htm");
-    }
-    
-    @RequestMapping(value = "borrarExperienciaLaboral.htm", method = RequestMethod.GET)
-    public ModelAndView borrarExperienciaLaboral(HttpServletRequest request){
-       int id = Integer.parseInt(request.getParameter("id"));
-       String sql="DELETE FROM `experienciaProfesional` WHERE experienciaProfesionalID=? ";
-       this.jdbcTemplate.update(sql,(PreparedStatement ps)->{
-                ps.setInt(1, id);                
-       });
-        return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
-    }
-    @RequestMapping(value = "ofertasLaboralesPostulante.htm", method = RequestMethod.GET)
-    public ModelAndView vistaOfertasLaborales() {
-        mav.addObject(new UsuarioPostulante());
-        mav.setViewName("ofertasLaboralesPostulante");
-        return mav;
+    @RequestMapping(value = "borrarTelefono.htm", method = RequestMethod.GET)
+    public ModelAndView borrarNumeroContacto(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String sql = "DELETE FROM `numerocontacto` WHERE numeroContactoID=? ";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setInt(1, id);
+        });
+        return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
     }
 
-//    @RequestMapping(value = "loginPostulante.htm", method = RequestMethod.POST)
-//    public String loginUsuarioPostulante(HttpServletRequest request, ModelMap model) {
-//        String cor = request.getParameter("correo");
-//        String cla = request.getParameter("clave");
-//        String sql = "select usuarioID,CorreoUsuario,TipoCuenta,"
-//                + "nombreUsuario,ApellidoUsuario from usuario where correoUsuario='" + cor + "' and Contraseña=AES_ENCRYPT('" + cla + "','userpass')";
-//        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-//
-//        if (rows.size() > 0) {
-//
-//            for (Map row : rows) {
-//                model.put("tipoCuenta", (String) row.get("TipoCuenta").toString());
-//                model.put("CorreoUsuario", (String) row.get("CorreoUsuario").toString());
-//                model.put("NombreUsuario", (String) row.get("NombreUsuario").toString());
-//                model.put("CuentaActiva", (Integer) row.get("CuentaActiva"));
-//                model.put("ID", (Integer) row.get("usuarioID"));
-//            }
-//
-//            return "/index";
-//
-//        } else {
-//            return "/loginPostulante";
-//        }
-//    }
+    //Borrar numero de contacto 
+    @RequestMapping(value = "borrarIdiomaPostulante.htm", method = RequestMethod.GET)
+    public ModelAndView borrarIdiomaPostulante(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String sql = "DELETE FROM `idiomaPostulante` WHERE idiomaPostulanteID=? ";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setInt(1, id);
+        });
+        return new ModelAndView("redirect:/cvPostulante.htm#idiomas");
+    }
+
+    //Borrar conocimiento usuario 
+    @RequestMapping(value = "borrarConocimientoPostulante.htm", method = RequestMethod.GET)
+    public ModelAndView borrarConociemtoPostulante(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String sql = "DELETE FROM `otrosconocimientos` WHERE OtrosConocimientosID=? ";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setInt(1, id);
+        });
+        return new ModelAndView("redirect:/cvPostulante.htm#otrosconocimientos");
+    }
+
+    //editar numero de contacto
+    @RequestMapping(value = "editarTelefono.htm", method = RequestMethod.GET)
+    public ModelAndView editarNumeroContacto(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println(id);
+        String nt = request.getParameter("numTel");
+        String ct = request.getParameter("conTipo");
+        System.out.println(id + nt + ct);
+        String sql = "UPDATE `numerocontacto` SET `ContactoTipo`=?,`NumeroTelefonico`=? WHERE NumeroContactoID ? ";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setString(1, ct);
+            ps.setString(2, nt);
+            ps.setInt(3, id);
+        });
+        return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
+    }
+
+    @RequestMapping(value = "borrarEducacion.htm", method = RequestMethod.GET)
+    public ModelAndView borrarEducacion(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String sql = "DELETE FROM `educacionPostulante` WHERE educacionPostulanteID=? ";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setInt(1, id);
+        });
+        return new ModelAndView("redirect:/cvPostulante.htm");
+    }
+
+    @RequestMapping(value = "borrarExperienciaLaboral.htm", method = RequestMethod.GET)
+    public ModelAndView borrarExperienciaLaboral(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String sql = "DELETE FROM `experienciaProfesional` WHERE experienciaProfesionalID=? ";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setInt(1, id);
+        });
+        return new ModelAndView("redirect:/cvPostulante.htm#experienciaprofesional");
+    }
+
+    @RequestMapping(value = "headerpostulante.htm", method = RequestMethod.PUT)
+    public ModelAndView listarReg(HttpServletRequest request) {
+        String sqlr = "SELECT * FROM v_regionofertas";
+        List region = this.jdbcTemplate.queryForList(sqlr);
+        mav.addObject("reg", region);
+        System.out.println("Lista; "+region);
+        mav.setViewName("postulante/headerpostulante.htm");
+        return mav;
+    }
+    
+
 }

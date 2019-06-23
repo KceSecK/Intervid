@@ -31,59 +31,7 @@
         <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">-->
     </head>
     <body>
-        <!-- Navbar-->
-        <div id="nav-fixed" class="container-fluid nav-intervid static">
-            <div class="navbar navbar-expand-sm black">
-                <div class="container-fluid">
-                    <!-- Logo -->
-                    <div class="col-lg-2">
-                        <a class="navbar-brand img-fluid" href="index.htm">
-                            <img id="logo" src="img/letra 5mm.png" alt="InterVid">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-8 d-none d-sm-block d-md-block">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar">
-                            <select class="form-control mr-sm-2">
-                                <option>Seleccione</option>
-                            </select>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                        </form>
-                    </div>
-                    <!--                    Toggle icon 
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                            <img src="img/Menu_32.png">
-                                        </button>-->
-
-                    <div class="container">
-                        <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <div class="dropdown">
-                                        <a class="btn" href="#"> 
-                                            <img src="img/calendar_32px.png" alt=""/>
-                                        </a>
-                                        <a class="btn dropdown-toggle text-intervid " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <%= username%>
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="cvPostulante.htm">CV</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
-                                            <a class="dropdown-item" href="#">Notificaciones</a>
-                                            <a class="dropdown-item" href="indexp.htm">Cuenta</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="logout">Cerrar Sesión</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="headerpostulante.jsp" flush="true"></jsp:include>
 
         <!--Container principal-->
         <div class="container-fluid div-principal">
