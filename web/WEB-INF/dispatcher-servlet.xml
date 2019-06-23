@@ -25,6 +25,7 @@
                 <prop key="trabajos.htm">conexionController</prop>
                 <prop key="accesodenegado.htm">conexionController</prop>
                 <prop key="redirect.htm">conexionController</prop>
+                <prop key="videoLlamada.htm">conexionController</prop>
                 
             <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
