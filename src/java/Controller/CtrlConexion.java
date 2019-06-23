@@ -75,6 +75,11 @@ public class CtrlConexion {
         mav.setViewName("accesodenegado");
         return mav;
     }
+    @RequestMapping("videoLlamada.htm")
+    public ModelAndView VideoLlamada() {
+        mav.setViewName("videoLlamada");
+        return mav;
+    }
 
     @RequestMapping(value = "trabajos.htm", method = RequestMethod.GET)
     public ModelAndView listarOfertas(HttpServletRequest request) {
