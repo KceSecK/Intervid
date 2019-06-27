@@ -8,27 +8,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Intervid - Publicaciones</title> 
-        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/scrolling.js" type="text/javascript"></script>
-        <script src="js/validaremail.js" type="text/javascript"></script>
-        <script src="js/compararpass.js" type="text/javascript"></script>
-    </head>
-    <body>
+        <jsp:include page="../head.jsp" flush="true"></jsp:include>
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+        </head>
+        <body>
         <jsp:include page="headerempresa.jsp"></jsp:include>
 
             <!--Container principal-->
             <div class="container-fluid div-principal">
                 <div class="row">
                     <!--Nav lateral-->
-                    <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
+                    <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav d-none d-lg-block">
                         <div class="container">
                             <ul class="list-unstyled static mt-4 ">
                                 <li>
@@ -80,7 +71,7 @@
                                         </table> 
                                     </div>
                                     <div class="col-lg-6">
-                                        <table class="table table-responsive rounded border border-info">
+                                        <table class="table table-responsive-sm rounded border border-info">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">Candidatos</th>
@@ -116,7 +107,7 @@
 
                             <div id="proceso" class="mb-5">
                                 <h3 class="text-intervid">En Proceso</h3>
-                                <table class="table table-responsive-lg table-hover border border-info">
+                                <table class="table table-responsive-sm table-hover border border-info">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">
@@ -227,22 +218,10 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
-            </div>   
-
-
-        <jsp:include page="../footer.jsp" ></jsp:include>
+                <div class="row">
+                <jsp:include page="../footer.jsp" ></jsp:include>
+            </div>
+        </div>   
     </body>
 </html>

@@ -24,22 +24,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Intervid - trabajos</title>
-        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validaremail.js" type="text/javascript"></script>
-        <script src="js/validarletra.js" type="text/javascript"></script>
-        <script src="js/validarnumeros.js" type="text/javascript"></script>
-    </head>
-    <script>
-        window.onunload = function () {
-            $.get("${request.contextPath}/logout");
-        }
+        <jsp:include page="head.jsp" flush="true"></jsp:include>
+        </head>
+        <script>
+            window.onunload = function () {
+                $.get("${request.contextPath}/logout");
+            }
     </script>
     <body>
 
@@ -87,7 +78,13 @@
                                         </a>
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="cvPostulante.htm">CV</a>
+                                            <a class="dropdown-item " href="cvPostulante.htm">
+                                                <button class="btn btn-toolbar">
+                                                    <img src="img/icons8_user_male_circle_filled_32.png" alt=""/>
+                                                    &emsp14;Mi perfil
+                                                </button>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
                                             <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
                                             <a class="dropdown-item" href="#">Notificaciones</a>

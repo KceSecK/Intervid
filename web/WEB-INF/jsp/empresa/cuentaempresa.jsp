@@ -3,6 +3,7 @@
     Created on : 21-06-2019, 0:25:46
     Author     : sdasd
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="org.springframework.security.core.userdetails.User"%>
 <%@page import="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"%>
 <%@page import="org.springframework.security.crypto.password.PasswordEncoder"%>
@@ -21,20 +22,11 @@
 %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Intervid - Cuenta empresa</title> 
-        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/scrolling.js" type="text/javascript"></script>
-        <script src="js/validaremail.js" type="text/javascript"></script>
-        <script src="js/compararpass.js" type="text/javascript"></script>
-    </head>
-    <body>
+        <jsp:include page="../head.jsp" flush="true"></jsp:include>
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+        </head>
+        <body>
         <jsp:include page="headerempresa.jsp"></jsp:include>
 
             <!--Container principal-->
@@ -42,7 +34,7 @@
 
                 <div class="row">
                     <!--Nav lateral-->
-                    <div class="col-lg-2 bg-intervid intervid-fixed-nav">
+                    <div class="col-lg-2 bg-intervid intervid-fixed-nav d-none d-lg-block">
                         <div class="container">
                             <ul class="list-unstyled static ">
                                 <h3 class="text-white mt-3">Mi cuenta</h3>
@@ -108,6 +100,9 @@
                                     </button>
                                 </div>
                             </c:when>
+                            <c:otherwise>
+
+                            </c:otherwise>
                         </c:choose>
                         <div id="perfil">
                             <div class="row mt-4"><p class="letraMediaPerfil">Datos de Cuenta</p></div>

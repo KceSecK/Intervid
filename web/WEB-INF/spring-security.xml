@@ -20,12 +20,14 @@
         <intercept-url pattern="/cuentaempresa.htm" access="hasAnyRole('Empresa')"/>
         <intercept-url pattern="/publicaciones.htm" access="hasAnyRole('Empresa')"/>
         <intercept-url pattern="/reclutadores.htm" access="hasAnyRole('Empresa')"/>
+        <intercept-url pattern="/perfilempresa.htm" access="hasAnyRole('Empresa')"/>
+        <intercept-url pattern="/nuevoaviso.htm" access="hasAnyRole('Empresa')"/>
         
         <!--Reclutador-->
         <intercept-url pattern="/indexr.htm" access="hasAnyRole('Reclutador')"/>
               
-        <form-login login-page="/redirect.htm" default-target-url="/redirect.htm"  
-                    login-processing-url="/login" authentication-failure-url="/loginPostulante.htm?error" 
+        <form-login login-page="/login.htm" default-target-url="/redirect.htm"  
+                    login-processing-url="/login" authentication-failure-url="/login.htm?error=1" 
                     username-parameter="correo"
                     password-parameter="clave" />  
         <logout logout-success-url="/index.htm" logout-url="/logout" invalidate-session="true" delete-cookies="true" />

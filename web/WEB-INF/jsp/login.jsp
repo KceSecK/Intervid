@@ -1,57 +1,65 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<c:choose>
-    <c:when test="${param.error == '1'}">        
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Correo o contraseña incorrectas!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-    <c:when test="${param.error == '2'}">        
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Esta cuenta de usuario ya existe, porfavor utilice otra.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-    <c:when test="${param.success == '1'}">        
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Cuenta creada con éxito!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:when>
-    <c:otherwise>
-
-    </c:otherwise>
-</c:choose>
-<form action="<c:url value="/login" />" method="POST">
-    <div class="form-group">
-        <div class="col-12">
-            <label class="text-intervid">Correo</label>                                 
-            <input id="correo" class="form-control" type="email" name="correo" onKeyUp="validarEmail(this.form.correo.value);" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-12">
-            <label class="text-intervid">Contraseña</label>
-            <input type="password" class="form-control" name="clave">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-12">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <p>Mantenerme conectado</p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Intervid - Login</title>
+        <jsp:include page="head.jsp" flush="true"></jsp:include>
+            <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+        </head>
+        <body>
+            <div class="container-fluid loginEM">
+                <div class="container"> 
+                    <div class="row">
+                        <div class="col-lg-12" >
+                            <a href="index.htm">
+                                <img class="inner img-fluid mt-5" src="img/letra 10mm_render.png" alt=""/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div class="container-fluid loginBody mb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="container mt-5">
+                                <div class="card mx-auto col-lg-6">
+                                    <p class="letraGrande text-intervid text-center">
+                                        Ingreso a INTERVID
+                                    </p>
 
-            <input type="submit" value="Ingresar" class="btn btn-success" style="width:100%">
-        </div>
-    </div>
-</form>  
+                                    <div class="card-body ">
+                                    <jsp:include page="loginem.jsp"></jsp:include>
+                                        <div class="form-group">
+                                            <div class="container">
+                                                <div class="row align-items-start">
+                                                    <div class="col-lg-12">
+                                                        <a href="">Â¿OlvidÃ³ su contraseÃ±a?</a> 
+                                                    </div>         
+                                                </div>
+                                                <div class="row mt-4">  </div>
+                                                <div class="row text-center">
+                                                    <div class="col-lg-12 ">
+                                                        <a href="registro.htm">Â¿No tienes cuenta de postulante? Registrate ahora</a>
+                                                    </div>
+                                                    <div class="col-lg-12 ">
+                                                        <a href="registroEmpresa.htm">Â¿No tienes cuenta de empresa? Registrate ahora</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <jsp:include page="footer.jsp"></jsp:include>
+    </body>
+</html>

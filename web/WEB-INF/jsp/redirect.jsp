@@ -14,8 +14,11 @@
     } else if (rol.equals("[Empresa]")) {
         response.sendRedirect("empresas.htm");
     } else if (rol.equals("[Reclutador]")) {
-        response.sendRedirect("reclutadores.htm");
+        response.sendRedirect("indexr.htm");
     } else if (rol.equals("[ROLE_ANONYMOUS]")) {
         response.sendRedirect("index.htm");
+    }else{
+        session.invalidate();
+        response.sendRedirect("404.jsp");
     }
 %>

@@ -55,7 +55,6 @@ public class CtrlPostulante {
 
     @RequestMapping(value = "registro.htm", method = RequestMethod.POST)
     public ModelAndView Agregar(Usuario u) {
-
         String password = u.getClave();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
@@ -71,7 +70,7 @@ public class CtrlPostulante {
         } else if (existe.equals("0")) {
             System.out.println("loginpostulante");
             this.jdbcTemplate.update("call creacion_UsuarioPostulante(?,?,?,?)", u.getCorreo(), u.getClave(), u.getNombre(), u.getApellido());
-            mav.setViewName("redirect:/loginPostulante.htm");
+            mav.setViewName("redirect:/loginPostulante.htm?success=1");
             return mav;
         } else {
             System.out.println("Else");
@@ -632,10 +631,9 @@ public class CtrlPostulante {
         String sqlr = "SELECT * FROM v_regionofertas";
         List region = this.jdbcTemplate.queryForList(sqlr);
         mav.addObject("reg", region);
-        System.out.println("Lista; "+region);
+        System.out.println("Lista; " + region);
         mav.setViewName("postulante/headerpostulante.htm");
         return mav;
     }
-    
 
 }

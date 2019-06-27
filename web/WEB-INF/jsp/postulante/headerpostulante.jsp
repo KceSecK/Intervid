@@ -54,7 +54,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="cvPostulante.htm">CV</a>
+                                    <a class="dropdown-item " href="cvPostulante.htm">
+                                        <button class="btn btn-toolbar">
+                                            <img src="img/icons8_user_male_circle_filled_32.png" alt=""/>
+                                            &emsp14;Mi perfil
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
                                     <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
                                     <a class="dropdown-item" href="#">Notificaciones</a>

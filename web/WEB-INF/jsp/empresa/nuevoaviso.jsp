@@ -12,12 +12,10 @@
     SecurityContext ctx = SecurityContextHolder.getContext();
     Authentication auth = ctx.getAuthentication();
     String username = auth.getName();
-    String rol = auth.getAuthorities().toString();
-
 %>
 <html>
     <head>
-        <title>Intervid - Curriculum de usuario</title> 
+        <title>Intervid - Nuevo Aviso Laboral</title> 
         <jsp:include page="../head.jsp" flush="true"></jsp:include>
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     </head>
@@ -31,9 +29,7 @@
                 <!--Nav lateral-->
                 <div class="col-lg-2 bg-intervid intervid-fixed-nav minh d-none d-lg-block">
                     <div class="container">
-                        <ul class="list-unstyled static ">
-                            <h3 class="text-white mt-3">Mi cuenta</h3>
-                            <hr class="hr-custom-white"/>
+                        <ul class="list-unstyled static mt-4 ">
                             <li>
                                 <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
                             </li>

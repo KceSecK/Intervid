@@ -31,7 +31,7 @@ public class CtrlConexion {
 
     @RequestMapping(value = "index.htm", method = RequestMethod.GET)
     public ModelAndView Listar() {
-        String sql = "SELECT * FROM REGION";
+        String sql = "SELECT * FROM v_regionofertas WHERE RegionPaisFK =38";
         List region = this.jdbcTemplate.queryForList(sql);
         mav.addObject("reg", region);
         mav.setViewName("index");
@@ -57,6 +57,12 @@ public class CtrlConexion {
         mav.setViewName("redirect");
         return mav;
     }
+    
+    @RequestMapping("login.htm")
+    public ModelAndView Login() {
+        mav.setViewName("login");
+        return mav;
+    }
 
     @RequestMapping("trabajos.htm")
     public ModelAndView Trabajos() {
@@ -73,7 +79,7 @@ public class CtrlConexion {
     @RequestMapping(value = "trabajos.htm", method = RequestMethod.GET)
     public ModelAndView listarOfertas(HttpServletRequest request) {
 
-        String sqlr = "SELECT * FROM v_regionofertas";
+        String sqlr = "SELECT * FROM v_regionofertas WHERE RegionPaisFK =38";
         List region = this.jdbcTemplate.queryForList(sqlr);
         mav.addObject("reg", region);
 

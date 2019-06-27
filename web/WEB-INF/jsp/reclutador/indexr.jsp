@@ -13,6 +13,6 @@
     </head>
     <body>
         reclutador
-        <a href="/logout">sss</a>
+        <a href="logout">sss</a>
     </body>
 </html>

@@ -11,15 +11,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Intervid - Login Postulantes</title>
-        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validaremail.js" type="text/javascript"></script>
+        <jsp:include page="head.jsp" flush="true"></jsp:include>
     </head>
     <body>
 
@@ -39,7 +32,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="container">
+                        <div class="container mt-5">
                             <div class="row mt-3">  </div>
                             <div class="row mt-3">  </div>
 
@@ -51,7 +44,7 @@
                                 </p>
 
                                 <div class="card-body ">
-                                    <jsp:include page="login.jsp" ></jsp:include>
+                                    <jsp:include page="loginem.jsp" ></jsp:include>
                                         <div class="form-group">
                                             <div class="container">
                                                 <div class="row align-items-start">

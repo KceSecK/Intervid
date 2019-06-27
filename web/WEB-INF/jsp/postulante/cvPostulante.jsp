@@ -9,19 +9,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Intervid - Curriculum de usuario</title> 
-        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <title>Intervid - Curriculum de usuario</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/validarrut.js"></script>
-        <script src="js/datosPostulante.js"></script>
-        <script src="js/validarnumeros.js" type="text/javascript"></script>
-        <script src="js/validaremail.js" type="text/javascript"></script>
+        <jsp:include page="../head.jsp" flush="true"></jsp:include>
     </head>
 
     <body>
@@ -32,7 +22,7 @@
                 <div class="row">
                     <!--Nav lateral-->
                     <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
-                        <div class="container">
+                        <div class="container mt-4">
                             <ul class="list-unstyled static ">
                                 <li>
                                     <a class="alink nav-link border-link" href="#datospersonales">Datos Personales</a>
@@ -1408,4 +1398,3 @@
 
 </script>
 <script type="text/javascript" src="js/datelimiter.js"></script>
-<script src="js/scrolling.js" type="text/javascript"></script>

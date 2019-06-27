@@ -25,6 +25,7 @@
                 <prop key="trabajos.htm">conexionController</prop>
                 <prop key="accesodenegado.htm">conexionController</prop>
                 <prop key="redirect.htm">conexionController</prop>
+                <prop key="login.htm">conexionController</prop>
                 
                 <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
@@ -57,10 +58,13 @@
                 <prop key="publicaciones.htm">conexionController3</prop>
                 <prop key="reclutadores.htm">conexionController3</prop>
                 <prop key="agregarreclutador.htm">conexionController3</prop>
+                <prop key="perfilempresa.htm">conexionController3</prop>
+                <prop key="nuevoaviso.htm">conexionController3</prop>
                 
                 
                 <!--Usuario Reclutador-->
                 <prop key="indexr.htm">conexionController4</prop>
+                
 
                  
                  

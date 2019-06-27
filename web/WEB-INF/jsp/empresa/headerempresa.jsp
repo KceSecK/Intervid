@@ -9,7 +9,6 @@
     SecurityContext ctx = SecurityContextHolder.getContext();
     Authentication auth = ctx.getAuthentication();
     String username = auth.getName();
-    String rol = auth.getAuthorities().toString();
 
 %>
 
@@ -18,13 +17,18 @@
     <div class="navbar navbar-expand-sm black">
         <div class="container-fluid">
             <!-- Logo -->
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-sm-4">
                 <a class="navbar-brand img-fluid" href="index.htm">
                     <img id="logo" src="img/letra 5mm.png" alt="InterVid">
                 </a>
             </div>
-            <div class="container">
-                <div class="ml-5 collapse navbar-collapse" id="collapsibleNavbar">
+            <div class="col-lg-2 col-sm-4 d-none d-sm-block">
+                <a class="navbar-brand img-fluid" href="nuevoaviso.htm">
+                    <button class="btn btn-orange scale">Publicar Aviso</button>
+                </a>
+            </div>
+            <div class="col-lg-8 col-sm-4">
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <div class="dropdown">
@@ -33,6 +37,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item " href="perfilempresa.htm">
+                                        <button class="btn btn-toolbar">
+                                            <img src="img/icons8_user_male_circle_filled_32.png" alt=""/>
+                                            &emsp14;Mi perfil
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="publicaciones.htm">Mis publicaciones</a>
                                     <a class="dropdown-item" href="#">Mis entrevistas</a>
                                     <a class="dropdown-item" href="reclutadores.htm">Mis reclutadores</a>
@@ -46,6 +57,7 @@
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
