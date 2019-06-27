@@ -301,3 +301,8 @@ grey{
     color: #FFF;
     font-weight: bold;
 }
+video
+{
+    width: 100%;
+    height: 300px;
+}
