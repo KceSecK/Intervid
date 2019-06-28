@@ -220,10 +220,15 @@ public class CtrlPostulante {
                 + "LEFT JOIN  educacionpostulante e on u.UsuarioPostulanteID = e.EducacionPostulanteFK WHERE CorreoUsuario='" + auth.getName() + "'";
         String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
-        String sql8 = "SELECT * FROM experienciaprofesional,usuario,usuariopostulante"
-                + "    WHERE ExperienciaPostulanteFK=UsuarioPostulanteID and CorreoUsuario='" + auth.getName() + " '";
-        String sql9 = "SELECT * FROM IdiomaPostulante,usuario,usuariopostulante "
-                + "WHERE PostulanteIdiomaFK=UsuarioPostulanteID AND CorreoUsuario='" + auth.getName() + "'";
+        String sql8 = "SELECT CorreoUsuario,ExperienciaProfesionalID,ExperienciaPostulanteFK,EmpresaExperiencia, "
+                + "CargoDesempeñado,InicioPeriodo,FinPeriodo,FuncionesLogros "
+                + "FROM usuario LEFT JOIN usuariopostulante u on usuario.UsuarioID = u.PostulanteUsuarioFK "
+                + "LEFT JOIN experienciaprofesional e on u.UsuarioPostulanteID = e.ExperienciaPostulanteFK "
+                + "WHERE  CorreoUsuario= '" + auth.getName() + "'";
+        String sql9 = "SELECT CorreoUsuario, IdiomaPostulanteID,PostulanteIdiomaFK,IdiomaFK,NivelEscrito,NivelHablado,NombreIdioma,IdiomaID "
+                + "FROM usuario LEFT JOIN usuariopostulante u on usuario.UsuarioID = u.PostulanteUsuarioFK "
+                + "LEFT JOIN idiomapostulante i on u.UsuarioPostulanteID = i.PostulanteIdiomaFK LEFT JOIN idioma i2 on i.IdiomaFK = i2.IdiomaID "
+                + "WHERE CorreoUsuario='" + auth.getName() + "'";
         String sql10 = "select * from idioma";
         String sql11 = "select * from otrosConocimientos,usuario,usuariopostulante"
                 + " WHERE ConocimientoPostulante=UsuarioPostulanteID AND CorreoUsuario='" + auth.getName() + "'";

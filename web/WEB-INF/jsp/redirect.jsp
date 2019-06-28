@@ -12,7 +12,7 @@
     if (rol.equals("[Postulante]")) {
         response.sendRedirect("trabajos.htm");
     } else if (rol.equals("[Empresa]")) {
-        response.sendRedirect("empresas.htm");
+        response.sendRedirect("publicaciones.htm");
     } else if (rol.equals("[Reclutador]")) {
         response.sendRedirect("indexr.htm");
     } else if (rol.equals("[ROLE_ANONYMOUS]")) {

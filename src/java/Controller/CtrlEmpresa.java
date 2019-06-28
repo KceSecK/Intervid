@@ -141,7 +141,7 @@ public class CtrlEmpresa {
             String rol = auth.getAuthorities().toString();
             if (rol.equals("[Empresa]")) {
                 /* The user is logged in :) */
-                model.setViewName("redirect:/empresas.htm");
+                model.setViewName("redirect:/publicaciones.htm");
                 return model;
             } else {
                 model.setViewName("redirect:/index.htm");

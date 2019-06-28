@@ -1043,7 +1043,7 @@
                                                         <tr>
                                                             <td class="text-intervid">Idioma</td>
                                                             <td>
-                                                                ${idiPos.IdiomaFK == idi[0].IdiomaID ? idi[0].NombreIdioma:''}
+                                                                ${idiPos.NombreIdioma}
                                                             </td>
 
                                                             <td class="text-intervid">Nivel Hablado</td>
