@@ -6,12 +6,7 @@
 package Controller;
 
 import Config.Conexion;
-import entidades.ContactoPostulante;
-import entidades.EducacionPostulante;
-import entidades.Licencia;
-import entidades.NumeroContacto;
-import entidades.Usuario;
-import entidades.UsuarioPostulante;
+import entidades.*;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.JdbcTemplate;

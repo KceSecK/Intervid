@@ -35,7 +35,7 @@
 
 
                     <div class="col-lg-10 mb-5">
-                        <div class="container">
+                        <div class="container mt-4">
                         <c:choose>
                             <c:when test="${param.error == '1'}">        
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -65,15 +65,14 @@
 
                             </c:otherwise>
                         </c:choose>
-                        <div id="reclutador" class="mb-5 mt-5">
-
+                        <div id="reclutador" class="mb-5">
                             <button id="" type="button" class="btn btn-right btn-link d-block mb-2" data-toggle="modal" data-target="#dreclutador" >
                                 <img src="img/icons8_add_32.png" alt=""/>
                                 Agregar Reclutador  
                             </button>
-
                             <div class="row d-block">
                                 <h3 class="text-intervid">Mis Reclutadores</h3>
+                                <hr/>
                                 <table class="table table-responsive-sm table-hover border border-info">
                                     <thead class="thead-dark">
                                         <tr>

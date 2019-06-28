@@ -1,5 +1,6 @@
 package entidades;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -7,159 +8,168 @@ import java.util.Date;
  * @author SaitaM
  */
 public class OfertaLaboral {
-   private int OfertaLaboralID;
-   private String NombreOferta;
-   private int CreadorOferta;
-   private int EmpresaOferta;
-   private int LugarTrabajo;
-   private int TipoEntrevista;
-   private int PlanOferta;
-   private String DescripcionCargo;
-   private Date FechaPublicacionOferta;
-   private Date FechaFinalizacionOferta;
-   private String RequisitosOferta;
-   private String BeneficiosOferta;
-   private Date HorarioEntrevista;
-   private String TipoCargo;
-   private String TipoContrato;
-   private String JornadaTrabajo;
-   private int SueldoOfrecido;
 
-    public int getOfertaLaboralID() {
-        return OfertaLaboralID;
+    private int ofertaid;
+    private String titulo;
+    private int creador;
+    private int empresa;
+    private int lugartrabajo;
+    private int tipoentrevista;
+    private int plan;
+    private String descripcion;
+    private Date fechapublicacion;
+    private Date fechafinalizacion;
+    private String requisitos;
+    private String beneficios;
+    private Time horarioinicio;
+    private Time horariofin;
+    private String cargo;
+    private String contrato;
+    private String jornada;
+    private int sueldo;
+
+    public int getOfertaid() {
+        return ofertaid;
     }
 
-    public void setOfertaLaboralID(int OfertaLaboralID) {
-        this.OfertaLaboralID = OfertaLaboralID;
+    public void setOfertaid(int ofertaid) {
+        this.ofertaid = ofertaid;
     }
 
-    public String getNombreOferta() {
-        return NombreOferta;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNombreOferta(String NombreOferta) {
-        this.NombreOferta = NombreOferta;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public int getCreadorOferta() {
-        return CreadorOferta;
+    public int getCreador() {
+        return creador;
     }
 
-    public void setCreadorOferta(int CreadorOferta) {
-        this.CreadorOferta = CreadorOferta;
+    public void setCreador(int creador) {
+        this.creador = creador;
     }
 
-    public int getEmpresaOferta() {
-        return EmpresaOferta;
+    public int getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaOferta(int EmpresaOferta) {
-        this.EmpresaOferta = EmpresaOferta;
+    public void setEmpresa(int empresa) {
+        this.empresa = empresa;
     }
 
-    public int getLugarTrabajo() {
-        return LugarTrabajo;
+    public int getLugartrabajo() {
+        return lugartrabajo;
     }
 
-    public void setLugarTrabajo(int LugarTrabajo) {
-        this.LugarTrabajo = LugarTrabajo;
+    public void setLugartrabajo(int lugartrabajo) {
+        this.lugartrabajo = lugartrabajo;
     }
 
-    public int getTipoEntrevista() {
-        return TipoEntrevista;
+    public int getTipoentrevista() {
+        return tipoentrevista;
     }
 
-    public void setTipoEntrevista(int TipoEntrevista) {
-        this.TipoEntrevista = TipoEntrevista;
+    public void setTipoentrevista(int tipoentrevista) {
+        this.tipoentrevista = tipoentrevista;
     }
 
-    public int getPlanOferta() {
-        return PlanOferta;
+    public int getPlan() {
+        return plan;
     }
 
-    public void setPlanOferta(int PlanOferta) {
-        this.PlanOferta = PlanOferta;
+    public void setPlan(int plan) {
+        this.plan = plan;
     }
 
-    public String getDescripcionCargo() {
-        return DescripcionCargo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcionCargo(String DescripcionCargo) {
-        this.DescripcionCargo = DescripcionCargo;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Date getFechaPublicacionOferta() {
-        return FechaPublicacionOferta;
+    public Date getFechapublicacion() {
+        return fechapublicacion;
     }
 
-    public void setFechaPublicacionOferta(Date FechaPublicacionOferta) {
-        this.FechaPublicacionOferta = FechaPublicacionOferta;
+    public void setFechapublicacion(Date fechapublicacion) {
+        this.fechapublicacion = fechapublicacion;
     }
 
-    public Date getFechaFinalizacionOferta() {
-        return FechaFinalizacionOferta;
+    public Date getFechafinalizacion() {
+        return fechafinalizacion;
     }
 
-    public void setFechaFinalizacionOferta(Date FechaFinalizacionOferta) {
-        this.FechaFinalizacionOferta = FechaFinalizacionOferta;
+    public void setFechafinalizacion(Date fechafinalizacion) {
+        this.fechafinalizacion = fechafinalizacion;
     }
 
-    public String getRequisitosOferta() {
-        return RequisitosOferta;
+    public String getRequisitos() {
+        return requisitos;
     }
 
-    public void setRequisitosOferta(String RequisitosOferta) {
-        this.RequisitosOferta = RequisitosOferta;
+    public void setRequisitos(String requisitos) {
+        this.requisitos = requisitos;
     }
 
-    public String getBeneficiosOferta() {
-        return BeneficiosOferta;
+    public String getBeneficios() {
+        return beneficios;
     }
 
-    public void setBeneficiosOferta(String BeneficiosOferta) {
-        this.BeneficiosOferta = BeneficiosOferta;
+    public void setBeneficios(String beneficios) {
+        this.beneficios = beneficios;
     }
 
-    public Date getHorarioEntrevista() {
-        return HorarioEntrevista;
+    public Time getHorarioinicio() {
+        return horarioinicio;
     }
 
-    public void setHorarioEntrevista(Date HorarioEntrevista) {
-        this.HorarioEntrevista = HorarioEntrevista;
+    public void setHorarioinicio(Time horarioinicio) {
+        this.horarioinicio = horarioinicio;
     }
 
-    public String getTipoCargo() {
-        return TipoCargo;
+    public Time getHorariofin() {
+        return horariofin;
     }
 
-    public void setTipoCargo(String TipoCargo) {
-        this.TipoCargo = TipoCargo;
+    public void setHorariofin(Time horariofin) {
+        this.horariofin = horariofin;
     }
 
-    public String getTipoContrato() {
-        return TipoContrato;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setTipoContrato(String TipoContrato) {
-        this.TipoContrato = TipoContrato;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public String getJornadaTrabajo() {
-        return JornadaTrabajo;
+    public String getContrato() {
+        return contrato;
     }
 
-    public void setJornadaTrabajo(String JornadaTrabajo) {
-        this.JornadaTrabajo = JornadaTrabajo;
+    public void setContrato(String contrato) {
+        this.contrato = contrato;
     }
 
-    public int getSueldoOfrecido() {
-        return SueldoOfrecido;
+    public String getJornada() {
+        return jornada;
     }
 
-    public void setSueldoOfrecido(int SueldoOfrecido) {
-        this.SueldoOfrecido = SueldoOfrecido;
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
     }
-   
-   
+
+    public int getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(int sueldo) {
+        this.sueldo = sueldo;
+    }
+
 }

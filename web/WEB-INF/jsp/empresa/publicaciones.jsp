@@ -40,14 +40,13 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-10 mb-5 mt-5">
+                    <div class="col-lg-10 mb-5 mt-4">
                         <div class="container">
 
                             <div id="publicaciones">
                                 <h3 class="text-intervid">Mis Publicaciones</h3>
+                                <hr/>
                                 <div class="row">
-
-
                                     <div class="col-lg-6">
                                         <table class="table rounded border border-info">
                                             <thead class="thead-dark">
@@ -107,6 +106,7 @@
 
                             <div id="proceso" class="mb-5">
                                 <h3 class="text-intervid">En Proceso</h3>
+                                <hr/>
                                 <table class="table table-responsive-sm table-hover border border-info">
                                     <thead class="thead-dark">
                                         <tr>

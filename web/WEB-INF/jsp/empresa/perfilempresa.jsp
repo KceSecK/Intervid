@@ -45,23 +45,86 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-10 mb-5">
+                    <div class="col-lg-10 mb-5 mt-4">
                         <div class="container">
-                            <!--datos empresa-->
-                            <div id="datos">
-                                <div class="row mt-4"><p class="letraMediaPerfil">Datos de la Empresa</p></div>
-                                <div class="row">
-                                    <div class="card col-lg-12">
-                                        <div class="card-body">
-                                            <div class="container">
-                                                <div>
-                                                    <button id="datosempresa" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#ddatos">
-                                                        Editar
-                                                    </button>
-                                                    <table class="table table-responsive-sm">
-                                                        <tr>
-                                                            <td class="text-intervid pr-5">Nombre</td>
-                                                            <td>${perfil[0].NombreEmpresa}</td>
+                        <c:choose>
+                            <c:when test="${param.error == '1'}">        
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    Hubo un error al modificar los datos de la empresa, porfavor revise los datos ingresados.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.error == '2'}">        
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    Hubo un error al modificar la descripción de la empresa, porfavor revise los datos ingresados.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.error == '3'}">        
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    Hubo un error al modificar los datos de la persona de contacto, porfavor revise los datos ingresados.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.error == '999'}">        
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    Ups!, algo ocurrió, revise los datos ingresados. Si el problema persiste contacte a un administrador.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.success == '1'}">        
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Datos de empresa modificados correctamente!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.success == '2'}">        
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Descripción de empresa modificada correctamente!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:when test="${param.success == '3'}">        
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Datos de contacto modificados correctamente!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+
+                            </c:otherwise>
+                        </c:choose>
+                        <h3 class="text-intervid">Mi Perfil</h3>
+                        <hr/>
+                        <!--datos empresa-->
+                        <div id="datos">
+                            <div class="row"><p class="letraMediaPerfil">Datos de la Empresa</p></div>
+                            <div class="row">
+                                <div class="card col-lg-12">
+                                    <div class="card-body">
+                                        <div class="container">
+                                            <div>
+                                                <button id="datosempresa" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#ddatos">
+                                                    Editar
+                                                </button>
+                                                <table class="table table-responsive-sm">
+                                                    <tr>
+                                                        <td class="text-intervid pr-5">Nombre</td>
+                                                        <td>${perfil[0].NombreEmpresa}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-intervid pr-5">Razón Social</td>
@@ -104,23 +167,26 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-6">
                                                         <label class="text-intervid">Nombre de la empresa</label>
-                                                        <input type="text" class="form-control" name="NombreEmpresa" required>
+                                                        <input type="text" class="form-control" name="NombreEmpresa" value="${perfil[0].NombreEmpresa}" required>
                                                     </div>
                                                     <div class="form-group col-lg-6">
                                                         <label class="text-intervid">Razón Social</label>
-                                                        <input type="text" class="form-control" name="RazonSocial" onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)" required>
+                                                        <input type="text" class="form-control" name="RazonSocial" value="${perfil[0].RazonSocial}" onkeypress="return soloLetras(event);" onkeydown="return soloLetra(event)" required>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="text-intervid">RUT de la empresa</label>
-                                                    <input type="text" class="form-control" name="RutEmpresa" oninput="checkRut(this)" maxlength="10" required>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-12">
                                                         <label class="text-intervid">País</label>
-                                                        <select class="form-control">
+                                                        <select class="form-control" id="EmpresaUsuarioFK" name="EmpresaUsuarioFK">
                                                             <c:forEach var="p" items="${pais}">
-                                                                <option value="${p.PaisID}">${p.PaisNombre}</option>
+                                                                <c:choose>
+                                                                    <c:when test="${p.PaisID == perfil[0].EmpresaPais}">
+                                                                        <option selected value="${p.PaisID}">${p.PaisNombre}</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option value="${p.PaisID}">${p.PaisNombre}</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                             </c:forEach>
                                                         </select>
                                                     </div>                                                            
@@ -128,13 +194,13 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-12">
                                                         <label class="text-intervid">Dirección</label>
-                                                        <input class="form-control" id="direccion" name="direccion" type="text" required/>
+                                                        <input class="form-control" id="EmpresaDireccion" name="EmpresaDireccion" type="text" value="${perfil[0].EmpresaDireccion}" required/>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-12">
                                                         <label class="text-intervid">Sector empresarial</label>
-                                                        <input class="form-control" id="sector" name="sector" type="text" required/>
+                                                        <input class="form-control" id="SectorEmpresarial" name="SectorEmpresarial" type="text" value="${perfil[0].SectorEmpresarial}" required/>
                                                     </div>
                                                 </div>
 
@@ -176,7 +242,7 @@
                                                     <tr>
                                                         <td class="text-intervid pr-5">Página Web de la empresa</td>
                                                         <td>
-                                                            <a href="http://${perfil[0].PaginaWeb}" target="_blank" hreflang="">${perfil[0].PaginaWeb}</a>
+                                                            <a href="${perfil[0].PaginaWeb}" target="_blank" hreflang="">${perfil[0].PaginaWeb}</a>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -207,21 +273,23 @@
                                         <div class="container">
                                             <form method="POST" class="mb-3">
                                                 <input type="hidden" name="formulario" value="2"/>
-                                                <label class="col-form-label text-intervid">Logo Empresarial</label>
-                                                <div class="custom-file col-lg-12">
-                                                    <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                                <div class="form-row">
+                                                    <div class="form-group col-lg-12">
+                                                        <label class="col-form-label text-intervid">Logo Empresarial (URL)</label>
+                                                        <input id="LogoEmpresa" name="LogoEmpresa" type="url" class="form-control" value="${perfil[0].LogoEmpresa}" />
+                                                    </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-12">
-                                                        <label class="col-form-label text-intervid">Página Web</label>
-                                                        <input id="web" name="web" type="url" class="form-control"/>
+                                                        <label class="col-form-label text-intervid">Página Web (URL)</label>
+                                                        <input id="PaginaEmpresa" name="PaginaEmpresa" type="url" class="form-control" value="${perfil[0].PaginaWeb}" />
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-12">
                                                         <label class="col-form-label text-intervid">Descripción Empresa</label>
-                                                        <textarea id="txtArea" class="form-control" name="txtArea" maxlength="3000" onkeypress="textAreaAdjust(this)" onkeyup="textAreaAdjust()" required></textarea>
+                                                        <textarea id="txtArea" class="form-control" name="DescripcionEmpresa" maxlength="2000"onfocus="charcountupdate(this.value)" onkeyup="charcountupdate(this.value)" onkeypress="textAreaAdjust(this)" onkeyup="textAreaAdjust()" required>${perfil[0].DescripcionEmpresa}</textarea>
+                                                        <span class="p-16 text-intervid" id=charcount></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-row justify-content-end">
@@ -281,18 +349,18 @@
                                     <div class="modal-body">
                                         <div class="container">
                                             <form method="POST" class="mb-3">
-                                                <input type="hidden" name="formulario" value="2"/>
+                                                <input type="hidden" name="formulario" value="3"/>
                                                 <div class="form-group">
                                                     <label class="col-form-label text-intervid">Nombre</label>
-                                                    <input id="logo" name="logo" type="text" class="form-control" required/>
+                                                    <input id="nombre" name="nombre" type="text" class="form-control" value="${perfil[0].NombreUsuario}" required/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-form-label text-intervid">Apellido</label>
-                                                    <input id="web" name="web" type="url" class="form-control"/>
+                                                    <input id="apellido" name="apellido" type="text" class="form-control" value="${perfil[0].ApellidoUsuario}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-form-label text-intervid">Descripción Empresa</label>
-                                                    <textarea id="txtArea" class="form-control" name="txtArea" maxlength="3000" onkeypress="textAreaAdjust(this)" onkeyup="textAreaAdjust()" required></textarea>
+                                                    <label class="col-form-label text-intervid">Teléfono</label>
+                                                    <input id="NumeroTelefonico" class="form-control" name="NumeroTelefonico" type="tel" maxlength="11" value="${perfil[0].NumeroTelefonico}" onKeyPress="return SoloNumeros(event);" onkeydown="return SoloNumeros(event);" required/>
                                                 </div>
                                                 <div class="form-row justify-content-end">
                                                     <div class="form-group">

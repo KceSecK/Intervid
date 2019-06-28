@@ -23,11 +23,14 @@
                 </a>
             </div>
             <div class="col-lg-2 col-sm-4 d-none d-sm-block">
-                <a class="navbar-brand img-fluid" href="nuevoaviso.htm">
+                <a class="mr-3" href="nuevoaviso.htm">
                     <button class="btn btn-orange scale">Publicar Aviso</button>
                 </a>
             </div>
-            <div class="col-lg-8 col-sm-4">
+            <div class="col-lg-2 d-none d-sm-block">
+                <a href="planesempresa.htm">Planes</a>
+            </div>
+            <div class="col-lg-6 col-sm-4">
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -45,9 +48,9 @@
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="publicaciones.htm">Mis publicaciones</a>
-                                    <a class="dropdown-item" href="#">Mis entrevistas</a>
+                                    <a class="dropdown-item disabled" href="#">Mis entrevistas</a>
                                     <a class="dropdown-item" href="reclutadores.htm">Mis reclutadores</a>
-                                    <a class="dropdown-item" href="#">Notificaciones</a>
+                                    <a class="dropdown-item disabled" href="#">Notificaciones</a>
                                     <a class="dropdown-item" href="cuentaempresa.htm">Cuenta</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="logout">Cerrar Sesión</a>

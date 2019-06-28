@@ -75,7 +75,7 @@
                 success: function (data) {
                      
                     $('#EmpresaExperiencia').val(data[0].EmpresaExperiencia);
-                    $('#CargoDesempeño').val(data[0].CargoDesempeño);
+                    $('#CargoDesempeñado').val(data[0].CargoDesempeñado);
                     $('#InicioPeriodo').val(data[0].InicioPeriodo);
                     $('#FinPeriodo').val(data[0].FinPeriodo);
                     $('#FuncionesLogros').val(data[0].FuncionesLogros);
@@ -161,7 +161,7 @@
         $(document).on('click', '.edit_data_idio', function () {
 
             var id_idiomaPostulante = $(this).attr("id");
-            console.log(id_idiomaPostulante)
+            console.log(id_idiomaPostulante);
             $.ajax({
                 url: "editIdiomaPostulante.htm",
                 method: "POST",

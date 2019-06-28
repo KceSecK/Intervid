@@ -26,6 +26,8 @@
                 <prop key="accesodenegado.htm">conexionController</prop>
                 <prop key="redirect.htm">conexionController</prop>
                 <prop key="login.htm">conexionController</prop>
+                <prop key="videoLlamada.htm">conexionController</prop>
+                <prop key="videoPitch.htm">conexionController</prop>
                 
                 <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
@@ -60,6 +62,7 @@
                 <prop key="agregarreclutador.htm">conexionController3</prop>
                 <prop key="perfilempresa.htm">conexionController3</prop>
                 <prop key="nuevoaviso.htm">conexionController3</prop>
+                <prop key="planesempresa.htm">conexionController3</prop>
                 
                 
                 <!--Usuario Reclutador-->

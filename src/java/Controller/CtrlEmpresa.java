@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -37,8 +38,8 @@ public class CtrlEmpresa {
     Conexion con = new Conexion();
     JdbcTemplate jdbcTemplate = new JdbcTemplate(con.Conectar());
     ModelAndView mav = new ModelAndView();
-    
-    public String Auth(HttpServletRequest request){
+
+    public String Auth(HttpServletRequest request) {
         HttpSession session = request.getSession();
         SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         Authentication auth = ctx.getAuthentication();
@@ -54,7 +55,7 @@ public class CtrlEmpresa {
     public String Cuenta() {
         return ("empresa/cuentaempresa");
     }
-    
+
     @RequestMapping("perfilempresa")
     public String Perfil() {
         return ("empresa/perfilempresa");
@@ -69,10 +70,15 @@ public class CtrlEmpresa {
     public String Reclutadores() {
         return ("empresa/reclutadores");
     }
-    
+
     @RequestMapping("nuevoaviso")
     public String Avisos() {
         return ("empresa/nuevoaviso");
+    }
+
+    @RequestMapping("planesempresa")
+    public String Planes() {
+        return ("empresa/planesempresa");
     }
 
     @RequestMapping(value = "registroEmpresa.htm", method = RequestMethod.GET)
@@ -149,28 +155,42 @@ public class CtrlEmpresa {
 
         return model;
     }
+    
+//    @RequestMapping(value = "nuevoaviso.htm", method = RequestMethod.GET)
+//    public ModelAndView nuevoAviso(HttpServletRequest request){
+//        try {
+//            String sqlregion = "SELECT * FROM region WHERE RegionPaisFK = 38";
+//            String sqlcomuna = "SELECT *";
+//            
+//            mav.setViewName("");
+//            return mav;
+//        } catch (DataAccessException e) {
+//            mav.setViewName("");
+//            return mav;
+//        }
+//    }
 
-    @RequestMapping(value = "crearOfertaLaboral.htm", method = RequestMethod.POST)
-
-    public ModelAndView AgregarOferta(Usuario u, UsuarioEmpresa ue, NumeroContacto nc, OfertaLaboral of) {
+    @RequestMapping(value = "nuevoaviso.htm", method = RequestMethod.POST)
+    public ModelAndView AgregarOferta(OfertaLaboral ol) {
         try {
-            this.jdbcTemplate.update("insert into OfertaLaboral (NombreOferta,"
-                    + "CreadorOferta,EmpresaOferta,LugarTrabajo,TipoEntrevista,"
-                    + "PlanOferta,DescripcionCargo,FechaPublicacionOferta,"
-                    + "FechaFinalizacionOferta,RequisitosOferta,BeneficiosOferta,"
-                    + "HorarioEntrevista,TipoCargo,TipoContrato,JornadaTrabajo,SueldoOfrecido) "
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                    of.getNombreOferta(), u.getUsuarioID(), ue.getUsuarioEmpresaID(), of.getLugarTrabajo(),
-                    of.getTipoEntrevista(), of.getPlanOferta(), of.getDescripcionCargo(),
-                    of.getFechaPublicacionOferta(), of.getFechaFinalizacionOferta(),
-                    of.getRequisitosOferta(), of.getBeneficiosOferta(), of.getHorarioEntrevista(),
-                    of.getTipoCargo(), of.getTipoContrato(), of.getJornadaTrabajo(),
-                    of.getSueldoOfrecido());
+            String sql = "INSERT INTO OfertaLaboral(NombreOferta,CreadorOferta,EmpresaOferta,LugarTrabajo, "
+                    + "TipoEntrevista,PlanOferta,DescripcionCargo,RequisitosOferta,BeneficiosOferta, "
+                    + "HorarioEntrevistaInicio,HorarioEntrevistaFin,TipoCargo,JornadaTrabajo,SueldoOfrecido) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                ps.setString(1, ol.getTitulo());
+                ps.setInt(2, ol.getCreador());
+                ps.setInt(3, ol.getEmpresa());
+                ps.setInt(4, ol.getLugartrabajo());
+                
+            });
 
-            return new ModelAndView("redirect:/ofertasLaboralesEmpresa.htm");
+            mav.setViewName("");
+            return mav;
 
-        } catch (DataIntegrityViolationException e) {
-            return new ModelAndView("redirect:/crearOfertaLaboral.htm?err=1");
+        } catch (DataAccessException e) {
+            mav.setViewName("redirect:/nuevoaviso.htm?error=1");
+            return mav;
         }
     }
 
@@ -226,17 +246,86 @@ public class CtrlEmpresa {
         });
         return new ModelAndView("redirect:/cvPostulante.htm#datoscontacto");
     }
-    
+
     @RequestMapping(value = "perfilempresa.htm", method = RequestMethod.GET)
-    public ModelAndView listarDatosEmpresa(HttpServletRequest request){
+    public ModelAndView listarDatosEmpresa(HttpServletRequest request) {
         String sql = "SELECT * FROM v_empresa WHERE CorreoUsuario = ?";
         String sqlpais = "SELECT * FROM PAIS";
         List pais = this.jdbcTemplate.queryForList(sqlpais);
-        List empresa = this.jdbcTemplate.queryForList(sql,new Object[]{Auth(request)});
+        List empresa = this.jdbcTemplate.queryForList(sql, new Object[]{Auth(request)});
         mav.addObject("perfil", empresa);
-        mav.addObject("pais",pais);
+        mav.addObject("pais", pais);
         mav.setViewName("empresa/perfilempresa");
         return mav;
+    }
+
+    @RequestMapping(value = "perfilempresa.htm", method = RequestMethod.POST)
+    public ModelAndView editarPerfilEmpresa(HttpServletRequest request, Usuario u, UsuarioEmpresa ue, NumeroContacto nc) {
+        int form = Integer.parseInt(request.getParameter("formulario"));
+        switch (form) {
+            case 1:
+                if (ue.getNombreEmpresa().isEmpty() && ue.getRazonSocial().isEmpty() && ue.getRutEmpresa().isEmpty() && ue.getEmpresaDireccion().isEmpty() && ue.getSectorEmpresarial().isEmpty()) {
+                    mav.setViewName("redirect:/perfilempresa.htm?error=1");
+                    return mav;
+                } else {
+                    try {
+                        String sql = "UPDATE UsuarioEmpresa SET NombreEmpresa = ?, RazonSocial = ?,EmpresaPais = ?, EmpresaDireccion = ?, SectorEmpresarial = ? "
+                                + "WHERE UsuarioEmpresaID = (SELECT UsuarioEmpresaID FROM usuario WHERE usuario.UsuarioID = EmpresaUsuarioFK AND CorreoUsuario= ? )";
+                        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                            ps.setString(1, ue.getNombreEmpresa());
+                            ps.setString(2, ue.getRazonSocial());
+                            ps.setInt(3, ue.getEmpresaUsuarioFK());
+                            ps.setString(4, ue.getEmpresaDireccion());
+                            ps.setString(5, ue.getSectorEmpresarial());
+                            ps.setString(6, Auth(request));
+                        });
+                        mav.setViewName("redirect:/perfilempresa.htm?success=1");
+                        return mav;
+                    } catch (DataAccessException e) {
+                        System.out.println("Error: " + e.getMessage());
+                        mav.setViewName("redirect:/perfilempresa.htm?error=1");
+                        return mav;
+                    }
+                }
+            case 2:
+                try {
+                    String sql = "UPDATE UsuarioEmpresa SET LogoEmpresa = ?, PaginaWeb = ?, DescripcionEmpresa = ? "
+                            + "WHERE UsuarioEmpresaID = (SELECT UsuarioEmpresaID FROM usuario WHERE usuario.UsuarioID = EmpresaUsuarioFK AND CorreoUsuario= ? )";
+                    this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                        ps.setString(1, ue.getLogoEmpresa());
+                        ps.setString(2, ue.getPaginaEmpresa());
+                        ps.setString(3, ue.getDescripcionEmpresa());
+                        ps.setString(4, Auth(request));
+                    });
+                    mav.setViewName("redirect:/perfilempresa.htm?success=2");
+                    return mav;
+                } catch (DataAccessException e) {
+                    System.out.println("Error: " + e.getMessage());
+                    mav.setViewName("redirect:/perfilempresa.htm?error=2");
+                    return mav;
+                }
+
+            case 3:
+                try {
+                    String sql = "UPDATE usuario u, numerocontacto nc SET u.NombreUsuario = ?, u.ApellidoUsuario= ?,NumeroTelefonico= ? "
+                            + "WHERE nc.NumeroUsuarioFK=u.UsuarioID AND u.CorreoUsuario= ?";
+                    this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                        ps.setString(1, u.getNombre());
+                        ps.setString(2, u.getApellido());
+                        ps.setString(3, nc.getNumeroTelefonico());
+                        ps.setString(4, Auth(request));
+                    });
+                    mav.setViewName("redirect:/perfilempresa.htm?success=3");
+                    return mav;
+                } catch (DataAccessException e) {
+                    System.out.println("Error: " + e.getMessage());
+                    mav.setViewName("redirect:/perfilempresa.htm?error=3");
+                    return mav;
+                }
+            default:
+                mav.setViewName("redirect:/perfilempresa.htm?error=999");
+                return mav;
+        }
     }
 
     @RequestMapping(value = "cuentaempresa.htm", method = RequestMethod.POST)

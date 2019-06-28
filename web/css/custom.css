@@ -306,3 +306,12 @@ video
     width: 100%;
     height: 300px;
 }
+
+.card-pricing.popular {
+    z-index: 0;
+    border: 3px solid #007bff;
+}
+.card-pricing .list-unstyled li {
+    padding: .5rem 0;
+    color: #6c757d;
+}

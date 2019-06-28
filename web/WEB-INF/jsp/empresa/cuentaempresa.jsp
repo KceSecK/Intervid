@@ -35,10 +35,8 @@
                 <div class="row">
                     <!--Nav lateral-->
                     <div class="col-lg-2 bg-intervid intervid-fixed-nav d-none d-lg-block">
-                        <div class="container">
+                        <div class="container mt-4">
                             <ul class="list-unstyled static ">
-                                <h3 class="text-white mt-3">Mi cuenta</h3>
-                                <hr class="hr-custom-white"/>
                                 <li>
                                     <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
                                 </li>
@@ -49,10 +47,10 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-10 mb-5">
+                    <div class="col-lg-10 mb-5 mt-4">
                         <div class="container">
-                            <c:choose>
-                                <c:when test="${param.error == '1'}">        
+                        <c:choose>
+                            <c:when test="${param.error == '1'}">        
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     Datos invalidos.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -104,6 +102,8 @@
 
                             </c:otherwise>
                         </c:choose>
+                        <h3 class="text-intervid">Mi Cuenta</h3>
+                        <hr/>
                         <div id="perfil">
                             <div class="row mt-4"><p class="letraMediaPerfil">Datos de Cuenta</p></div>
                             <div class="row">
