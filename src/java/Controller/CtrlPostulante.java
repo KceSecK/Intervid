@@ -214,8 +214,10 @@ public class CtrlPostulante {
         String sql2 = "select * from Pais";
         String sql3 = "select * from Region";
         String sql4 = "select * from Comuna";
-        String sql5 = "SELECT * FROM educacionpostulante,usuariopostulante,usuario "
-                + "WHERE EducacionPostulanteFK = UsuarioPostulanteID   AND CorreoUsuario ='" + auth.getName() + "'";
+        String sql5 = "SELECT CorreoUsuario,EducacionPostulanteID, EducacionPostulanteFK,Institucion,NivelEstudio, "
+                + "EstadoEstudio,PeriodoInicio,PeriodoFin,PeriodoActual "
+                + "FROM usuario LEFT JOIN usuariopostulante u on usuario.UsuarioID = u.PostulanteUsuarioFK "
+                + "LEFT JOIN  educacionpostulante e on u.UsuarioPostulanteID = e.EducacionPostulanteFK WHERE CorreoUsuario='" + auth.getName() + "'";
         String sql6 = "SELECT * FROM NumeroContacto, usuario WHERE NumeroUsuarioFK = UsuarioID AND CorreoUsuario = '" + auth.getName() + "'";
         String sql7 = "SELECT * FROM pais, comuna, region WHERE paisID = RegionPaisFK AND ComunaRegionFK = RegionID";
         String sql8 = "SELECT * FROM experienciaprofesional,usuario,usuariopostulante"

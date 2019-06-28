@@ -48,7 +48,7 @@
                 <prop key="borrarConocimientoPostulante.htm">conexionController2</prop>
                 <prop key="editConocimientoPostulante.htm">conexionController2</prop>
                 <prop key="headerpostulante.htm">conexionController2</prop>
-                <prop key="videoPitch.htm">conexionController</prop>
+                <prop key="videoPitch.htm">conexionController2</prop>
 
                 
 

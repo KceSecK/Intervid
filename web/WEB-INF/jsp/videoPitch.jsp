@@ -22,8 +22,6 @@
         SecurityContext ctx = SecurityContextHolder.getContext();
         Authentication auth = ctx.getAuthentication();
         String rol = auth.getAuthorities().toString();
-
-
     %>
 
     <body>
@@ -79,6 +77,9 @@
                     </div>
                 </div>
             </div>
+            
+            
+            
         </div>
         <div>
 
@@ -89,12 +90,17 @@
             <button class="btn btn-danger" id="btn-stop-recording" disabled>Stop Recording</button>
             <button class="btn btn-danger" id="btn-save-recording" >Guardar</button>
         </div>
+        
+        <jsp:include page="footer.jsp"></jsp:include>
+        
+        
+        
         <script src="js/RecordRTC.js" type="text/javascript"></script>
         <script src="js/adapter.js"></script>
         <script>
 
 
-        // Store a reference of the preview video element and a global reference to the recorder instance
+            // Store a reference of the preview video element and a global reference to the recorder instance
             var video = document.getElementById('vidPitch');
             var recorder;
             var mimeType = 'video/webm';
@@ -157,11 +163,11 @@
 
                     // Retrieve recorded video as blob and display in the preview element
 
-        //            video.src = recorder.getBlob();
-        //            video.play();
-        //
-        //            // Unmute video on preview
-        //            video.muted = false;
+                    //            video.src = recorder.getBlob();
+                    //            video.play();
+                    //
+                    //            // Unmute video on preview
+                    //            video.muted = false;
                     // Stop the device streaming
                     recorder.stream.stop();
                     // to fix video seeking issues
