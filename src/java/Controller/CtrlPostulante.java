@@ -631,4 +631,20 @@ public class CtrlPostulante {
         return mav;
     }
 
+    @RequestMapping(value = "videoPitch.htm", method = RequestMethod.GET)
+    public ModelAndView videoPitch() {
+        mav.addObject(new UsuarioPostulante());
+        mav.setViewName("videoPitch");
+        return mav;
+    }
+
+    @RequestMapping("entrevistadiferida.htm")
+    public ModelAndView entrevistaDiferida() {
+        String sql = "select * from ofertalaboral where ofertalaboralid =1";
+        List ofertas = jdbcTemplate.queryForList(sql);
+        mav.addObject("ofertas", ofertas);
+        mav.setViewName("postulante/entrevistadiferida");
+        return mav;
+    }
+
 }

@@ -10,19 +10,10 @@
 <html>
     <head>
         <title>Intervid - Curriculum de usuario</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Intervid - Curriculum de usuario</title> 
-        <link rel="shortcut icon" type="image/x-icon" href="icon/inter2-favicon.ico" />
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/validarrut.js"></script>
-        <script src="js/datosPostulante.js"></script>
-        <script src="js/validarnumeros.js" type="text/javascript"></script>
-        <script src="js/validaremail.js" type="text/javascript"></script>
+            <jsp:include page="../head.jsp" flush="true"></jsp:include>
+            <script src="js/datosPostulante.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -807,7 +798,7 @@
                                                         <select name="TipoMoneda" class="form-control" required>
                                                             <option ${lista[0].TipoMoneda == 'CLP' ? 'selected' : '' } value="CLP">Pesos Chilenos</option>
                                                             <option ${lista[0].TipoMoneda == 'MXN' ? 'selected' : '' } value="MXN">Pesos Mexicanos</option>
-                                                            <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">Dólar</option>
+                                                            <option ${lista[0].TipoMoneda == 'USD' ? 'selected' : '' } value="USD">D�lar</option>
                                                         </select>
                                                     </div>
 
@@ -998,7 +989,7 @@
                                                     <div class="form-row">
 
                                                         <label class="text-intervid">Cargo Desempeñado: <red>*</red></label>
-                                                        <input type="text" id="CargoDesempeñado" name="CargoDesempeñado" class="form-control" required/>
+                                                        <input type="text" id="CargoDesempeño" name="CargoDesempeño" class="form-control" required/>
                                                     </div>
 
 

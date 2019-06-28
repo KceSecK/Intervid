@@ -75,7 +75,7 @@
                 success: function (data) {
                      
                     $('#EmpresaExperiencia').val(data[0].EmpresaExperiencia);
-                    $('#CargoDesempeñado').val(data[0].CargoDesempeñado);
+                    $('#CargoDesempeño').val(data[0].CargoDesempeñado);
                     $('#InicioPeriodo').val(data[0].InicioPeriodo);
                     $('#FinPeriodo').val(data[0].FinPeriodo);
                     $('#FuncionesLogros').val(data[0].FuncionesLogros);

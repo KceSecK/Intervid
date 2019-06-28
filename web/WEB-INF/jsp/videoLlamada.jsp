@@ -3,9 +3,12 @@
 <%@page import="org.springframework.security.core.context.SecurityContext"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
+<%
+    SecurityContext ctx = SecurityContextHolder.getContext();
+    Authentication auth = ctx.getAuthentication();
+    String rol = auth.getAuthorities().toString();
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,17 +18,9 @@
         <link href="css/custom.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>InterVid</title>
-         <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+        <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
 
     </head>
-    <%
-        SecurityContext ctx = SecurityContextHolder.getContext();
-        Authentication auth = ctx.getAuthentication();
-        String rol = auth.getAuthorities().toString();
-
-
-    %>
-
     <body>
         <!-- Navbar-->
         <div id="nav-fixed" class="container-fluid nav-intervid static">
@@ -80,15 +75,15 @@
                 </div>
             </div>
         </div>
-    
-        <input type="text" name="room" id="room">
+
+        <input type="text" name="room" id="room" />
 
     <video id="localVideo" autoplay playsinline></video>
     <video id="remoteVideo" autoplay playsinline></video>
 
-   
-    <!--<script src="js/adapter.js"></script>-->
+
     <script src="js/videoLlamada.js" type="text/javascript"></script>
 
+    <script src="js/adapter.js"></script>
 </body>
 </html>
