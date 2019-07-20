@@ -11,7 +11,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -155,53 +154,102 @@ public class CtrlEmpresa {
 
         return model;
     }
-    
-//    @RequestMapping(value = "nuevoaviso.htm", method = RequestMethod.GET)
-//    public ModelAndView nuevoAviso(HttpServletRequest request){
-//        try {
-//            String sqlregion = "SELECT * FROM region WHERE RegionPaisFK = 38";
-//            String sqlcomuna = "SELECT *";
-//            
-//            mav.setViewName("");
-//            return mav;
-//        } catch (DataAccessException e) {
-//            mav.setViewName("");
-//            return mav;
-//        }
-//    }
 
-    @RequestMapping(value = "nuevoaviso.htm", method = RequestMethod.POST)
-    public ModelAndView AgregarOferta(OfertaLaboral ol) {
+    @RequestMapping(value = "nuevoaviso.htm", method = RequestMethod.GET)
+    public ModelAndView nuevoAviso(HttpServletRequest request) {
         try {
-            String sql = "INSERT INTO OfertaLaboral(NombreOferta,CreadorOferta,EmpresaOferta,LugarTrabajo, "
-                    + "TipoEntrevista,PlanOferta,DescripcionCargo,RequisitosOferta,BeneficiosOferta, "
-                    + "HorarioEntrevistaInicio,HorarioEntrevistaFin,TipoCargo,JornadaTrabajo,SueldoOfrecido) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
-                ps.setString(1, ol.getTitulo());
-                ps.setInt(2, ol.getCreador());
-                ps.setInt(3, ol.getEmpresa());
-                ps.setInt(4, ol.getLugartrabajo());
-                
-            });
-
-            mav.setViewName("");
+            String sqlregion = "SELECT * FROM region WHERE RegionPaisFK=38";
+            String sqlcomuna = "SELECT ComunaRegionFK,RegionNombre,ComunaID,ComunaNombre "
+                    + "FROM region LEFT JOIN comuna c on region.RegionID = c.ComunaRegionFK "
+                    + "WHERE RegionPaisFK=38";
+            String sqlentrevista = "SELECT * FROM Tipoentrevista";
+            List reg = this.jdbcTemplate.queryForList(sqlregion);
+            List com = this.jdbcTemplate.queryForList(sqlcomuna);
+            List entr = this.jdbcTemplate.queryForList(sqlentrevista);
+            mav.addObject("reg", reg);
+            mav.addObject("com", com);
+            mav.addObject("entr", entr);
+            mav.setViewName("empresa/nuevoaviso");
             return mav;
-
         } catch (DataAccessException e) {
-            mav.setViewName("redirect:/nuevoaviso.htm?error=1");
+            mav.setViewName("redirect:/nuevoaviso.htm?error=999");
             return mav;
         }
     }
 
-    @RequestMapping(value = "reclutadores.htm", method = RequestMethod.POST)
-    public ModelAndView AgregarReclutador(HttpServletRequest request, UsuarioReclutador ur, Usuario u) {
+    @RequestMapping(value = "nuevoaviso.htm", method = RequestMethod.POST)
+    public ModelAndView AgregarOferta(HttpServletRequest request, OfertaLaboral ol) {
+        try {
+//        System.out.println("titulo: " + ol.getTitulo());
+//        System.out.println("creador: " + ol.getCreador());
+//        System.out.println("empresa: " + ol.getEmpresa());
+//        System.out.println("lugartrabajo: " + ol.getLugartrabajo());
+//        System.out.println("tipoempresa: " + ol.getTipoentrevista());
+//        System.out.println("plan: " + ol.getPlan());
+//        System.out.println("descripcion: " + ol.getDescripcion());
+//        System.out.println("requisitos: " + ol.getRequisitos());
+//        System.out.println("beneficios: " + ol.getBeneficios());
+//        System.out.println("horarioinicio: " + ol.getHorarioinicio());
+//        System.out.println("horariofin: " + ol.getHorariofin());
+//        System.out.println("cargo: " + ol.getCargo());
+//        System.out.println("jornada: " + ol.getJornada());
+//        System.out.println("sueldo: " + ol.getSueldo());
+        String sql1 = "SELECT UsuarioID FROM usuario WHERE CorreoUsuario=?";
+        String sql2 = "SELECT UsuarioEmpresaID FROM usuario "
+                + "LEFT JOIN usuarioempresa u on usuario.UsuarioID = u.EmpresaUsuarioFK "
+                + "WHERE CorreoUsuario=?";
+        String idemp = (String) this.jdbcTemplate.queryForObject(sql2, new Object[]{Auth(request)}, String.class);
+        String id = (String) this.jdbcTemplate.queryForObject(sql1, new Object[]{Auth(request)}, String.class);
+        System.out.println("ID: " + id);
+        String sql = "INSERT INTO OfertaLaboral(NombreOferta,CreadorOferta,EmpresaOferta,LugarTrabajo, "
+                + "TipoEntrevista,PlanOferta,DescripcionCargo,RequisitosOferta,BeneficiosOferta, "
+                + "HorarioEntrevistaInicio,HorarioEntrevistaFin,TipoCargo,JornadaTrabajo,SueldoOfrecido) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        int inrt = this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setString(1, ol.getTitulo());
+            ps.setInt(2, Integer.parseInt(id));
+            ps.setInt(3, Integer.parseInt(idemp));
+            ps.setInt(4, ol.getLugartrabajo());
+            ps.setInt(5, ol.getTipoentrevista());
+            ps.setInt(6, ol.getPlan());
+            ps.setString(7, ol.getDescripcion());
+            ps.setString(8, ol.getRequisitos());
+            ps.setString(9, ol.getBeneficios());
+            ps.setString(10, ol.getHorarioinicio());
+            ps.setString(11, ol.getHorariofin());
+            ps.setString(12, ol.getCargo());
+            ps.setString(13, ol.getJornada());
+            ps.setInt(14, ol.getSueldo());
+        });
+        if (inrt == 1) {
+            mav.setViewName("redirect:/publicaciones.htm?success=1");
+            return mav;
+        } else {
+            mav.setViewName("redirect:/nuevoaviso.htm");
+            return mav;
+        }
+
+    }
+    catch (DataAccessException e
+
+    
+        ) {
+            mav.setViewName("redirect:/nuevoaviso.htm?error=2");
+        return mav;
+    }
+}
+
+@RequestMapping(value = "reclutadores.htm", method = RequestMethod.POST)
+        public ModelAndView AgregarReclutador(HttpServletRequest request, UsuarioReclutador ur, Usuario u) {
         HttpSession session = request.getSession();
         SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         Authentication auth = ctx.getAuthentication();
 
         String sql = "SELECT COUNT(CorreoUsuario) FROM Usuario WHERE CorreoUsuario = ?";
-        String existe = (String) jdbcTemplate.queryForObject(sql, new Object[]{u.getCorreo()}, String.class);
+        String 
+
+existe = (String) jdbcTemplate.queryForObject(sql, new Object[]{u.getCorreo()}, String.class
+);
         if (existe.equals("1")) {
             System.out.println("redirect: error");
             mav.setViewName("redirect:reclutadores.htm?error=1");
@@ -219,7 +267,7 @@ public class CtrlEmpresa {
     }
 
     @RequestMapping(value = "reclutadores.htm", method = RequestMethod.GET)
-    public ModelAndView listarReclutadores(HttpServletRequest request) {
+        public ModelAndView listarReclutadores(HttpServletRequest request) {
         String sql = "SELECT * FROM v_reclutadores "
                 + "WHERE EmpresaAsociadaFK = (SELECT UsuarioEmpresaID FROM usuarioempresa,usuario "
                 + "WHERE CorreoUsuario = ? AND EmpresaUsuarioFK = UsuarioID)";
@@ -232,7 +280,7 @@ public class CtrlEmpresa {
 
     //editar reclutador
     @RequestMapping(value = "modificarreclutador.htm", method = RequestMethod.GET)
-    public ModelAndView editarNumeroContacto(HttpServletRequest request) {
+        public ModelAndView editarNumeroContacto(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println(id);
         String nt = request.getParameter("numTel");
@@ -248,7 +296,7 @@ public class CtrlEmpresa {
     }
 
     @RequestMapping(value = "perfilempresa.htm", method = RequestMethod.GET)
-    public ModelAndView listarDatosEmpresa(HttpServletRequest request) {
+        public ModelAndView listarDatosEmpresa(HttpServletRequest request) {
         String sql = "SELECT * FROM v_empresa WHERE CorreoUsuario = ?";
         String sqlpais = "SELECT * FROM PAIS";
         List pais = this.jdbcTemplate.queryForList(sqlpais);
@@ -260,7 +308,7 @@ public class CtrlEmpresa {
     }
 
     @RequestMapping(value = "perfilempresa.htm", method = RequestMethod.POST)
-    public ModelAndView editarPerfilEmpresa(HttpServletRequest request, Usuario u, UsuarioEmpresa ue, NumeroContacto nc) {
+        public ModelAndView editarPerfilEmpresa(HttpServletRequest request, Usuario u, UsuarioEmpresa ue, NumeroContacto nc) {
         int form = Integer.parseInt(request.getParameter("formulario"));
         switch (form) {
             case 1:
@@ -329,7 +377,7 @@ public class CtrlEmpresa {
     }
 
     @RequestMapping(value = "cuentaempresa.htm", method = RequestMethod.POST)
-    public ModelAndView validarCambioCorreo(HttpServletRequest request) {
+        public ModelAndView validarCambioCorreo(HttpServletRequest request) {
         int form = Integer.parseInt(request.getParameter("formulario"));
         String password = request.getParameter("pass");
         String correo = request.getParameter("correo");
@@ -345,11 +393,17 @@ public class CtrlEmpresa {
         if (form == 1) {
             if (password != null & correo != null) {
                 String sqlexiste = "SELECT COUNT(CorreoUsuario) FROM Usuario WHERE CorreoUsuario = ?";
-                String existe = (String) jdbcTemplate.queryForObject(sqlexiste, new Object[]{correo}, String.class);
+                String 
+
+existe = (String) jdbcTemplate.queryForObject(sqlexiste, new Object[]{correo}, String.class
+);
 
                 if (existe.equals("0")) {
                     String sql = "SELECT contraseña FROM Usuario WHERE CorreoUsuario = ?";
-                    String validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class);
+                    String 
+
+validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class
+);
 
                     boolean match = passwordEncoder.matches(password, validar);
                     if (match == true) {
@@ -375,7 +429,10 @@ public class CtrlEmpresa {
         } else if (form == 2) {
             if (password != null && npass1 != null & npass2 != null) {
                 String sql = "SELECT contraseña FROM Usuario WHERE CorreoUsuario = ?";
-                String validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class);
+                String 
+
+validar = (String) jdbcTemplate.queryForObject(sql, new Object[]{auth.getName()}, String.class
+);
                 boolean match = passwordEncoder.matches(password, validar);
                 boolean match2 = npass1.equals(npass2);
                 System.out.println("match1: " + match);

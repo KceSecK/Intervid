@@ -102,13 +102,7 @@
                         <div class="ml-5 justify-content-center collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="alink nav-link border-link" href="loginEmpresa.htm">Empresas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <p class="nav-link text-white font-weight-bold">|</p>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="btn btn-primary" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                                    <a class="btn btn-primary" href="login.htm" role="button">Ingresar</a>                            
                                 </li>
                             </ul>
                         </div>
@@ -185,9 +179,9 @@
                     <c:forEach var="ol" items="${ofertas}">
                         <div class="row mb-4">
                             <div class="col-lg-12">
-                                <a class="d-block a-lab" href="">
+                                <a class="d-block a-lab" href="ofertalaboral.htm?oferta=${ol.OfertaLaboralID}">
                                     <div class="container border rounded border-primary">
-                                        <div class="row bg-">
+                                        <div class="row ">
                                             <div class="col-lg-10 mt-2 rounded">
                                                 <h3 class="text-intervid">${ol.NombreOferta}</h3>
                                                 <hr class="hr-custom-black" />

@@ -21,12 +21,30 @@ public class OfertaLaboral {
     private Date fechafinalizacion;
     private String requisitos;
     private String beneficios;
-    private Time horarioinicio;
-    private Time horariofin;
+    private String horarioinicio;
+    private String horariofin;
     private String cargo;
     private String contrato;
     private String jornada;
     private int sueldo;
+    private int region;
+    private int pais;
+
+    public int getRegion() {
+        return region;
+    }
+
+    public void setRegion(int region) {
+        this.region = region;
+    }
+
+    public int getPais() {
+        return pais;
+    }
+
+    public void setPais(int pais) {
+        this.pais = pais;
+    }
 
     public int getOfertaid() {
         return ofertaid;
@@ -124,19 +142,19 @@ public class OfertaLaboral {
         this.beneficios = beneficios;
     }
 
-    public Time getHorarioinicio() {
+    public String getHorarioinicio() {
         return horarioinicio;
     }
 
-    public void setHorarioinicio(Time horarioinicio) {
+    public void setHorarioinicio(String horarioinicio) {
         this.horarioinicio = horarioinicio;
     }
 
-    public Time getHorariofin() {
+    public String getHorariofin() {
         return horariofin;
     }
 
-    public void setHorariofin(Time horariofin) {
+    public void setHorariofin(String horariofin) {
         this.horariofin = horariofin;
     }
 

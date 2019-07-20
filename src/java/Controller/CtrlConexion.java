@@ -3,7 +3,12 @@ package Controller;
 import Config.Conexion;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,7 +62,7 @@ public class CtrlConexion {
         mav.setViewName("redirect");
         return mav;
     }
-    
+
     @RequestMapping("login.htm")
     public ModelAndView Login() {
         mav.setViewName("login");
@@ -75,10 +80,52 @@ public class CtrlConexion {
         mav.setViewName("accesodenegado");
         return mav;
     }
-    @RequestMapping("videoLlamada.htm")
+
+    @RequestMapping("videollamada.htm")
     public ModelAndView VideoLlamada() {
-        mav.setViewName("videoLlamada");
+        mav.setViewName("videollamada");
         return mav;
+    }
+
+    @RequestMapping(value = "videollamada.htm", method = RequestMethod.GET)
+    public ModelAndView VideoLlamada(HttpServletRequest request) {
+        try {
+            String oferta = request.getParameter("oferta");
+            String sql = "SELECT OfertaLaboralID,NombreOferta,FechaPublicacionOferta,FechaFinalizacionOferta, NombreEmpresa, regionNombre,regionID, ComunaNombre, LogoEmpresa "
+                    + "FROM ofertalaboral ol "
+                    + "LEFT JOIN usuarioempresa e ON ol.EmpresaOferta = e.UsuarioEmpresaID "
+                    + "LEFT JOIN comuna c ON c.ComunaID = ol.LugarTrabajo "
+                    + "LEFT JOIN region r ON r.RegionID=c.ComunaRegionFK "
+                    + "WHERE OfertaLaboralID = ? ";
+            List detalleoferta = jdbcTemplate.queryForList(sql, new Object[]{oferta});
+            mav.addObject("oferta", detalleoferta);
+            mav.setViewName("videollamada");
+            return mav;
+        } catch (DataAccessException e) {
+            mav.setViewName("redirect:/videollamada.htm?error=999");
+            return mav;
+        }
+    }
+
+    @RequestMapping(value = "ofertalaboral.htm", method = RequestMethod.GET)
+    public ModelAndView ofertaLaboral(HttpServletRequest request) {
+        try {
+            String oferta = request.getParameter("oferta");
+            String sql = "SELECT OfertaLaboralID,UsuarioEmpresaID, NombreOferta, NombreEmpresa,LugarTrabajo,RegionNombre, ComunaNombre,DescripcionCargo,FechaPublicacionOferta,FechaFinalizacionOferta,RequisitosOferta, "
+                    + "BeneficiosOferta,time_format(HorarioEntrevistaInicio,'%H:%i') AS inicio,time_format(HorarioEntrevistaFin,'%H:%i') AS fin,TipoCargo,TipoContrato,JornadaTrabajo,SueldoOfrecido,LogoEmpresa "
+                    + "FROM ofertalaboral ol "
+                    + "LEFT JOIN usuarioempresa e ON ol.EmpresaOferta = e.UsuarioEmpresaID "
+                    + "LEFT JOIN comuna c ON c.ComunaID = ol.LugarTrabajo "
+                    + "LEFT JOIN region r ON r.RegionID=c.ComunaRegionFK "
+                    + "WHERE OfertaLaboralID = ?";
+            List detalleoferta = jdbcTemplate.queryForList(sql, new Object[]{oferta});
+            mav.addObject("oferta", detalleoferta);
+            mav.setViewName("ofertalaboral");
+            return mav;
+        } catch (DataAccessException e) {
+            mav.setViewName("redirect:/ofertalaboral.htm?error=999");
+            return mav;
+        }
     }
 
     @RequestMapping(value = "trabajos.htm", method = RequestMethod.GET)
@@ -122,8 +169,8 @@ public class CtrlConexion {
             String buscar = request.getParameter("buscar");
             String idreg = request.getParameter("region");
 
-            System.out.println("asdf: "+buscar);
-            System.out.println("idreg: "+idreg);
+            System.out.println("asdf: " + buscar);
+            System.out.println("idreg: " + idreg);
             if (!"".equals(buscar) && idreg != null) {
                 String sql = "SELECT ol.*, NombreEmpresa, regionNombre,regionID, ComunaNombre, LogoEmpresa "
                         + "FROM ofertalaboral ol "

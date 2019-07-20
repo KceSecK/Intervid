@@ -10,92 +10,105 @@
 <html>
     <head>
         <title>Intervid - Curriculum de usuario</title>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <jsp:include page="../head.jsp" flush="true"></jsp:include>
-            <script src="js/datosPostulante.js" type="text/javascript"></script>
+        <script src="js/datosPostulante.js" type="text/javascript"></script>
+        <jsp:include page="../head.jsp" flush="true" />
     </head>
-
     <body>
-        <jsp:include page="headerpostulante.jsp"></jsp:include>
-
-            <!--Container principal-->
-            <div class="container-fluid div-principal">
-                <div class="row">
-                    <!--Nav lateral-->
-                    <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
-                        <div class="container mt-4">
-                            <ul class="list-unstyled static ">
-                                <li>
-                                    <a class="alink nav-link border-link" href="#datospersonales">Datos Personales</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#datoscontacto">Datos de Contacto</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#educacion">Educación</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#expectativaslaborales">Expectativas Laborales</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#experienciaprofesional">Experiencia Profesional</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#idiomas">Idiomas</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#otrosconocimientos">Otros Conocimientos</a>
-                                </li>
-                            </ul>
-                        </div>
+        <jsp:include page="headerpostulante.jsp"/>
+        <!--Container principal-->
+        <div class="container-fluid div-principal">
+            <div class="row">
+                <!--Nav lateral-->
+                <div class="col-lg-2 col-md-3 bg-intervid intervid-fixed-nav">
+                    <div class="container mt-4">
+                        <ul class="list-unstyled static ">
+                            <li>
+                                <a class="alink nav-link border-link" href="#datospersonales">Datos Personales</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#datoscontacto">Datos de Contacto</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#educacion">Educación</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#expectativaslaborales">Expectativas Laborales</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#experienciaprofesional">Experiencia Profesional</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#idiomas">Idiomas</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#otrosconocimientos">Otros Conocimientos</a>
+                            </li>
+                        </ul>
                     </div>
+                </div>
 
-                    <div class="col-lg-10 col-md-9 mb-5">
-                        <div class="container">
-                            <!--Primer cuadro-->
-                            <div class="row mt-4"><p class="letraMediaPerfil">Mi CV</p></div>
+                <div class="col-lg-10 col-md-9 mb-5">
+                    <div class="container">
+                        <!--Primer cuadro-->
+                        <div class="row mt-4"><p class="letraMediaPerfil">Mi CV</p></div>
+                        <div class="round-graph" id="graficosround">
                             <div class="row">
                                 <div class="card col-md-12">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-lg-2">
-                                                <p class="text-intervid">Estado CV</p>
+                                            <div class="col-lg-4 col-sm-12">
+                                                <div class="progress a">
+                                                    <span class="progress-left">
+                                                        <span class="progress-bar"></span>
+                                                    </span>
+                                                    <span class="progress-right">
+                                                        <span class="progress-bar"></span>
+                                                    </span>
+                                                    <div class="progress-value">96%</div>
+                                                </div>
+                                                <div class="text-intervid text-center">Estado CV</div>
                                             </div>
-                                            <div class="col-lg-2">
-                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <div class="dv-hover">
+                                                    <img class="perfil-usuario inner" src="https://i2.cdn.turner.com/cnnnext/dam/assets/140926165711-john-sutter-profile-image-large-169.jpg"/>
+                                                    <label class="edit btn btn-link" for="my-file-selector">
+                                                        <input id="my-file-selector" type="file" class="d-none">
+                                                        <img src="img/icons8_upload_26px.png" alt=""/>
+                                                    </label>
+                                                </div>
+                                                <div class="text-intervid text-center">Foto Perfil</div>
                                             </div>
-                                            <div class="col-lg-2">
-                                                <p class="text-intervid">Foto Perfil</p>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <div class="overflow-hidden">
+                                                    <img class="perfil-usuario inner" src="" alt=""/>
+                                                    <div class="text-intervid text-center">Video Pitch</div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-2">
-                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <p class="text-intervid">Video Pitch</p>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <img class="rounded-circle perfil-usuario" src="img/letra 100mm.png" alt=""/>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!--Vista datos personales-->
-                            <div id="datospersonales">
-                                <div class="row mt-4"><p class="letraMediaPerfil">Datos Personales</p></div>
-                                <div class="row">
-                                    <div class="card col-md-12">
-                                        <div class="card-body">
-                                            <div class="container">
-                                                <button id="EditarPersonales" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dpersonales">
-                                                    Editar
-                                                </button>
-                                                <table class="table table-sm table-hover">
-                                                    <tr>
-                                                        <td class="pr-5 text-intervid">Nombre(s):</td>
-                                                        <td>${lista[0].NombreUsuario}</td>
+                        <!--Vista datos personales-->
+                        <div id="datospersonales">
+                            <div class="row mt-4"><p class="letraMediaPerfil">Datos Personales</p></div>
+                            <div class="row">
+                                <div class="card col-md-12">
+                                    <div class="card-body">
+                                        <div class="container">
+                                            <button id="EditarPersonales" type="button" class="btn btn-link btn-right" data-toggle="modal" data-target="#dpersonales">
+                                                Editar
+                                            </button>
+                                            <table class="table table-sm table-hover">
+                                                <tr>
+                                                    <td class="pr-5 text-intervid">Nombre(s):</td>
+                                                    <td>${lista[0].NombreUsuario}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="pr-5 text-intervid">Apellido(s)</td>
@@ -1289,8 +1302,9 @@
                 </div>
                 <!--Termino div central-->
 
-                <jsp:include page="../footer.jsp"></jsp:include>
+                <jsp:include page="../footer.jsp"/>
             </div>
+        </div>
     </body>
 </html>
 
@@ -1398,5 +1412,12 @@
     });
 
 
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.chart').easyPieChart({
+            //your configuration goes here
+        });
+    });
 </script>
 <script type="text/javascript" src="js/datelimiter.js"></script>

@@ -638,10 +638,10 @@ public class CtrlPostulante {
         return mav;
     }
 
-    @RequestMapping(value = "videoPitch.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "videopitch.htm", method = RequestMethod.GET)
     public ModelAndView videoPitch() {
         mav.addObject(new UsuarioPostulante());
-        mav.setViewName("videoPitch");
+        mav.setViewName("postulante/videopitch");
         return mav;
     }
 
