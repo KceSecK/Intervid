@@ -16,35 +16,42 @@
 %>
 <html>
     <head>
-        <title>Intervid - Curriculum de usuario</title> 
-        <jsp:include page="../head.jsp" flush="true"/>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-    </head>
-    <body>
-        <jsp:include page="headerpostulante.jsp" flush="true"/>
+        <title>Intervid - Curriculum de usuario</title>
+      
+         
+        <jsp:include page="../head.jsp" flush="true"></jsp:include>
+     
+       <link href="css/toastr.css" rel="stylesheet" type="text/css"/>
 
-        <!--Container principal-->
-        <div class="container-fluid div-principal">
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+        </head>
+        <body>
+           
+        <jsp:include page="headerpostulante.jsp" flush="true"></jsp:include>
 
-            <div class="row">
-                <!--Nav lateral-->
-                <div class="col-lg-2 bg-intervid intervid-fixed-nav">
-                    <div class="container">
-                        <ul class="list-unstyled static ">
-                            <h3 class="text-white mt-3">Mi cuenta</h3>
-                            <hr class="hr-custom-white"/>
-                            <li>
-                                <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
-                            </li>
-                            <li>
-                                <a class="alink nav-link border-link" href="#contraseña">Contraseña</a>
-                            </li>
-                        </ul>
+            <!--Container principal-->
+            <div class="container-fluid div-principal">
+
+
+                <div class="row">
+                    <!--Nav lateral-->
+                    <div class="col-lg-2 bg-intervid intervid-fixed-nav">
+                        <div class="container">
+                            <ul class="list-unstyled static ">
+                                <h3 class="text-white mt-3">Mi cuenta</h3>
+                                <hr class="hr-custom-white"/>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
+                                </li>
+                                <li>
+                                    <a class="alink nav-link border-link" href="#contraseña">Contraseña</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-10 mb-5">
-                    <div class="container">
+                    <div class="col-lg-10 mb-5">
+                        <div class="container">
                         <c:choose>
                             <c:when test="${param.error == '1'}">        
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -96,6 +103,7 @@
                             </c:when>
                         </c:choose>
                         <div id="perfil">
+
                             <div class="row mt-4"><p class="letraMediaPerfil">Datos de Cuenta</p></div>
                             <div class="row">
                                 <div class="card col-md-12">
@@ -250,3 +258,42 @@
         </div>
     </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="js/toastr.min.js" type="text/javascript"></script>
+
+<script>
+    $.ajax({        
+                method: "POST",
+                dataType: "json",
+                url: "obtenerNotificacionPostulante.htm",
+                success: function (data) {
+              
+        console.log(data);
+                        if (data) {
+     toastr.success('<a style="display:d-inline" href="'+data[0].NotificacionLink+'">Tienes una video llamada</a>','Notificación',{
+  "progressBar": true,
+  "positionClass": "toast-bottom-right",
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut" 
+   });
+}
+else if (data===null)
+{
+    
+}
+ 
+                    
+                }
+            });
+    
+ 
+ 
+</script>

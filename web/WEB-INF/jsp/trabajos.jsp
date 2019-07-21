@@ -26,6 +26,7 @@
     <head>
         <title>Intervid - trabajos</title>
         <jsp:include page="head.jsp" flush="true"></jsp:include>
+        <link href="css/toastr.css" rel="stylesheet" type="text/css"/>
         </head>
         <script>
             window.onunload = function () {
@@ -235,3 +236,39 @@
     </body>
     <jsp:include page="footer.jsp" ></jsp:include>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="js/toastr.min.js" type="text/javascript"></script>
+
+<script>
+    $.ajax({        
+                method: "POST",
+                dataType: "json",
+                url: "obtenerNotificacionPostulante.htm",
+                success: function (data) {
+              
+        console.log(data);
+                        if (!data[0].NotificacionLink===null) {
+     toastr.success('<a style="display:d-inline" href="'+data[0].NotificacionLink+'">Tienes una video llamada</a>','Notificación',{
+  "progressBar": true,
+  "positionClass": "toast-bottom-right",
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut" 
+   });
+}
+
+ 
+                    
+                }
+            });
+    
+ 
+ 
+</script>

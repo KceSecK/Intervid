@@ -84,6 +84,13 @@ public class CtrlConexion {
 
     @RequestMapping("videollamada.htm")
     public ModelAndView VideoLlamada() {
+        String sql="Select * from ofertalaboral where ofertalaboralID=3";
+        String sql2="SELECT * FROM candidatooferta left join usuariopostulante on candidatooferta.CandidatoID = usuariopostulante.UsuarioPostulanteID\n" +
+"left join usuario on usuario.UsuarioID = usuariopostulante.PostulanteUsuarioFK where OfertaID=3;";
+        List oferta= this.jdbcTemplate.queryForList(sql);
+        List postulantes = this.jdbcTemplate.queryForList(sql2);
+        mav.addObject("oferta",oferta);
+        mav.addObject("postu",postulantes);
         mav.setViewName("videollamada");
         return mav;
     }
@@ -128,7 +135,26 @@ public class CtrlConexion {
             return mav;
         }
     }
-
+    @RequestMapping(value = "notificacionPostulante.htm", method = RequestMethod.POST)
+    public String enviarNotificacionPostulante(HttpServletRequest request) {
+       
+        String room = request.getParameter("idRoom");
+        int idPostulante = Integer.parseInt(request.getParameter("idPost"));
+        String link ="http://inter-vid.com/videollamada.htm#"+room ;
+        System.out.println("IDPOST "+idPostulante);
+        System.out.println("LINK "+link);
+        String sql="insert into notificaciones (UsuarioDestino,DetalleNotificacion,EstadoNotificacion,NotificacionLink)"
+                + " VALUES (?,?,?,?)";
+        this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+            ps.setInt(1, idPostulante);
+            ps.setString(2, "Video entrevista lista, haga click aqui para ser dirigido a la entrevista");
+            ps.setInt(3, 1);
+            ps.setString(4, link);
+            
+        });
+       String mensaje ="fuciona";
+        return mensaje;
+    }
     @RequestMapping(value = "trabajos.htm", method = RequestMethod.GET)
     public ModelAndView listarOfertas(HttpServletRequest request) {
 

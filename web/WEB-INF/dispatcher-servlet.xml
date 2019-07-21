@@ -52,6 +52,8 @@
                 <prop key="headerpostulante.htm">conexionController2</prop>
                 <prop key="videopitch.htm">conexionController2</prop>
                 <prop key="postulaciones.htm">conexionController2</prop>
+                <prop key="videoPitch.htm">conexionController2</prop>
+                <prop key="obtenerNotificacionPostulante.htm">conexionController2</prop>
 
                 
 

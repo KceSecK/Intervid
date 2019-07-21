@@ -1,4 +1,4 @@
-//var room = document.getElementById("room");
+
 
 // Generate random room name if needed
 if (!location.hash) {
@@ -18,6 +18,8 @@ const configuration = {
             username: 'webrtc@live.com'
         }]
 };
+document.getElementById("room1").value= roomHash;
+
 let room;
 let pc;
 
