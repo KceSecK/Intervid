@@ -315,3 +315,7 @@ video
     padding: .5rem 0;
     color: #6c757d;
 }
+
+.toast-error {
+  background-color: #37589F;
+}

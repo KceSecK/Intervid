@@ -26,7 +26,8 @@
                 <prop key="accesodenegado.htm">conexionController</prop>
                 <prop key="redirect.htm">conexionController</prop>
                 <prop key="login.htm">conexionController</prop>
-                <prop key="videoLlamada.htm">conexionController</prop>
+                <prop key="videollamada.htm">conexionController</prop>
+                <prop key="notificacionPostulante.htm">conexionController</prop>
                 
                 <!--Usuario Postulante--> 
                 <prop key="indexp.htm">conexionController2</prop> 
@@ -49,6 +50,7 @@
                 <prop key="editConocimientoPostulante.htm">conexionController2</prop>
                 <prop key="headerpostulante.htm">conexionController2</prop>
                 <prop key="videoPitch.htm">conexionController2</prop>
+                <prop key="obtenerNotificacionPostulante.htm">conexionController2</prop>
 
                 
 

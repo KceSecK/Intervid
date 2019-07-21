@@ -21,6 +21,7 @@ import entidades.ExpectativaLaboral;
 import entidades.ExperienciaProfesional;
 import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -28,7 +29,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestParam;
-
 /**
  *
  * @author Saitam
@@ -532,6 +532,29 @@ public class CtrlPostulante {
         System.out.println();
         return json;
     }
+    @RequestMapping(value = "obtenerNotificacionPostulante.htm", method = RequestMethod.POST)
+    public @ResponseBody
+    String obtenerNotificacionPostulante(HttpServletRequest request) throws JsonProcessingException {
+        try {
+             String sql2= "SELECT UsuarioID FROM usuario WHERE CorreoUsuario=?";
+        String id = (String) this.jdbcTemplate.queryForObject(sql2, new Object[]{Auth(request)},String.class);
+        
+        String sql = "SELECT * FROM usuario left join notificaciones "
+                + "on notificaciones.UsuarioDestino=usuario.UsuarioID "
+                + "where usuario.UsuarioID="+id;
+        List usuarioNotificaciones = jdbcTemplate.queryForList(sql);
+        ObjectMapper mapper = new ObjectMapper();
+        //cambio configuracion para obtener fecha correctamente
+     
+        String json = mapper.writeValueAsString(usuarioNotificaciones);
+        System.out.println(json);
+        return json;
+        } catch (DataAccessException e) {
+           String json="error";
+            return json;
+        }
+       
+    }
     // Select dinamico pais-region
 
     @RequestMapping(value = "listaRegion.htm", method = RequestMethod.POST)
@@ -653,5 +676,10 @@ public class CtrlPostulante {
         mav.setViewName("postulante/entrevistadiferida");
         return mav;
     }
-
+      public String Auth(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        Authentication auth = ctx.getAuthentication();
+        return auth.getName();
+    }
 }
