@@ -21,6 +21,7 @@ import entidades.ExpectativaLaboral;
 import entidades.ExperienciaProfesional;
 import java.sql.PreparedStatement;
 import javax.servlet.http.HttpSession;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -39,6 +40,13 @@ public class CtrlPostulante {
     Conexion con = new Conexion();
     JdbcTemplate jdbcTemplate = new JdbcTemplate(con.Conectar());
     ModelAndView mav = new ModelAndView();
+    
+     public String Auth(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        SecurityContext ctx = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        Authentication auth = ctx.getAuthentication();
+        return auth.getName();
+    }
 
     @RequestMapping(value = "registro.htm", method = RequestMethod.GET)
     public ModelAndView Agregar() {
@@ -652,6 +660,28 @@ public class CtrlPostulante {
         mav.addObject("ofertas", ofertas);
         mav.setViewName("postulante/entrevistadiferida");
         return mav;
+    }
+
+    @RequestMapping(value = "postulaciones.htm", method = RequestMethod.GET)
+    public ModelAndView postulacionesPostulante(HttpServletRequest request) {
+        try {
+            String sql = "SELECT CandidatoOfertaID,OfertaID,EstadoPostulacion,date_format(FechaPostulacion,'%d-%M-%Y') AS FechaPostulacion, "
+                    + "NombreOferta, NombreEmpresa,TipoCargo, ComunaNombre, RegionNombre "
+                    + "FROM candidatooferta LEFT JOIN ofertalaboral o on candidatooferta.OfertaID = o.OfertaLaboralID "
+                    + "LEFT JOIN usuarioempresa u on o.EmpresaOferta = u.UsuarioEmpresaID "
+                    + "LEFT JOIN comuna c on o.LugarTrabajo = c.ComunaID "
+                    + "LEFT JOIN  region r on c.ComunaRegionFK = r.RegionID "
+                    + "LEFT JOIN usuariopostulante u2 on candidatooferta.CandidatoID = u2.UsuarioPostulanteID "
+                    + "LEFT JOIN  usuario u3 on u2.PostulanteUsuarioFK = u3.UsuarioID "
+                    + "WHERE CorreoUsuario = ? ORDER BY EstadoPostulacion DESC, FechaPostulacion DESC";
+            List postulaciones = jdbcTemplate.queryForList(sql, new Object[]{Auth(request)});
+            mav.addObject("post", postulaciones);
+            mav.setViewName("postulante/postulaciones");
+            return mav;
+        } catch (DataAccessException e) {
+            mav.setViewName("redirect:/postulaciones.htm?error=999");
+            return mav;
+        }
     }
 
 }

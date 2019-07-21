@@ -85,9 +85,9 @@
                                                 </button>
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
-                                            <a class="dropdown-item" href="#">Notificaciones</a>
+                                            <a class="dropdown-item" href="postulaciones.htm">Mis postulaciones</a>
+                                            <a class="dropdown-item disabled" href="cvPostulante.htm">Mis entrevistas </a>
+                                            <a class="dropdown-item disabled" href="#">Notificaciones</a>
                                             <a class="dropdown-item" href="indexp.htm">Cuenta</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Cerrar Sesión</a>
@@ -102,13 +102,7 @@
                         <div class="ml-5 justify-content-center collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="alink nav-link border-link" href="loginEmpresa.htm">Empresas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <p class="nav-link text-white font-weight-bold">|</p>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="btn btn-primary" href="loginPostulante.htm" role="button">Ingresar</a>                            
+                                    <a class="btn btn-primary" href="login.htm" role="button">Ingresar</a>                            
                                 </li>
                             </ul>
                         </div>
@@ -118,92 +112,136 @@
             </div>
         </div>
         <div class="container div-principal div-filtro">
-            <div class="row">
-                <div class="card col-lg-12 mt-5 ">
+            <c:choose>
+                <c:when test="${empty oferta}">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h4 class="text-intervid mt-2">${oferta[0].NombreOferta}</h4>
-                        </div>
-                        <div class="col-lg-12">
-                            <img src="${oferta[0].LogoEmpresa}" class="figure-img img-fluid rounded max-img " alt="...">
+                        <div class="col-lg-12 mt-5">
+                            <h3 class="">La oferta no existe o no se encuentra disponible.</h3>
+                            <a class="text" href="trabajos.htm">Volver</a>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col-lg-9">
-                    <div class="row pr-1">
-                        <div class="container-fluid card">
-                            <div class="row">
-
-                                <div class="col-lg-12">
-                                    <h4 class="text-intervid mt-2">Descripcion del cargo</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    ${oferta[0].DescripcionCargo}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h4 class="text-intervid mt-2">Requisitos</h4>
-
-                                </div>
-                                <div class="col-lg-6">
-                                    <h4 class="text-intervid mt-2">Beneficios</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 card">
-                    <h4 class="text-intervid mt-2">Detalle Oferta</h4>
+                </c:when>
+                <c:otherwise>
                     <div class="row">
-                        <div class="col-lg-12 font-weight-bold">
-                            Horario de entrevistas
-                        </div>
-                        <div class="col-lg-12 text-right">
-                            ${oferta[0].inicio} - ${oferta[0].fin}
-                        </div>
-                        <div class="col-lg-12 font-weight-bold">
-                            Tipo Cargo
-                        </div>
-                        <div class="col-lg-12 text-right">
-                            ${oferta[0].TipoCargo}
-                        </div>
-                        <div class="col-lg-12 font-weight-bold">
-                            Lugar de trabajo
-                        </div>
-                        <div class="col-lg-12 text-right">
-                            ${oferta[0].RegionNombre}, ${oferta[0].ComunaNombre}
-                        </div>
-                        <div class="col-lg-12 font-weight-bold">
-                            Tipo Contrato
-                        </div>
-                        <div class="col-lg-12 text-right">
-                            ${oferta[0].TipoContrato}
-                        </div>
-                        <div class="col-lg-12 font-weight-bold">
-                            Jornada
-                        </div>
-                        <div class="col-lg-12 text-right">
-                            ${oferta[0].JornadaTrabajo}
-                        </div>
-                        <div class="col-lg-12 font-weight-bold">
-                            Sueldo
-                        </div>
-                        <div class="col-lg-12 text-right">
-                            ${oferta[0].SueldoOfrecido}
+                        <div class="card col-lg-12 mt-5 ">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <h4 class="text-intervid mt-2">${oferta[0].NombreOferta}</h4>
+                                </div>
+                                <div class="col-lg-2 text-right mt-2">
+                                    <p>${oferta[0].FechaOferta}</p>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row float-left pl-3">
+                                        <figure class="float-left d-none d-md-block figure img-thumbnail mx-auto">
+                                            <img src="${oferta[0].LogoEmpresa}" class="figure-img img-fluid rounded max-img " alt="...">
+                                        </figure>
+                                        <h5 class="ml-2" >${oferta[0].NombreEmpresa}</h5>
+                                    </div>
+                                    <%
+                                        if (rol.equals("[Postulante]")) {
+                                    %>
+                                    <form method="POST">
+                                        <input type="hidden" value="1" name="entrevista">
+                                        <input type="hidden" value="${oferta[0].OfertaLaboralID}" name="oferta">
+                                        <button class="btn btn-primary btn-right mb-2 ml-2">
+                                            Postular a entrevista
+                                        </button>
+                                    </form>
+                                    <form method="POST">
+                                        <input type="hidden" value="2" name="entrevista">
+                                        <input type="hidden" value="${oferta[0].OfertaLaboralID}" name="oferta">
+                                        <button  class="btn btn-success btn-right mb-2" >
+                                            Realizar entrevista diferida
+                                        </button>
+                                    </form>
+                                    <% }%>
+                                </div>
+                                <div class="col-lg-12">
+                                    Finaliza: ${oferta[0].FechaFin}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <div class="row mt-2">
+                        <div class="col-lg-9 mb-2">
+                            <div class="row pr-1">
+                                <div class="container-fluid card">
+                                    <div class="row">
+
+                                        <div class="col-lg-12">
+                                            <h4 class="text-intervid mt-2">Descripcion del cargo</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            ${oferta[0].DescripcionCargo}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h4 class="text-intervid mt-2">Requisitos</h4>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <pre class="">${oferta[0].RequisitosOferta}</pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <h4 class="text-intervid mt-2">Beneficios</h4>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <pre>${oferta[0].BeneficiosOferta}</pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 card mb-5">
+                            <h4 class="text-intervid mt-2">Detalle Oferta</h4>
+                            <div class="row">
+                                <div class="col-lg-12 font-weight-bold">
+                                    Horario de entrevistas
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    ${oferta[0].inicio} - ${oferta[0].fin}
+                                </div>
+                                <div class="col-lg-12 font-weight-bold">
+                                    Lugar de trabajo
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    ${oferta[0].ComunaNombre},
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    ${oferta[0].RegionNombre}
+                                </div>
+                                <div class="col-lg-12 font-weight-bold">
+                                    Tipo Contrato
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    ${oferta[0].TipoContrato}
+                                </div>
+                                <div class="col-lg-12 font-weight-bold">
+                                    Jornada
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    ${oferta[0].JornadaTrabajo}
+                                </div>
+                                <div class="col-lg-12 font-weight-bold">
+                                    Sueldo
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    $ ${oferta[0].sueldo}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
-
-
-
+        <jsp:include page="footer.jsp" />
     </body>
-    <jsp:include page="footer.jsp" ></jsp:include>
 </html>

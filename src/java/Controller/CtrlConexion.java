@@ -1,6 +1,7 @@
 package Controller;
 
 import Config.Conexion;
+import java.sql.PreparedStatement;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -111,13 +112,13 @@ public class CtrlConexion {
     public ModelAndView ofertaLaboral(HttpServletRequest request) {
         try {
             String oferta = request.getParameter("oferta");
-            String sql = "SELECT OfertaLaboralID,UsuarioEmpresaID, NombreOferta, NombreEmpresa,LugarTrabajo,RegionNombre, ComunaNombre,DescripcionCargo,FechaPublicacionOferta,FechaFinalizacionOferta,RequisitosOferta, "
-                    + "BeneficiosOferta,time_format(HorarioEntrevistaInicio,'%H:%i') AS inicio,time_format(HorarioEntrevistaFin,'%H:%i') AS fin,TipoCargo,TipoContrato,JornadaTrabajo,SueldoOfrecido,LogoEmpresa "
+            String sql = "SELECT OfertaLaboralID,UsuarioEmpresaID, NombreOferta, NombreEmpresa,LugarTrabajo,RegionNombre, ComunaNombre,DescripcionCargo,date_format(FechaPublicacionOferta,'%d %M, %Y') AS FechaOferta,date_format(FechaFinalizacionOferta, '%d-%M-%Y') AS FechaFin,RequisitosOferta, "
+                    + "BeneficiosOferta,time_format(HorarioEntrevistaInicio,'%H:%i') AS inicio,time_format(HorarioEntrevistaFin,'%H:%i') AS fin,TipoCargo,TipoContrato,JornadaTrabajo,REPLACE(format(SueldoOfrecido,'es_CL'),',','.')AS sueldo,LogoEmpresa "
                     + "FROM ofertalaboral ol "
                     + "LEFT JOIN usuarioempresa e ON ol.EmpresaOferta = e.UsuarioEmpresaID "
                     + "LEFT JOIN comuna c ON c.ComunaID = ol.LugarTrabajo "
                     + "LEFT JOIN region r ON r.RegionID=c.ComunaRegionFK "
-                    + "WHERE OfertaLaboralID = ?";
+                    + "WHERE OfertaLaboralID = ? AND EstadoOferta = 1";
             List detalleoferta = jdbcTemplate.queryForList(sql, new Object[]{oferta});
             mav.addObject("oferta", detalleoferta);
             mav.setViewName("ofertalaboral");
@@ -147,7 +148,7 @@ public class CtrlConexion {
                     + "LEFT JOIN usuarioempresa e ON ol.EmpresaOferta = e.UsuarioEmpresaID "
                     + "LEFT JOIN comuna c ON c.ComunaID = ol.LugarTrabajo "
                     + "LEFT JOIN region r ON r.RegionID=c.ComunaRegionFK "
-                    + "WHERE regionID = ? "
+                    + "WHERE regionID = ? AND EstadoOferta = 1 "
                     + "AND (ol.TipoCargo LIKE ? OR ol.NombreOferta LIKE ? OR NombreEmpresa LIKE ?)";
             String bres = "%" + busqueda + "%";
 
@@ -177,7 +178,7 @@ public class CtrlConexion {
                         + "LEFT JOIN usuarioempresa e ON ol.EmpresaOferta = e.UsuarioEmpresaID "
                         + "LEFT JOIN comuna c ON c.ComunaID = ol.LugarTrabajo "
                         + "LEFT JOIN region r ON r.RegionID=c.ComunaRegionFK "
-                        + "WHERE regionID = ? "
+                        + "WHERE regionID = ? AND EstadoOferta = 1 "
                         + "AND (ol.TipoCargo LIKE ? OR ol.NombreOferta LIKE ? OR NombreEmpresa LIKE ?)";
                 String bres = "%" + buscar + "%";
 
@@ -201,7 +202,7 @@ public class CtrlConexion {
                     + "LEFT JOIN usuarioempresa e ON ol.EmpresaOferta = e.UsuarioEmpresaID "
                     + "LEFT JOIN comuna c ON c.ComunaID = ol.LugarTrabajo "
                     + "LEFT JOIN region r ON r.RegionID=c.ComunaRegionFK "
-                    + "WHERE regionID = ? "
+                    + "WHERE regionID = ? AND EstadoOferta = 1 "
                     + "AND (ol.TipoCargo LIKE ? OR ol.NombreOferta LIKE ? OR NombreEmpresa LIKE ?)";
             String bres = "%" + busqueda + "%";
 
@@ -216,4 +217,32 @@ public class CtrlConexion {
         return mav;
     }
 
+    @RequestMapping(value = "ofertalaboral.htm", method = RequestMethod.POST)
+    public ModelAndView postularOferta(HttpServletRequest request) {
+        try {
+            int entrevista = Integer.parseInt(request.getParameter("entrevista"));
+            int oferta = Integer.parseInt(request.getParameter("oferta"));
+            switch (entrevista) {
+                case 1:
+                    String sql = "INSERT INTO CandidatoOferta(CandidatoID, OfertaID, EstadoPostulacion) "
+                            + "VALUES (?,?,1)";
+                    this.jdbcTemplate.update(sql, (PreparedStatement ps) -> {
+                        ps.setInt(1,entrevista);
+                        ps.setInt(2,oferta );
+                    });
+                    mav.setViewName("redirect:/postulaciones.htm");
+                    return mav;
+                case 2:
+                    
+                    mav.setViewName("redirect:/videodiferido.htm");
+                    return mav;
+                default:
+                    mav.setViewName("ofertalaboral");
+                    return mav;
+            }
+        } catch (DataAccessException e) {
+            mav.setViewName("trabajos");
+            return mav;
+        }
+    }
 }

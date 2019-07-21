@@ -85,9 +85,9 @@
                                                 </button>
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis postulaciones</a>
-                                            <a class="dropdown-item" href="cvPostulante.htm">Mis entrevistas </a>
-                                            <a class="dropdown-item" href="#">Notificaciones</a>
+                                            <a class="dropdown-item" href="postulaciones.htm">Mis postulaciones</a>
+                                            <a class="dropdown-item disabled" href="cvPostulante.htm">Mis entrevistas </a>
+                                            <a class="dropdown-item disabled" href="#">Notificaciones</a>
                                             <a class="dropdown-item" href="indexp.htm">Cuenta</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Cerrar Sesión</a>

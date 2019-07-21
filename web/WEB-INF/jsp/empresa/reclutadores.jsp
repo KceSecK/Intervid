@@ -10,32 +10,32 @@
 <html>
     <head>
         <title>Intervid - Mis Reclutadores</title> 
-        <jsp:include page="../head.jsp" flush="true"></jsp:include>
-            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-        </head>
-        <body>
-        <jsp:include page="headerempresa.jsp"></jsp:include>
-            <!--Container principal-->
-            <div class="container-fluid div-principal">
+        <jsp:include page="../head.jsp" flush="true"/>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    </head>
+    <body>
+        <jsp:include page="headerempresa.jsp"/>
+        <!--Container principal-->
+        <div class="container-fluid div-principal">
 
-                <div class="row">
-                    <!--Nav lateral-->
-                    <div class="col-lg-2 bg-intervid intervid-fixed-nav d-none d-lg-block">
-                        <div class="container mt-4">
-                            <ul class="list-unstyled static ">
-                                <li>
-                                    <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
-                                </li>
-                                <li>
-                                    <a class="alink nav-link border-link" href="#contraseña">Contraseña</a>
-                                </li>
-                            </ul>
-                        </div>
+            <div class="row div-filtro">
+                <!--Nav lateral-->
+                <div class="col-lg-2 bg-intervid intervid-fixed-nav d-none d-lg-block">
+                    <div class="container mt-4">
+                        <ul class="list-unstyled static ">
+                            <li>
+                                <a class="alink nav-link border-link" href="#cuenta">Cuenta</a>
+                            </li>
+                            <li>
+                                <a class="alink nav-link border-link" href="#contraseña">Contraseña</a>
+                            </li>
+                        </ul>
                     </div>
+                </div>
 
 
-                    <div class="col-lg-10 mb-5">
-                        <div class="container mt-4">
+                <div class="col-lg-10 mb-5">
+                    <div class="container mt-4">
                         <c:choose>
                             <c:when test="${param.error == '1'}">        
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -295,11 +295,9 @@
 
                 </div>
 
-
-
             </div>
             <div class="row">
-                <jsp:include page="../footer.jsp" ></jsp:include>
+                <jsp:include page="../footer.jsp" />
             </div>
 
         </div>

@@ -17,11 +17,11 @@
 <html>
     <head>
         <title>Intervid - Curriculum de usuario</title> 
-        <jsp:include page="../head.jsp" flush="true"></jsp:include>
+        <jsp:include page="../head.jsp" flush="true"/>
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     </head>
     <body>
-        <jsp:include page="headerpostulante.jsp" flush="true"></jsp:include>
+        <jsp:include page="headerpostulante.jsp" flush="true"/>
 
         <!--Container principal-->
         <div class="container-fluid div-principal">
@@ -240,11 +240,13 @@
                                 </div>
                             </div>
 
-
                         </div>
                     </div>
                 </div>
-                <jsp:include page="../footer.jsp"></jsp:include>
             </div>
+            <div class="row">
+                <jsp:include page="../footer.jsp" />
+            </div>
+        </div>
     </body>
 </html>

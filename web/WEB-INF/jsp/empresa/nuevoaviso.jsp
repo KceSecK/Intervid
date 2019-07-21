@@ -154,7 +154,9 @@
                                                     <div class="form-group col-lg-6">
                                                         <label class="text-intervid">Plan</label>
                                                         <select id="plan" class="form-control" name="plan">
-                                                            <option value="1">asdf</option>
+                                                            <c:forEach var="p" items="${plan}">
+                                                                <option value="${p.PlanID}">${p.NombrePlan}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>

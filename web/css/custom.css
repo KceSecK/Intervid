@@ -488,8 +488,8 @@ video
 }
 
 #localVideo{
-   width: 100%;
-   height: auto;
+    width: 100%;
+    height: auto;
 }
 
 /*
@@ -500,3 +500,12 @@ video
  *  tree.
  */
 
+pre{
+    font-family: 'NeoTechW01';
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    border:0;
+    line-height: none;
+    white-space: pre-wrap;
+}

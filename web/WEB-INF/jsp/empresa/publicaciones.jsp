@@ -110,13 +110,8 @@
                             <table class="table table-responsive-sm table-hover border border-info">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                <label class="custom-control-label" for="customCheck1"></label>
-                                            </div>
-                                        </th>
                                         <th scope="col">Oferta</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Cargo</th>
                                         <th scope="col">Fecha Publicación</th>
                                         <th scope="col">Fecha Término</th>
@@ -126,13 +121,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="custom2">
-                                                <label class="custom-control-label" for="custom2"></label>
-                                            </div>
-                                        </td>
                                         <td>Oferta</td>
+                                        <td>Estado</td>
                                         <td>Jefe de Planta</td>
                                         <td>30-03-2018</td>
                                         <td>09-07-2018</td>
@@ -154,63 +144,6 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="custom3">
-                                                <label class="custom-control-label" for="custom3"></label>
-                                            </div>
-                                        </td>
-                                        <td>Oferta</td>
-                                        <td>Jefe de Planta</td>
-                                        <td>30-03-2018</td>
-                                        <td>09-07-2018</td>
-                                        <td><a href="">Ir a la oferta</a></td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn">
-                                                    <img src="img/play_40px.png" alt=""/>
-                                                </button>
-                                                <button type="button" class="btn">
-                                                    <img src="img/pause_40px.png" alt=""/>
-                                                </button>
-                                                <button type="button" class="btn">
-                                                    <img src="img/edit_24px.png" alt=""/>
-                                                </button>
-                                                <button type="button" class="btn">
-                                                    <img src="img/delete_sign_24px.png" alt=""/>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="custom1">
-                                                <label class="custom-control-label" for="custom1"></label>
-                                            </div>
-                                        </td>
-                                        <td>Oferta</td>
-                                        <td>Jefe de Planta</td>
-                                        <td>30-03-2018</td>
-                                        <td>09-07-2018</td>
-                                        <td><a href="">Ir a la oferta</a></td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn">
-                                                    <img src="img/play_40px.png" alt=""/>
-                                                </button>
-                                                <button type="button" class="btn">
-                                                    <img src="img/pause_40px.png" alt=""/>
-                                                </button>
-                                                <button type="button" class="btn">
-                                                    <img src="img/edit_24px.png" alt=""/>
-                                                </button>
-                                                <button type="button" class="btn">
-                                                    <img src="img/delete_sign_24px.png" alt=""/>
-                                                </button>
-                                            </div>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table> 

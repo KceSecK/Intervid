@@ -25,7 +25,6 @@
 
         <c:choose>
             <c:when test="${sessionScope.rol == '[Postulante]'}">
-
                 <div class="container">
                     <div class="container-fluid">
                         <div class="row mb-2 pt-2">
